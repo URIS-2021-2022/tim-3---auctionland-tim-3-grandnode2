@@ -17,7 +17,7 @@ namespace KorisnikServis.Token
     {
 
         private readonly IConfiguration configuration;
-        private DatabaseContext db;
+        private readonly DatabaseContext db;
 
         public GenerateToken(IConfiguration configuration)
         {

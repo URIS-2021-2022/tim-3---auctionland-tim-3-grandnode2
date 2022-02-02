@@ -18,7 +18,7 @@ namespace KorisnikServis.Controllers
     public class TipKorisnikaController : ControllerBase
     {
 
-        TipKorisnikaService tipKorisnikaService;
+        private readonly TipKorisnikaService tipKorisnikaService;
 
         public TipKorisnikaController()
         {
@@ -56,7 +56,7 @@ namespace KorisnikServis.Controllers
             catch (Exception exp)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, exp);
-            };
+            }
         }
 
         // PUT api/<TipKorisnikaController>/5
