@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -20,11 +21,13 @@ namespace KorisnikServis.Controllers
 
         private KorisnikService korisnikService;
         private readonly IGenerateToken generateToken;
+        private IHttpContextAccessor httpContextAccessor;
 
-        public KorisnikController(IGenerateToken generateToken)
+        public KorisnikController(IGenerateToken generateToken, IHttpContextAccessor httpContextAccessor)
         {
             korisnikService = new KorisnikService();
             this.generateToken = generateToken;
+            this.httpContextAccessor = httpContextAccessor;
         }
 
         // GET: api/<KorisnikController>
@@ -73,6 +76,33 @@ namespace KorisnikServis.Controllers
             }
             return StatusCode(StatusCodes.Status404NotFound, new { message = "Korisnik with this id: " + id + " doesnt exist" });
         }
+
+        [Authorize(Roles = "Administrator")]
+        [HttpGet("getTip/{nazivTipa}")]
+        public IActionResult GetByNazivTipa(string nazivTipa)
+        {
+            List<Korisnik> korisnici = korisnikService.GetByTip(nazivTipa);
+            if (korisnici != null)
+            {
+                return StatusCode(StatusCodes.Status200OK, korisnici);
+            }
+
+            return StatusCode(StatusCodes.Status404NotFound, new { message = "Korisnik with this type doesnt exist: " + nazivTipa });
+        }
+
+        [HttpGet("getKorisnikToken")]
+        public IActionResult GetKorisnikToken()
+        {
+            var identityClaims = (ClaimsIdentity)httpContextAccessor.HttpContext.User.Identity;
+            Korisnik korisnik = korisnikService.GetKorisnikByToken(identityClaims);
+            if (korisnik != null)
+            {
+                return StatusCode(StatusCodes.Status200OK, korisnik);
+            }
+
+            return StatusCode(StatusCodes.Status404NotFound, new { message = "Token is not valid"});
+        }
+
 
         // POST api/<KorisnikController>
         [Authorize]
