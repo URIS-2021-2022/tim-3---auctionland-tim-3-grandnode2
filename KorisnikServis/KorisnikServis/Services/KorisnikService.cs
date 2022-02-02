@@ -12,7 +12,7 @@ namespace KorisnikServis.Services
 {
     public class KorisnikService
     {
-        DatabaseContext db;
+        private readonly DatabaseContext db;
 
         public KorisnikService()
         {
@@ -67,7 +67,6 @@ namespace KorisnikServis.Services
 
         public Korisnik GetKorisnikByToken(ClaimsIdentity identityClaims)
         {
-            IEnumerable<Claim> claims = identityClaims.Claims;
             Korisnik korisnik = new Korisnik()
             {
                 KorisnikID = Int32.Parse(identityClaims.FindFirst("KorisnikID").Value),
@@ -93,7 +92,7 @@ namespace KorisnikServis.Services
 
         public bool KorisnikExists(int id)
         {
-            return db.Korisnik.Count(e => e.KorisnikID == id) > 0;
+            return db.Korisnik.Any(e => e.KorisnikID == id);
         }
 
         public void Delete(Korisnik korisnik)

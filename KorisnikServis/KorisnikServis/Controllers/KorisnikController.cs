@@ -19,9 +19,9 @@ namespace KorisnikServis.Controllers
     public class KorisnikController : ControllerBase
     {
 
-        private KorisnikService korisnikService;
+        private readonly KorisnikService korisnikService;
         private readonly IGenerateToken generateToken;
-        private IHttpContextAccessor httpContextAccessor;
+        private readonly IHttpContextAccessor httpContextAccessor;
 
         public KorisnikController(IGenerateToken generateToken, IHttpContextAccessor httpContextAccessor)
         {
@@ -67,7 +67,7 @@ namespace KorisnikServis.Controllers
         // GET api/<KorisnikController>/5
         [Authorize(Roles = "Administrator")]
         [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        public IActionResult GetById(int id)
         {
             Korisnik korisnik = korisnikService.GetById(id);
             if (korisnik != null)
@@ -117,7 +117,7 @@ namespace KorisnikServis.Controllers
             catch (Exception exp)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, exp);
-            };
+            }
         }
 
         // PUT api/<KorisnikController>/5

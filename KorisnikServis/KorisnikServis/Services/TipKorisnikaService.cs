@@ -10,7 +10,7 @@ namespace KorisnikServis.Services
 {
     public class TipKorisnikaService
     {
-        DatabaseContext db;
+        private readonly DatabaseContext  db;
 
         public TipKorisnikaService()
         {
@@ -41,7 +41,7 @@ namespace KorisnikServis.Services
 
         public bool TipKorisnikaExists(int id)
         {
-            return db.TipKorisnika.Count(e => e.TipKorisnikaID == id) > 0;
+            return db.TipKorisnika.Any(e => e.TipKorisnikaID == id);
         }
 
         public void Delete(TipKorisnika tipKorisnika)
