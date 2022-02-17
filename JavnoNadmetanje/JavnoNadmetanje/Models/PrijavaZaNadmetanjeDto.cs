@@ -5,10 +5,8 @@ using System.Threading.Tasks;
 
 namespace JavnoNadmetanje.Models
 {
-    public class PrijavaZaNadmetanjeModel
+    public class PrijavaZaNadmetanjeDto
     {
-        public Guid PrijavaZaNadmetanjeId { get; set; }
-
         public DateTime DatumPrijave { get; set; }
 
         public String MestoPrijave { get; set; }

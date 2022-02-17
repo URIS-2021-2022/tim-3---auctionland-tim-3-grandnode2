@@ -1,4 +1,6 @@
-﻿using JavnoNadmetanje.Data;
+﻿using AutoMapper;
+using JavnoNadmetanje.Data;
+using JavnoNadmetanje.Entities;
 using JavnoNadmetanje.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -17,45 +19,49 @@ namespace JavnoNadmetanje.Controllers
     {
         private readonly ISluzbeniListRepository sluzbeniListRepository;
         private readonly LinkGenerator linkGenerator;
-
-        public SluzbeniListController(ISluzbeniListRepository sluzbeniListRepository, LinkGenerator linkGenerator)
+        private readonly IMapper mapper;
+        
+        public SluzbeniListController(ISluzbeniListRepository sluzbeniListRepository, LinkGenerator linkGenerator, IMapper mapper)
         {
             this.sluzbeniListRepository = sluzbeniListRepository;
             this.linkGenerator = linkGenerator;
+            this.mapper = mapper;
         }
 
         [HttpGet]
-        public ActionResult<List<SluzbeniListModel>> GetSluzbeniListovi()
+        [HttpHead]
+        public ActionResult<List<SluzbeniListDto>> GetSluzbeniListovi()
         {
-            List<SluzbeniListModel> sluzbeniListovi = sluzbeniListRepository.GetSluzbeniListovi();
+            List<SluzbeniListEntity> sluzbeniListovi = sluzbeniListRepository.GetSluzbeniListovi();
 
             if (sluzbeniListovi == null || sluzbeniListovi.Count == 0)
             {
                 return NoContent();
             }
-            return Ok(sluzbeniListovi);
+            return Ok(mapper.Map<List<SluzbeniListDto>>(sluzbeniListovi));
         }
 
         [HttpGet("{sluzbeniListId}")]
-        public ActionResult<SluzbeniListModel> GetSluzbeniListById(Guid sluzbeniListId)
+        public ActionResult<SluzbeniListDto> GetSluzbeniListById(Guid sluzbeniListId)
         {
-            SluzbeniListModel sluzbeniList = sluzbeniListRepository.GetSluzbeniListById(sluzbeniListId);
+            SluzbeniListEntity sluzbeniList = sluzbeniListRepository.GetSluzbeniListById(sluzbeniListId);
 
             if (sluzbeniList == null)
             {
                 return NotFound();
             }
-            return Ok(sluzbeniList);
+            return Ok(mapper.Map<SluzbeniListDto>(sluzbeniList));
         }
 
         [HttpPost]
-        public ActionResult<SluzbeniListModel> CreateSluzbeniList([FromBody] SluzbeniListModel sluzbeniList)
+        public ActionResult<SluzbeniListDto> CreateSluzbeniList([FromBody] SluzbeniListDto sluzbeniList)
         {
             try
             {
-                SluzbeniListModel sList = sluzbeniListRepository.CreateSluzbeniList(sluzbeniList);
-                string location = linkGenerator.GetPathByAction("GetSluzbeniListovi", "SluzbeniList", new { sluzbeniListId = sList.SluzbeniListId });
-                return Created(location, sList);
+                SluzbeniListEntity sList1 = mapper.Map<SluzbeniListEntity>(sluzbeniList);
+                SluzbeniListEntity sList2 = sluzbeniListRepository.CreateSluzbeniList(sList1);
+                string location = linkGenerator.GetPathByAction("GetSluzbeniListovi", "SluzbeniList", new { sluzbeniListId = sList1.SluzbeniListId });
+                return Created(location, mapper.Map<SluzbeniListEntity>(sList2));
             }
             catch
             {
@@ -68,7 +74,7 @@ namespace JavnoNadmetanje.Controllers
         {
             try
             {
-                SluzbeniListModel sluzbeniList = sluzbeniListRepository.GetSluzbeniListById(sluzbeniListId); ;
+                SluzbeniListEntity sluzbeniList = sluzbeniListRepository.GetSluzbeniListById(sluzbeniListId); ;
                 if (sluzbeniList == null)
                 {
                     return NotFound();
@@ -84,7 +90,7 @@ namespace JavnoNadmetanje.Controllers
         }
 
         [HttpPut]
-        public ActionResult<SluzbeniListModel> UpdateSluzbeniList(SluzbeniListModel sluzbeniList)
+        public ActionResult<SluzbeniListDto> UpdateSluzbeniList(SluzbeniListEntity sluzbeniList)
         {
             try
             {
@@ -93,12 +99,21 @@ namespace JavnoNadmetanje.Controllers
                     return NotFound();
                 }
 
-                return Ok(sluzbeniListRepository.UpdateSluzbeniList(sluzbeniList));
+                SluzbeniListEntity sluzbeniList1 = sluzbeniListRepository.UpdateSluzbeniList(sluzbeniList);
+
+                return Ok(mapper.Map<SluzbeniListDto>(sluzbeniList1));
             }
             catch (Exception)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "Greska prilikom azuriranja sluzbenog lista!");
             }
+        }
+
+        [HttpOptions]
+        public IActionResult GetSluzbeniListOptions()
+        {
+            Response.Headers.Add("Allow", "GET, HEAD, POST, PUT, DELETE");
+            return Ok();
         }
     }
 }

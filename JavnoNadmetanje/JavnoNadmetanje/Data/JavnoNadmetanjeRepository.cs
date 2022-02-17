@@ -1,4 +1,4 @@
-﻿using JavnoNadmetanje.Models;
+﻿using JavnoNadmetanje.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ namespace JavnoNadmetanje.Data
 {
     public class JavnoNadmetanjeRepository : IJavnoNadmetanjeRepository
     {
-        public static List<JavnoNadmetanjeModel> JavnaNadmetanja { get; set; } = new List<JavnoNadmetanjeModel>();
+        public static List<JavnoNadmetanjeEntity> JavnaNadmetanja { get; set; } = new List<JavnoNadmetanjeEntity>();
 
         public JavnoNadmetanjeRepository()
         {
@@ -17,9 +17,9 @@ namespace JavnoNadmetanje.Data
 
         private void FillData()
         {
-            JavnaNadmetanja.AddRange(new List<JavnoNadmetanjeModel>
+            JavnaNadmetanja.AddRange(new List<JavnoNadmetanjeEntity>
             {
-                new JavnoNadmetanjeModel
+                new JavnoNadmetanjeEntity
                 {
                     JavnoNadmetanjeId = Guid.Parse("6a411c13-a195-48f7-8dbd-67596c3974c0"),
                     Datum = DateTime.Parse("10-02-2022"),
@@ -35,7 +35,7 @@ namespace JavnoNadmetanje.Data
                     Krug = 1,
                     Status = {}
                 },
-                 new JavnoNadmetanjeModel
+                 new JavnoNadmetanjeEntity
                  {
                     JavnoNadmetanjeId = Guid.Parse("1c7ea607-8ddb-493a-87fa-4bf5893e965b"),
                     Datum = DateTime.Parse("11-02-2022"),
@@ -54,28 +54,28 @@ namespace JavnoNadmetanje.Data
             });
         }
 
-        public List<JavnoNadmetanjeModel> GetJavnaNadmetanja()
+        public List<JavnoNadmetanjeEntity> GetJavnaNadmetanja()
         {
             return (from j in JavnaNadmetanja select j).ToList();
         }
 
-        public JavnoNadmetanjeModel GetJavnoNadmetanjeById(Guid javnoNadmetanjeId)
+        public JavnoNadmetanjeEntity GetJavnoNadmetanjeById(Guid javnoNadmetanjeId)
         {
             return JavnaNadmetanja.FirstOrDefault(j => j.JavnoNadmetanjeId == javnoNadmetanjeId);
         }
 
-        public JavnoNadmetanjeModel CreateJavnoNadmetanje(JavnoNadmetanjeModel javnoNadmetanje)
+        public JavnoNadmetanjeEntity CreateJavnoNadmetanje(JavnoNadmetanjeEntity javnoNadmetanje)
         {
             javnoNadmetanje.JavnoNadmetanjeId = Guid.NewGuid();
             JavnaNadmetanja.Add(javnoNadmetanje);
-            JavnoNadmetanjeModel jNadmetanje = GetJavnoNadmetanjeById(javnoNadmetanje.JavnoNadmetanjeId);
+            JavnoNadmetanjeEntity jNadmetanje = GetJavnoNadmetanjeById(javnoNadmetanje.JavnoNadmetanjeId);
             return jNadmetanje;
 
         }
 
-        public JavnoNadmetanjeModel UpdateJavnoNadmetanje(JavnoNadmetanjeModel javnoNadmetanje)
+        public JavnoNadmetanjeEntity UpdateJavnoNadmetanje(JavnoNadmetanjeEntity javnoNadmetanje)
         {
-            JavnoNadmetanjeModel jNadmetanje = GetJavnoNadmetanjeById(javnoNadmetanje.JavnoNadmetanjeId);
+            JavnoNadmetanjeEntity jNadmetanje = GetJavnoNadmetanjeById(javnoNadmetanje.JavnoNadmetanjeId);
 
             jNadmetanje.Datum = javnoNadmetanje.Datum;
             jNadmetanje.VremePocetka = javnoNadmetanje.VremePocetka;

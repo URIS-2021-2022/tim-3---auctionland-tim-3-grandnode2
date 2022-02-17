@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace JavnoNadmetanje.Models
+namespace JavnoNadmetanje.Entities
 {
-    public class SluzbeniListModel
+    public class SluzbeniListEntity
     {
         public Guid SluzbeniListId { get; set; }
 
@@ -14,6 +14,5 @@ namespace JavnoNadmetanje.Models
         public int BrojSluzbenogLista { get; set; }
 
         public DateTime DatumIzdavanja { get; set; }
-
     }
 }

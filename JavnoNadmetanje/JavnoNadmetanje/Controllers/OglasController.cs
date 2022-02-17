@@ -1,4 +1,6 @@
-﻿using JavnoNadmetanje.Data;
+﻿using AutoMapper;
+using JavnoNadmetanje.Data;
+using JavnoNadmetanje.Entities;
 using JavnoNadmetanje.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,45 +18,49 @@ namespace JavnoNadmetanje.Controllers
     {
         private readonly IOglasRepository oglasRepository;
         private readonly LinkGenerator linkGenerator;
+        private readonly IMapper mapper;
 
-        public OglasController(IOglasRepository oglasRepository, LinkGenerator linkGenerator)
+        public OglasController(IOglasRepository oglasRepository, LinkGenerator linkGenerator, IMapper mapper)
         {
             this.oglasRepository = oglasRepository;
             this.linkGenerator = linkGenerator;
+            this.mapper = mapper;
         }
 
         [HttpGet]
-        public ActionResult<List<OglasModel>> GetOglasi()
+        [HttpHead]
+        public ActionResult<List<OglasDto>> GetOglasi()
         {
-            List<OglasModel> oglasi = oglasRepository.GetOglasi();
+            List<OglasEntity> oglasi = oglasRepository.GetOglasi();
 
             if (oglasi == null || oglasi.Count == 0)
             {
                 return NoContent();
             }
-            return Ok(oglasi);
+            return Ok(mapper.Map<List<OglasDto >>(oglasi));
         }
 
         [HttpGet("{oglasId}")]
-        public ActionResult<OglasModel> GetOglasById(Guid oglasId)
+        public ActionResult<OglasDto> GetOglasById(Guid oglasId)
         {
-            OglasModel oglas = oglasRepository.GetOglasById(oglasId);
+            OglasEntity oglas = oglasRepository.GetOglasById(oglasId);
 
             if (oglas == null)
             {
                 return NotFound();
             }
-            return Ok(oglas);
+            return Ok(mapper.Map<OglasDto>(oglas));
         }
 
         [HttpPost]
-        public ActionResult<OglasModel> CreateOglas([FromBody] OglasModel oglas)
+        public ActionResult<OglasDto> CreateOglas([FromBody] OglasDto oglas)
         {
             try
             {
-                OglasModel oglas1 = oglasRepository.CreateOglas(oglas);
+                OglasEntity oglas1 = mapper.Map<OglasEntity>(oglas);
+                OglasEntity oglas2 = oglasRepository.CreateOglas(oglas1);
                 string location = linkGenerator.GetPathByAction("GetOglasi", "Oglas", new { oglasId = oglas1.OglasId });
-                return Created(location, oglas1);
+                return Created(location, mapper.Map<OglasEntity>(oglas2));
             }
             catch
             {
@@ -67,7 +73,7 @@ namespace JavnoNadmetanje.Controllers
         {
             try
             {
-                OglasModel oglas = oglasRepository.GetOglasById(oglasId); ;
+                OglasEntity oglas = oglasRepository.GetOglasById(oglasId); ;
                 if (oglas == null)
                 {
                     return NotFound();
@@ -83,7 +89,7 @@ namespace JavnoNadmetanje.Controllers
         }
 
         [HttpPut]
-        public ActionResult<OglasModel> UpdateOglas(OglasModel oglas)
+        public ActionResult<OglasDto> UpdateOglas(OglasEntity oglas)
         {
             try
             {
@@ -92,12 +98,22 @@ namespace JavnoNadmetanje.Controllers
                     return NotFound();
                 }
 
-                return Ok(oglasRepository.UpdateOglas(oglas));
+                OglasEntity oglas1 = oglasRepository.UpdateOglas(oglas);
+
+                return Ok(mapper.Map<OglasDto>(oglas1));
+
             }
             catch (Exception)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "Greska prilikom azuriranja oglasa!");
             }
+        }
+
+        [HttpOptions]
+        public IActionResult GetOglasOptions()
+        {
+            Response.Headers.Add("Allow", "GET, HEAD, POST, PUT, DELETE");
+            return Ok();
         }
     }
 }
