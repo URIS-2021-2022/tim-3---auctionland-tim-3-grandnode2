@@ -1,4 +1,6 @@
-﻿using JavnoNadmetanje.Data;
+﻿using AutoMapper;
+using JavnoNadmetanje.Data;
+using JavnoNadmetanje.Entities;
 using JavnoNadmetanje.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,39 +18,42 @@ namespace JavnoNadmetanje.Controllers
     {
         private readonly IJavnoNadmetanjeRepository javnoNadmetanjeRepository;
         private readonly LinkGenerator linkGenerator;
+        private readonly IMapper mapper;
 
-        public JavnoNadmetanjeController(IJavnoNadmetanjeRepository javnoNadmetanjeRepository, LinkGenerator linkGenerator)
+        public JavnoNadmetanjeController(IJavnoNadmetanjeRepository javnoNadmetanjeRepository, LinkGenerator linkGenerator, IMapper mapper)
         {
             this.javnoNadmetanjeRepository = javnoNadmetanjeRepository;
             this.linkGenerator = linkGenerator;
+            this.mapper = mapper;
         }
 
         [HttpGet]
-        public ActionResult<List<JavnoNadmetanjeModel>> GetJavnaNadmetanja()
+        [HttpHead]
+        public ActionResult<List<JavnoNadmetanjeDto>> GetJavnaNadmetanja()
         {
-            List<JavnoNadmetanjeModel> javnaNadmetanja = javnoNadmetanjeRepository.GetJavnaNadmetanja();
+            List<JavnoNadmetanjeEntity> javnaNadmetanja = javnoNadmetanjeRepository.GetJavnaNadmetanja();
 
             if (javnaNadmetanja == null || javnaNadmetanja.Count == 0)
             {
                 return NoContent();
             }
-            return Ok(javnaNadmetanja);
+            return Ok(mapper.Map<List<JavnoNadmetanjeDto>>(javnaNadmetanja));
         }
 
         [HttpGet("{javnoNadmetanjeId}")]
-        public ActionResult<JavnoNadmetanjeModel> GetJavnoNadmetanjeById(Guid javnoNadmetanjeId)
+        public ActionResult<JavnoNadmetanjeDto> GetJavnoNadmetanjeById(Guid javnoNadmetanjeId)
         {
-            JavnoNadmetanjeModel javnoNadmetanje = javnoNadmetanjeRepository.GetJavnoNadmetanjeById(javnoNadmetanjeId);
+            JavnoNadmetanjeEntity javnoNadmetanje = javnoNadmetanjeRepository.GetJavnoNadmetanjeById(javnoNadmetanjeId);
             
             if(javnoNadmetanje == null)
             {
                 return NotFound();
             }
-            return Ok(javnoNadmetanje);
+            return Ok(mapper.Map<JavnoNadmetanjeDto>(javnoNadmetanje));
         }
 
         [HttpPost]
-        public ActionResult<JavnoNadmetanjeModel> CreateJavnoNadmetanje([FromBody] JavnoNadmetanjeModel javnoNadmetanje)
+        public ActionResult<JavnoNadmetanjeDto> CreateJavnoNadmetanje([FromBody] JavnoNadmetanjeDto javnoNadmetanje)
         {
             try
             {
@@ -59,9 +64,11 @@ namespace JavnoNadmetanje.Controllers
                     return BadRequest("Vreme kraja javnog nadmetanja mora biti nakon vremena pocetka javnog nadmetanja!");
                 }
 
-                JavnoNadmetanjeModel jNadmetanje = javnoNadmetanjeRepository.CreateJavnoNadmetanje(javnoNadmetanje);
-                string location = linkGenerator.GetPathByAction("GetJavnaNadmetanja", "JavnoNadmetanje", new { javnoNadmetanjeId = jNadmetanje.JavnoNadmetanjeId });
-                return Created(location, jNadmetanje); 
+                JavnoNadmetanjeEntity jNadmetanje = mapper.Map<JavnoNadmetanjeEntity>(javnoNadmetanje);
+                JavnoNadmetanjeEntity jNadmetanje1 = javnoNadmetanjeRepository.CreateJavnoNadmetanje(jNadmetanje);
+
+                string location = linkGenerator.GetPathByAction("GetJavnaNadmetanja", "JavnoNadmetanje", new { javnoNadmetanjeId = jNadmetanje1.JavnoNadmetanjeId });
+                return Created(location, mapper.Map<JavnoNadmetanjeDto>(jNadmetanje1)); 
             }
             catch
             {
@@ -74,7 +81,7 @@ namespace JavnoNadmetanje.Controllers
         {
             try
             {
-                JavnoNadmetanjeModel javnoNadmetanje = javnoNadmetanjeRepository.GetJavnoNadmetanjeById(javnoNadmetanjeId);
+                JavnoNadmetanjeEntity javnoNadmetanje = javnoNadmetanjeRepository.GetJavnoNadmetanjeById(javnoNadmetanjeId);
                 if (javnoNadmetanje == null)
                 {
                     return NotFound();
@@ -90,23 +97,18 @@ namespace JavnoNadmetanje.Controllers
         }
 
         [HttpPut]
-        public ActionResult<JavnoNadmetanjeModel> UpdateJavnoNadmetanje(JavnoNadmetanjeModel javnoNadmetanje)
+        public ActionResult<JavnoNadmetanjeDto> UpdateJavnoNadmetanje(JavnoNadmetanjeEntity javnoNadmetanje)
         {
             try
             {
-                bool modelValid = ValidationJavnoNadmetanje(javnoNadmetanje);
-
-                if (!modelValid)
-                {
-                    return BadRequest("Vreme kraja javnog nadmetanja mora biti nakon vremena pocetka javnog nadmetanja!");
-                }
-
                 if (javnoNadmetanjeRepository.GetJavnoNadmetanjeById(javnoNadmetanje.JavnoNadmetanjeId) == null)
                 {
                     return NotFound();
                 }
 
-                return Ok(javnoNadmetanjeRepository.UpdateJavnoNadmetanje(javnoNadmetanje));
+                JavnoNadmetanjeEntity jNadmetanje = javnoNadmetanjeRepository.UpdateJavnoNadmetanje(javnoNadmetanje);
+
+                return Ok(mapper.Map<JavnoNadmetanjeDto>(jNadmetanje));
             }
             catch (Exception)
             {
@@ -114,7 +116,7 @@ namespace JavnoNadmetanje.Controllers
             }
         }
 
-        private bool ValidationJavnoNadmetanje(JavnoNadmetanjeModel javnoNadmetanje)
+        private bool ValidationJavnoNadmetanje(JavnoNadmetanjeDto javnoNadmetanje)
          {
              if(javnoNadmetanje.VremePocetka > javnoNadmetanje.VremeKraja)
              {
@@ -123,6 +125,13 @@ namespace JavnoNadmetanje.Controllers
 
              return true;
          }
+
+        [HttpOptions]
+        public IActionResult GetJavnoNadmetanjeOptions()
+        {
+            Response.Headers.Add("Allow", "GET, HEAD, POST, PUT, DELETE");
+            return Ok();
+        }
     }
 }
 

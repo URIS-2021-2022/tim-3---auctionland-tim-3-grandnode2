@@ -1,4 +1,6 @@
-﻿using JavnoNadmetanje.Data;
+﻿using AutoMapper;
+using JavnoNadmetanje.Data;
+using JavnoNadmetanje.Entities;
 using JavnoNadmetanje.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,46 +18,49 @@ namespace JavnoNadmetanje.Controllers
     {
         private readonly IPrijavaZaNadmetanjeRepository prijavaZaNadmetanjeRepository;
         private readonly LinkGenerator linkGenerator;
-
-        public PrijavaZaNadmetanjeController(IPrijavaZaNadmetanjeRepository prijavaZaNadmetanjeRepository, LinkGenerator linkGenerator)
+        private readonly IMapper mapper;
+        
+        public PrijavaZaNadmetanjeController(IPrijavaZaNadmetanjeRepository prijavaZaNadmetanjeRepository, LinkGenerator linkGenerator, IMapper mapper)
         {
             this.prijavaZaNadmetanjeRepository = prijavaZaNadmetanjeRepository;
             this.linkGenerator = linkGenerator;
+            this.mapper = mapper;
         }
 
         [HttpGet]
-        public ActionResult<List<PrijavaZaNadmetanjeModel>> GetPrijaveZaNadmetanje()
+        [HttpHead]
+        public ActionResult<List<PrijavaZaNadmetanjeDto>> GetPrijaveZaNadmetanje()
         {
-            List<PrijavaZaNadmetanjeModel> prijavaZaNadmetanje = prijavaZaNadmetanjeRepository.GetPrijaveZaNadmetanje();
+            List<PrijavaZaNadmetanjeEntity> prijaveZaNadmetanje = prijavaZaNadmetanjeRepository.GetPrijaveZaNadmetanje();
 
-            if (prijavaZaNadmetanje == null || prijavaZaNadmetanje.Count == 0)
+            if (prijaveZaNadmetanje == null || prijaveZaNadmetanje.Count == 0)
             {
                 return NoContent();
             }
-            return Ok(prijavaZaNadmetanje);
+            return Ok(mapper.Map<List<PrijavaZaNadmetanjeDto>>(prijaveZaNadmetanje));
         }
 
         [HttpGet("{prijavaZaNadmetanjeId}")]
-        public ActionResult<PrijavaZaNadmetanjeModel> GetPrijavaZaNadmetanjeById(Guid prijavaZaNadmetanjeId)
+        public ActionResult<PrijavaZaNadmetanjeDto> GetPrijavaZaNadmetanjeById(Guid prijavaZaNadmetanjeId)
         {
-            PrijavaZaNadmetanjeModel prijavaZaNadmetanje = prijavaZaNadmetanjeRepository.GetPrijavaZaNadmetanjeById(prijavaZaNadmetanjeId);
+            PrijavaZaNadmetanjeEntity prijavaZaNadmetanje = prijavaZaNadmetanjeRepository.GetPrijavaZaNadmetanjeById(prijavaZaNadmetanjeId);
 
             if (prijavaZaNadmetanje == null)
             {
                 return NotFound();
             }
-            return Ok(prijavaZaNadmetanje);
+            return Ok(mapper.Map<PrijavaZaNadmetanjeDto>(prijavaZaNadmetanje));
         }
 
         [HttpPost]
-        public ActionResult<PrijavaZaNadmetanjeModel> CreatePrijavaZaNadmetanje([FromBody] PrijavaZaNadmetanjeModel prijavaZaNadmetanje)
+        public ActionResult<PrijavaZaNadmetanjeDto> CreatePrijavaZaNadmetanje([FromBody] PrijavaZaNadmetanjeDto prijavaZaNadmetanje)
         {
             try
             {
-
-                PrijavaZaNadmetanjeModel prijavaNadmetanje = prijavaZaNadmetanjeRepository.CreatePrijavaZaNadmetanje(prijavaZaNadmetanje);
+                PrijavaZaNadmetanjeEntity prijavaNadmetanje = mapper.Map<PrijavaZaNadmetanjeEntity>(prijavaZaNadmetanje);
+                PrijavaZaNadmetanjeEntity prijavaNadmetanje1 = prijavaZaNadmetanjeRepository.CreatePrijavaZaNadmetanje(prijavaNadmetanje);
                 string location = linkGenerator.GetPathByAction("GetPrijaveZaNadmetanje", "PrijavaZaNadmetanje", new { prijavaZaNadmetanjeId = prijavaNadmetanje.PrijavaZaNadmetanjeId });
-                return Created(location, prijavaNadmetanje);
+                return Created(location, mapper.Map<PrijavaZaNadmetanjeEntity>(prijavaNadmetanje1));
             }
             catch
             {
@@ -68,7 +73,7 @@ namespace JavnoNadmetanje.Controllers
         {
             try
             {
-                PrijavaZaNadmetanjeModel prijavaNadmetanje = prijavaZaNadmetanjeRepository.GetPrijavaZaNadmetanjeById(prijavaZaNadmetanjeId);
+                PrijavaZaNadmetanjeEntity prijavaNadmetanje = prijavaZaNadmetanjeRepository.GetPrijavaZaNadmetanjeById(prijavaZaNadmetanjeId);
                 if (prijavaNadmetanje == null)
                 {
                     return NotFound();
@@ -84,7 +89,7 @@ namespace JavnoNadmetanje.Controllers
         }
 
         [HttpPut]
-        public ActionResult<PrijavaZaNadmetanjeModel> UpdatePrijavaZaNadmetanje(PrijavaZaNadmetanjeModel prijavaZaNadmetanje)
+        public ActionResult<PrijavaZaNadmetanjeDto> UpdatePrijavaZaNadmetanje(PrijavaZaNadmetanjeEntity prijavaZaNadmetanje)
         {
             try
             {
@@ -94,12 +99,21 @@ namespace JavnoNadmetanje.Controllers
                     return NotFound();
                 }
 
-                return Ok(prijavaZaNadmetanjeRepository.UpdatePrijavaZaNadmetanje(prijavaZaNadmetanje));
+                PrijavaZaNadmetanjeEntity prijavaZaNadmetanje1 = prijavaZaNadmetanjeRepository.UpdatePrijavaZaNadmetanje(prijavaZaNadmetanje);
+
+                return Ok(mapper.Map<PrijavaZaNadmetanjeDto>(prijavaZaNadmetanje1));
             }
             catch (Exception)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "Greska prilikom azuriranja prijave za nadmetanje!");
             }
+        }
+
+        [HttpOptions]
+        public IActionResult GetPrijavaZaNadmetanjeOptions()
+        {
+            Response.Headers.Add("Allow", "GET, HEAD, POST, PUT, DELETE");
+            return Ok();
         }
     }
 }

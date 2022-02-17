@@ -1,4 +1,4 @@
-﻿using JavnoNadmetanje.Models;
+﻿using JavnoNadmetanje.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,13 +8,13 @@ namespace JavnoNadmetanje.Data
 {
     public interface IOglasRepository
     {
-        List<OglasModel> GetOglasi();
+        List<OglasEntity> GetOglasi();
 
-        OglasModel GetOglasById(Guid oglasId);
+        OglasEntity GetOglasById(Guid oglasId);
 
-        OglasModel CreateOglas(OglasModel oglas);
+        OglasEntity CreateOglas(OglasEntity oglas);
 
-        OglasModel UpdateOglas(OglasModel oglas);
+        OglasEntity UpdateOglas(OglasEntity oglas);
 
         void DeleteOglas(Guid oglasId);
     }

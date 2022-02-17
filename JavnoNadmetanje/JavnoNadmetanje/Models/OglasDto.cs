@@ -5,10 +5,8 @@ using System.Threading.Tasks;
 
 namespace JavnoNadmetanje.Models
 {
-    public class OglasModel
+    public class OglasDto
     {
-        public Guid OglasId { get; set; }
-
         public DateTime DatumObjavljivanjaOglasa { get; set; }
 
         public int GodinaObjavljivanjaOglasa { get; set; }

@@ -5,10 +5,8 @@ using System.Threading.Tasks;
 
 namespace JavnoNadmetanje.Models
 {
-    public class JavnoNadmetanjeModel
+    public class JavnoNadmetanjeDto
     {
-        public Guid JavnoNadmetanjeId { get; set; }
-
         public DateTime Datum { get; set; }
 
         public DateTime VremePocetka { get; set; }

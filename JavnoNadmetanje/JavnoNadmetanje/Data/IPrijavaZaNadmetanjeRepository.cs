@@ -1,4 +1,4 @@
-﻿using JavnoNadmetanje.Models;
+﻿using JavnoNadmetanje.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,13 +8,13 @@ namespace JavnoNadmetanje.Data
 {
     public interface IPrijavaZaNadmetanjeRepository
     {
-        List<PrijavaZaNadmetanjeModel> GetPrijaveZaNadmetanje();
+        List<PrijavaZaNadmetanjeEntity> GetPrijaveZaNadmetanje();
 
-        PrijavaZaNadmetanjeModel GetPrijavaZaNadmetanjeById(Guid prijavaZaNadmetanjeId);
+        PrijavaZaNadmetanjeEntity GetPrijavaZaNadmetanjeById(Guid prijavaZaNadmetanjeId);
 
-        PrijavaZaNadmetanjeModel CreatePrijavaZaNadmetanje(PrijavaZaNadmetanjeModel prijavaZaNadmetanje);
+        PrijavaZaNadmetanjeEntity CreatePrijavaZaNadmetanje(PrijavaZaNadmetanjeEntity prijavaZaNadmetanje);
 
-        PrijavaZaNadmetanjeModel UpdatePrijavaZaNadmetanje(PrijavaZaNadmetanjeModel prijavaZaNadmetanje);
+        PrijavaZaNadmetanjeEntity UpdatePrijavaZaNadmetanje(PrijavaZaNadmetanjeEntity prijavaZaNadmetanje);
 
         void DeletePrijavaZaNadmetanje(Guid prijavaZaNadmetanjeId);
     }

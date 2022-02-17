@@ -1,4 +1,4 @@
-﻿using JavnoNadmetanje.Models;
+﻿using JavnoNadmetanje.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,13 +8,13 @@ namespace JavnoNadmetanje.Data
 {
     public interface IJavnoNadmetanjeRepository
     {
-        List<JavnoNadmetanjeModel> GetJavnaNadmetanja();
+        List<JavnoNadmetanjeEntity> GetJavnaNadmetanja();
 
-        JavnoNadmetanjeModel GetJavnoNadmetanjeById(Guid javnoNadmetanjeId);
+        JavnoNadmetanjeEntity GetJavnoNadmetanjeById(Guid javnoNadmetanjeId);
 
-        JavnoNadmetanjeModel CreateJavnoNadmetanje(JavnoNadmetanjeModel javnoNadmetanje);
+        JavnoNadmetanjeEntity CreateJavnoNadmetanje(JavnoNadmetanjeEntity javnoNadmetanje);
 
-        JavnoNadmetanjeModel UpdateJavnoNadmetanje(JavnoNadmetanjeModel javnoNadmetanje);
+        JavnoNadmetanjeEntity UpdateJavnoNadmetanje(JavnoNadmetanjeEntity javnoNadmetanje);
 
         void DeleteJavnoNadmetanje(Guid javnoNadmetanjeId);
 
