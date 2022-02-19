@@ -167,7 +167,7 @@ namespace licitacijaService.Controllers
         ///          brojLicitacije = 1,
         ///          goidna = 2019,
         ///          ogranicenjeLicitacije = 1,
-        ///          oznakaKomisije = "aftt",
+        ///          oznakaKomisije = "kom123ef",
         ///          korakCene = 1,
         ///          datumLicitacije = "2019-01-02",
         ///          rokZaDostavuPrijava = 2019-02-22"
@@ -227,13 +227,13 @@ namespace licitacijaService.Controllers
         /// Primer request-a \
         /// PUT 'https://localhost:44306/api/licitacije/'\
         ///  --header 'key: Bearer DunjaZamaklar' \
-        ///  --param  'licitacijaId = 3F8AA5B3-A67F-45B5-B518-771A7C09A944\
+        ///  --param  'licitacijaId = 4E1F1F8D-A8F7-44B1-9BDA-1C1EE122628D\
         /// Example: \
         /// { \
         ///         brojLicitacije = 1,
         ///          goidna = 2019,
         ///          ogranicenjeLicitacije = 1,
-        ///          oznakaKomisije = "aftt",
+        ///          oznakaKomisije = "kom123ef",
         ///          korakCene = 1,
         ///          datumLicitacije = "2019-01-02",
         ///          rokZaDostavuPrijava = "2019-02-22"
@@ -300,7 +300,7 @@ namespace licitacijaService.Controllers
         /// Example of request \
         /// DELETE 'https://localhost:44306/api/licitacije/'\
         ///  --header 'key: Bearer DunjaZamaklar' \
-        ///  --param  'liictacijaId = 5DB187A7-D99D-4DB1-B843-7771448819A1'\
+        ///  --param  'liictacijaId = 4E1F1F8D-A8F7-44B1-9BDA-1C1EE122628D'\
         /// </remarks>
         /// <response code="200">Success answer</response>
         /// <response code="401">Unauthorized user</response>

@@ -38,7 +38,7 @@ namespace licitacijaService.DBContexts
                    brojLicitacije = 1,
                    goidna = 2019,
                    ogranicenjeLicitacije = 1,
-                   oznakaKomisije = "bgt246",
+                   oznakaKomisije = "kom345ef",
                    korakCene = 1,
                    datumLicitacije = DateTime.Parse("2019-01-02"),
                    rokZaDostavuPrijava = DateTime.Now
@@ -49,7 +49,7 @@ namespace licitacijaService.DBContexts
                    brojLicitacije = 2,
                    goidna = 2021,
                    ogranicenjeLicitacije = 0,
-                   oznakaKomisije = "bgt246",
+                   oznakaKomisije = "kom345ef",
                    korakCene = 2,
                    datumLicitacije = DateTime.Parse("2021-09-18"),
                    rokZaDostavuPrijava = DateTime.Now

@@ -190,7 +190,7 @@ namespace komisijaService.Controllers
         /// Primer request-a \
         /// PUT 'https://localhost:44306/api/licnostiKomisije/'\
         ///  --header 'key: Bearer DunjaZamaklar' \
-        ///  --param  'licnostKomisijeId = 084FE9DF-BD72-4AD3-863D-538C7CF07C3E'\
+        ///  --param  'licnostKomisijeId = 4E1F1F8D-A8F7-44B1-9BDA-1C1EE122628D'\
         /// Example: \
         /// { \
         ///         imeLicnostiKomisije: "Mina",
@@ -254,7 +254,7 @@ namespace komisijaService.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
-        
+
         /// <summary>
         /// Obrisi licnost komisije
         /// </summary>

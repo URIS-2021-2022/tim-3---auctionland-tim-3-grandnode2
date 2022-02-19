@@ -188,31 +188,31 @@ namespace komisijaService.Controllers
                     return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
                 }
             }
-    
 
-            /// <summary>
-            /// Update komisiju
-            /// </summary>
-            /// <param name="komisijaUpdateDto">Model komisije</param>
-            /// <param name="komisijaId">jedinstevni identifikator komisije</param>
-            /// <param name="key">Authorization Key Value</param>
-            /// <remarks>
-            /// Primer request-a \
-            /// PUT 'https://localhost:44306/api/komisije/'\
-            ///  --header 'key: Bearer DunjaZamaklar' \
-            ///  --param  'komisijaId = 4E1F1F8D-A8F7-44B1-9ABD-1C1EE122628D'\
-            /// Example: \
-            /// { \
-            ///        "nazivKomisije": "Update Test service", \
-            ///        "oznakaKomisije": "Update Test description", \
-            /// } \
-            /// </remarks>
-            /// <response code="200">Success answer - update-ovana komisija</response>
-            /// <response code="401">Unauthorized user</response>
-            /// <response code="403">Not allowed</response>
-            /// <response code="404">Not found</response>
-            /// <response code="500">Server error</response>
-            [Consumes("application/json")]
+
+        /// <summary>
+        /// Update komisiju
+        /// </summary>
+        /// <param name="komisijaUpdateDto">Model komisije</param>
+        /// <param name="komisijaId">jedinstevni identifikator komisije</param>
+        /// <param name="key">Authorization Key Value</param>
+        /// <remarks>
+        /// Primer request-a \
+        /// PUT 'https://localhost:44306/api/komisije/'\
+        ///  --header 'key: Bearer DunjaZamaklar' \
+        ///  --param  'komisijaId = 4E1F1F8D-A8F7-44B1-9ABD-1C1EE122628D'\
+        /// Example: \
+        /// { \
+        ///        "nazivKomisije": "Update Test service", \
+        ///        "oznakaKomisije": "Update Test description", \
+        /// } \
+        /// </remarks>
+        /// <response code="200">Success answer - update-ovana komisija</response>
+        /// <response code="401">Unauthorized user</response>
+        /// <response code="403">Not allowed</response>
+        /// <response code="404">Not found</response>
+        /// <response code="500">Server error</response>
+        [Consumes("application/json")]
             [ProducesResponseType(StatusCodes.Status200OK)]
             [ProducesResponseType(StatusCodes.Status401Unauthorized)]
             [ProducesResponseType(StatusCodes.Status403Forbidden)]

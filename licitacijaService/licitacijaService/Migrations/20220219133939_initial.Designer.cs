@@ -10,7 +10,7 @@ using licitacijaService.DBContexts;
 namespace licitacijaService.Migrations
 {
     [DbContext(typeof(LicitacijaContext))]
-    [Migration("20220219104330_initial")]
+    [Migration("20220219133939_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -63,8 +63,8 @@ namespace licitacijaService.Migrations
                             goidna = 2019,
                             korakCene = 1,
                             ogranicenjeLicitacije = 1,
-                            oznakaKomisije = "bgt246",
-                            rokZaDostavuPrijava = new DateTime(2022, 2, 19, 11, 43, 29, 911, DateTimeKind.Local).AddTicks(5164)
+                            oznakaKomisije = "kom345ef",
+                            rokZaDostavuPrijava = new DateTime(2022, 2, 19, 14, 39, 38, 308, DateTimeKind.Local).AddTicks(5422)
                         },
                         new
                         {
@@ -74,8 +74,8 @@ namespace licitacijaService.Migrations
                             goidna = 2021,
                             korakCene = 2,
                             ogranicenjeLicitacije = 0,
-                            oznakaKomisije = "bgt246",
-                            rokZaDostavuPrijava = new DateTime(2022, 2, 19, 11, 43, 29, 913, DateTimeKind.Local).AddTicks(821)
+                            oznakaKomisije = "kom345ef",
+                            rokZaDostavuPrijava = new DateTime(2022, 2, 19, 14, 39, 38, 310, DateTimeKind.Local).AddTicks(7929)
                         },
                         new
                         {
@@ -86,7 +86,7 @@ namespace licitacijaService.Migrations
                             korakCene = 3,
                             ogranicenjeLicitacije = 0,
                             oznakaKomisije = "kom123ef",
-                            rokZaDostavuPrijava = new DateTime(2022, 2, 19, 11, 43, 29, 913, DateTimeKind.Local).AddTicks(864)
+                            rokZaDostavuPrijava = new DateTime(2022, 2, 19, 14, 39, 38, 310, DateTimeKind.Local).AddTicks(7973)
                         },
                         new
                         {
@@ -97,7 +97,7 @@ namespace licitacijaService.Migrations
                             korakCene = 1,
                             ogranicenjeLicitacije = 0,
                             oznakaKomisije = "kom123ef",
-                            rokZaDostavuPrijava = new DateTime(2022, 2, 19, 11, 43, 29, 913, DateTimeKind.Local).AddTicks(876)
+                            rokZaDostavuPrijava = new DateTime(2022, 2, 19, 14, 39, 38, 310, DateTimeKind.Local).AddTicks(7985)
                         });
                 });
 
@@ -125,49 +125,49 @@ namespace licitacijaService.Migrations
                         {
                             licitacijaId = new Guid("1f8aa5b3-a67f-45c5-b519-771a7c09a944"),
                             dokumentId = new Guid("b99d4b97-6984-43ef-b0a5-89d04569466e"),
-                            datumPodnosenjaDokumenta = new DateTime(2022, 2, 19, 11, 43, 29, 914, DateTimeKind.Local).AddTicks(877),
+                            datumPodnosenjaDokumenta = new DateTime(2022, 2, 19, 14, 39, 38, 312, DateTimeKind.Local).AddTicks(1276),
                             vrstaPodnosiocaDokumenta = "f"
                         },
                         new
                         {
                             licitacijaId = new Guid("1f8aa5b3-a67f-45c5-b519-771a7c09a944"),
                             dokumentId = new Guid("a99d4b97-6984-43ef-b0a5-89d04569276e"),
-                            datumPodnosenjaDokumenta = new DateTime(2022, 2, 19, 11, 43, 29, 914, DateTimeKind.Local).AddTicks(1686),
+                            datumPodnosenjaDokumenta = new DateTime(2022, 2, 19, 14, 39, 38, 312, DateTimeKind.Local).AddTicks(2285),
                             vrstaPodnosiocaDokumenta = "f"
                         },
                         new
                         {
                             licitacijaId = new Guid("1f8aa5b3-a67f-45c5-b519-771a7c09a944"),
                             dokumentId = new Guid("b99d4b97-6984-43ef-b0a5-19d04569276e"),
-                            datumPodnosenjaDokumenta = new DateTime(2022, 2, 19, 11, 43, 29, 914, DateTimeKind.Local).AddTicks(1705),
+                            datumPodnosenjaDokumenta = new DateTime(2022, 2, 19, 14, 39, 38, 312, DateTimeKind.Local).AddTicks(2441),
                             vrstaPodnosiocaDokumenta = "p"
                         },
                         new
                         {
                             licitacijaId = new Guid("2d53fc22-eac4-43bb-8f55-d2b8495603cc"),
                             dokumentId = new Guid("a99d4b97-6984-43ef-b0a5-89d04569276e"),
-                            datumPodnosenjaDokumenta = new DateTime(2022, 2, 19, 11, 43, 29, 914, DateTimeKind.Local).AddTicks(1711),
+                            datumPodnosenjaDokumenta = new DateTime(2022, 2, 19, 14, 39, 38, 312, DateTimeKind.Local).AddTicks(2447),
                             vrstaPodnosiocaDokumenta = "f"
                         },
                         new
                         {
                             licitacijaId = new Guid("4e1f1f8d-a8f7-44b1-9bda-1c1ee122628d"),
                             dokumentId = new Guid("c99d5b97-6984-43ef-b0a5-89d04569466e"),
-                            datumPodnosenjaDokumenta = new DateTime(2022, 2, 19, 11, 43, 29, 914, DateTimeKind.Local).AddTicks(1716),
+                            datumPodnosenjaDokumenta = new DateTime(2022, 2, 19, 14, 39, 38, 312, DateTimeKind.Local).AddTicks(2453),
                             vrstaPodnosiocaDokumenta = "p"
                         },
                         new
                         {
                             licitacijaId = new Guid("4e1f1f8d-a8f7-44b1-9bda-1c1ee122628d"),
                             dokumentId = new Guid("f11d5b97-6984-43ef-b0a5-89d04569466e"),
-                            datumPodnosenjaDokumenta = new DateTime(2022, 2, 19, 11, 43, 29, 914, DateTimeKind.Local).AddTicks(1721),
+                            datumPodnosenjaDokumenta = new DateTime(2022, 2, 19, 14, 39, 38, 312, DateTimeKind.Local).AddTicks(2458),
                             vrstaPodnosiocaDokumenta = "f"
                         },
                         new
                         {
                             licitacijaId = new Guid("3f8aa5b3-a67f-45b5-b518-771a7c09a944"),
                             dokumentId = new Guid("e99d4b97-6984-43ef-b0a5-89d04569466e"),
-                            datumPodnosenjaDokumenta = new DateTime(2022, 2, 19, 11, 43, 29, 914, DateTimeKind.Local).AddTicks(1727),
+                            datumPodnosenjaDokumenta = new DateTime(2022, 2, 19, 14, 39, 38, 312, DateTimeKind.Local).AddTicks(2463),
                             vrstaPodnosiocaDokumenta = "f"
                         });
                 });
