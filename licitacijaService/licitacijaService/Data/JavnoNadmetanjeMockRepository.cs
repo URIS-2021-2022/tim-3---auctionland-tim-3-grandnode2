@@ -34,7 +34,7 @@ namespace licitacijaService.Data
                     VisinaDopuneDepozita = 500,
                     Krug = 1,
                     Status = {},
-                    licitacijaId = Guid.Parse("1F8AA5B3-A67F-45C5-B519-771A7C09A944")
+                    licitacijaId = Guid.Parse("4E1F1F8D-A8F7-44B1-9BDA-1C1EE122628D")
 
                 },
                  new JavnoNadmetanjeDTO
@@ -52,7 +52,7 @@ namespace licitacijaService.Data
                     VisinaDopuneDepozita = 250,
                     Krug = 1,
                     Status = {},
-                    licitacijaId = Guid.Parse("1F8AA5B3-A67F-45C5-B519-771A7C09A944")
+                    licitacijaId = Guid.Parse("4E1F1F8D-A8F7-44B1-9BDA-1C1EE122628D")
                  }
             }) ;
         }

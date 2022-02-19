@@ -10,7 +10,7 @@ using komisijaService.DBContexts;
 namespace komisijaService.Migrations
 {
     [DbContext(typeof(KomisijaContext))]
-    [Migration("20220217191458_initial")]
+    [Migration("20220219133849_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
