@@ -46,19 +46,27 @@ namespace DokumentServis.Controllers
             Dokument dokument = dokumentService.GetById(id);
             if (dokument != null)
             {
-                var accessToken = HttpContext.GetTokenAsync("access_token");
-                httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {accessToken.Result}");
-                var responseKorisnik = httpClient.GetAsync(requestUri: "http://localhost:9901/api/Korisnik/" + dokument.KorisnikID).Result;
-                Korisnik korisnik = JsonConvert.DeserializeObject<Korisnik>(responseKorisnik.Content.ReadAsStringAsync().Result);
-                var responseKupac = httpClient.GetAsync(requestUri: "http://localhost:9904/api/Kupci/" + dokument.KupacID).Result;
-                Kupac kupac = JsonConvert.DeserializeObject<Kupac>(responseKupac.Content.ReadAsStringAsync().Result);
-                var responseLiciter = httpClient.GetAsync(requestUri: "http://localhost:9904/api/Liciteri/" + dokument.LiciterID).Result;
-                Liciter liciter = JsonConvert.DeserializeObject<Liciter>(responseLiciter.Content.ReadAsStringAsync().Result);
-                vo.dokument = dokument;
-                vo.korisnik = korisnik;
-                vo.kupac = kupac;
-                vo.liciter = liciter;
-                return StatusCode(StatusCodes.Status200OK, vo);
+                try
+                {
+                    var accessToken = HttpContext.GetTokenAsync("access_token");
+                    httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {accessToken.Result}");
+                    var responseKorisnik = httpClient.GetAsync(requestUri: "http://localhost:9901/api/Korisnik/" + dokument.KorisnikID).Result;
+                    Korisnik korisnik = JsonConvert.DeserializeObject<Korisnik>(responseKorisnik.Content.ReadAsStringAsync().Result);
+                    var responseKupac = httpClient.GetAsync(requestUri: "http://localhost:9904/api/Kupci/" + dokument.KupacID).Result;
+                    Kupac kupac = JsonConvert.DeserializeObject<Kupac>(responseKupac.Content.ReadAsStringAsync().Result);
+                    var responseLiciter = httpClient.GetAsync(requestUri: "http://localhost:9904/api/Liciteri/" + dokument.LiciterID).Result;
+                    Liciter liciter = JsonConvert.DeserializeObject<Liciter>(responseLiciter.Content.ReadAsStringAsync().Result);
+                    vo.dokument = dokument;
+                    vo.korisnik = korisnik;
+                    vo.kupac = kupac;
+                    vo.liciter = liciter;
+                    return StatusCode(StatusCodes.Status200OK, vo);
+                }
+                catch (Exception exp)
+                {
+                    return StatusCode(StatusCodes.Status200OK, new { message = "Korisnik or kupac service is down"});
+                }
+                
             }
             return StatusCode(StatusCodes.Status404NotFound, new { message = "Dokument with this id: " + id + "doesnt exist" });
         }
