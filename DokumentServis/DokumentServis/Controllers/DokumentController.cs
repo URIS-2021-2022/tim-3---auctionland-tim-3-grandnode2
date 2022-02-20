@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -21,13 +22,21 @@ namespace DokumentServis.Controllers
     [ApiController]
     public class DokumentController : ControllerBase
     {
-        public static HttpClient httpClient;
+        private readonly HttpClient httpClient;
         private readonly DokumentService dokumentService;
+        private readonly IConfiguration configuration;
+        private readonly string KorisnikPath;
+        private readonly string KupacPath;
+        private readonly string LiciterPath;
 
-        public DokumentController()
+        public DokumentController(IConfiguration iconfiguration)
         {
             dokumentService = new DokumentService();
             httpClient = new HttpClient();
+            configuration = iconfiguration;
+            KorisnikPath = configuration.GetValue<String>("Paths:Korisnik");
+            KupacPath = configuration.GetValue<String>("Paths:Kupac");
+            LiciterPath = configuration.GetValue<String>("Paths:Liciter");
         }
 
 
@@ -50,11 +59,11 @@ namespace DokumentServis.Controllers
                 {
                     var accessToken = HttpContext.GetTokenAsync("access_token");
                     httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {accessToken.Result}");
-                    var responseKorisnik = httpClient.GetAsync(requestUri: "http://localhost:9901/api/Korisnik/" + dokument.KorisnikID).Result;
+                    var responseKorisnik = httpClient.GetAsync(requestUri: KorisnikPath + dokument.KorisnikID).Result;
                     Korisnik korisnik = JsonConvert.DeserializeObject<Korisnik>(responseKorisnik.Content.ReadAsStringAsync().Result);
-                    var responseKupac = httpClient.GetAsync(requestUri: "http://localhost:9904/api/Kupci/" + dokument.KupacID).Result;
+                    var responseKupac = httpClient.GetAsync(requestUri: KupacPath + dokument.KupacID).Result;
                     Kupac kupac = JsonConvert.DeserializeObject<Kupac>(responseKupac.Content.ReadAsStringAsync().Result);
-                    var responseLiciter = httpClient.GetAsync(requestUri: "http://localhost:9904/api/Liciteri/" + dokument.LiciterID).Result;
+                    var responseLiciter = httpClient.GetAsync(requestUri: LiciterPath + dokument.LiciterID).Result;
                     Liciter liciter = JsonConvert.DeserializeObject<Liciter>(responseLiciter.Content.ReadAsStringAsync().Result);
                     vo.dokument = dokument;
                     vo.korisnik = korisnik;
@@ -64,7 +73,7 @@ namespace DokumentServis.Controllers
                 }
                 catch (Exception exp)
                 {
-                    return StatusCode(StatusCodes.Status200OK, new { message = "Korisnik or kupac service is down"});
+                    return StatusCode(StatusCodes.Status400BadRequest, new { message = "Korisnik or kupac service is down", error = exp.Message});
                 }
                 
             }
@@ -77,7 +86,7 @@ namespace DokumentServis.Controllers
         {
             try
             {
-                if (Provera(model) == false)
+                if (!Provera(model))
                 {
                     return StatusCode(StatusCodes.Status400BadRequest, new { message = "Korisnik or kupac or liciter doesnt exist" });
                 }
@@ -100,7 +109,7 @@ namespace DokumentServis.Controllers
             }
             try
             {
-                if (Provera(dokument) == false)
+                if (!Provera(dokument))
                 {
                     return StatusCode(StatusCodes.Status400BadRequest, new { message = "Korisnik or kupac or liciter doesnt exist" });
                 }
@@ -138,7 +147,7 @@ namespace DokumentServis.Controllers
         {
             var accessToken = HttpContext.GetTokenAsync("access_token");
             httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {accessToken.Result}");
-            var responseKorisnik = httpClient.GetAsync(requestUri: "http://localhost:9901/api/Korisnik/").Result;
+            var responseKorisnik = httpClient.GetAsync(requestUri: KorisnikPath).Result;
             List<Korisnik> korisnici = JsonConvert.DeserializeObject<List<Korisnik>>(responseKorisnik.Content.ReadAsStringAsync().Result);
             bool proveraKorisnika = false;
             foreach (var k in korisnici)
@@ -148,7 +157,7 @@ namespace DokumentServis.Controllers
                     proveraKorisnika = true;
                 }
             }
-            var responseKupac = httpClient.GetAsync(requestUri: "http://localhost:9904/api/Kupci/").Result;
+            var responseKupac = httpClient.GetAsync(requestUri: KupacPath).Result;
             List<Kupac> kupci = JsonConvert.DeserializeObject<List<Kupac>>(responseKupac.Content.ReadAsStringAsync().Result);
             bool proveraKupca = false;
             foreach (var k in kupci)
@@ -158,7 +167,7 @@ namespace DokumentServis.Controllers
                     proveraKupca = true;
                 }
             }
-            var responseLiciter = httpClient.GetAsync(requestUri: "http://localhost:9904/api/Liciteri/").Result;
+            var responseLiciter = httpClient.GetAsync(requestUri: LiciterPath).Result;
             List<Liciter> liciteri = JsonConvert.DeserializeObject<List<Liciter>>(responseLiciter.Content.ReadAsStringAsync().Result);
             bool proveraLicitera = false;
             foreach (var k in liciteri)
