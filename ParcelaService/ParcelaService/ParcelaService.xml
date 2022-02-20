@@ -1,0 +1,210 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ParcelaService</name>
+    </assembly>
+    <members>
+        <member name="M:ParcelaService.Controllers.DeoParceleController.GetAll(System.Nullable{System.Guid})">
+            <summary>
+            Vraca sve delove parcele ili opciono sve delove parcele sa unetim Id
+            </summary>
+            <param name="parcelaId">Id parcele</param>
+            <returns>Lista delova parcele</returns>
+        </member>
+        <member name="M:ParcelaService.Controllers.DeoParceleController.GetById(System.Guid)">
+            <summary>
+            Vraca deo parcele sa unetim Id
+            </summary>
+            <param name="deoParceleId">Id dela parcele</param>
+            <returns>Odgovarajuci deo parcele</returns>
+        </member>
+        <member name="M:ParcelaService.Controllers.DeoParceleController.Create(ParcelaService.Models.CreateDto.DeoParceleCreateDto,System.String)">
+            <summary>
+            Kreiranje novog dela parcele
+            </summary>
+            <param name="deoParcele">Model dela parcele</param>
+            <returns>Potvrda o kreiranju dela parcele</returns>
+        </member>
+        <member name="M:ParcelaService.Controllers.DeoParceleController.Update(ParcelaService.Models.UpdateDto.DeoParceleUpdateDto,System.String)">
+            <summary>
+            Azuriranje dela parcele
+            </summary>
+            <param name="deoParcele">Model dela parcele</param>
+            <returns>Potvrda o izmenama u delu parcele</returns>
+        </member>
+        <member name="M:ParcelaService.Controllers.DeoParceleController.Delete(System.Guid,System.String)">
+            <summary>
+            Brisanje dela parcele
+            </summary>
+            <param name="deoParceleId">Id dela parcele</param>
+            <returns>Obrisan deo parcele</returns>
+        </member>
+        <member name="M:ParcelaService.Controllers.DeoParceleController.GetDeoParceleOptions">
+            <summary>
+            Vraca opcije za rad delovima parcele
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ParcelaService.Controllers.DozvoljeniRadController.GetAll">
+            <summary>
+            Vraca sve dozvoljene radove
+            </summary>
+            <returns>Lista dozvoljenih radova</returns>
+        </member>
+        <member name="M:ParcelaService.Controllers.DozvoljeniRadController.GetById(System.Guid)">
+            <summary>
+            Vraca dozvoljene radove sa unetim Id
+            </summary>
+            <param name="dozvoljeniRadId">Id dozvoljenog rada</param>
+            <returns>Odgovarajuci dozvoljeni rad</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:ParcelaService.Controllers.DozvoljeniRadController.Create(ParcelaService.Models.CreateDto.DozvoljeniRadCreateDto,System.String)" -->
+        <member name="M:ParcelaService.Controllers.DozvoljeniRadController.Update(ParcelaService.Models.UpdateDto.DozvoljeniRadUpdateDto,System.String)">
+            <summary>
+            Azuriranje dozvoljenih radova
+            </summary>
+            <param name="dozvoljeniRad">Model dozvoljenog rada</param>
+            <returns>Potvrda o izmenama u dozvoljenom radu</returns>
+        </member>
+        <member name="M:ParcelaService.Controllers.DozvoljeniRadController.Delete(System.Guid,System.String)">
+            <summary>
+            Brisanje dozvoljenog rada
+            </summary>
+            <param name="dozvoljeniRadId">Id dozvoljenog rada</param>
+            <returns>Obrisan dozvoljeniRad </returns>
+        </member>
+        <member name="M:ParcelaService.Controllers.DozvoljeniRadController.GetDozvoljeniRadOptions">
+            <summary>
+            Vraca opcije za rad dozvoljenim radovima
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ParcelaService.Controllers.KvalitetZemljistaController.GetAll">
+            <summary>
+            Vraca sve kvalitete zemljista
+            </summary>
+            <returns>Lista kvaliteta zemljista</returns>
+        </member>
+        <member name="M:ParcelaService.Controllers.KvalitetZemljistaController.GetById(System.Guid)">
+            <summary>
+            Vraca kvalitet zemljista sa unetim Id
+            </summary>
+            <param name="kvalitetZemljistaId">Id kvaliteta zemljista</param>
+            <returns>Odgovarajuci kvalitet zemljista</returns>
+        </member>
+        <member name="M:ParcelaService.Controllers.KvalitetZemljistaController.Create(ParcelaService.Models.CreateDto.KvalitetZemljistaCreateDto,System.String)">
+            <summary>
+            Kreiranje novog kvaliteta zemljista
+            </summary>
+            <param name="kvalitetZemljista">Model kvaliteta zemljista</param>
+            <returns>Potvrdu o kreiranju kvaliteta zemljista</returns>
+        </member>
+        <member name="M:ParcelaService.Controllers.KvalitetZemljistaController.Update(ParcelaService.Models.UpdateDto.KvalitetZemljistaUpdateDto,System.String)">
+            <summary>
+            Azuriranje kvaliteta zemljista
+            </summary>
+            <param name="kvalitetZemljista">Model kvaliteta zemljista</param>
+            <returns>Potvrda o izmenama u kvalitetu zemljista</returns>
+        </member>
+        <member name="M:ParcelaService.Controllers.KvalitetZemljistaController.Delete(System.Guid,System.String)">
+            <summary>
+            Brisanje kvaliteta zemljista
+            </summary>
+            <param name="kvalitetZemljistaId">Id kvaliteta zemljista</param>
+            <returns>Obrisan kvalitet zemljista</returns>
+        </member>
+        <member name="M:ParcelaService.Controllers.KvalitetZemljistaController.GetKvalitetZemljistaOptions">
+            <summary>
+            Vraca opcije za rad kvalitetima zemljista
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ParcelaService.Controllers.ParcelaController.GetAll(System.Nullable{System.Guid})">
+            <summary>
+            Vraca sve parcele ili opciono sve parcele koje pripadaju nekoj katastarskoj opstini
+            </summary>
+            <param name="katastarskaOpstinaId">Id katastarske opstine</param>
+            <returns>Lista parcela</returns>
+        </member>
+        <member name="M:ParcelaService.Controllers.ParcelaController.GetDeloveParcele(System.Guid)">
+            <summary>
+            Vraca sve delove parcele ciji je Id prosledjen
+            </summary>
+            <param name="parcelaId">Id parcele</param>
+            <returns>Lista delova parcele</returns>
+        </member>
+        <member name="M:ParcelaService.Controllers.ParcelaController.GetById(System.Guid)">
+            <summary>
+            Vraca parcelu sa unetim Id
+            </summary>
+            <param name="parcelaId">Id parcele</param>
+            <returns>Odgovarajuca parcela</returns>
+        </member>
+        <member name="M:ParcelaService.Controllers.ParcelaController.Create(ParcelaService.Models.CreateDto.ParcelaCreateDto,System.String)">
+            <summary>
+            Kreiranje nove parcele
+            </summary>
+            <param name="parcela">Model parcele</param>
+            <returns>Potvrda o kreiranju parcele</returns>
+        </member>
+        <member name="M:ParcelaService.Controllers.ParcelaController.Update(ParcelaService.Models.UpdateDto.ParcelaUpdateDto,System.String)">
+            <summary>
+            Azuriranje parcele
+            </summary>
+            <param name="parcela">Model parcele</param>
+            <returns>Potvrda o izmenama u parceli</returns>
+        </member>
+        <member name="M:ParcelaService.Controllers.ParcelaController.Delete(System.Guid,System.String)">
+            <summary>
+            Brisanje parcele
+            </summary>
+            <param name="parcelaId">Id parcele</param>
+            <returns>Obrisana parcela</returns>
+        </member>
+        <member name="M:ParcelaService.Controllers.ParcelaController.GetParcelaOptions">
+            <summary>
+            Vraca opcije za rad sa parcelama
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ParcelaService.Controllers.ZasticenaZonaController.GetAll">
+            <summary>
+            Vraca sve zasticene zone
+            </summary>
+            <returns>Lista zasticenih zona</returns>
+        </member>
+        <member name="M:ParcelaService.Controllers.ZasticenaZonaController.GetById(System.Guid)">
+            <summary>
+            Vraca zasticenu zonu sa unetim Id
+            </summary>
+            <param name="zasticenaZonaId">Id zasticene zone</param>
+            <returns>Odgovarajuca zasticena zona</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:ParcelaService.Controllers.ZasticenaZonaController.Create(ParcelaService.Models.CreateDto.ZasticenaZonaCreateDto,System.String)" -->
+        <member name="M:ParcelaService.Controllers.ZasticenaZonaController.Update(ParcelaService.Models.ZasticenaZonaUpdateDto,System.String)">
+            <summary>
+            Azuriranje zasticene zone
+            </summary>
+            <param name="zasticenaZona">Model zasticene zone</param>
+            <returns>Potvrdu o izmenama o zasticenoj zoni</returns>
+        </member>
+        <member name="M:ParcelaService.Controllers.ZasticenaZonaController.Delete(System.Guid,System.String)">
+            <summary>
+            Brisanje zasticene zone
+            </summary>
+            <param name="zasticenaZonaId">Id zasticene zone</param>
+            <returns>Obrisana zasticena zona</returns>
+        </member>
+        <member name="M:ParcelaService.Controllers.ZasticenaZonaController.GetZasticenaZonaOptions">
+            <summary>
+            Vraca opcije za rad sa zasticenim zonama
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ParcelaService.Entities.ParcelaContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+            Popunjava bazu sa nekim inicijalnim podacima
+            </summary>
+        </member>
+    </members>
+</doc>
