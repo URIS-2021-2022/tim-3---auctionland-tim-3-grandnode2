@@ -6,6 +6,7 @@ using licitacijaService.DTOs.Mock;
 using licitacijaService.Entities;
 using licitacijaService.Logger;
 using licitacijaService.ServiceCalls;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -80,6 +81,7 @@ namespace licitacijaService.Controllers
             {
                 return NoContent();
             }
+             
 
             foreach (Licitacija l in licitacije)
             {

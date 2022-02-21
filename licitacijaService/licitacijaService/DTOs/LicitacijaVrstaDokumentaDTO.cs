@@ -1,4 +1,5 @@
-﻿using System;
+﻿using licitacijaService.DTOs.Mock;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -9,16 +10,17 @@ namespace licitacijaService.DTOs
     public class LicitacijaVrstaDokumentaDTO
     {
         /// <summary>
-        /// Identifikator dokumenta
-        /// </summary>
-        [Required]
-        public Guid dokumentId { get; set; }
-
-        /// <summary>
         /// Datum podnosenja dokumenta
         ///P pravno lice, F fizicko lice
         /// </summary>
         [Required]
         public DateTime datumPodnosenjaDokumenta { get; set; }
+
+
+        /// <summary>
+        /// Dokument
+        /// </summary>
+        [Required]
+        public DokumentDTO dokument { get; set; }
     }
 }
