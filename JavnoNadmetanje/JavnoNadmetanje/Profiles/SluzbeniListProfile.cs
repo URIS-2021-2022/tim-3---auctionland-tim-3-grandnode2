@@ -14,6 +14,8 @@ namespace JavnoNadmetanje.Profiles
         {
             CreateMap<SluzbeniListEntity, SluzbeniListDto>();
             CreateMap<SluzbeniListDto, SluzbeniListEntity>();
+            CreateMap<SluzbeniListCreateDto, SluzbeniListEntity>();
+            CreateMap<SluzbeniListEntity, SluzbeniListEntity>();
         }
     }
 }

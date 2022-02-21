@@ -1,10 +1,16 @@
-using AutoMapper;
+﻿using AutoMapper;
+using JavnoNadmetanje.Auth;
 using JavnoNadmetanje.Data;
+using JavnoNadmetanje.Entities;
+using JavnoNadmetanje.ServiceCalls;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -12,7 +18,10 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace JavnoNadmetanje
@@ -31,18 +40,52 @@ namespace JavnoNadmetanje
         {
 
             services.AddControllers(setup =>
-            setup.ReturnHttpNotAcceptable = true).AddXmlDataContractSerializerFormatters();
+                setup.ReturnHttpNotAcceptable = true
+            ).AddXmlDataContractSerializerFormatters();
+
+            services.AddControllers().AddJsonOptions(options =>
+            options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-            services.AddSingleton<IJavnoNadmetanjeRepository, JavnoNadmetanjeRepository>();
-            services.AddSingleton<ISluzbeniListRepository, SluzbeniListRepository>();
-            services.AddSingleton<IPrijavaZaNadmetanjeRepository, PrijavaZaNadmetanjeRepository>();
-            services.AddSingleton<IOglasRepository, OglasRepository>();
-            /*services.AddSwaggerGen(c =>
+            services.AddScoped<IJavnoNadmetanjeRepository, JavnoNadmetanjeRepository>();
+            services.AddScoped<ISluzbeniListRepository, SluzbeniListRepository>();
+            services.AddScoped<IPrijavaZaNadmetanjeRepository, PrijavaZaNadmetanjeRepository>();
+            services.AddScoped<IOglasRepository, OglasRepository>();
+            services.AddScoped<IDokumentPrijavaZaNadmetanjeRepository, DokumentPrijavaZaNadmetanjeRepository>();
+            services.AddScoped<IUplataService, UplataService>();
+            services.AddScoped<IAuthService, AuthService>();
+
+            services.AddSwaggerGen(setupAction =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "JavnoNadmetanje", Version = "v1" });
-            });*/
+                setupAction.SwaggerDoc("JavnoNadmetanjeOpenApiSpecification", new Microsoft.OpenApi.Models.OpenApiInfo()
+                {
+                    Title = "Javno Nadmetanje API",
+                    Version = "1",
+                    Description = "Pomoću ovog API-ja mogu da se vrše sve CRUD operacije u okviru agregata Javno Nadmetanje.",
+                    Contact = new Microsoft.OpenApi.Models.OpenApiContact
+                    {
+                        Name = "Lenka Subotin",
+                        Email = "subotinlenka@gmail.com",
+                        Url = new Uri("http://www.ftn.uns.ac.rs/")
+                    },
+                    License = new Microsoft.OpenApi.Models.OpenApiLicense
+                    {
+                        Name = "FTN licence",
+                        Url = new Uri("http://www.ftn.uns.ac.rs/")
+                    },
+                    TermsOfService = new Uri("http://www.ftn.uns.ac.rs/javnoNadmetanjeTermsOfService")
+                });
+
+                var xmlComments = $"{ Assembly.GetExecutingAssembly().GetName().Name }.xml";
+
+                var xmlCommentsPath = Path.Combine(AppContext.BaseDirectory, xmlComments);
+
+                setupAction.IncludeXmlComments(xmlCommentsPath);
+            });
+
+            // Dodat DbContext koji ce se koristiti
+            services.AddDbContextPool<JavnoNadmetanjeContext>(options => options.UseSqlServer(Configuration.GetConnectionString("JavnoNadmetanjeDB")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,8 +94,6 @@ namespace JavnoNadmetanje
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                //app.UseSwagger();
-                //app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "JavnoNadmetanje v1"));
             }
 
             else
@@ -62,10 +103,16 @@ namespace JavnoNadmetanje
                     appBuilder.Run(async context =>
                     {
                         context.Response.StatusCode = 500;
-                        await context.Response.WriteAsync("Do�lo je do gre�ke. Molim Vas poku�ajte kasnije!");
+                        await context.Response.WriteAsync("Došlo je do greške. Molim Vas pokušajte kasnije!");
                     });
                 });
             }
+
+            app.UseSwagger();
+            app.UseSwaggerUI(setupAction =>
+            {
+                setupAction.SwaggerEndpoint("/swagger/JavnoNadmetanjeOpenApiSpecification/swagger.json", "Javno Nadmetanje API");
+            });
 
             app.UseHttpsRedirection();
 

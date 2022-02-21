@@ -12,11 +12,15 @@ namespace JavnoNadmetanje.Data
 
         JavnoNadmetanjeEntity GetJavnoNadmetanjeById(Guid javnoNadmetanjeId);
 
+        List<JavnoNadmetanjeEntity> GetJavnaNadmetanjaByLicitacijaId(Guid licitacijaId);
+
         JavnoNadmetanjeEntity CreateJavnoNadmetanje(JavnoNadmetanjeEntity javnoNadmetanje);
 
-        JavnoNadmetanjeEntity UpdateJavnoNadmetanje(JavnoNadmetanjeEntity javnoNadmetanje);
+        void UpdateJavnoNadmetanje(JavnoNadmetanjeEntity javnoNadmetanje);
 
         void DeleteJavnoNadmetanje(Guid javnoNadmetanjeId);
+
+        bool SaveChanges();
 
     }
 }

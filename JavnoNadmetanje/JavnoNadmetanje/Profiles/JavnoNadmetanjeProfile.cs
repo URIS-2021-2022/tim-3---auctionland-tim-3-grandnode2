@@ -14,6 +14,8 @@ namespace JavnoNadmetanje.Profiles
         {
             CreateMap<JavnoNadmetanjeEntity, JavnoNadmetanjeDto>();
             CreateMap<JavnoNadmetanjeDto, JavnoNadmetanjeEntity>();
+            CreateMap<JavnoNadmetanjeCreateDto, JavnoNadmetanjeEntity>();
+            CreateMap<JavnoNadmetanjeEntity, JavnoNadmetanjeEntity>();
         }
     }
 }
