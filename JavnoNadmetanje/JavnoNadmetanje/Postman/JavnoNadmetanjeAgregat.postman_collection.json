@@ -1,0 +1,835 @@
+{
+	"info": {
+		"_postman_id": "eb4084be-1b1b-4c28-9029-80678cee8776",
+		"name": "JavnoNadmetanjeAgregat",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetJavnaNadmetanja",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:44250/api/javnaNadmetanja",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "44250",
+					"path": [
+						"api",
+						"javnaNadmetanja"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetJavnoNadmetanjeById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:44250/api/javnaNadmetanja/6a411c13-a195-48f7-8dbd-67596c3974c0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "44250",
+					"path": [
+						"api",
+						"javnaNadmetanja",
+						"6a411c13-a195-48f7-8dbd-67596c3974c0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetJavnaNadmetanjaHead",
+			"request": {
+				"method": "HEAD",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:44250/api/javnaNadmetanja",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "44250",
+					"path": [
+						"api",
+						"javnaNadmetanja"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetJavnoNadmetanjeOptions",
+			"request": {
+				"method": "OPTIONS",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:44250/api/javnaNadmetanja",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "44250",
+					"path": [
+						"api",
+						"javnaNadmetanja"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateJavnoNadmetanje",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "Bearer LenkaSubotin",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Key",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"datum\": \"2022-10-02T00:00:00\",\r\n    \"vremePocetka\": \"2022-02-11T09:00:00\",\r\n    \"vremeKraja\": \"2022-02-11T10:00:00\",\r\n    \"pocetnaCenaPoHektaru\": 2000,\r\n    \"izuzeto\": false,\r\n    \"tip\": null,\r\n    \"izlicitiranaCena\": 2500,\r\n    \"periodZakupa\": 3,\r\n    \"brojUcesnika\": 5,\r\n    \"visinaDopuneDepozita\": 1000,\r\n    \"krug\": 1,\r\n    \"status\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:44250/api/javnaNadmetanja",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "44250",
+					"path": [
+						"api",
+						"javnaNadmetanja"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteJavnoNadmetanje",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "Bearer LenkaSubotin",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Key",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:44250/api/javnaNadmetanja/6a411c13-a195-48f7-8dbd-67596c3974c0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "44250",
+					"path": [
+						"api",
+						"javnaNadmetanja",
+						"6a411c13-a195-48f7-8dbd-67596c3974c0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateJavnoNadmetanje",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "Bearer LenkaSubotin",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Key",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \"javnoNadmetanjeId\" : \"6a411c13-a195-48f7-8dbd-67596c3974c0\",\r\n        \"datum\": \"2022-11-02T00:00:00\",\r\n        \"vremePocetka\": \"2022-02-17T10:00:00\",\r\n        \"vremeKraja\": \"2022-02-17T14:00:00\",\r\n        \"pocetnaCenaPoHektaru\": 2700,\r\n        \"izuzeto\": true,\r\n        \"tip\": null,\r\n        \"izlicitiranaCena\": 900,\r\n        \"periodZakupa\": 4,\r\n        \"brojUcesnika\": 10,\r\n        \"visinaDopuneDepozita\": 300,\r\n        \"krug\": 2,\r\n        \"status\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:44250/api/javnaNadmetanja",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "44250",
+					"path": [
+						"api",
+						"javnaNadmetanja"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetSluzbeniListovi",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:44250/api/sluzbeniListovi",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "44250",
+					"path": [
+						"api",
+						"sluzbeniListovi"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetSluzbeniListById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:44250/api/sluzbeniListovi/1a0d7558-2ebc-45df-83d3-13066c36d42b",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "44250",
+					"path": [
+						"api",
+						"sluzbeniListovi",
+						"1a0d7558-2ebc-45df-83d3-13066c36d42b"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetSluzbeniListoviHead",
+			"request": {
+				"method": "HEAD",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:44250/api/sluzbeniListovi",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "44250",
+					"path": [
+						"api",
+						"sluzbeniListovi"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetSluzbeniListOptions",
+			"request": {
+				"method": "OPTIONS",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:44250/api/sluzbeniListovi",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "44250",
+					"path": [
+						"api",
+						"sluzbeniListovi"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateSluzbeniList",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "Bearer LenkaSubotin",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Key",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"opstina\": \"Novi Sad\",\r\n        \"brojSluzbenogLista\": 5,\r\n        \"datumIzdavanja\": \"2021-12-09T00:00:00\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:44250/api/sluzbeniListovi",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "44250",
+					"path": [
+						"api",
+						"sluzbeniListovi"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteSluzbeniList",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "Bearer LenkaSubotin",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Key",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:44250/api/sluzbeniListovi/1a0d7558-2ebc-45df-83d3-13066c36d42b",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "44250",
+					"path": [
+						"api",
+						"sluzbeniListovi",
+						"1a0d7558-2ebc-45df-83d3-13066c36d42b"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateSluzbeniList",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "Bearer LenkaSubotin",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Key",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \"sluzbeniListId\": \"1a0d7558-2ebc-45df-83d3-13066c36d42b\",\r\n        \"opstina\": \"Subotica\",\r\n        \"brojSluzbenogLista\": 8,\r\n        \"datumIzdavanja\": \"2022-11-01T00:00:00\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:44250/api/sluzbeniListovi",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "44250",
+					"path": [
+						"api",
+						"sluzbeniListovi"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetPrijaveZaNadmetanje",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:44250/api/prijaveZaNadmetanje",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "44250",
+					"path": [
+						"api",
+						"prijaveZaNadmetanje"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetPrijavaZaNadmetanjeById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:44250/api/prijaveZaNadmetanje/07c0c62b-675e-4714-816c-b492720194d6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "44250",
+					"path": [
+						"api",
+						"prijaveZaNadmetanje",
+						"07c0c62b-675e-4714-816c-b492720194d6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetPrijaveZaNadmetanjeHead",
+			"request": {
+				"method": "HEAD",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:44250/api/prijaveZaNadmetanje",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "44250",
+					"path": [
+						"api",
+						"prijaveZaNadmetanje"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetPrijavaZaNadmetanjeOptions",
+			"request": {
+				"method": "OPTIONS",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:44250/api/prijaveZaNadmetanje",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "44250",
+					"path": [
+						"api",
+						"prijaveZaNadmetanje"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreatePrijavaZaNadmetanje",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "Bearer LenkaSubotin",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Key",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"datumPrijave\": \"2022-07-02T00:00:00\",\r\n    \"mestoPrijave\": \"Novi Sad\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:44250/api/prijaveZaNadmetanje",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "44250",
+					"path": [
+						"api",
+						"prijaveZaNadmetanje"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeletePrijavaZaNadmetanje",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "Bearer LenkaSubotin",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Key",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:44250/api/prijaveZaNadmetanje/07c0c62b-675e-4714-816c-b492720194d6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "44250",
+					"path": [
+						"api",
+						"prijaveZaNadmetanje",
+						"07c0c62b-675e-4714-816c-b492720194d6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdatePrijavaZaNadmetanje",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "Bearer LenkaSubotin",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Key",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"prijavaZaNadmetanjeId\": \"07c0c62b-675e-4714-816c-b492720194d6\",\r\n        \"datumPrijave\": \"2022-06-02T00:00:00\",\r\n        \"mestoPrijave\": \"Sombor\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:44250/api/prijaveZaNadmetanje",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "44250",
+					"path": [
+						"api",
+						"prijaveZaNadmetanje"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetOglasi",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:44250/api/oglasi",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "44250",
+					"path": [
+						"api",
+						"oglasi"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetOglasById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:44250/api/oglasi/382e1636-2705-477e-95c4-8727e819c5e9",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "44250",
+					"path": [
+						"api",
+						"oglasi",
+						"382e1636-2705-477e-95c4-8727e819c5e9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetOglasiHead",
+			"request": {
+				"method": "HEAD",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:44250/api/oglasi",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "44250",
+					"path": [
+						"api",
+						"oglasi"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetOglasOptions",
+			"request": {
+				"method": "OPTIONS",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:44250/api/oglasi",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "44250",
+					"path": [
+						"api",
+						"oglasi"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateOglas",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "Bearer LenkaSubotin",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Key",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"datumObjavljivanjaOglasa\": \"2018-05-10T00:00:00\",\r\n        \"godinaObjavljivanjaOglasa\": 2018,\r\n        \"tipGarantaPlacanja\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:44250/api/oglasi",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "44250",
+					"path": [
+						"api",
+						"oglasi"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteOglas",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "Bearer LenkaSubotin",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Key",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:44250/api/oglasi/382e1636-2705-477e-95c4-8727e819c5e9",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "44250",
+					"path": [
+						"api",
+						"oglasi",
+						"382e1636-2705-477e-95c4-8727e819c5e9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateOglas",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "Bearer LenkaSubotin",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Key",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"oglasId\": \"382e1636-2705-477e-95c4-8727e819c5e9\",\r\n    \"datumObjavljivanjaOglasa\": \"2022-05-10T00:00:00\",\r\n    \"godinaObjavljivanjaOglasa\": 2022,\r\n    \"tipGarantaPlacanja\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:44250/api/oglasi",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "44250",
+					"path": [
+						"api",
+						"oglasi"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

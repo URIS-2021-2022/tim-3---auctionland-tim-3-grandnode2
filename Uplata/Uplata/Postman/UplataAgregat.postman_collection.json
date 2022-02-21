@@ -1,0 +1,419 @@
+{
+	"info": {
+		"_postman_id": "f31441da-ebf8-4242-8644-ce65cca9c3f0",
+		"name": "UplataAgregat",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetUplate",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:42251/api/uplate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "42251",
+					"path": [
+						"api",
+						"uplate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetUplataById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:42251/api/uplate/de24dc84-1744-41cd-b4d7-56b830dde7f9",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "42251",
+					"path": [
+						"api",
+						"uplate",
+						"de24dc84-1744-41cd-b4d7-56b830dde7f9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetUplateHead",
+			"request": {
+				"method": "HEAD",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:42251/api/uplate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "42251",
+					"path": [
+						"api",
+						"uplate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetUplataOptions",
+			"request": {
+				"method": "OPTIONS",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:42251/api/uplate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "42251",
+					"path": [
+						"api",
+						"uplate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateUplata",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "Bearer LenkaSubotin",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Key",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"brojRacuna\": 22604112,\r\n    \"pozivNaBroj\": 22100222,\r\n    \"iznos\": 1500,\r\n    \"svrhaUplate\": \"Uplata za javno nadmetanje u 2022. godini\",\r\n    \"datum\": \"2022-10-02T00:00:00\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:42251/api/uplate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "42251",
+					"path": [
+						"api",
+						"uplate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteUplata",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "Bearer LenkaSubotin",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Key",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:42251/api/uplate/de24dc84-1744-41cd-b4d7-56b830dde7f9",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "42251",
+					"path": [
+						"api",
+						"uplate",
+						"de24dc84-1744-41cd-b4d7-56b830dde7f9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateUplata",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "Bearer LenkaSubotin",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Key",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"uplataId\": \"de24dc84-1744-41cd-b4d7-56b830dde7f9\",\r\n    \"brojRacuna\": 45604112,\r\n    \"pozivNaBroj\": 45100222,\r\n    \"iznos\": 1500,\r\n    \"svrhaUplate\": \"Uplata za javno nadmetanje u 2022. godini\",\r\n    \"datum\": \"2022-10-02T00:00:00\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:42251/api/uplate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "42251",
+					"path": [
+						"api",
+						"uplate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetBanke",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:42251/api/banke",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "42251",
+					"path": [
+						"api",
+						"banke"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetBankaById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:42251/api/banke/9aef1da1-d5af-4073-9d40-8794f9d33564",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "42251",
+					"path": [
+						"api",
+						"banke",
+						"9aef1da1-d5af-4073-9d40-8794f9d33564"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetBankeHead",
+			"request": {
+				"method": "HEAD",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:42251/api/banke",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "42251",
+					"path": [
+						"api",
+						"banke"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetBankaOptions",
+			"request": {
+				"method": "OPTIONS",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:42251/api/banke",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "42251",
+					"path": [
+						"api",
+						"banke"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateBanka",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "Bearer LenkaSubotin",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Key",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n    {\r\n        \"nazivBanke\": \"Vojvodjanska banka\",\r\n        \"adresa\": \"Knez Mihailova 20\",\r\n        \"grad\": \"Beograd\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:42251/api/banke",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "42251",
+					"path": [
+						"api",
+						"banke"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteBanka",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "Bearer LenkaSubotin",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Key",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:42251/api/banke/9aef1da1-d5af-4073-9d40-8794f9d33564",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "42251",
+					"path": [
+						"api",
+						"banke",
+						"9aef1da1-d5af-4073-9d40-8794f9d33564"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateBanka",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "Bearer LenkaSubotin",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Key",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"bankaId\" : \"9aef1da1-d5af-4073-9d40-8794f9d33564\",\r\n        \"nazivBanke\": \"OTP banka\",\r\n        \"adresa\": \"Bulevar Evrope 80\",\r\n        \"grad\": \"Novi Sad\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:42251/api/banke",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "42251",
+					"path": [
+						"api",
+						"banke"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

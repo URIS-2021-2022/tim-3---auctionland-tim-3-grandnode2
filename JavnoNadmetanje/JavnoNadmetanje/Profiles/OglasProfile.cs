@@ -14,6 +14,8 @@ namespace JavnoNadmetanje.Profiles
         {
             CreateMap<OglasEntity, OglasDto>();
             CreateMap<OglasDto, OglasEntity>();
+            CreateMap<OglasCreateDto, OglasEntity>();
+            CreateMap<OglasEntity, OglasEntity>();
         }
     }
 }

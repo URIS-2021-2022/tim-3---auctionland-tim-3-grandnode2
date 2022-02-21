@@ -14,8 +14,10 @@ namespace JavnoNadmetanje.Data
 
         SluzbeniListEntity CreateSluzbeniList(SluzbeniListEntity sluzbeniList);
 
-        SluzbeniListEntity UpdateSluzbeniList(SluzbeniListEntity sluzbeniList);
+        void UpdateSluzbeniList(SluzbeniListEntity sluzbeniList);
 
         void DeleteSluzbeniList(Guid sluzbeniListId);
+
+        bool SaveChanges();
     }
 }

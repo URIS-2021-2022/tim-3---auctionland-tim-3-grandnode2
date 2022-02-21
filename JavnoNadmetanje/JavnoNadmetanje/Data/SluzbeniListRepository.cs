@@ -1,4 +1,5 @@
-﻿using JavnoNadmetanje.Entities;
+﻿using AutoMapper;
+using JavnoNadmetanje.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,66 +9,47 @@ namespace JavnoNadmetanje.Data
 {
     public class SluzbeniListRepository : ISluzbeniListRepository
     {
-        public static List<SluzbeniListEntity> SluzbeniListovi { get; set; } = new List<SluzbeniListEntity>();
+        private readonly JavnoNadmetanjeContext context;
+        private readonly IMapper mapper;
 
-        public SluzbeniListRepository()
+        public SluzbeniListRepository(JavnoNadmetanjeContext context, IMapper mapper)
         {
-            FillData();
+            this.context = context;
+            this.mapper = mapper;
         }
 
-        private void FillData()
+        public bool SaveChanges()
         {
-            SluzbeniListovi.AddRange(new List<SluzbeniListEntity>
-            {
-                new SluzbeniListEntity
-                {
-                    SluzbeniListId = Guid.Parse("1a0d7558-2ebc-45df-83d3-13066c36d42b"),
-                    Opstina = "Novi Sad",
-                    BrojSluzbenogLista = 5,
-                    DatumIzdavanja = DateTime.Parse("11-10-2021")
-                },
-                new SluzbeniListEntity
-                {
-                    SluzbeniListId = Guid.Parse("76e60dd7-0e18-4c7c-abe0-b59524eca5ff"),
-                    Opstina = "Subotica",
-                    BrojSluzbenogLista = 8,
-                    DatumIzdavanja = DateTime.Parse("11-01-2022")
-                }
-            });
+            return context.SaveChanges() > 0;
         }
 
         public List<SluzbeniListEntity> GetSluzbeniListovi()
         {
-            return (from s in SluzbeniListovi select s).ToList();
+            return (from s in context.SluzbeniListovi select s).ToList();
         }
 
         public SluzbeniListEntity GetSluzbeniListById(Guid sluzbeniListId)
         {
-            return SluzbeniListovi.FirstOrDefault(s => s.SluzbeniListId == sluzbeniListId);
+            return context.SluzbeniListovi.FirstOrDefault(s => s.SluzbeniListId == sluzbeniListId);
         }
 
         public SluzbeniListEntity CreateSluzbeniList(SluzbeniListEntity sluzbeniList)
         {
             sluzbeniList.SluzbeniListId = Guid.NewGuid();
-            SluzbeniListovi.Add(sluzbeniList);
+            context.SluzbeniListovi.Add(sluzbeniList);
             SluzbeniListEntity sList = GetSluzbeniListById(sluzbeniList.SluzbeniListId);
             return sList;
         }
 
-        public SluzbeniListEntity UpdateSluzbeniList(SluzbeniListEntity sluzbeniList)
+        public void UpdateSluzbeniList(SluzbeniListEntity sluzbeniList)
         {
-            SluzbeniListEntity sList = GetSluzbeniListById(sluzbeniList.SluzbeniListId);
-
-            sList.Opstina = sluzbeniList.Opstina;
-            sList.BrojSluzbenogLista = sluzbeniList.BrojSluzbenogLista;
-            sList.DatumIzdavanja = sluzbeniList.DatumIzdavanja;
-
-            return sList;
+            //Nije potrebna implementacija jer EF core prati entitet koji smo izvukli iz baze
+            //i kada promenimo taj objekat i odradimo SaveChanges sve izmene će biti perzistirane
         }
 
         public void DeleteSluzbeniList(Guid sluzbeniListId)
         {
-            SluzbeniListovi.Remove(SluzbeniListovi.FirstOrDefault(s => s.SluzbeniListId == sluzbeniListId));
+            context.SluzbeniListovi.Remove(context.SluzbeniListovi.FirstOrDefault(s => s.SluzbeniListId == sluzbeniListId));
         }
 
     }

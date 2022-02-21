@@ -1,4 +1,5 @@
-﻿using JavnoNadmetanje.Entities;
+﻿using AutoMapper;
+using JavnoNadmetanje.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,63 +9,47 @@ namespace JavnoNadmetanje.Data
 {
     public class PrijavaZaNadmetanjeRepository : IPrijavaZaNadmetanjeRepository
     {
-        public static List<PrijavaZaNadmetanjeEntity> PrijaveZaNadmetanje { get; set; } = new List<PrijavaZaNadmetanjeEntity>();
+        private readonly JavnoNadmetanjeContext context;
+        private readonly IMapper mapper;
 
-        public PrijavaZaNadmetanjeRepository()
+        public PrijavaZaNadmetanjeRepository(JavnoNadmetanjeContext context, IMapper mapper)
         {
-            FillData();
+            this.context = context;
+            this.mapper = mapper;
         }
 
-        private void FillData()
+        public bool SaveChanges()
         {
-            PrijaveZaNadmetanje.AddRange(new List<PrijavaZaNadmetanjeEntity>
-            {
-                new PrijavaZaNadmetanjeEntity
-                {
-                    PrijavaZaNadmetanjeId = Guid.Parse("07c0c62b-675e-4714-816c-b492720194d6"),
-                    DatumPrijave = DateTime.Parse("09-02-2022"),
-                    MestoPrijave = "Novi Sad"
-                },
-                new PrijavaZaNadmetanjeEntity
-                {
-                    PrijavaZaNadmetanjeId = Guid.Parse("1cd5c783-4bf5-4bbc-b7f0-bd66e2ba0bd7"),
-                    DatumPrijave = DateTime.Parse("08-02-2022"),
-                    MestoPrijave = "Subotica"
-                }
-            });
+            return context.SaveChanges() > 0;
         }
 
         public List<PrijavaZaNadmetanjeEntity> GetPrijaveZaNadmetanje()
         {
-            return (from p in PrijaveZaNadmetanje select p).ToList();
+            return (from p in context.PrijaveZaNadmetanje select p).ToList();
         }
 
         public PrijavaZaNadmetanjeEntity GetPrijavaZaNadmetanjeById(Guid prijavaZaNadmetanjeId)
         {
-            return PrijaveZaNadmetanje.FirstOrDefault(p => p.PrijavaZaNadmetanjeId == prijavaZaNadmetanjeId);
+            return context.PrijaveZaNadmetanje.FirstOrDefault(p => p.PrijavaZaNadmetanjeId == prijavaZaNadmetanjeId);
         }
 
         public PrijavaZaNadmetanjeEntity CreatePrijavaZaNadmetanje(PrijavaZaNadmetanjeEntity prijavaZaNadmetanje)
         {
             prijavaZaNadmetanje.PrijavaZaNadmetanjeId= Guid.NewGuid();
-            PrijaveZaNadmetanje.Add(prijavaZaNadmetanje);
+            context.PrijaveZaNadmetanje.Add(prijavaZaNadmetanje);
             PrijavaZaNadmetanjeEntity prijavaNadmetanje = GetPrijavaZaNadmetanjeById(prijavaZaNadmetanje.PrijavaZaNadmetanjeId);
             return prijavaNadmetanje;
         }
 
-        public PrijavaZaNadmetanjeEntity UpdatePrijavaZaNadmetanje(PrijavaZaNadmetanjeEntity prijavaZaNadmetanje)
+        public void UpdatePrijavaZaNadmetanje(PrijavaZaNadmetanjeEntity prijavaZaNadmetanje)
         {
-            PrijavaZaNadmetanjeEntity prijavaNadmetanje = GetPrijavaZaNadmetanjeById(prijavaZaNadmetanje.PrijavaZaNadmetanjeId);
-
-            prijavaNadmetanje.DatumPrijave = prijavaZaNadmetanje.DatumPrijave;
-            prijavaNadmetanje.MestoPrijave = prijavaZaNadmetanje.MestoPrijave;
-
-            return prijavaNadmetanje;
+            //Nije potrebna implementacija jer EF core prati entitet koji smo izvukli iz baze
+            //i kada promenimo taj objekat i odradimo SaveChanges sve izmene će biti perzistirane
         }
 
         public void DeletePrijavaZaNadmetanje(Guid prijavaZaNadmetanjeId)
         {
-            PrijaveZaNadmetanje.Remove(PrijaveZaNadmetanje.FirstOrDefault(p => p.PrijavaZaNadmetanjeId== prijavaZaNadmetanjeId));
+            context.PrijaveZaNadmetanje.Remove(context.PrijaveZaNadmetanje.FirstOrDefault(p => p.PrijavaZaNadmetanjeId== prijavaZaNadmetanjeId));
         }
 
     }

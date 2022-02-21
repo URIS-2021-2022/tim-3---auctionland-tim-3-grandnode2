@@ -14,8 +14,10 @@ namespace JavnoNadmetanje.Data
 
         OglasEntity CreateOglas(OglasEntity oglas);
 
-        OglasEntity UpdateOglas(OglasEntity oglas);
+        void UpdateOglas(OglasEntity oglas);
 
         void DeleteOglas(Guid oglasId);
+
+        bool SaveChanges();
     }
 }

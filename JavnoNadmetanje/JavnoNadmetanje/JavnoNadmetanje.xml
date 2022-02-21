@@ -1,0 +1,895 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>JavnoNadmetanje</name>
+    </assembly>
+    <members>
+        <member name="M:JavnoNadmetanje.Controllers.DokumentPrijavaZaNadmetanjeController.GetDokumentiPrijavaByPrijavaZaNadmetanjeId(System.Guid)">
+            <summary>
+            Vraća sve veze između dokumenta i prijava za nadmetanje na osnovu prijave za nadmetanje ID
+            </summary>
+            <returns>Lista veza između dokumenata i prijave za nadmetanje</returns>
+            <response code = "200">Vraća listu veza između dokumenata i prijava za nadmetanje</response>
+            <response code = "204">Ne postoji nijedna veza između dokumenata i prijava za nadmetanje</response>
+        </member>
+        <member name="M:JavnoNadmetanje.Controllers.DokumentPrijavaZaNadmetanjeController.GetDokumentPrijavaById(System.Guid,System.Guid)">
+            <summary>
+            Vraća vezu između dokumenta i prijave za nadmetanje po ID-ju dokumenta i prijave za nadmetanje
+            </summary>
+            <param name="prijavaZaNadmetanjeId">ID prijave za nadmetanje</param>
+             <param name="dokumentId">ID dokumenta</param>
+            <returns>Tražena veza između dokumenta i prijave za nadmetanje</returns>
+            <response code = "200">Vraća traženu vezu između dokumenta i prijave za nadmetanje</response>
+            <response code = "404">Nije pronađena tražena veza između dokumenta i prijave za nadmetanje</response>
+        </member>
+        <member name="M:JavnoNadmetanje.Controllers.DokumentPrijavaZaNadmetanjeController.CreateDokumentPrijava(JavnoNadmetanje.Models.DokumentPrijavaZaNadmetanjeDto,System.String)">
+            <summary>
+            Kreira novu vezu između dokumenta i prijave za nadmetanje
+            </summary>
+            <param name="dokumentPrijava"> model veze između dokumenta i prijave za nadmetanje</param>
+            <param name="key"> ključ sa kojim se proverava autorizacija</param>
+            <returns>Potvrda o kreiranoj vezi između dokumenta i prijave za nadmetanje</returns>
+            <remarks>
+            Primer zahteva za kreiranje nove veze između dokumenta i prijave za nadmetanje \
+            POST /api/prijaveZaNadmetanje \
+            { \
+            "DatumDonosenjaDokumenta" : "09-02-2022" \
+            } 
+            </remarks>
+            <response code = "201">Vraća kreiranu vezu između dokumenta i prijave za nadmetanje</response>
+            <response code="401">Lice koje želi da izvrši kreiranje veze između dokumenta i prijave za nadmetanje nije autorizovani korisnik</response>
+            <response code = "500">Došlo je do greške na serveru prilikom kreiranja veze između dokumenta i prijave za nadmetanje</response>
+        </member>
+        <member name="M:JavnoNadmetanje.Controllers.DokumentPrijavaZaNadmetanjeController.DeleteDokumentPrijavaByPrijavaZaNadmetanjeId(System.Guid,System.String)">
+            <summary>
+            Briše vezu između dokumenta i prijavu za nadmetanje na osnovu ID-ja prijave za nadmetanje
+            </summary>
+            <param name="prijavaZaNadmetanjeId">ID prijave za nadmetanje</param>
+            <param name="key"> ključ sa kojim se proverava autorizacija</param>
+            <returns>Status 204 (NoContent)</returns>
+            <response code="204">Veza između dokumenta i prijave za nadmetanje uspešno obrisana</response>
+            <response code="401">Lice koje želi da izvrši brisanje nije autorizovani korisnik</response>
+            <response code="404">Nije pronađena veza između dokumenta i prijave za nadmetanje za brisanje</response>
+            <response code="500">Došlo je do greške na serveru prilikom brisanja veze između dokumenta i prijave za nadmetanje</response>
+        </member>
+        <member name="M:JavnoNadmetanje.Controllers.DokumentPrijavaZaNadmetanjeController.UpdateDokumentPrijava(JavnoNadmetanje.Entities.DokumentPrijavaZaNadmetanjeEntity,System.String)">
+            <summary>
+            Ažurira jednu vezu između dokumenta i prijave za nadmetanje
+            </summary>
+            <param name="dokumentPrijava">Model veze između dokumenta i prijave za nadmetanje koji se ažurira</param>
+            <param name="key"> ključ sa kojim se proverava autorizacija</param>
+            <returns>Potvrda o ažuriranoj vezi između dokumenta i prijave za nadmetanje</returns>
+            <response code="200">Vraća ažuriranu vezu između dokumenta i prijave za nadmetanje</response>
+            <response code="401">Lice koje želi da izvrši ažuriranje nije autorizovani korisnik</response>
+            <response code="404">Nije pronađena  veza između dokumenta i prijave za nadmetanje za ažuriranje</response>
+            <response code="500">Došlo je do greške na serveru prilikom ažuriranja veze između dokumenta i prijave za nadmetanje</response>
+        </member>
+        <member name="M:JavnoNadmetanje.Controllers.DokumentPrijavaZaNadmetanjeController.GetDokumentPrijavaOptions">
+            <summary>
+            Vraća informacije o opcijama koje je moguće izvršiti za sve dokumente prijave za nadmetanje
+            </summary>
+            <response code="200">Vraća informacije o opcijama koje je moguće izvršiti</response>
+        </member>
+        <member name="M:JavnoNadmetanje.Controllers.JavnoNadmetanjeController.GetJavnaNadmetanja">
+            <summary>
+            Vraća sva javna nadmetanja
+            </summary>
+            <returns>Lista javnih nadmetanja</returns>
+            <response code = "200">Vraća listu javnih nadmetanja</response>
+            <response code = "204">Ne postoji nijedno javno nadmetanje</response>
+        </member>
+        <member name="M:JavnoNadmetanje.Controllers.JavnoNadmetanjeController.GetJavnoNadmetanjeById(System.Guid)">
+            <summary>
+            Vraća traženo javno nadmetanje po ID-ju
+            </summary>
+            <param name="javnoNadmetanjeId">ID javnog nadmetanja</param>
+            <returns>Traženo javno nadmetanje</returns>
+            <response code = "200">Vraća traženo javno nadmetanje</response>
+            <response code = "404">Nije pronađeno traženo javno nadmetanje</response>
+        </member>
+        <member name="M:JavnoNadmetanje.Controllers.JavnoNadmetanjeController.GetJavnaNadmetanjaByLicitacijaId(System.Guid)">
+            <summary>
+            Vraća listu javnih nadmetanja po ID-ju licitacije
+            </summary>
+            <param name="licitacijaId">ID licitacije</param>
+            <returns>Lista javnih nadmetanja za prosleđenu licitaciju</returns>
+            <response code = "200">Vraća listu javnih nadmetanja za prosleđenu licitaciju</response>
+            <response code = "204">Ne postoji lista javnih nadmetanja za prosleđenu licitaciju</response>
+        </member>
+        <member name="M:JavnoNadmetanje.Controllers.JavnoNadmetanjeController.CreateJavnoNadmetanje(JavnoNadmetanje.Models.JavnoNadmetanjeCreateDto,System.String)">
+            <summary>
+            Kreira novo javno nadmetanje
+            </summary>
+            <param name="javnoNadmetanje"> model javnog nadmetanja</param>
+            <param name="key"> ključ sa kojim se proverava autorizacija</param>
+            <returns>Potvrda o kreiranom javnom nadmetanju</returns>
+            <remarks>
+            Primer zahteva za kreiranje novog javnog nadmetanja \
+            POST /api/javnaNadmetanja \
+            { \
+             "Datum" : "2022-02-10", \
+             "VremePocetka" : "9:00:00", \
+             "VremeKraja" : "13:00:00", \
+             "PocetnaCenaPoHektaru" : 2000, \
+             "Izuzeto" : false, \
+             "Tip" : "JavnaLicitacija", \
+             "IzlicitiranaCena" : 1500, \
+             "PeriodZakupa" : 3, \
+             "BrojUcesnika : 25", \
+             "VisinaDopuneDepozita" : 500, \
+             "Krug" : 1, \
+             "Status" : "PrviKrug", \
+              "OglasId" : "382e1636-2705-477e-95c4-8727e819c5e9", \
+              "LicitacijaId" : "861e7d2e-268f-495f-8bd3-dbfb4f0594a4", \
+              "ParcelaId: : "35d3c2da-7e55-4730-a4ed-9f886e24e6f9", \
+              "KupacId" : "bc03a6fb-b322-4797-b6c4-0a899615f653" \
+            } 
+            </remarks>
+            <response code = "201">Vraća kreirano javno nadmetanje</response>
+            <response code="401">Lice koje želi da izvrši kreiranje javnog nadmetanja nije autorizovani korisnik</response>
+            <response code = "500">Došlo je do greške na serveru prilikom kreiranja javnog nadmetanja</response>
+        </member>
+        <member name="M:JavnoNadmetanje.Controllers.JavnoNadmetanjeController.DeleteJavnoNadmetanje(System.Guid,System.String)">
+            <summary>
+            Briše javno nadmetanje na osnovu ID-ja
+            </summary>
+            <param name="javnoNadmetanjeId">ID javnog nadmetanja</param>
+            /// <param name="key"> ključ sa kojim se proverava autorizacija</param>
+            <returns>Status 204 (NoContent)</returns>
+            <response code="204">Javno nadmetanja uspešno obrisano</response>
+            <response code="401">Lice koje želi da izvrši brisanje nije autorizovani korisnik</response>
+            <response code="404">Nije pronađeno javno nadmetanje za brisanje</response>
+            <response code="500">Došlo je do greške na serveru prilikom brisanja javnog nadmetanja</response>
+        </member>
+        <member name="M:JavnoNadmetanje.Controllers.JavnoNadmetanjeController.UpdateJavnoNadmetanje(JavnoNadmetanje.Entities.JavnoNadmetanjeEntity,System.String)">
+            <summary>
+            Ažurira jedno javno nadmetanje
+            </summary>
+            <param name="javnoNadmetanje">Model javnog nadmetanja koje se ažurira</param>
+            <param name="key"> ključ sa kojim se proverava autorizacija</param>
+            <returns>Potvrda o ažuriranom javnom nadmetanju</returns>
+            <response code="200">Vraća ažurirano javno nadmetanje</response>
+            <response code="401">Lice koje želi da izvrši ažuriranje nije autorizovani korisnik</response>
+            <response code="404">Nije pronađeno javno nadmetanje za ažuriranje</response>
+            <response code="500">Došlo je do greške na serveru prilikom ažuriranja javnog nadmetanja</response>
+        </member>
+        <member name="M:JavnoNadmetanje.Controllers.JavnoNadmetanjeController.GetJavnoNadmetanjeOptions">
+            <summary>
+            Vraća informacije o opcijama koje je moguće izvršiti za sva javna nadmetanja
+            </summary>
+            <response code="200">Vraća informacije o opcijama koje je moguće izvršiti</response>
+        </member>
+        <member name="M:JavnoNadmetanje.Controllers.OglasController.GetOglasi">
+            <summary>
+            Vraća sve oglase
+            </summary>
+            <returns>Lista oglasa</returns>
+            <response code = "200">Vraća listu oglasa</response>
+            <response code = "204">Ne postoji nijedan oglas</response>
+        </member>
+        <member name="M:JavnoNadmetanje.Controllers.OglasController.GetOglasById(System.Guid)">
+            <summary>
+            Vraća traženi oglas po ID-ju
+            </summary>
+            <param name="oglasId">ID oglasa</param>
+            <returns>Traženi oglas</returns>
+            <response code = "200">Vraća traženi oglas</response>
+            <response code = "404">Nije pronađen traženi oglas</response>
+        </member>
+        <member name="M:JavnoNadmetanje.Controllers.OglasController.CreateOglas(JavnoNadmetanje.Models.OglasCreateDto,System.String)">
+            <summary>
+            Kreira novi oglas
+            </summary>
+            <param name="oglas"> model oglasa</param>
+            <param name="key"> ključ sa kojim se proverava autorizacija</param>
+            <returns>Potvrda o kreiranom oglasu</returns>
+            <remarks>
+            Primer zahteva za kreiranje novog oglasa \
+            POST /api/oglasi \
+            { \
+            "DatumObjavljivanjaOglasa" : "2022-10-05", \
+            "GodinaObjavljivanjaOglasa" : 2022, \
+            "SluzbeniListId" : "1a0d7558-2ebc-45df-83d3-13066c36d42b" \
+            } 
+            </remarks>
+            <response code = "201">Vraća kreiran oglas</response>
+            <response code="401">Lice koje želi da izvrši kreiranje oglasa nije autorizovani korisnik</response>
+            <response code = "500">Došlo je do greške na serveru prilikom kreiranja oglasa</response>
+        </member>
+        <member name="M:JavnoNadmetanje.Controllers.OglasController.DeleteOglas(System.Guid,System.String)">
+            <summary>
+            Briše oglas na osnovu ID-ja
+            </summary>
+            <param name="oglasId">ID oglasa</param>
+            <param name="key"> ključ sa kojim se proverava autorizacija</param>
+            <returns>Status 204 (NoContent)</returns>
+            <response code="204">Oglas uspešno obrisan</response>
+            <response code="401">Lice koje želi da izvrši brisanje nije autorizovani korisnik</response>
+            <response code="404">Nije pronađen oglas za brisanje</response>
+            <response code="500">Došlo je do greške na serveru prilikom brisanja oglasa</response>
+        </member>
+        <member name="M:JavnoNadmetanje.Controllers.OglasController.UpdateOglas(JavnoNadmetanje.Entities.OglasEntity,System.String)">
+            <summary>
+            Ažurira jedan oglas 
+            </summary>
+            <param name="oglas">Model oglasa koji se ažurira</param>
+            <param name="key"> ključ sa kojim se proverava autorizacija</param>
+            <returns>Potvrda o ažuriranom oglasu</returns>
+            <response code="200">Vraća ažuriran oglas</response>
+            <response code="401">Lice koje želi da izvrši ažuriranje nije autorizovani korisnik</response>
+            <response code="404">Nije pronađen oglas za ažuriranje</response>
+            <response code="500">Došlo je do greške na serveru prilikom ažuriranja oglasa</response>
+        </member>
+        <member name="M:JavnoNadmetanje.Controllers.OglasController.GetOglasOptions">
+            <summary>
+            Vraća informacije o opcijama koje je moguće izvršiti za sve oglase
+            </summary>
+            <response code="200">Vraća informacije o opcijama koje je moguće izvršiti</response>
+        </member>
+        <member name="M:JavnoNadmetanje.Controllers.PrijavaZaNadmetanjeController.GetPrijaveZaNadmetanje">
+            <summary>
+            Vraća sve prijave za nadmetanje
+            </summary>
+            <returns>Lista prijava za nadmetanje</returns>
+            <response code = "200">Vraća listu prijava za nadmetanje</response>
+            <response code = "204">Ne postoji nijedna prijava za nadmetanje</response>
+        </member>
+        <member name="M:JavnoNadmetanje.Controllers.PrijavaZaNadmetanjeController.GetPrijavaZaNadmetanjeById(System.Guid)">
+            <summary>
+            Vraća prijavu za nadmetanje po ID-ju
+            </summary>
+            <param name="prijavaZaNadmetanjeId">ID prijave za nadmetanje</param>
+            <returns>Tražena prijava za nadmetanje</returns>
+            <response code = "200">Vraća traženu prijavu za nadmetanje</response>
+            <response code = "404">Nije pronađena tražena prijava za nadmetanje</response>
+        </member>
+        <member name="M:JavnoNadmetanje.Controllers.PrijavaZaNadmetanjeController.CreatePrijavaZaNadmetanje(JavnoNadmetanje.Models.PrijavaZaNadmetanjeCreateDto,System.String)">
+            <summary>
+            Kreira novu prijavu za nadmetanje
+            </summary>
+            <param name="prijavaZaNadmetanje"> model prijave za nadmetanje</param>
+            <param name="key"> ključ sa kojim se proverava autorizacija</param>
+            <returns>Potvrda o kreiranoj prijavi za nadmetanje</returns>
+            <remarks>
+            Primer zahteva za kreiranje nove prijave za nadmetanje \
+            POST /api/prijaveZaNadmetanje \
+            { \
+            "DatumPrijave": "2022-02-08", \
+            "MestoPrijave" : "Subotica", \
+            "JavnoNadmetanjeId" : "1c7ea607-8ddb-493a-87fa-4bf5893e965b", \
+            "Uplate" : [] \
+            } 
+            </remarks>
+            <response code = "201">Vraća kreiranu prijavu za nadmetanje</response>
+            <response code="401">Lice koje želi da izvrši kreiranje prijave za nadmetanje nije autorizovani korisnik</response>
+            <response code = "500">Došlo je do greške na serveru prilikom kreiranja prijave za nadmetanje</response>
+        </member>
+        <member name="M:JavnoNadmetanje.Controllers.PrijavaZaNadmetanjeController.DeletePrijavaZaNadmetanje(System.Guid,System.String)">
+            <summary>
+            Briše prijavu za nadmetanje na osnovu ID-ja
+            </summary>
+            <param name="prijavaZaNadmetanjeId">ID prijave za nadmetanje</param>
+            <param name="key"> ključ sa kojim se proverava autorizacija</param>
+            <returns>Status 204 (NoContent)</returns>
+            <response code="204">Prijava za nadmetanje uspešno obrisana</response>
+            <response code="401">Lice koje želi da izvrši brisanje nije autorizovani korisnik</response>
+            <response code="404">Nije pronađena prijava za nadmetanje za brisanje</response>
+            <response code="500">Došlo je do greške na serveru prilikom brisanja prijave za nadmetanje</response>
+        </member>
+        <member name="M:JavnoNadmetanje.Controllers.PrijavaZaNadmetanjeController.UpdatePrijavaZaNadmetanje(JavnoNadmetanje.Entities.PrijavaZaNadmetanjeEntity,System.String)">
+            <summary>
+            Ažurira jedna prijava za nadmetanje
+            </summary>
+            <param name="prijavaZaNadmetanje">Model prijave za nadmetanje koji se ažurira</param>
+            <param name="key"> ključ sa kojim se proverava autorizacija</param>
+            <returns>Potvrda o ažuriranoj prijavi za nadmetanje</returns>
+            <response code="200">Vraća ažuriranu prijavu za nadmetanje</response>
+            <response code="401">Lice koje želi da izvrši ažuriranje nije autorizovani korisnik</response>
+            <response code="404">Nije pronađena prijava za nadmetanje za ažuriranje</response>
+            <response code="500">Došlo je do greške na serveru prilikom ažuriranja prijave za nadmetanje</response>
+        </member>
+        <member name="M:JavnoNadmetanje.Controllers.PrijavaZaNadmetanjeController.GetPrijavaZaNadmetanjeOptions">
+            <summary>
+            Vraća informacije o opcijama koje je moguće izvršiti za sve prijave za nadmetanje
+            </summary>
+            <response code="200">Vraća informacije o opcijama koje je moguće izvršiti</response>
+        </member>
+        <member name="M:JavnoNadmetanje.Controllers.SluzbeniListController.GetSluzbeniListovi">
+            <summary>
+            Vraća sve službene listove
+            </summary>
+            <returns>Lista službenih listova</returns>
+            <response code = "200">Vraća listu službenih listova</response>
+            <response code = "204">Ne postoji nijedan službeni list</response>
+        </member>
+        <member name="M:JavnoNadmetanje.Controllers.SluzbeniListController.GetSluzbeniListById(System.Guid)">
+            <summary>
+            Vraća traženi službeni list po ID-ju
+            </summary>
+            <param name="sluzbeniListId">ID službenog lista</param>
+            <returns>Traženi službeni list</returns>
+            <response code = "200">Vraća traženi službeni list</response>
+            <response code = "404">Nije pronađen traženi službeni list</response>
+        </member>
+        <member name="M:JavnoNadmetanje.Controllers.SluzbeniListController.CreateSluzbeniList(JavnoNadmetanje.Models.SluzbeniListCreateDto,System.String)">
+            <summary>
+            Kreira novi službeni list
+            </summary>
+            <param name="sluzbeniList"> model službenog lista</param>
+            <param name="key"> ključ sa kojim se proverava autorizacija</param>
+            <returns>Potvrda o kreiranom službenom listu</returns>
+            <remarks>
+            Primer zahteva za kreiranje novog službenog lista \
+            POST /api/sluzbeniListovi \
+            { \
+            "Opstina" : "Novi Sad", \
+            "BrojSluzbenogLista" : 12, \
+            "DatumIzdavanja": "2021-10-11" \
+            } 
+            </remarks>
+            <response code = "201">Vraća kreiran službeni list</response>
+            <response code="401">Lice koje želi da izvrši kreiranje službenog lista nije autorizovani korisnik</response>
+            <response code = "500">Došlo je do greške na serveru prilikom kreiranja službenog lista</response>
+        </member>
+        <member name="M:JavnoNadmetanje.Controllers.SluzbeniListController.DeleteSluzbeniList(System.Guid,System.String)">
+            <summary>
+            Briše službeni list na osnovu ID-ja
+            </summary>
+            <param name="sluzbeniListId">ID službenog lista</param>
+            <param name="key"> ključ sa kojim se proverava autorizacija</param>
+            <returns>Status 204 (NoContent)</returns>
+            <response code="204">Službeni list uspešno obrisan</response>
+            <response code="401">Lice koje želi da izvrši brisanje nije autorizovani korisnik</response>
+            <response code="404">Nije pronađen službeni list za brisanje</response>
+            <response code="500">Došlo je do greške na serveru prilikom brisanja službenog lista</response>
+        </member>
+        <member name="M:JavnoNadmetanje.Controllers.SluzbeniListController.UpdateSluzbeniList(JavnoNadmetanje.Entities.SluzbeniListEntity,System.String)">
+            <summary>
+            Ažurira jedan službeni list 
+            </summary>
+            <param name="sluzbeniList">Model službenog lista koji se ažurira</param>
+            <param name="key"> ključ sa kojim se proverava autorizacija</param>
+            <returns>Potvrda o ažuriranom službenom listu</returns>
+            <response code="200">Vraća ažuriran službeni list</response>
+            <response code="401">Lice koje želi da izvrši ažuriranje nije autorizovani korisnik</response>
+            <response code="404">Nije pronađen službeni list za ažuriranje</response>
+            <response code="500">Došlo je do greške na serveru prilikom ažuriranja službenog lista</response>
+        </member>
+        <member name="M:JavnoNadmetanje.Controllers.SluzbeniListController.GetSluzbeniListOptions">
+            <summary>
+            Vraća informacije o opcijama koje je moguće izvršiti za sve službene listove
+            </summary>
+            <response code="200">Vraća informacije o opcijama koje je moguće izvršiti</response>
+        </member>
+        <member name="P:JavnoNadmetanje.Entities.DokumentPrijavaZaNadmetanjeEntity.PrijavaZaNadmetanjeId">
+            <summary>
+            Strani ključ prijave za nadmetanje
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Entities.DokumentPrijavaZaNadmetanjeEntity.DokumentId">
+            <summary>
+            ID dokumenta
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Entities.DokumentPrijavaZaNadmetanjeEntity.DatumDonosenjaDokumenta">
+            <summary>
+            Datum donošenja dokumenta
+            </summary>
+        </member>
+        <member name="M:JavnoNadmetanje.Entities.JavnoNadmetanjeContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+            Metoda koja popunjava bazu sa inicijalnim podacima
+            </summary>
+        </member>
+        <member name="T:JavnoNadmetanje.Entities.JavnoNadmetanjeEntity">
+            <summary>
+            Entity za Javno nadmetanje
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Entities.JavnoNadmetanjeEntity.JavnoNadmetanjeId">
+            <summary>
+            ID javnog nadmetanja
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Entities.JavnoNadmetanjeEntity.Datum">
+            <summary>
+             Datum održavanja javnog nadmetanja
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Entities.JavnoNadmetanjeEntity.VremePocetka">
+            <summary>
+             Vreme početka javnog nadmetanja
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Entities.JavnoNadmetanjeEntity.VremeKraja">
+            <summary>
+             Vreme kraja javnog nadmetanja
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Entities.JavnoNadmetanjeEntity.PocetnaCenaPoHektaru">
+            <summary>
+            Početna cena zemljišta po hektaru
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Entities.JavnoNadmetanjeEntity.Izuzeto">
+            <summary>
+             Izuzeto javno nadmetanje
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Entities.JavnoNadmetanjeEntity.Tip">
+            <summary>
+            Tip javnog nadmetanja
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Entities.JavnoNadmetanjeEntity.IzlicitiranaCena">
+            <summary>
+            Izlicitirana cena
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Entities.JavnoNadmetanjeEntity.PeriodZakupa">
+            <summary>
+            Vremenski period zakupa 
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Entities.JavnoNadmetanjeEntity.BrojUcesnika">
+            <summary>
+            Broj učesnika u javnom nadmetanju
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Entities.JavnoNadmetanjeEntity.VisinaDopuneDepozita">
+            <summary>
+            Visina dopune depozita
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Entities.JavnoNadmetanjeEntity.Krug">
+            <summary>
+            Krug javnog nadmetanja 
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Entities.JavnoNadmetanjeEntity.Status">
+            <summary>
+            Status javnog nadmetanja 
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Entities.JavnoNadmetanjeEntity.OglasId">
+            <summary>
+            Strani ključ oglas
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Entities.JavnoNadmetanjeEntity.LicitacijaId">
+            <summary>
+            ID licitacije
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Entities.JavnoNadmetanjeEntity.ParcelaId">
+            <summary>
+            ID parcele
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Entities.JavnoNadmetanjeEntity.KupacId">
+            <summary>
+            ID kupca
+            </summary>
+        </member>
+        <member name="T:JavnoNadmetanje.Entities.OglasEntity">
+            <summary>
+            Entity za Oglas
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Entities.OglasEntity.OglasId">
+            <summary>
+            ID Oglasa
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Entities.OglasEntity.DatumObjavljivanjaOglasa">
+            <summary>
+            Datum objavljivanja Oglasa
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Entities.OglasEntity.GodinaObjavljivanjaOglasa">
+            <summary>
+            Godina objavljivanja Oglasa
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Entities.OglasEntity.SluzbeniListId">
+            <summary>
+            Strani ključ službenog lista
+            </summary>
+        </member>
+        <member name="T:JavnoNadmetanje.Entities.PrijavaZaNadmetanjeEntity">
+            <summary>
+            Entity za Prijavu za nadmetanje
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Entities.PrijavaZaNadmetanjeEntity.PrijavaZaNadmetanjeId">
+            <summary>
+            ID prijave za nadmetanje
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Entities.PrijavaZaNadmetanjeEntity.DatumPrijave">
+            <summary>
+            Datum prijave na javno nadmetanje
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Entities.PrijavaZaNadmetanjeEntity.MestoPrijave">
+            <summary>
+            Mesto prijave na javno nadmetanje
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Entities.PrijavaZaNadmetanjeEntity.JavnoNadmetanjeId">
+            <summary>
+            Strani ključ javnog nadmetanja
+            </summary>
+        </member>
+        <member name="T:JavnoNadmetanje.Entities.SluzbeniListEntity">
+            <summary>
+            Entity za Službeni list
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Entities.SluzbeniListEntity.SluzbeniListId">
+            <summary>
+            ID službenog lista
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Entities.SluzbeniListEntity.Opstina">
+            <summary>
+            Opština u okviru koje je izdat službeni list
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Entities.SluzbeniListEntity.BrojSluzbenogLista">
+            <summary>
+            Broj službenog lista
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Entities.SluzbeniListEntity.DatumIzdavanja">
+            <summary>
+            Datum izdavanja službenog lista
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.DokumentPrijavaZaNadmetanjeDto.PrijavaZaNadmetanjeId">
+            <summary>
+            ID prijave za nadmetanje
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.DokumentPrijavaZaNadmetanjeDto.DokumentId">
+            <summary>
+            ID dokumenta
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.DokumentPrijavaZaNadmetanjeDto.DatumDonosenjaDokumenta">
+            <summary>
+            Datum donošenja dokumenta
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.JavnoNadmetanjeCreateDto.Datum">
+            <summary>
+             Datum održavanja javnog nadmetanja
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.JavnoNadmetanjeCreateDto.VremePocetka">
+            <summary>
+             Vreme početka javnog nadmetanja
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.JavnoNadmetanjeCreateDto.VremeKraja">
+            <summary>
+             Vreme kraja javnog nadmetanja
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.JavnoNadmetanjeCreateDto.PocetnaCenaPoHektaru">
+            <summary>
+            Početna cena zemljišta po hektaru
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.JavnoNadmetanjeCreateDto.Izuzeto">
+            <summary>
+             Izuzeto javno nadmetanje
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.JavnoNadmetanjeCreateDto.Tip">
+            <summary>
+            Tip javnog nadmetanja
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.JavnoNadmetanjeCreateDto.IzlicitiranaCena">
+            <summary>
+            Izlicitirana cena
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.JavnoNadmetanjeCreateDto.PeriodZakupa">
+            <summary>
+            Vremenski period zakupa 
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.JavnoNadmetanjeCreateDto.BrojUcesnika">
+            <summary>
+            Broj učesnika u javnom nadmetanju
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.JavnoNadmetanjeCreateDto.VisinaDopuneDepozita">
+            <summary>
+            Visina dopune depozita
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.JavnoNadmetanjeCreateDto.Krug">
+            <summary>
+            Krug javnog nadmetanja 
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.JavnoNadmetanjeCreateDto.Status">
+            <summary>
+            Status javnog nadmetanja 
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.JavnoNadmetanjeCreateDto.OglasId">
+            <summary>
+            ID oglasa
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.JavnoNadmetanjeCreateDto.LicitacijaId">
+            <summary>
+            ID licitacije
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.JavnoNadmetanjeCreateDto.ParcelaId">
+            <summary>
+            ID parcele
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.JavnoNadmetanjeCreateDto.KupacId">
+            <summary>
+            ID kupca
+            </summary>
+        </member>
+        <member name="T:JavnoNadmetanje.Models.JavnoNadmetanjeDto">
+            <summary>
+            DTO za Javno nadmetanje
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.JavnoNadmetanjeDto.JavnoNadmetanjeId">
+            <summary>
+            ID javnog nadmetanja
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.JavnoNadmetanjeDto.Datum">
+            <summary>
+             Datum održavanja javnog nadmetanja
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.JavnoNadmetanjeDto.VremePocetka">
+            <summary>
+             Vreme početka javnog nadmetanja
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.JavnoNadmetanjeDto.VremeKraja">
+            <summary>
+             Vreme kraja javnog nadmetanja
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.JavnoNadmetanjeDto.PocetnaCenaPoHektaru">
+            <summary>
+            Početna cena zemljišta po hektaru
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.JavnoNadmetanjeDto.Izuzeto">
+            <summary>
+             Izuzeto javno nadmetanje
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.JavnoNadmetanjeDto.Tip">
+            <summary>
+            Tip javnog nadmetanja
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.JavnoNadmetanjeDto.IzlicitiranaCena">
+            <summary>
+            Izlicitirana cena
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.JavnoNadmetanjeDto.PeriodZakupa">
+            <summary>
+            Vremenski period zakupa 
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.JavnoNadmetanjeDto.BrojUcesnika">
+            <summary>
+            Broj učesnika u javnom nadmetanju
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.JavnoNadmetanjeDto.VisinaDopuneDepozita">
+            <summary>
+            Visina dopune depozita
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.JavnoNadmetanjeDto.Krug">
+            <summary>
+            Krug javnog nadmetanja 
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.JavnoNadmetanjeDto.Status">
+            <summary>
+            Status javnog nadmetanja 
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.JavnoNadmetanjeDto.OglasId">
+            <summary>
+            ID oglasa
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.JavnoNadmetanjeDto.LicitacijaId">
+            <summary>
+            ID licitacije
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.JavnoNadmetanjeDto.ParcelaId">
+            <summary>
+            ID parcele
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.JavnoNadmetanjeDto.KupacId">
+            <summary>
+            ID kupca
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.OglasCreateDto.DatumObjavljivanjaOglasa">
+            <summary>
+            Datum objavljivanja Oglasa
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.OglasCreateDto.GodinaObjavljivanjaOglasa">
+            <summary>
+            Godina objavljivanja Oglasa
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.OglasCreateDto.SluzbeniListId">
+             <summary>
+            ID službenog lista
+             </summary>
+        </member>
+        <member name="T:JavnoNadmetanje.Models.OglasDto">
+            <summary>
+            DTO za Oglas
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.OglasDto.OglasId">
+            <summary>
+            ID Oglasa
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.OglasDto.DatumObjavljivanjaOglasa">
+            <summary>
+            Datum objavljivanja Oglasa
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.OglasDto.GodinaObjavljivanjaOglasa">
+            <summary>
+            Godina objavljivanja Oglasa
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.OglasDto.SluzbeniListId">
+             <summary>
+            ID službenog lista
+             </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.PrijavaZaNadmetanjeCreateDto.DatumPrijave">
+            <summary>
+            Datum prijave na javno nadmetanje
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.PrijavaZaNadmetanjeCreateDto.MestoPrijave">
+            <summary>
+            Mesto prijave na javno nadmetanje
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.PrijavaZaNadmetanjeCreateDto.JavnoNadmetanjeId">
+            <summary>
+            ID javnog nadmetanja
+            </summary>
+        </member>
+        <member name="T:JavnoNadmetanje.Models.PrijavaZaNadmetanjeDto">
+            <summary>
+            DTO za Prijavu za nadmetanje
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.PrijavaZaNadmetanjeDto.PrijavaZaNadmetanjeId">
+            <summary>
+            ID prijave za nadmetanje
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.PrijavaZaNadmetanjeDto.DatumPrijave">
+            <summary>
+            Datum prijave na javno nadmetanje
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.PrijavaZaNadmetanjeDto.MestoPrijave">
+            <summary>
+            Mesto prijave na javno nadmetanje
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.PrijavaZaNadmetanjeDto.JavnoNadmetanjeId">
+            <summary>
+            ID javnog nadmetanja
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.SluzbeniListCreateDto.Opstina">
+            <summary>
+            Opština u okviru koje je izdat službeni list
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.SluzbeniListCreateDto.BrojSluzbenogLista">
+            <summary>
+            Broj službenog lista
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.SluzbeniListCreateDto.DatumIzdavanja">
+            <summary>
+            Datum izdavanja službenog lista
+            </summary>
+        </member>
+        <member name="T:JavnoNadmetanje.Models.SluzbeniListDto">
+            <summary>
+            DTO za Službeni list
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.SluzbeniListDto.SluzbeniListId">
+            <summary>
+            ID službenog lista
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.SluzbeniListDto.Opstina">
+            <summary>
+            Opština u okviru koje je izdat službeni list
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.SluzbeniListDto.BrojSluzbenogLista">
+            <summary>
+            Broj službenog lista
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.SluzbeniListDto.DatumIzdavanja">
+            <summary>
+            Datum izdavanja službenog lista
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.UplataService.UplataDto.UplataId">
+            <summary>
+            ID uplate
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.UplataService.UplataDto.BrojRacuna">
+            <summary>
+            Broj računa sa kog je izvršena uplata
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.UplataService.UplataDto.PozivNaBroj">
+            <summary>
+            Poziv na broj u okviru uplate
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.UplataService.UplataDto.Iznos">
+            <summary>
+            Iznos uplate
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.UplataService.UplataDto.SvrhaUplate">
+            <summary>
+            Svrha uplate
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.UplataService.UplataDto.Datum">
+            <summary>
+            Datum uplate
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.UplataService.UplataDto.BankaId">
+            <summary>
+            Banka ID
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.UplataService.UplataDto.PrijavaZaNadmetanjeId">
+            <summary>
+            Prijava za nadmetanje ID
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -14,8 +14,10 @@ namespace JavnoNadmetanje.Data
 
         PrijavaZaNadmetanjeEntity CreatePrijavaZaNadmetanje(PrijavaZaNadmetanjeEntity prijavaZaNadmetanje);
 
-        PrijavaZaNadmetanjeEntity UpdatePrijavaZaNadmetanje(PrijavaZaNadmetanjeEntity prijavaZaNadmetanje);
+        void UpdatePrijavaZaNadmetanje(PrijavaZaNadmetanjeEntity prijavaZaNadmetanje);
 
         void DeletePrijavaZaNadmetanje(Guid prijavaZaNadmetanjeId);
+
+        bool SaveChanges();
     }
 }

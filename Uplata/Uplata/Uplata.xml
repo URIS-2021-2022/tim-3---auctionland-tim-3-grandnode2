@@ -1,0 +1,330 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Uplata</name>
+    </assembly>
+    <members>
+        <member name="M:Uplata.Controllers.BankaController.GetBanke">
+            <summary>
+            Vraća sve banke
+            </summary>
+            <returns>Lista banki</returns>
+            <response code = "200">Vraća listu banki</response>
+            <response code = "204">Ne postoji nijedna banka</response>
+        </member>
+        <member name="M:Uplata.Controllers.BankaController.GetBankaById(System.Guid)">
+            <summary>
+            Vraća traženu banku po ID-ju
+            </summary>
+            <param name="bankaId">ID banke</param>
+            <returns>Tražena banka</returns>
+            <response code = "200">Vraća traženu banku</response>
+            <response code = "404">Nije pronađena tražena banka</response>
+        </member>
+        <member name="M:Uplata.Controllers.BankaController.CreateBanka(Uplata.Models.BankaCreateDto,System.String)">
+            <summary>
+            Kreira novu banku
+            </summary>
+            <param name="banka"> model banke</param>
+            <param name="key"> ključ sa kojim se proverava autorizacija</param>
+            <returns>Potvrda o kreiranoj banci</returns>
+            <remarks>
+            Primer zahteva za kreiranje nove banke \
+            POST /api/banke \
+            { \
+             "NazivBanke" : "OTP banka", \
+             "Adresa" : "OTP banka", \
+             "Grad" : "Novi Sad", \
+            } 
+            </remarks>
+            <response code = "201">Vraća kreiranu banku</response>
+            <response code="401">Lice koje želi da izvrši kreiranje banke nije autorizovani korisnik</response>
+            <response code = "500">Došlo je do greške na serveru prilikom kreiranja banke</response>
+        </member>
+        <member name="M:Uplata.Controllers.BankaController.DeleteBanka(System.Guid,System.String)">
+            <summary>
+            Briše banku na osnovu ID-ja
+            </summary>
+            <param name="bankaId">ID banke</param>
+            /// <param name="key"> ključ sa kojim se proverava autorizacija</param>
+            <returns>Status 204 (NoContent)</returns>
+            <response code="204">Banka uspešno obrisana</response>
+            <response code="401">Lice koje želi da izvrši brisanje nije autorizovani korisnik</response>
+            <response code="404">Nije pronađena banka za brisanje</response>
+            <response code="500">Došlo je do greške na serveru prilikom brisanja banke</response>
+        </member>
+        <member name="M:Uplata.Controllers.BankaController.UpdateBanka(Uplata.Entities.BankaEntity,System.String)">
+            <summary>
+            Ažurira jednu banku
+            </summary>
+            <param name="banka">Model banke koje se ažurira</param>
+            <param name="key"> ključ sa kojim se proverava autorizacija</param>
+            <returns>Potvrda o ažuriranoj banci</returns>
+            <response code="200">Vraća ažuriranu banku</response>
+            <response code="401">Lice koje želi da izvrši ažuriranje nije autorizovani korisnik</response>
+            <response code="404">Nije pronađena banka za ažuriranje</response>
+            <response code="500">Došlo je do greške na serveru prilikom ažuriranja banke</response>
+        </member>
+        <member name="M:Uplata.Controllers.BankaController.GetBankaOptions">
+            <summary>
+            Vraća informacije o opcijama koje je moguće izvršiti za sve banke
+            </summary>
+            <response code="200">Vraća informacije o opcijama koje je moguće izvršiti</response>
+        </member>
+        <member name="M:Uplata.Controllers.UplataController.GetUplate">
+            <summary>
+            Vraća sve uplate
+            </summary>
+            <returns>Lista uplata</returns>
+            <response code = "200">Vraća listu uplata</response>
+            <response code = "204">Ne postoji nijedna uplata</response>
+        </member>
+        <member name="M:Uplata.Controllers.UplataController.GetUplataById(System.Guid)">
+            <summary>
+            Vraća traženu uplatu po ID-ju
+            </summary>
+            <param name="uplataId">ID uplate</param>
+            <returns>Tražena uplata</returns>
+            <response code = "200">Vraća traženu uplatu</response>
+            <response code = "404">Nije pronađena tražena uplata</response>
+        </member>
+        <member name="M:Uplata.Controllers.UplataController.GetUplateByPrijavaZaNadmetanjeId(System.Guid)">
+            <summary>
+            Vraća listu uplata po ID-ju prijave za nadmetanje
+            </summary>
+            <param name="prijavaZaNadmetanjeId">ID prijave za nadmetanje</param>
+            <returns>Lista uplata za prosleđenu prijavu za nadmetanje</returns>
+            <response code = "200">Vraća listu uplata za prosleđenu prijavu za nadmetanje</response>
+            <response code = "204">Ne postoji lista uplata za prosleđenu prijavu za nadmetanje</response>
+        </member>
+        <member name="M:Uplata.Controllers.UplataController.CreateUplata(Uplata.Models.UplataCreateDto,System.String)">
+            <summary>
+            Kreira novu uplatu
+            </summary>
+            <param name="uplata"> model uplate</param>
+            <param name="key"> ključ sa kojim se proverava autorizacija</param>
+            <returns>Potvrda o kreiranoj uplati</returns>
+            <remarks>
+            Primer zahteva za kreiranje nove uplate \
+            POST /api/uplate \
+            { \
+              "BrojRacuna" : 43604112, \
+              "PozivNaBroj" : 43100222, \
+              "Iznos" : 1500, \
+              "SvrhaUplate" : "Uplata za javno nadmetanje u 2022. godini", \
+              "Datum" : "2022-02-10" \
+              "BankaId" : "9aef1da1-d5af-4073-9d40-8794f9d33564", \
+              "PrijavaZaNadmetanjeId" = "1cd5c783-4bf5-4bbc-b7f0-bd66e2ba0bd7" \
+            } 
+            </remarks>
+            <response code = "201">Vraća kreiranu uplatu</response>
+            <response code="401">Lice koje želi da izvrši kreiranje uplate nije autorizovani korisnik</response>
+            <response code = "500">Došlo je do greške na serveru prilikom kreiranja uplate</response>
+        </member>
+        <member name="M:Uplata.Controllers.UplataController.DeleteUplata(System.Guid,System.String)">
+            <summary>
+            Briše uplatu na osnovu ID-ja
+            </summary>
+            <param name="uplataId">ID uplate</param>
+            /// <param name="key"> ključ sa kojim se proverava autorizacija</param>
+            <returns>Status 204 (NoContent)</returns>
+            <response code="204">Uplata uspešno obrisana</response>
+            <response code="401">Lice koje želi da izvrši brisanje nije autorizovani korisnik</response>
+            <response code="404">Nije pronađena uplata za brisanje</response>
+            <response code="500">Došlo je do greške na serveru prilikom brisanja uplate</response>
+        </member>
+        <member name="M:Uplata.Controllers.UplataController.UpdateOglas(Uplata.Entities.UplataEntity,System.String)">
+            <summary>
+            Ažurira jednu uplatu
+            </summary>
+            <param name="uplata">Model uplate koja se ažurira</param>
+            <param name="key"> ključ sa kojim se proverava autorizacija</param>
+            <returns>Potvrda o ažuriranoj uplati</returns>
+            <response code="200">Vraća ažuriranu uplatu</response>
+            <response code="401">Lice koje želi da izvrši ažuriranje nije autorizovani korisnik</response>
+            <response code="404">Nije pronađena uplata za ažuriranje</response>
+            <response code="500">Došlo je do greške na serveru prilikom ažuriranja uplate</response>
+        </member>
+        <member name="M:Uplata.Controllers.UplataController.GetUplataOptions">
+            <summary>
+            Vraća informacije o opcijama koje je moguće izvršiti za sve uplate
+            </summary>
+            <response code="200">Vraća informacije o opcijama koje je moguće izvršiti</response>
+        </member>
+        <member name="P:Uplata.Entities.BankaEntity.BankaId">
+            <summary>
+            ID banke
+            </summary>
+        </member>
+        <member name="P:Uplata.Entities.BankaEntity.NazivBanke">
+            <summary>
+            Naziv banke
+            </summary>
+        </member>
+        <member name="P:Uplata.Entities.BankaEntity.Adresa">
+            <summary>
+            Adresa banke
+            </summary>
+        </member>
+        <member name="P:Uplata.Entities.BankaEntity.Grad">
+            <summary>
+            Grad banke
+            </summary>
+        </member>
+        <member name="P:Uplata.Entities.UplataEntity.UplataId">
+            <summary>
+            ID uplate
+            </summary>
+        </member>
+        <member name="P:Uplata.Entities.UplataEntity.BrojRacuna">
+            <summary>
+            Broj računa sa kog je izvršena uplata
+            </summary>
+        </member>
+        <member name="P:Uplata.Entities.UplataEntity.PozivNaBroj">
+            <summary>
+            Poziv na broj u okviru uplate
+            </summary>
+        </member>
+        <member name="P:Uplata.Entities.UplataEntity.Iznos">
+            <summary>
+            Iznos uplate
+            </summary>
+        </member>
+        <member name="P:Uplata.Entities.UplataEntity.SvrhaUplate">
+            <summary>
+            Svrha uplate
+            </summary>
+        </member>
+        <member name="P:Uplata.Entities.UplataEntity.Datum">
+            <summary>
+            Datum uplate
+            </summary>
+        </member>
+        <member name="P:Uplata.Entities.UplataEntity.BankaId">
+            <summary>
+            Strani ključ banke
+            </summary>
+        </member>
+        <member name="P:Uplata.Entities.UplataEntity.Banka">
+            <summary>
+            Entitet banka
+            </summary>
+        </member>
+        <member name="P:Uplata.Entities.UplataEntity.PrijavaZaNadmetanjeId">
+            <summary>
+            ID prijave za nadmetanje
+            </summary>
+        </member>
+        <member name="P:Uplata.Models.BankaCreateDto.NazivBanke">
+            <summary>
+            Naziv banke
+            </summary>
+        </member>
+        <member name="P:Uplata.Models.BankaCreateDto.Adresa">
+            <summary>
+            Adresa banke
+            </summary>
+        </member>
+        <member name="P:Uplata.Models.BankaCreateDto.Grad">
+            <summary>
+            Grad banke
+            </summary>
+        </member>
+        <member name="P:Uplata.Models.BankaDto.BankaId">
+            <summary>
+            ID banke
+            </summary>
+        </member>
+        <member name="P:Uplata.Models.BankaDto.NazivBanke">
+            <summary>
+            Naziv banke
+            </summary>
+        </member>
+        <member name="P:Uplata.Models.BankaDto.Adresa">
+            <summary>
+            Adresa banke
+            </summary>
+        </member>
+        <member name="P:Uplata.Models.BankaDto.Grad">
+            <summary>
+            Grad banke
+            </summary>
+        </member>
+        <member name="P:Uplata.Models.UplataCreateDto.BrojRacuna">
+            <summary>
+            Broj računa sa kog je izvršena uplata
+            </summary>
+        </member>
+        <member name="P:Uplata.Models.UplataCreateDto.PozivNaBroj">
+            <summary>
+            Poziv na broj u okviru uplate
+            </summary>
+        </member>
+        <member name="P:Uplata.Models.UplataCreateDto.Iznos">
+            <summary>
+            Iznos uplate
+            </summary>
+        </member>
+        <member name="P:Uplata.Models.UplataCreateDto.SvrhaUplate">
+            <summary>
+            Svrha uplate
+            </summary>
+        </member>
+        <member name="P:Uplata.Models.UplataCreateDto.Datum">
+            <summary>
+            Datum uplate
+            </summary>
+        </member>
+        <member name="P:Uplata.Models.UplataCreateDto.BankaId">
+            <summary>
+            Banka ID
+            </summary>
+        </member>
+        <member name="P:Uplata.Models.UplataCreateDto.PrijavaZaNadmetanjeId">
+            <summary>
+            Prijava za nadmetanje ID
+            </summary>
+        </member>
+        <member name="P:Uplata.Models.UplataDto.UplataId">
+            <summary>
+            ID uplate
+            </summary>
+        </member>
+        <member name="P:Uplata.Models.UplataDto.BrojRacuna">
+            <summary>
+            Broj računa sa kog je izvršena uplata
+            </summary>
+        </member>
+        <member name="P:Uplata.Models.UplataDto.PozivNaBroj">
+            <summary>
+            Poziv na broj u okviru uplate
+            </summary>
+        </member>
+        <member name="P:Uplata.Models.UplataDto.Iznos">
+            <summary>
+            Iznos uplate
+            </summary>
+        </member>
+        <member name="P:Uplata.Models.UplataDto.SvrhaUplate">
+            <summary>
+            Svrha uplate
+            </summary>
+        </member>
+        <member name="P:Uplata.Models.UplataDto.Datum">
+            <summary>
+            Datum uplate
+            </summary>
+        </member>
+        <member name="P:Uplata.Models.UplataDto.BankaId">
+            <summary>
+            Banka ID
+            </summary>
+        </member>
+        <member name="P:Uplata.Models.UplataDto.PrijavaZaNadmetanjeId">
+            <summary>
+            Prijava za nadmetanje ID
+            </summary>
+        </member>
+    </members>
+</doc>
