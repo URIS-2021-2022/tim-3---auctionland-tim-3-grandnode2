@@ -82,7 +82,7 @@ namespace licitacijaService.Entities
         /// </summary>
 
         [NotMapped]
-        public ICollection<JavnoNadmetanjeDTO> javnaNadmetanja { get; set; }
+        public ICollection<JavnoNadmetanjeConfirmationDTO> javnaNadmetanja { get; set; }
 
 
     }

@@ -31,7 +31,7 @@ namespace licitacijaService.Controllers
     {
         private readonly ILicitacijaRepository licitacijaRepository;
         private readonly ILicitacijaDokumentRepository licitacijaDokumentRepository;
-        private readonly IJavnoNadmetanjeMockRepository javnoNadmetanjeMockRepository;
+        private readonly IJavnoNadmetanjeService javnoNadmetanjeService;
         private readonly IKomisijaService komisijaService;
         private readonly IMapper mapper;
         private readonly LinkGenerator linkGenerator;
@@ -40,12 +40,12 @@ namespace licitacijaService.Controllers
 
         private readonly IAuthHelper auth;
 
-        public LicitacijaController(ILicitacijaRepository licitacijaRepository, ILicitacijaDokumentRepository licitacijaDokumentRepository,IJavnoNadmetanjeMockRepository javnoNadmetanjeMockRepository,IKomisijaService komisijaService,IMapper mapper, ILoggerMockReposiotry logger,
+        public LicitacijaController(ILicitacijaRepository licitacijaRepository, ILicitacijaDokumentRepository licitacijaDokumentRepository,IJavnoNadmetanjeService javnoNadmetanjeService,IKomisijaService komisijaService,IMapper mapper, ILoggerMockReposiotry logger,
                                   LinkGenerator linkGenerator, IHttpContextAccessor contextAccessor, IAuthHelper auth)
         {
             this.licitacijaRepository = licitacijaRepository;
             this.licitacijaDokumentRepository = licitacijaDokumentRepository;
-            this.javnoNadmetanjeMockRepository = javnoNadmetanjeMockRepository;
+            this.javnoNadmetanjeService = javnoNadmetanjeService;
             this.komisijaService = komisijaService;
             this.mapper = mapper;
             this.linkGenerator = linkGenerator;
@@ -87,7 +87,7 @@ namespace licitacijaService.Controllers
                 List<LicitacijaDokument> fizickiDokumneti = licitacijaDokumentRepository.GetDokumnetByLicitacijaIdAndVrstaPodnosioca(l.licitacijaId, "f");
                 l.dokumentacijaFizickaLica = fizickiDokumneti;
                 l.dokumnetacijaPravnaLica = pravniDokuemnti;
-                List<JavnoNadmetanjeDTO> javnaNadmetanja = javnoNadmetanjeMockRepository.GetJavnaNadmetanjaByLicitacijaId(l.licitacijaId);
+                List<JavnoNadmetanjeConfirmationDTO> javnaNadmetanja = javnoNadmetanjeService.GetJavnaNadmetanjaByLicitacijaId(l.licitacijaId).Result;
                 l.javnaNadmetanja = javnaNadmetanja;
                 List<KomisijaConfirmationDTO> komisije = komisijaService.GetKomisijaByOznaka(l.oznakaKomisije).Result;
                 if (komisije != null && komisije.Count > 0)
@@ -136,7 +136,7 @@ namespace licitacijaService.Controllers
             List<LicitacijaDokument> fizickiDokumneti = licitacijaDokumentRepository.GetDokumnetByLicitacijaIdAndVrstaPodnosioca(licitacijaId, "f");
             licitacija.dokumentacijaFizickaLica = fizickiDokumneti;
             licitacija.dokumnetacijaPravnaLica = pravniDokuemnti;
-            List<JavnoNadmetanjeDTO> javnaNadmetanja = javnoNadmetanjeMockRepository.GetJavnaNadmetanjaByLicitacijaId(licitacija.licitacijaId);
+            List<JavnoNadmetanjeConfirmationDTO> javnaNadmetanja = javnoNadmetanjeService.GetJavnaNadmetanjaByLicitacijaId(licitacija.licitacijaId).Result;
             licitacija.javnaNadmetanja = javnaNadmetanja;
             List<KomisijaConfirmationDTO> komisije = komisijaService.GetKomisijaByOznaka(licitacija.oznakaKomisije).Result;
             if (komisije != null && komisije.Count > 0)
@@ -333,7 +333,6 @@ namespace licitacijaService.Controllers
                  return StatusCode(StatusCodes.Status404NotFound, "Nema licitacije!");
              }
 
-                javnoNadmetanjeMockRepository.DeleteJvanoNadmetanjeByLicitacijaId(licitacijaId);
                 licitacijaDokumentRepository.DeleteLicitacijaDokumentByLicitacijaId(licitacijaId);
                 licitacijaDokumentRepository.SaveChanges();
                 licitacijaRepository.DeleteLicitacija(licitacijaId);
