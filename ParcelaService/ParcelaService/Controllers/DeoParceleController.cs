@@ -80,6 +80,7 @@ namespace ParcelaService.Controllers
         /// <returns>Potvrda o kreiranju dela parcele</returns>
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [Consumes("application/json")]
         [HttpPost]
         public ActionResult<DeoParceleDto> Create([FromBody] DeoParceleCreateDto deoParcele, [FromHeader] string key)
@@ -110,6 +111,7 @@ namespace ParcelaService.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [HttpPut]
         public ActionResult<DeoParceleConfirmationDto> Update(DeoParceleUpdateDto deoParcele, [FromHeader] string key)
         {
@@ -144,6 +146,7 @@ namespace ParcelaService.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [HttpDelete("{deoParceleId}")]
         public IActionResult Delete(Guid deoParceleId, [FromHeader] string key)
         {
@@ -174,6 +177,7 @@ namespace ParcelaService.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpOptions]
+        [AllowAnonymous]
         public IActionResult GetDeoParceleOptions()
         {
             Response.Headers.Add("Allow", "GET, POST, PUT, DELETE");
