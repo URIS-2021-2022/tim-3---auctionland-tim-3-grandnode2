@@ -103,7 +103,7 @@ namespace KupacService.DBContexts
                         KontaktOsobaId = Guid.Parse("4e1f1f8d-a8f7-44b1-9abd-1c1ee122628d"),
                         Ime = "Ime",
                         Prezime = "Prezime",
-                        Funckcija = "Funkcija1",
+                        Funkcija = "Funkcija1",
                         Telefon = "1233456"
                     }
                 );

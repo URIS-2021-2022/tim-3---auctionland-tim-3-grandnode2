@@ -96,7 +96,7 @@ namespace KupacService.Migrations
             migrationBuilder.InsertData(
                 table: "KontaktOsoba",
                 columns: new[] { "KontaktOsobaId", "Funkcija", "Ime", "Prezime", "Telefon" },
-                values: new object[] { new Guid("4e1f1f8d-a8f7-44b1-9abd-1c1ee122628d"), null, "Ime", "Prezime", "1233456" });
+                values: new object[] { new Guid("4e1f1f8d-a8f7-44b1-9abd-1c1ee122628d"), "Funkcija1", "Ime", "Prezime", "1233456" });
 
             migrationBuilder.InsertData(
                 table: "Kupac",

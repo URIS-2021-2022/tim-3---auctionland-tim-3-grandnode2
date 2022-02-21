@@ -90,6 +90,7 @@ namespace KupacService.Migrations
                         new
                         {
                             KontaktOsobaId = new Guid("4e1f1f8d-a8f7-44b1-9abd-1c1ee122628d"),
+                            Funkcija = "Funkcija1",
                             Ime = "Ime",
                             Prezime = "Prezime",
                             Telefon = "1233456"
