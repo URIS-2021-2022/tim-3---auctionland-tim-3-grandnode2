@@ -76,8 +76,8 @@ namespace licitacijaService
             services.AddScoped<ILicitacijaRepository, LicitacijaRepository>();
             services.AddScoped<ILicitacijaDokumentRepository, LicitacijaDokumentRepository>();
             services.AddScoped<ILoggerMockReposiotry, LoggerMockReposiotry>();
-            services.AddSingleton<IJavnoNadmetanjeMockRepository, JavnoNadmetanjeMockRepository>();
             services.AddScoped<IKomisijaService, KomisijaService>();
+            services.AddScoped<IJavnoNadmetanjeService, JavnoNadmetanjeService>();
             services.AddScoped<IAuthHelper, AuthHelper>();
 
             services.AddHttpContextAccessor();
