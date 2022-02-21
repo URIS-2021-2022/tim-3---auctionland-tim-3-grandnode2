@@ -1,4 +1,5 @@
 ﻿using KorisnikServis.Database.Entities;
+using KorisnikServis.Logger;
 using KorisnikServis.Services;
 using KorisnikServis.Token;
 using Microsoft.AspNetCore.Authorization;
@@ -22,12 +23,14 @@ namespace KorisnikServis.Controllers
         private readonly KorisnikService korisnikService;
         private readonly IGenerateToken generateToken;
         private readonly IHttpContextAccessor httpContextAccessor;
+        private readonly LoggerService logger;
 
         public KorisnikController(IGenerateToken generateToken, IHttpContextAccessor httpContextAccessor)
         {
             korisnikService = new KorisnikService();
             this.generateToken = generateToken;
             this.httpContextAccessor = httpContextAccessor;
+            logger = new LoggerService();
         }
 
         // GET: api/<KorisnikController>
@@ -35,6 +38,7 @@ namespace KorisnikServis.Controllers
         [HttpGet]
         public IEnumerable<Korisnik> Get()
         {
+            logger.PostLogger("Pristup svim korisnicima." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
             return korisnikService.GetAll();
         }
 
@@ -42,6 +46,8 @@ namespace KorisnikServis.Controllers
         [HttpGet("{KorisnickoIme}/{Lozinka}")]
         public IActionResult GetKorisnikUP(string KorisnickoIme, string Lozinka)
         {
+            logger.PostLogger("Pristup korisniku putem korisnickog imena i lozinke." +
+                "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
             Korisnik korisnik = korisnikService.FindImeLozinka(KorisnickoIme, Lozinka);
 
             if (korisnik.KorisnickoIme == null)
@@ -55,6 +61,7 @@ namespace KorisnikServis.Controllers
         [HttpPost("login")]
         public IActionResult LogIn([FromBody] Korisnik korisnik)
         {
+            logger.PostLogger("Logovanje korisnika." + "*********KorisnickoIme: " + korisnik.KorisnickoIme);
             Korisnik provera = korisnikService.FindImeLozinka(korisnik.KorisnickoIme, korisnik.Lozinka);
             if (provera == null)
             {
@@ -69,6 +76,7 @@ namespace KorisnikServis.Controllers
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
+            logger.PostLogger("Pristup korisniku putem id-a." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
             Korisnik korisnik = korisnikService.GetById(id);
             if (korisnik != null)
             {
@@ -81,6 +89,7 @@ namespace KorisnikServis.Controllers
         [HttpGet("getTip/{nazivTipa}")]
         public IActionResult GetByNazivTipa(string nazivTipa)
         {
+            logger.PostLogger("Pristup korisnicima po ulozi koju imaju." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
             List<Korisnik> korisnici = korisnikService.GetByTip(nazivTipa);
             if (korisnici != null)
             {
@@ -93,6 +102,7 @@ namespace KorisnikServis.Controllers
         [HttpGet("getKorisnikToken")]
         public IActionResult GetKorisnikToken()
         {
+            logger.PostLogger("Pristup korisniku na osnovu tokena." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
             var identityClaims = (ClaimsIdentity)httpContextAccessor.HttpContext.User.Identity;
             Korisnik korisnik = korisnikService.GetKorisnikByToken(identityClaims);
             if (korisnik != null)
@@ -109,6 +119,7 @@ namespace KorisnikServis.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] Korisnik model)
         {
+            logger.PostLogger("Kreiranje novog korisnika." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
             try
             {
                 korisnikService.Save(model);
@@ -125,6 +136,7 @@ namespace KorisnikServis.Controllers
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] Korisnik korisnik)
         {
+            logger.PostLogger("Modifikacija postojeceg korisnika." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
             if (id != korisnik.KorisnikID)
             {
                 return BadRequest();
@@ -152,6 +164,7 @@ namespace KorisnikServis.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
+            logger.PostLogger("Brisanje postojeceg korisnika." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
             Korisnik korisnik = korisnikService.GetById(id);
             if (korisnik == null)
             {

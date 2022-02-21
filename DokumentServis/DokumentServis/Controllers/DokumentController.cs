@@ -1,4 +1,5 @@
 ﻿using DokumentServis.Database.Entities;
+using DokumentServis.Logger;
 using DokumentServis.Services;
 using DokumentServis.VO;
 using Microsoft.AspNetCore.Authentication;
@@ -28,6 +29,7 @@ namespace DokumentServis.Controllers
         private readonly string KorisnikPath;
         private readonly string KupacPath;
         private readonly string LiciterPath;
+        private readonly LoggerService logger;
 
         public DokumentController(IConfiguration iconfiguration)
         {
@@ -37,6 +39,7 @@ namespace DokumentServis.Controllers
             KorisnikPath = configuration.GetValue<String>("Paths:Korisnik");
             KupacPath = configuration.GetValue<String>("Paths:Kupac");
             LiciterPath = configuration.GetValue<String>("Paths:Liciter");
+            logger = new LoggerService();
         }
 
 
@@ -44,6 +47,7 @@ namespace DokumentServis.Controllers
         [HttpGet]
         public IEnumerable<Dokument> Get()
         {
+            logger.PostLogger("Pristup svim dokumentima." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
             return dokumentService.GetAll();
         }
 
@@ -51,6 +55,7 @@ namespace DokumentServis.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
+            logger.PostLogger("Pristup dokumentu putem id-a." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
             ResponseTemplateVO vo = new ResponseTemplateVO();
             Dokument dokument = dokumentService.GetById(id);
             if (dokument != null)
@@ -84,6 +89,7 @@ namespace DokumentServis.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] Dokument model)
         {
+            logger.PostLogger("Kreiranje novog dokumenta." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
             try
             {
                 if (!Provera(model))
@@ -103,6 +109,7 @@ namespace DokumentServis.Controllers
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] Dokument dokument)
         {
+            logger.PostLogger("Modifikacija postojeceg dokumenta." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
             if (id != dokument.DokumentID)
             {
                 return BadRequest();
@@ -133,6 +140,7 @@ namespace DokumentServis.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
+            logger.PostLogger("Brisanje postojeceg dokumenta." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
             Dokument dokument = dokumentService.GetById(id);
             if (dokument == null)
             {
@@ -145,43 +153,50 @@ namespace DokumentServis.Controllers
 
         private bool Provera(Dokument model)
         {
-            var accessToken = HttpContext.GetTokenAsync("access_token");
-            httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {accessToken.Result}");
-            var responseKorisnik = httpClient.GetAsync(requestUri: KorisnikPath).Result;
-            List<Korisnik> korisnici = JsonConvert.DeserializeObject<List<Korisnik>>(responseKorisnik.Content.ReadAsStringAsync().Result);
-            bool proveraKorisnika = false;
-            foreach (var k in korisnici)
+            try
             {
-                if (k.KorisnikID == model.KorisnikID)
+                var accessToken = HttpContext.GetTokenAsync("access_token");
+                httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {accessToken.Result}");
+                var responseKorisnik = httpClient.GetAsync(requestUri: KorisnikPath).Result;
+                List<Korisnik> korisnici = JsonConvert.DeserializeObject<List<Korisnik>>(responseKorisnik.Content.ReadAsStringAsync().Result);
+                bool proveraKorisnika = false;
+                foreach (var k in korisnici)
                 {
-                    proveraKorisnika = true;
+                    if (k.KorisnikID == model.KorisnikID)
+                    {
+                        proveraKorisnika = true;
+                    }
                 }
-            }
-            var responseKupac = httpClient.GetAsync(requestUri: KupacPath).Result;
-            List<Kupac> kupci = JsonConvert.DeserializeObject<List<Kupac>>(responseKupac.Content.ReadAsStringAsync().Result);
-            bool proveraKupca = false;
-            foreach (var k in kupci)
-            {
-                if (k.KupacID == model.KupacID)
+                var responseKupac = httpClient.GetAsync(requestUri: KupacPath).Result;
+                List<Kupac> kupci = JsonConvert.DeserializeObject<List<Kupac>>(responseKupac.Content.ReadAsStringAsync().Result);
+                bool proveraKupca = false;
+                foreach (var k in kupci)
                 {
-                    proveraKupca = true;
+                    if (k.KupacID == model.KupacID)
+                    {
+                        proveraKupca = true;
+                    }
                 }
-            }
-            var responseLiciter = httpClient.GetAsync(requestUri: LiciterPath).Result;
-            List<Liciter> liciteri = JsonConvert.DeserializeObject<List<Liciter>>(responseLiciter.Content.ReadAsStringAsync().Result);
-            bool proveraLicitera = false;
-            foreach (var k in liciteri)
-            {
-                if (k.LiciterID == model.LiciterID)
+                var responseLiciter = httpClient.GetAsync(requestUri: LiciterPath).Result;
+                List<Liciter> liciteri = JsonConvert.DeserializeObject<List<Liciter>>(responseLiciter.Content.ReadAsStringAsync().Result);
+                bool proveraLicitera = false;
+                foreach (var k in liciteri)
                 {
-                    proveraLicitera = true;
+                    if (k.LiciterID == model.LiciterID)
+                    {
+                        proveraLicitera = true;
+                    }
                 }
+                if (proveraKorisnika && proveraKupca && proveraLicitera)
+                {
+                    return true;
+                }
+                return false;
             }
-            if (proveraKorisnika && proveraKupca && proveraLicitera)
+            catch
             {
-                return true;
+                return false;
             }
-            return false;
         }
     }
 }
