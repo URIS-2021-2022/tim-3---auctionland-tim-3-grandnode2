@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>KatastarskaOpstina</name>
+    </assembly>
+    <members>
+        <member name="M:KatastarskaOpstina.Entities.KatastarskaOpstinaContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+            Popunjava bazu sa nekim inicijalnim podacima
+            </summary>
+        </member>
+    </members>
+</doc>
