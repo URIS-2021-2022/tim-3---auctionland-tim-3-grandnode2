@@ -1,4 +1,5 @@
 ﻿using DokumentServis.Database.Entities;
+using DokumentServis.Logger;
 using DokumentServis.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -18,16 +19,19 @@ namespace DokumentServis.Controllers
     public class VerzijaDokumentaController : ControllerBase
     {
         private readonly VerzijaDokumentaService verzijaDokumentaService;
+        private readonly LoggerService logger;
 
         public VerzijaDokumentaController()
         {
             verzijaDokumentaService = new VerzijaDokumentaService();
+            logger = new LoggerService();
         }
 
         // GET: api/<VerzijaDokumentaController>
         [HttpGet]
         public IEnumerable<VerzijaDokumenta> Get()
         {
+            logger.PostLogger("Pristup svim verzijama dokumenta." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
             return verzijaDokumentaService.GetAll();
         }
 
@@ -35,6 +39,7 @@ namespace DokumentServis.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
+            logger.PostLogger("Pristup verziji dokumenta putem id-a." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
             VerzijaDokumenta verzijaDokumenta = verzijaDokumentaService.GetById(id);
             if (verzijaDokumenta != null)
             {
@@ -47,6 +52,7 @@ namespace DokumentServis.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] VerzijaDokumenta model)
         {
+            logger.PostLogger("Kreiranje nove verzije dokumenta." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
             try
             {
                 verzijaDokumentaService.Save(model);
@@ -62,6 +68,7 @@ namespace DokumentServis.Controllers
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] VerzijaDokumenta verzijaDokumenta)
         {
+            logger.PostLogger("Modifikacija postojece verzije dokumenta." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
             if (id != verzijaDokumenta.VerzijaDokumentaID)
             {
                 return BadRequest();
@@ -90,6 +97,7 @@ namespace DokumentServis.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
+            logger.PostLogger("Brisanje postojece verzije dokumenta." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
             VerzijaDokumenta verzijaDokumenta = verzijaDokumentaService.GetById(id);
             if (verzijaDokumenta == null)
             {

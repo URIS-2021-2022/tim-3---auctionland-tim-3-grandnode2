@@ -1,4 +1,5 @@
 ﻿using KorisnikServis.Database.Entities;
+using KorisnikServis.Logger;
 using KorisnikServis.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -19,16 +20,19 @@ namespace KorisnikServis.Controllers
     {
 
         private readonly TipKorisnikaService tipKorisnikaService;
+        private readonly LoggerService logger;
 
         public TipKorisnikaController()
         {
             tipKorisnikaService = new TipKorisnikaService();
+            logger = new LoggerService();
         }
 
         // GET: api/<TipKorisnikaController>
         [HttpGet]
         public IEnumerable<TipKorisnika> Get()
         {
+            logger.PostLogger("Pristup svim tipovima korisnika." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
             return tipKorisnikaService.GetAll();
         }
 
@@ -36,6 +40,7 @@ namespace KorisnikServis.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
+            logger.PostLogger("Pristup svim tipovima korisnika po id-u." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
             TipKorisnika tipKorisnika = tipKorisnikaService.GetById(id);
             if (tipKorisnika != null)
             {
@@ -48,6 +53,7 @@ namespace KorisnikServis.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] TipKorisnika model)
         {
+            logger.PostLogger("Kreiranje novog tipa korisnika." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
             try
             {
                 tipKorisnikaService.Save(model);
@@ -63,6 +69,7 @@ namespace KorisnikServis.Controllers
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] TipKorisnika tipKorisnika)
         {
+            logger.PostLogger("Modifikacija postojeceg tipa korisnika." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
             if (id != tipKorisnika.TipKorisnikaID)
             {
                 return BadRequest();
@@ -91,6 +98,7 @@ namespace KorisnikServis.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
+            logger.PostLogger("Brisanje postojeceg tipa korisnika." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
             TipKorisnika tipKorisnika = tipKorisnikaService.GetById(id);
             if (tipKorisnika == null)
             {

@@ -45,7 +45,8 @@ namespace KorisnikServis.Token
                     new Claim("KorisnickoIme", korisnik.KorisnickoIme),
                     new Claim("Lozinka", korisnik.Lozinka),
                     new Claim("TipKorisnikaID", korisnik.TipKorisnikaID.ToString()),
-                    new Claim(ClaimTypes.Role, tipKorisnika.NazivTipa)
+                    new Claim(ClaimTypes.Role, tipKorisnika.NazivTipa),
+                    new Claim(ClaimTypes.Name, korisnik.KorisnickoIme),
                 }),
                 Expires = DateTime.UtcNow.AddMinutes(90),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
