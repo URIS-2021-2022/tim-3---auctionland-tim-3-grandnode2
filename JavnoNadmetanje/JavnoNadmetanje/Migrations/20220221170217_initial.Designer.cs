@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JavnoNadmetanje.Migrations
 {
     [DbContext(typeof(JavnoNadmetanjeContext))]
-    [Migration("20220220194019_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20220221170217_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -121,7 +121,7 @@ namespace JavnoNadmetanje.Migrations
                             Izuzeto = false,
                             Krug = 1,
                             KupacId = new Guid("bc03a6fb-b322-4797-b6c4-0a899615f653"),
-                            LicitacijaId = new Guid("861e7d2e-268f-495f-8bd3-dbfb4f0594a4"),
+                            LicitacijaId = new Guid("4e1f1f8d-a8f7-44b1-9bda-1c1ee122628d"),
                             OglasId = new Guid("382e1636-2705-477e-95c4-8727e819c5e9"),
                             ParcelaId = new Guid("35d3c2da-7e55-4730-a4ed-9f886e24e6f9"),
                             PeriodZakupa = 3,
@@ -129,8 +129,8 @@ namespace JavnoNadmetanje.Migrations
                             Status = 0,
                             Tip = 0,
                             VisinaDopuneDepozita = 500,
-                            VremeKraja = new DateTime(2022, 2, 20, 13, 0, 0, 0, DateTimeKind.Unspecified),
-                            VremePocetka = new DateTime(2022, 2, 20, 9, 0, 0, 0, DateTimeKind.Unspecified)
+                            VremeKraja = new DateTime(2022, 2, 21, 13, 0, 0, 0, DateTimeKind.Unspecified),
+                            VremePocetka = new DateTime(2022, 2, 21, 9, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -141,7 +141,7 @@ namespace JavnoNadmetanje.Migrations
                             Izuzeto = true,
                             Krug = 1,
                             KupacId = new Guid("80b7a335-bc5f-4a72-861e-2c914e14e2b4"),
-                            LicitacijaId = new Guid("eca6f180-d90e-4432-a9dc-3a50f5b704b5"),
+                            LicitacijaId = new Guid("3f8aa5b3-a67f-45b5-b518-771a7c09a944"),
                             OglasId = new Guid("abd912e3-5962-463e-a04e-5fdd2b43e30f"),
                             ParcelaId = new Guid("afdc833f-faf6-4bc1-862c-4ad94273690d"),
                             PeriodZakupa = 5,
@@ -149,8 +149,8 @@ namespace JavnoNadmetanje.Migrations
                             Status = 0,
                             Tip = 1,
                             VisinaDopuneDepozita = 250,
-                            VremeKraja = new DateTime(2022, 2, 20, 14, 0, 0, 0, DateTimeKind.Unspecified),
-                            VremePocetka = new DateTime(2022, 2, 20, 10, 0, 0, 0, DateTimeKind.Unspecified)
+                            VremeKraja = new DateTime(2022, 2, 21, 14, 0, 0, 0, DateTimeKind.Unspecified),
+                            VremePocetka = new DateTime(2022, 2, 21, 10, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 

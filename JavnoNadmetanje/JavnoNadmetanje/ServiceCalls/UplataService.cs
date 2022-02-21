@@ -23,7 +23,7 @@ namespace JavnoNadmetanje.ServiceCalls
             try
             {
                 using var httpClient = new HttpClient();
-                Uri url = new Uri($"{ configuration["Services:Uplata"] }api/uplate/UplateZaPrijavu/=" + prijavaZaNadmetanjeId);
+                Uri url = new Uri($"{ configuration["Services:Uplata"] }UplateZaPrijavu/" + prijavaZaNadmetanjeId);
                 var request = new HttpRequestMessage(HttpMethod.Get, url);
                 request.Headers.Add("Accept", "application/json");
                 var response = await httpClient.SendAsync(request);

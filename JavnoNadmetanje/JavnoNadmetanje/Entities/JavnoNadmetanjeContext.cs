@@ -48,7 +48,7 @@ namespace JavnoNadmetanje.Entities
                     Krug = 1,
                     Status = StatusJavnogNadmetanja.PrviKrug,
                     OglasId = Guid.Parse("382e1636-2705-477e-95c4-8727e819c5e9"),
-                    LicitacijaId = Guid.Parse("861e7d2e-268f-495f-8bd3-dbfb4f0594a4"),
+                    LicitacijaId = Guid.Parse("4e1f1f8d-a8f7-44b1-9bda-1c1ee122628d"),
                     ParcelaId = Guid.Parse("35d3c2da-7e55-4730-a4ed-9f886e24e6f9"),
                     KupacId = Guid.Parse("bc03a6fb-b322-4797-b6c4-0a899615f653")
                 });
@@ -70,7 +70,7 @@ namespace JavnoNadmetanje.Entities
                     Krug = 1,
                     Status = StatusJavnogNadmetanja.PrviKrug,
                     OglasId = Guid.Parse("abd912e3-5962-463e-a04e-5fdd2b43e30f"),
-                    LicitacijaId = Guid.Parse("eca6f180-d90e-4432-a9dc-3a50f5b704b5"),
+                    LicitacijaId = Guid.Parse("3f8aa5b3-a67f-45b5-b518-771a7c09a944"),
                     ParcelaId = Guid.Parse("afdc833f-faf6-4bc1-862c-4ad94273690d"),
                     KupacId = Guid.Parse("80b7a335-bc5f-4a72-861e-2c914e14e2b4")
 

@@ -24,7 +24,7 @@ namespace licitacijaService.ServiceCalls
             try
             {
                 using var httpClient = new HttpClient();
-                Uri url = new Uri($"{ configuration["Services:JavnoNadmetanjeService"] }api/javnaNadmetanja/JavnaNadmetanjaLicitacija/" + licitacijaId);
+                Uri url = new Uri($"{ configuration["Services:JavnoNadmetanjeService"] }JavnaNadmetanjaLicitacija/" + licitacijaId);
                 var request = new HttpRequestMessage(HttpMethod.Get, url);
                 request.Headers.Add("Accept", "application/json");
                 var response = await httpClient.SendAsync(request);

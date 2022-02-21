@@ -10,8 +10,8 @@ using Uplata.Entities;
 namespace Uplata.Migrations
 {
     [DbContext(typeof(UplataContext))]
-    [Migration("20220219203135_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20220221173331_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
