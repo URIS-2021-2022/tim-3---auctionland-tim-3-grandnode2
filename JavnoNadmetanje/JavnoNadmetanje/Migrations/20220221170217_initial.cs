@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace JavnoNadmetanje.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -136,12 +136,12 @@ namespace JavnoNadmetanje.Migrations
             migrationBuilder.InsertData(
                 table: "JavnaNadmetanja",
                 columns: new[] { "JavnoNadmetanjeId", "BrojUcesnika", "Datum", "IzlicitiranaCena", "Izuzeto", "Krug", "KupacId", "LicitacijaId", "OglasId", "ParcelaId", "PeriodZakupa", "PocetnaCenaPoHektaru", "Status", "Tip", "VisinaDopuneDepozita", "VremeKraja", "VremePocetka" },
-                values: new object[] { new Guid("1c7ea607-8ddb-493a-87fa-4bf5893e965b"), 10, new DateTime(2022, 11, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), 900, true, 1, new Guid("80b7a335-bc5f-4a72-861e-2c914e14e2b4"), new Guid("eca6f180-d90e-4432-a9dc-3a50f5b704b5"), new Guid("abd912e3-5962-463e-a04e-5fdd2b43e30f"), new Guid("afdc833f-faf6-4bc1-862c-4ad94273690d"), 5, 1500, 0, 1, 250, new DateTime(2022, 2, 20, 14, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2022, 2, 20, 10, 0, 0, 0, DateTimeKind.Unspecified) });
+                values: new object[] { new Guid("1c7ea607-8ddb-493a-87fa-4bf5893e965b"), 10, new DateTime(2022, 11, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), 900, true, 1, new Guid("80b7a335-bc5f-4a72-861e-2c914e14e2b4"), new Guid("3f8aa5b3-a67f-45b5-b518-771a7c09a944"), new Guid("abd912e3-5962-463e-a04e-5fdd2b43e30f"), new Guid("afdc833f-faf6-4bc1-862c-4ad94273690d"), 5, 1500, 0, 1, 250, new DateTime(2022, 2, 21, 14, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2022, 2, 21, 10, 0, 0, 0, DateTimeKind.Unspecified) });
 
             migrationBuilder.InsertData(
                 table: "JavnaNadmetanja",
                 columns: new[] { "JavnoNadmetanjeId", "BrojUcesnika", "Datum", "IzlicitiranaCena", "Izuzeto", "Krug", "KupacId", "LicitacijaId", "OglasId", "ParcelaId", "PeriodZakupa", "PocetnaCenaPoHektaru", "Status", "Tip", "VisinaDopuneDepozita", "VremeKraja", "VremePocetka" },
-                values: new object[] { new Guid("6a411c13-a195-48f7-8dbd-67596c3974c0"), 25, new DateTime(2022, 10, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), 1500, false, 1, new Guid("bc03a6fb-b322-4797-b6c4-0a899615f653"), new Guid("861e7d2e-268f-495f-8bd3-dbfb4f0594a4"), new Guid("382e1636-2705-477e-95c4-8727e819c5e9"), new Guid("35d3c2da-7e55-4730-a4ed-9f886e24e6f9"), 3, 2000, 0, 0, 500, new DateTime(2022, 2, 20, 13, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2022, 2, 20, 9, 0, 0, 0, DateTimeKind.Unspecified) });
+                values: new object[] { new Guid("6a411c13-a195-48f7-8dbd-67596c3974c0"), 25, new DateTime(2022, 10, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), 1500, false, 1, new Guid("bc03a6fb-b322-4797-b6c4-0a899615f653"), new Guid("4e1f1f8d-a8f7-44b1-9bda-1c1ee122628d"), new Guid("382e1636-2705-477e-95c4-8727e819c5e9"), new Guid("35d3c2da-7e55-4730-a4ed-9f886e24e6f9"), 3, 2000, 0, 0, 500, new DateTime(2022, 2, 21, 13, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2022, 2, 21, 9, 0, 0, 0, DateTimeKind.Unspecified) });
 
             migrationBuilder.InsertData(
                 table: "PrijaveZaNadmetanje",

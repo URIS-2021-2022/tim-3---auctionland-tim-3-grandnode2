@@ -26,7 +26,7 @@
             Kreira novu banku
             </summary>
             <param name="banka"> model banke</param>
-            <param name="key"> ključ sa kojim se proverava autorizacija</param>
+            <param name="key"> ključ sa kojim se proverava autorizacija(key vrednost: Bearer LenkaSubotin)</param>
             <returns>Potvrda o kreiranoj banci</returns>
             <remarks>
             Primer zahteva za kreiranje nove banke \
@@ -46,7 +46,7 @@
             Briše banku na osnovu ID-ja
             </summary>
             <param name="bankaId">ID banke</param>
-            /// <param name="key"> ključ sa kojim se proverava autorizacija</param>
+            /// <param name="key"> ključ sa kojim se proverava autorizacija(key vrednost: Bearer LenkaSubotin)</param>
             <returns>Status 204 (NoContent)</returns>
             <response code="204">Banka uspešno obrisana</response>
             <response code="401">Lice koje želi da izvrši brisanje nije autorizovani korisnik</response>
@@ -58,7 +58,7 @@
             Ažurira jednu banku
             </summary>
             <param name="banka">Model banke koje se ažurira</param>
-            <param name="key"> ključ sa kojim se proverava autorizacija</param>
+            <param name="key"> ključ sa kojim se proverava autorizacija(key vrednost: Bearer LenkaSubotin)</param>
             <returns>Potvrda o ažuriranoj banci</returns>
             <response code="200">Vraća ažuriranu banku</response>
             <response code="401">Lice koje želi da izvrši ažuriranje nije autorizovani korisnik</response>
@@ -102,7 +102,7 @@
             Kreira novu uplatu
             </summary>
             <param name="uplata"> model uplate</param>
-            <param name="key"> ključ sa kojim se proverava autorizacija</param>
+            <param name="key"> ključ sa kojim se proverava autorizacija(key vrednost: Bearer LenkaSubotin)</param>
             <returns>Potvrda o kreiranoj uplati</returns>
             <remarks>
             Primer zahteva za kreiranje nove uplate \
@@ -126,7 +126,7 @@
             Briše uplatu na osnovu ID-ja
             </summary>
             <param name="uplataId">ID uplate</param>
-            /// <param name="key"> ključ sa kojim se proverava autorizacija</param>
+            /// <param name="key"> ključ sa kojim se proverava autorizacija(key vrednost: Bearer LenkaSubotin)</param>
             <returns>Status 204 (NoContent)</returns>
             <response code="204">Uplata uspešno obrisana</response>
             <response code="401">Lice koje želi da izvrši brisanje nije autorizovani korisnik</response>
@@ -138,7 +138,7 @@
             Ažurira jednu uplatu
             </summary>
             <param name="uplata">Model uplate koja se ažurira</param>
-            <param name="key"> ključ sa kojim se proverava autorizacija</param>
+            <param name="key"> ključ sa kojim se proverava autorizacija(key vrednost: Bearer LenkaSubotin)</param>
             <returns>Potvrda o ažuriranoj uplati</returns>
             <response code="200">Vraća ažuriranu uplatu</response>
             <response code="401">Lice koje želi da izvrši ažuriranje nije autorizovani korisnik</response>

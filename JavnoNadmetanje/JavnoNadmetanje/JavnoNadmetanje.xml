@@ -27,7 +27,7 @@
             Kreira novu vezu između dokumenta i prijave za nadmetanje
             </summary>
             <param name="dokumentPrijava"> model veze između dokumenta i prijave za nadmetanje</param>
-            <param name="key"> ključ sa kojim se proverava autorizacija</param>
+            <param name="key"> ključ sa kojim se proverava autorizacija(key vrednost: Bearer LenkaSubotin)</param>
             <returns>Potvrda o kreiranoj vezi između dokumenta i prijave za nadmetanje</returns>
             <remarks>
             Primer zahteva za kreiranje nove veze između dokumenta i prijave za nadmetanje \
@@ -45,7 +45,7 @@
             Briše vezu između dokumenta i prijavu za nadmetanje na osnovu ID-ja prijave za nadmetanje
             </summary>
             <param name="prijavaZaNadmetanjeId">ID prijave za nadmetanje</param>
-            <param name="key"> ključ sa kojim se proverava autorizacija</param>
+            <param name="key"> ključ sa kojim se proverava autorizacija(key vrednost: Bearer LenkaSubotin)</param>
             <returns>Status 204 (NoContent)</returns>
             <response code="204">Veza između dokumenta i prijave za nadmetanje uspešno obrisana</response>
             <response code="401">Lice koje želi da izvrši brisanje nije autorizovani korisnik</response>
@@ -57,7 +57,7 @@
             Ažurira jednu vezu između dokumenta i prijave za nadmetanje
             </summary>
             <param name="dokumentPrijava">Model veze između dokumenta i prijave za nadmetanje koji se ažurira</param>
-            <param name="key"> ključ sa kojim se proverava autorizacija</param>
+            <param name="key"> ključ sa kojim se proverava autorizacija(key vrednost: Bearer LenkaSubotin)</param>
             <returns>Potvrda o ažuriranoj vezi između dokumenta i prijave za nadmetanje</returns>
             <response code="200">Vraća ažuriranu vezu između dokumenta i prijave za nadmetanje</response>
             <response code="401">Lice koje želi da izvrši ažuriranje nije autorizovani korisnik</response>
@@ -101,7 +101,7 @@
             Kreira novo javno nadmetanje
             </summary>
             <param name="javnoNadmetanje"> model javnog nadmetanja</param>
-            <param name="key"> ključ sa kojim se proverava autorizacija</param>
+            <param name="key"> ključ sa kojim se proverava autorizacija(key vrednost: Bearer LenkaSubotin)</param>
             <returns>Potvrda o kreiranom javnom nadmetanju</returns>
             <remarks>
             Primer zahteva za kreiranje novog javnog nadmetanja \
@@ -134,7 +134,7 @@
             Briše javno nadmetanje na osnovu ID-ja
             </summary>
             <param name="javnoNadmetanjeId">ID javnog nadmetanja</param>
-            /// <param name="key"> ključ sa kojim se proverava autorizacija</param>
+            /// <param name="key"> ključ sa kojim se proverava autorizacija(key vrednost: Bearer LenkaSubotin)</param>
             <returns>Status 204 (NoContent)</returns>
             <response code="204">Javno nadmetanja uspešno obrisano</response>
             <response code="401">Lice koje želi da izvrši brisanje nije autorizovani korisnik</response>
@@ -146,7 +146,7 @@
             Ažurira jedno javno nadmetanje
             </summary>
             <param name="javnoNadmetanje">Model javnog nadmetanja koje se ažurira</param>
-            <param name="key"> ključ sa kojim se proverava autorizacija</param>
+            <param name="key"> ključ sa kojim se proverava autorizacija(key vrednost: Bearer LenkaSubotin)</param>
             <returns>Potvrda o ažuriranom javnom nadmetanju</returns>
             <response code="200">Vraća ažurirano javno nadmetanje</response>
             <response code="401">Lice koje želi da izvrši ažuriranje nije autorizovani korisnik</response>
@@ -181,7 +181,7 @@
             Kreira novi oglas
             </summary>
             <param name="oglas"> model oglasa</param>
-            <param name="key"> ključ sa kojim se proverava autorizacija</param>
+            <param name="key"> ključ sa kojim se proverava autorizacija(key vrednost: Bearer LenkaSubotin)</param>
             <returns>Potvrda o kreiranom oglasu</returns>
             <remarks>
             Primer zahteva za kreiranje novog oglasa \
@@ -201,7 +201,7 @@
             Briše oglas na osnovu ID-ja
             </summary>
             <param name="oglasId">ID oglasa</param>
-            <param name="key"> ključ sa kojim se proverava autorizacija</param>
+            <param name="key"> ključ sa kojim se proverava autorizacija(key vrednost: Bearer LenkaSubotin)</param>
             <returns>Status 204 (NoContent)</returns>
             <response code="204">Oglas uspešno obrisan</response>
             <response code="401">Lice koje želi da izvrši brisanje nije autorizovani korisnik</response>
@@ -213,7 +213,7 @@
             Ažurira jedan oglas 
             </summary>
             <param name="oglas">Model oglasa koji se ažurira</param>
-            <param name="key"> ključ sa kojim se proverava autorizacija</param>
+            <param name="key"> ključ sa kojim se proverava autorizacija(key vrednost: Bearer LenkaSubotin)</param>
             <returns>Potvrda o ažuriranom oglasu</returns>
             <response code="200">Vraća ažuriran oglas</response>
             <response code="401">Lice koje želi da izvrši ažuriranje nije autorizovani korisnik</response>
@@ -248,7 +248,7 @@
             Kreira novu prijavu za nadmetanje
             </summary>
             <param name="prijavaZaNadmetanje"> model prijave za nadmetanje</param>
-            <param name="key"> ključ sa kojim se proverava autorizacija</param>
+            <param name="key"> ključ sa kojim se proverava autorizacija(key vrednost: Bearer LenkaSubotin)</param>
             <returns>Potvrda o kreiranoj prijavi za nadmetanje</returns>
             <remarks>
             Primer zahteva za kreiranje nove prijave za nadmetanje \
@@ -269,7 +269,7 @@
             Briše prijavu za nadmetanje na osnovu ID-ja
             </summary>
             <param name="prijavaZaNadmetanjeId">ID prijave za nadmetanje</param>
-            <param name="key"> ključ sa kojim se proverava autorizacija</param>
+            <param name="key"> ključ sa kojim se proverava autorizacija(key vrednost: Bearer LenkaSubotin)</param>
             <returns>Status 204 (NoContent)</returns>
             <response code="204">Prijava za nadmetanje uspešno obrisana</response>
             <response code="401">Lice koje želi da izvrši brisanje nije autorizovani korisnik</response>
@@ -281,7 +281,7 @@
             Ažurira jedna prijava za nadmetanje
             </summary>
             <param name="prijavaZaNadmetanje">Model prijave za nadmetanje koji se ažurira</param>
-            <param name="key"> ključ sa kojim se proverava autorizacija</param>
+            <param name="key"> ključ sa kojim se proverava autorizacija(key vrednost: Bearer LenkaSubotin)</param>
             <returns>Potvrda o ažuriranoj prijavi za nadmetanje</returns>
             <response code="200">Vraća ažuriranu prijavu za nadmetanje</response>
             <response code="401">Lice koje želi da izvrši ažuriranje nije autorizovani korisnik</response>
@@ -316,7 +316,7 @@
             Kreira novi službeni list
             </summary>
             <param name="sluzbeniList"> model službenog lista</param>
-            <param name="key"> ključ sa kojim se proverava autorizacija</param>
+            <param name="key"> ključ sa kojim se proverava autorizacija(key vrednost: Bearer LenkaSubotin)</param>
             <returns>Potvrda o kreiranom službenom listu</returns>
             <remarks>
             Primer zahteva za kreiranje novog službenog lista \
@@ -336,7 +336,7 @@
             Briše službeni list na osnovu ID-ja
             </summary>
             <param name="sluzbeniListId">ID službenog lista</param>
-            <param name="key"> ključ sa kojim se proverava autorizacija</param>
+            <param name="key"> ključ sa kojim se proverava autorizacija(key vrednost: Bearer LenkaSubotin)</param>
             <returns>Status 204 (NoContent)</returns>
             <response code="204">Službeni list uspešno obrisan</response>
             <response code="401">Lice koje želi da izvrši brisanje nije autorizovani korisnik</response>
@@ -348,7 +348,7 @@
             Ažurira jedan službeni list 
             </summary>
             <param name="sluzbeniList">Model službenog lista koji se ažurira</param>
-            <param name="key"> ključ sa kojim se proverava autorizacija</param>
+            <param name="key"> ključ sa kojim se proverava autorizacija(key vrednost: Bearer LenkaSubotin)</param>
             <returns>Potvrda o ažuriranom službenom listu</returns>
             <response code="200">Vraća ažuriran službeni list</response>
             <response code="401">Lice koje želi da izvrši ažuriranje nije autorizovani korisnik</response>
@@ -364,6 +364,11 @@
         <member name="P:JavnoNadmetanje.Entities.DokumentPrijavaZaNadmetanjeEntity.PrijavaZaNadmetanjeId">
             <summary>
             Strani ključ prijave za nadmetanje
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Entities.DokumentPrijavaZaNadmetanjeEntity.PrijavaZaNadmetanje">
+            <summary>
+            Prijava za nadmetanje entitet
             </summary>
         </member>
         <member name="P:JavnoNadmetanje.Entities.DokumentPrijavaZaNadmetanjeEntity.DokumentId">
@@ -456,6 +461,11 @@
             Strani ključ oglas
             </summary>
         </member>
+        <member name="P:JavnoNadmetanje.Entities.JavnoNadmetanjeEntity.Oglas">
+            <summary>
+            Oglas entitet
+            </summary>
+        </member>
         <member name="P:JavnoNadmetanje.Entities.JavnoNadmetanjeEntity.LicitacijaId">
             <summary>
             ID licitacije
@@ -496,6 +506,11 @@
             Strani ključ službenog lista
             </summary>
         </member>
+        <member name="P:JavnoNadmetanje.Entities.OglasEntity.SluzbeniList">
+            <summary>
+            Službeni list entitet
+            </summary>
+        </member>
         <member name="T:JavnoNadmetanje.Entities.PrijavaZaNadmetanjeEntity">
             <summary>
             Entity za Prijavu za nadmetanje
@@ -519,6 +534,11 @@
         <member name="P:JavnoNadmetanje.Entities.PrijavaZaNadmetanjeEntity.JavnoNadmetanjeId">
             <summary>
             Strani ključ javnog nadmetanja
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Entities.PrijavaZaNadmetanjeEntity.JavnoNadmetanje">
+            <summary>
+            Javno nadmetanje entitet
             </summary>
         </member>
         <member name="T:JavnoNadmetanje.Entities.SluzbeniListEntity">
@@ -770,6 +790,31 @@
              <summary>
             ID službenog lista
              </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.ParcelaService.DeoParceleDto.DeoParceleId">
+            <summary>
+            ID dela parcele
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.ParcelaService.DeoParceleDto.ParcelaId">
+            <summary>
+            ID parcele
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.ParcelaService.DeoParceleDto.RedniBrojDelaParcele">
+            <summary>
+            Redni broj dela parcele
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.ParcelaService.DeoParceleDto.PovrsinaDelaParcele">
+            <summary>
+            Površina dela parcele
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.ParcelaService.DeoParceleDto.KvalitetZemljistaId">
+            <summary>
+            ID kvaliteta zemljišta
+            </summary>
         </member>
         <member name="P:JavnoNadmetanje.Models.PrijavaZaNadmetanjeCreateDto.DatumPrijave">
             <summary>
