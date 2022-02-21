@@ -7,6 +7,9 @@ namespace ParcelaService.Models.ConfirmationDto
 {
     public class KvalitetZemljistaConfirmationDto
     {
+        /// <summary>
+        /// ID kvaliteta zemljišta
+        /// </summary>
         public Guid KvalitetZemljistaId { get; set; }
     }
 }

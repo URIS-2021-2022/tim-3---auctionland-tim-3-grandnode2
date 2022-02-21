@@ -7,6 +7,9 @@ namespace ParcelaService.Entities.Confirmations
 {
     public class DozvoljeniRadConfirmation
     {
+        /// <summary>
+        /// ID dozvoljenog rada
+        /// </summary>
         public Guid DozvoljeniRadId { get; set; }
     }
 }

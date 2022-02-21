@@ -36,9 +36,11 @@ namespace ParcelaService.Controllers
         }
 
         /// <summary>
-        /// Vraca sve kvalitete zemljista
+        /// Vraća sve kvalitete zemljišta
         /// </summary>
-        /// <returns>Lista kvaliteta zemljista</returns>
+        /// <returns>Lista kvaliteta zemljišta</returns>
+        /// <response code = "200">Vraća listu kvaliteta zemljišta</response>
+        /// <response code = "204">Ne postoji nijedan kvalitet zemljišta</response>
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet]
@@ -54,10 +56,12 @@ namespace ParcelaService.Controllers
         }
 
         /// <summary>
-        /// Vraca kvalitet zemljista sa unetim Id
+        /// Vraća kvalitet zemljišta sa unetim ID
         /// </summary>
-        /// <param name="kvalitetZemljistaId">Id kvaliteta zemljista</param>
-        /// <returns>Odgovarajuci kvalitet zemljista</returns>
+        /// <param name="kvalitetZemljistaId">ID kvaliteta zemljišta</param>
+        /// <returns>Odgovarajući kvalitet zemljišta</returns>
+        /// <response code = "200">Vraća traženi kvalitet zemljišta</response>
+        /// <response code = "404">Nije pronađen traženi kvalitet zemljišta</response>
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet("{kvalitetZemljistaId}")]
@@ -73,10 +77,14 @@ namespace ParcelaService.Controllers
         }
 
         /// <summary>
-        /// Kreiranje novog kvaliteta zemljista
+        /// Kreiranje novog kvaliteta zemljišta
         /// </summary>
-        /// <param name="kvalitetZemljista">Model kvaliteta zemljista</param>
-        /// <returns>Potvrdu o kreiranju kvaliteta zemljista</returns>
+        /// <param name="kvalitetZemljista">Model kvaliteta zemljišta</param>
+        /// <param name="key"> ključ sa kojim se proverava autorizacija(key vrednost: Bearer Jovana123)</param>
+        /// <returns>Potvrdu o kreiranju kvaliteta zemljišta</returns>
+        /// <response code = "201">Vraća kreirani kvalitet zemljišta</response>
+        /// <response code="401">Lice koje želi da izvrši kreiranje kvaliteta zemljišta nije autorizovani korisnik</response>
+        /// <response code = "500">Došlo je do greške na serveru prilikom kreiranja kvaliteta zemljišta</response>
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -103,10 +111,15 @@ namespace ParcelaService.Controllers
         }
 
         /// <summary>
-        /// Azuriranje kvaliteta zemljista
+        /// Ažuriranje kvaliteta zemljišta
         /// </summary>
-        /// <param name="kvalitetZemljista">Model kvaliteta zemljista</param>
-        /// <returns>Potvrda o izmenama u kvalitetu zemljista</returns>
+        /// <param name="kvalitetZemljista">Model kvaliteta zemljišta</param>
+        /// <param name="key"> ključ sa kojim se proverava autorizacija(key vrednost: Bearer Jovana123)</param>
+        /// <returns>Potvrda o izmenama u kvalitetu zemljšsta</returns>
+        /// <response code="200">Vraća ažurirani kvalitet zemljišta</response>
+        /// <response code="401">Lice koje želi da izvrši ažuriranje nije autorizovani korisnik</response>
+        /// <response code="404">Nije pronađen kvalitet zemljišta za ažuriranje</response>
+        /// <response code="500">Došlo je do greške na serveru prilikom ažuriranja kvaliteta zemljišta</response>
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -138,10 +151,15 @@ namespace ParcelaService.Controllers
         }
 
         /// <summary>
-        /// Brisanje kvaliteta zemljista
+        /// Brisanje kvaliteta zemljišta
         /// </summary>
-        /// <param name="kvalitetZemljistaId">Id kvaliteta zemljista</param>
-        /// <returns>Obrisan kvalitet zemljista</returns>
+        /// <param name="kvalitetZemljistaId">ID kvaliteta zemljišta</param>
+        ///  <param name="key"> ključ sa kojim se proverava autorizacija(key vrednost: Bearer Jovana123)</param>
+        /// <returns>Status 204 (NoContent)</returns>
+        /// <response code="204">Kvalitet zemljišta uspešno obrisan</response>
+        /// <response code="401">Lice koje želi da izvrši brisanje nije autorizovani korisnik</response>
+        /// <response code="404">Nije pronađen kvalitet zemljišta  za brisanje</response>
+        /// <response code="500">Došlo je do greške na serveru prilikom brisanja kvaliteta zemljišta</response>
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -172,7 +190,7 @@ namespace ParcelaService.Controllers
         }
 
         /// <summary>
-        /// Vraca opcije za rad kvalitetima zemljista
+        /// Vraća opcije za rad kvalitetima zemljišta
         /// </summary>
         /// <returns></returns>
         [HttpOptions]

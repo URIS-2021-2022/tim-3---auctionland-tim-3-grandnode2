@@ -35,9 +35,11 @@ namespace ParcelaService.Controllers
         }
 
         /// <summary>
-        /// Vraca sve zasticene zone
+        /// Vraca sve zaštićene zone
         /// </summary>
-        /// <returns>Lista zasticenih zona</returns>
+        /// <returns>Lista zaštićenih zona</returns>
+        /// <response code = "200">Vraća listu zaštićenih zona</response>
+        /// <response code = "204">Ne postoji nijedna zaštićena zona</response>
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet]
@@ -53,10 +55,12 @@ namespace ParcelaService.Controllers
         }
 
         /// <summary>
-        /// Vraca zasticenu zonu sa unetim Id
+        /// Vraca zaštićenu zonu po ID-ju
         /// </summary>
-        /// <param name="zasticenaZonaId">Id zasticene zone</param>
-        /// <returns>Odgovarajuca zasticena zona</returns>
+        /// <param name="zasticenaZonaId">ID zaštićene zone</param>
+        /// <returns>Odgovarajuća zaštićena zona</returns>
+        /// <response code = "200">Vraća traženu zaštićenu zonu</response>
+        /// <response code = "404">Nije pronađena tražena zaštićena zona</response>
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet("{zasticenaZonaId}")]
@@ -72,10 +76,14 @@ namespace ParcelaService.Controllers
         }
 
         /// <summary>
-        /// Kreiranje nove zasticene zone
+        /// Kreiranje nove zaštićene zone
         /// </summary>
-        /// <param name="zasticenaZona">Model zasticene zone</param>
-        /// <returns>Potvrdu o kreiranju zasticene zone/returns>
+        /// <param name="zasticenaZona">Model zaštićene zone</param>
+        /// <param name="key"> ključ sa kojim se proverava autorizacija(key vrednost: Bearer Jovana123)</param>
+        /// <returns>Potvrdu o kreiranju zaštićene zone/returns>
+        /// <response code = "201">Vraća kreiranu zaštićenu zonu</response>
+        /// <response code="401">Lice koje želi da izvrši kreiranje zaštićene zone nije autorizovani korisnik</response>
+        /// <response code = "500">Došlo je do greške na serveru prilikom kreiranja zaštićene zone</response>
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -102,10 +110,15 @@ namespace ParcelaService.Controllers
         }
 
         /// <summary>
-        /// Azuriranje zasticene zone
+        /// Ažuriranje zaštićene zone
         /// </summary>
-        /// <param name="zasticenaZona">Model zasticene zone</param>
-        /// <returns>Potvrdu o izmenama o zasticenoj zoni</returns>
+        /// <param name="zasticenaZona">Model zaštićene zone</param>
+        /// <param name="key"> ključ sa kojim se proverava autorizacija(key vrednost: Bearer Jovana123)</param>
+        /// <returns>Potvrdu o izmenama o zaštićenoj zoni</returns>
+        /// <response code="200">Vraća ažuriranu zaštićenu zonu</response>
+        /// <response code="401">Lice koje želi da izvrši ažuriranje nije autorizovani korisnik</response>
+        /// <response code="404">Nije pronađena zaštićena zona za ažuriranje</response>
+        /// <response code="500">Došlo je do greške na serveru prilikom ažuriranja zaštićene zone</response>
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -137,10 +150,15 @@ namespace ParcelaService.Controllers
         }
 
         /// <summary>
-        /// Brisanje zasticene zone
+        /// Brisanje zaštićene zone
         /// </summary>
-        /// <param name="zasticenaZonaId">Id zasticene zone</param>
-        /// <returns>Obrisana zasticena zona</returns>
+        /// <param name="zasticenaZonaId">ID zaštićene zone</param>
+        /// <param name="key"> ključ sa kojim se proverava autorizacija(key vrednost: Bearer Jovana123)</param>
+        /// <returns>Status 204 (NoContent)</returns>
+        /// <response code="204">Zaštićena zona uspešno obrisana</response>
+        /// <response code="401">Lice koje želi da izvrši brisanje nije autorizovani korisnik</response>
+        /// <response code="404">Nije pronađena zaštićena zona za brisanje</response>
+        /// <response code="500">Došlo je do greške na serveru prilikom brisanja zaštićene zone</response>
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -171,7 +189,7 @@ namespace ParcelaService.Controllers
         }
 
         /// <summary>
-        /// Vraca opcije za rad sa zasticenim zonama
+        /// Vraća opcije za rad sa zaštićenim zonama
         /// </summary>
         /// <returns></returns>
         [HttpOptions]

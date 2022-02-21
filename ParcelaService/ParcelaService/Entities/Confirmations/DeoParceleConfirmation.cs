@@ -7,6 +7,9 @@ namespace ParcelaService.Entities.Confirmations
 {
     public class DeoParceleConfirmation
     {
+        /// <summary>
+        /// ID dela parcele
+        /// </summary>
         public Guid DeoParceleId { get; set; }
     }
 }

@@ -7,6 +7,9 @@ namespace ParcelaService.Models.ConfirmationDto
 {
     public class ParcelaConfirmationDto
     {
+        /// <summary>
+        /// ID parcele
+        /// </summary>
         public Guid ParcelaId { get; set; }
     }
 }

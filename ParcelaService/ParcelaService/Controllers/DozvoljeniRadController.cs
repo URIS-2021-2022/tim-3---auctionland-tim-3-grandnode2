@@ -36,9 +36,11 @@ namespace ParcelaService.Controllers
         }
 
         /// <summary>
-        /// Vraca sve dozvoljene radove
+        /// Vraća sve dozvoljene radove
         /// </summary>
         /// <returns>Lista dozvoljenih radova</returns>
+        /// <response code = "200">Vraća listu dozvoljenih radova</response>
+        /// <response code = "204">Ne postoji nijedan dozvoljeni rad</response>
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet]
@@ -54,10 +56,12 @@ namespace ParcelaService.Controllers
         }
 
         /// <summary>
-        /// Vraca dozvoljene radove sa unetim Id
+        /// Vrača dozvoljene radove po ID-ju
         /// </summary>
-        /// <param name="dozvoljeniRadId">Id dozvoljenog rada</param>
-        /// <returns>Odgovarajuci dozvoljeni rad</returns>
+        /// <param name="dozvoljeniRadId">ID dozvoljenog rada</param>
+        /// <returns>Odgovarajući dozvoljeni rad</returns>
+        /// <response code = "200">Vraća traženi dozvoljeni rad</response>
+        /// <response code = "404">Nije pronađen traženi dozvoljeni rad</response>
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet("{dozvoljeniRadId}")]
@@ -76,7 +80,11 @@ namespace ParcelaService.Controllers
         /// Kreiranje novog dozvoljenog rada
         /// </summary>
         /// <param name="dozvoljeniRad">Model dozvoljenog rada/param>
+        /// <param name="key"> ključ sa kojim se proverava autorizacija(key vrednost: Bearer Jovana123)</param>
         /// <returns>Potvrda o kreiranju dozvoljenog rada</returns>
+        /// <response code = "201">Vraća kreirani dozvoljeni rad</response>
+        /// <response code="401">Lice koje želi da izvrši kreiranje dozvoljenog rada nije autorizovani korisnik</response>
+        /// <response code = "500">Došlo je do greške na serveru prilikom kreiranja dozvoljenog rada</response>
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -103,10 +111,15 @@ namespace ParcelaService.Controllers
         }
 
         /// <summary>
-        /// Azuriranje dozvoljenih radova
+        /// Ažuriranje dozvoljenih radova
         /// </summary>
         /// <param name="dozvoljeniRad">Model dozvoljenog rada</param>
+        /// <param name="key"> ključ sa kojim se proverava autorizacija(key vrednost: Bearer Jovana123)</param>
         /// <returns>Potvrda o izmenama u dozvoljenom radu</returns>
+        /// <response code="200">Vraća ažuriran dozvoljeni rada</response>
+        /// <response code="401">Lice koje želi da izvrši ažuriranje nije autorizovani korisnik</response>
+        /// <response code="404">Nije pronađen dozvoljeni rad za ažuriranje</response>
+        /// <response code="500">Došlo je do greške na serveru prilikom ažuriranja dozvoljenog rada</response>
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -141,7 +154,12 @@ namespace ParcelaService.Controllers
         /// Brisanje dozvoljenog rada
         /// </summary>
         /// <param name="dozvoljeniRadId">Id dozvoljenog rada</param>
-        /// <returns>Obrisan dozvoljeniRad </returns>
+        /// <param name="key"> ključ sa kojim se proverava autorizacija(key vrednost: Bearer Jovana123)</param>
+        /// <returns>Status 204 (NoContent)</returns>
+        /// <response code="204">Dozvoljeni rad uspešno obrisan</response>
+        /// <response code="401">Lice koje želi da izvrši brisanje nije autorizovani korisnik</response>
+        /// <response code="404">Nije pronađen dozvoljeni rad za brisanje</response>
+        /// <response code="500">Došlo je do greške na serveru prilikom brisanja dozvoljenog rada</response>
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -172,7 +190,7 @@ namespace ParcelaService.Controllers
         }
 
         /// <summary>
-        /// Vraca opcije za rad dozvoljenim radovima
+        /// Vraća opcije za rad dozvoljenim radovima
         /// </summary>
         /// <returns></returns>
         [HttpOptions]
