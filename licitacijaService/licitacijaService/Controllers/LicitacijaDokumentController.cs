@@ -4,6 +4,8 @@ using licitacijaService.Data;
 using licitacijaService.DTOs;
 using licitacijaService.Entities;
 using licitacijaService.Logger;
+using licitacijaService.ServiceCalls;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -26,6 +28,7 @@ namespace licitacijaService.Controllers
     {
         private readonly ILicitacijaRepository licitacijaRepository;
         private readonly ILicitacijaDokumentRepository licitacijaDokumentRepository;
+        private readonly IDokumentService dokumentService;
         private readonly IMapper mapper;
         private readonly LinkGenerator linkGenerator;
         private readonly ILoggerMockReposiotry logger;
@@ -33,11 +36,12 @@ namespace licitacijaService.Controllers
 
         private readonly IAuthHelper auth;
 
-        public LicitacijaDokumentController(ILicitacijaRepository licitacijaRepository, ILicitacijaDokumentRepository licitacijaDokumentRepository, IMapper mapper, ILoggerMockReposiotry logger,
+        public LicitacijaDokumentController(ILicitacijaRepository licitacijaRepository, ILicitacijaDokumentRepository licitacijaDokumentRepository, IDokumentService dokumentService ,IMapper mapper, ILoggerMockReposiotry logger,
                                   LinkGenerator linkGenerator, IHttpContextAccessor contextAccessor, IAuthHelper auth)
         {
             this.licitacijaRepository = licitacijaRepository;
             this.licitacijaDokumentRepository = licitacijaDokumentRepository;
+            this.dokumentService = dokumentService;
             this.mapper = mapper;
             this.linkGenerator = linkGenerator;
             this.logger = logger;
@@ -65,6 +69,7 @@ namespace licitacijaService.Controllers
         public ActionResult<LicitacijaDokumentConfirmationDTO> GetDokumentiByLicitacijaId(Guid licitacijaId, string podnosilac)
         {
             var dokumentaLicitacije = licitacijaDokumentRepository.GetDokumnetByLicitacijaId(licitacijaId);
+            string accessToken = HttpContext.GetTokenAsync("access_token").Result;
             if (podnosilac!=null)
             {
                 
@@ -73,22 +78,19 @@ namespace licitacijaService.Controllers
                     return StatusCode(StatusCodes.Status400BadRequest, "Bad Request! Wrong podnosilac value!");
                 }
                 dokumentaLicitacije = licitacijaDokumentRepository.GetDokumnetByLicitacijaIdAndVrstaPodnosioca(licitacijaId, podnosilac);
+                
             }
 
 
-            if (dokumentaLicitacije == null)
+            if (dokumentaLicitacije == null && dokumentaLicitacije.Count<1)
             {
                 return NotFound();
             }
-            /* komisija.clanoviKomisije = licnostKomisijeRepository.GetLicnosiKomisijeByOznakaKomisije(komisija.oznakaKomisije);
-             mapper.Map<List<LicnostKomisijeConfirmationDto>>(komisija.clanoviKomisije);
-             komisija.predsednikKomisije = licnostKomisijeRepository.GetPredsednikaKomisije(komisija.komisijaId);
-             if (komisija.predsednikKomisije != null)
-             {
-                 komisija.clanoviKomisije.Remove(komisija.predsednikKomisije);
-                 mapper.Map<LicnostKomisijeConfirmationDto>(komisija.predsednikKomisije);
-             }
-            */
+
+            foreach(var dok in dokumentaLicitacije)
+            {
+                dok.dokument = dokumentService.GetDokumentByDokumentId(dok.dokumentId,accessToken).Result;
+            }
             logger.Log(LogLevel.Information, contextAccessor.HttpContext.TraceIdentifier, "", "Get licitacija by licitacijaId", null);
             return Ok(mapper.Map<List<LicitacijaDokumentConfirmationDTO>>(dokumentaLicitacije));
 
@@ -131,7 +133,11 @@ namespace licitacijaService.Controllers
                 {
                     return StatusCode(StatusCodes.Status401Unauthorized, "Authorization failed!");
                 }
-                
+                string accessToken = HttpContext.GetTokenAsync("access_token").Result;
+                if(dokumentService.GetDokumentByDokumentId(licitacijaDokumentiCreationDTO.dokumentId,accessToken).Result==null)
+                {
+                    return StatusCode(StatusCodes.Status400BadRequest, "Bad Request! Wrong dokumentId value!");
+                }
                 LicitacijaDokument dokuemntiLicitacija = mapper.Map<LicitacijaDokument>(licitacijaDokumentiCreationDTO);
                 Licitacija licitacija = licitacijaRepository.GetLicitacijaById(dokuemntiLicitacija.licitacijaId);
                 if(licitacija==null)
@@ -214,7 +220,11 @@ namespace licitacijaService.Controllers
                 {
                     return StatusCode(StatusCodes.Status400BadRequest, "Bad Request! Wrong licitacijaId value!");
                 }
-                
+                string accessToken = HttpContext.GetTokenAsync("access_token").Result;
+                if (dokumentService.GetDokumentByDokumentId(newLD.dokumentId, accessToken).Result == null)
+                {
+                    return StatusCode(StatusCodes.Status400BadRequest, "Bad Request! Wrong dokumentId value!");
+                }
                 licitacijaDokumentRepository.UpdateLicitacijaDokument(oldLD, newLD);
 
                 licitacijaDokumentRepository.SaveChanges();

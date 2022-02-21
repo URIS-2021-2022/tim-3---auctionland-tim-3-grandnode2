@@ -1,4 +1,5 @@
-﻿using System;
+﻿using licitacijaService.DTOs.Mock;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -23,6 +24,12 @@ namespace licitacijaService.Entities
         public Guid dokumentId { get; set; }
 
         /// <summary>
+        /// Dokument
+        /// </summary>
+        [NotMapped]
+        public DokumentDTO dokument { get; set; }
+
+        /// <summary>
         /// Indikator vrste podnosioca dokumenta
         ///P pravno lice, F fizicko lice
         /// </summary>
@@ -35,5 +42,7 @@ namespace licitacijaService.Entities
         /// </summary>
         [Required]
         public DateTime datumPodnosenjaDokumenta { get; set; }
+
+       
     }
 }
