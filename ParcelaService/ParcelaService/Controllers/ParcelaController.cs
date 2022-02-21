@@ -43,6 +43,7 @@ namespace ParcelaService.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet]
+        [HttpHead]
         [AllowAnonymous]
         public ActionResult<List<ParcelaDto>> GetAll(Guid ?katastarskaOpstinaId)
         {
@@ -99,6 +100,7 @@ namespace ParcelaService.Controllers
         /// <returns>Potvrda o kreiranju parcele</returns>
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [Consumes("application/json")]
         [HttpPost]
         public ActionResult<ParcelaDto> Create([FromBody] ParcelaCreateDto parcela, [FromHeader] string key)
@@ -129,6 +131,7 @@ namespace ParcelaService.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [HttpPut]
         public ActionResult<ParcelaConfirmationDto> Update(ParcelaUpdateDto parcela, [FromHeader] string key)
         {
@@ -163,6 +166,7 @@ namespace ParcelaService.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [HttpDelete("{parcelaId}")]
         public IActionResult Delete(Guid parcelaId, [FromHeader] string key)
         {

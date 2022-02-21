@@ -78,6 +78,7 @@ namespace ParcelaService.Controllers
         /// <returns>Potvrdu o kreiranju zasticene zone/returns>
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [Consumes("application/json")]
         [HttpPost]
         public ActionResult<ZasticenaZonaDto> Create([FromBody] ZasticenaZonaCreateDto zasticenaZona, [FromHeader] string key)
@@ -108,6 +109,7 @@ namespace ParcelaService.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [HttpPut]
         public ActionResult<ZasticenaZonaConfirmationDto> Update(ZasticenaZonaUpdateDto zasticenaZona, [FromHeader] string key)
         {
@@ -142,6 +144,7 @@ namespace ParcelaService.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [HttpDelete("{zasticenaZonaId}")]
         public IActionResult Delete(Guid zasticenaZonaId, [FromHeader] string key)
         {
@@ -172,6 +175,7 @@ namespace ParcelaService.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpOptions]
+        [AllowAnonymous]
         public IActionResult GetZasticenaZonaOptions()
         {
             Response.Headers.Add("Allow", "GET, POST, PUT, DELETE");

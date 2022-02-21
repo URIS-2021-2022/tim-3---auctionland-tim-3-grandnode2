@@ -79,6 +79,7 @@ namespace ParcelaService.Controllers
         /// <returns>Potvrda o kreiranju dozvoljenog rada</returns>
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [Consumes("application/json")]
         [HttpPost]
         public ActionResult<DozvoljeniRadDto> Create([FromBody] DozvoljeniRadCreateDto dozvoljeniRad, [FromHeader] string key)
@@ -109,6 +110,7 @@ namespace ParcelaService.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [HttpPut]
         public ActionResult<DozvoljeniRadConfirmationDto> Update(DozvoljeniRadUpdateDto dozvoljeniRad, [FromHeader] string key)
         {
@@ -143,6 +145,7 @@ namespace ParcelaService.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [HttpDelete("{dozvoljeniRadId}")]
         public IActionResult Delete(Guid dozvoljeniRadId, [FromHeader] string key)
         {
@@ -173,6 +176,7 @@ namespace ParcelaService.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpOptions]
+        [AllowAnonymous]
         public IActionResult GetDozvoljeniRadOptions()
         {
             Response.Headers.Add("Allow", "GET, POST, PUT, DELETE");
