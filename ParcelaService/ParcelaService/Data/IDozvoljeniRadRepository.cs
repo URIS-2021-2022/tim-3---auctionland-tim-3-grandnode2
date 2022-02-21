@@ -10,10 +10,10 @@ namespace ParcelaService.Data
     public interface IDozvoljeniRadRepository
     {
         List<DozvoljeniRad> GetAll();
-        DozvoljeniRad GetById(Guid dozvoljeniRadoviId);
-        DozvoljeniRadConfirmation Create(DozvoljeniRad dozvoljeniRadovi);
-        void Update(DozvoljeniRad dozvoljeniRadovi);
-        void Delete(Guid dozvoljeniRadoviId);
+        DozvoljeniRad GetById(Guid dozvoljeniRadId);
+        DozvoljeniRadConfirmation Create(DozvoljeniRad dozvoljeniRad);
+        void Update(DozvoljeniRad dozvoljeniRad);
+        void Delete(Guid dozvoljeniRadId);
         bool SaveChanges();
     }
 }

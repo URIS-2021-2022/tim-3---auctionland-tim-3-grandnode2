@@ -31,7 +31,7 @@ namespace ParcelaService.Data
 
         public List<DeoParcele> GetDeloveParcele(Guid parcelaId)
         {
-            return _context.DeloviParcele.Where(e => (parcelaId == null || e.ParcelaId == parcelaId)).ToList();
+            return _context.DeloviParcele.Where(e => e.ParcelaId == parcelaId).ToList();
         }
 
         public Parcela GetById(Guid parcelaId)

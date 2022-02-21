@@ -23,16 +23,16 @@ namespace ParcelaService.Entities
         /// <summary>
         /// Popunjava bazu sa nekim inicijalnim podacima
         /// </summary>
-        protected override void OnModelCreating(ModelBuilder builder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            builder.Entity<KvalitetZemljista>()
+            modelBuilder.Entity<KvalitetZemljista>()
                 .HasData(new
                 {
                     KvalitetZemljistaId = Guid.Parse("0943c9e9-2dc0-4d8a-92a4-4c0d7297c8f1"),
                     OznakaKvaliteta = "LK",
                     Opis = "Los kvalitet"
                 });
-            builder.Entity<KvalitetZemljista>()
+            modelBuilder.Entity<KvalitetZemljista>()
                 .HasData(new
                 {
                     KvalitetZemljistaId = Guid.Parse("b767f876-7462-40d7-918e-e32472e8e07f"),
@@ -40,21 +40,21 @@ namespace ParcelaService.Entities
                     Opis = "Dobar kvalitet"
                 });
 
-            builder.Entity<ZasticenaZona>()
+            modelBuilder.Entity<ZasticenaZona>()
                 .HasData(new
                 {
                     ZasticenaZonaId = Guid.Parse("80a231c2-f454-4bb9-bc55-df65440ef57e"),
                     BrojZasticeneZone = 1
                 });
 
-            builder.Entity<ZasticenaZona>()
+            modelBuilder.Entity<ZasticenaZona>()
                 .HasData(new
                 {
                     ZasticenaZonaId = Guid.Parse("da357d41-7086-49dc-857c-17ee3085f46f"),
                     BrojZasticeneZone = 2
                 });
 
-            builder.Entity<DozvoljeniRad>()
+            modelBuilder.Entity<DozvoljeniRad>()
                 .HasData(new
                 {
                     DozvoljeniRadId = Guid.Parse("9dcc4f86-da91-4767-8256-20e865406e60"),
@@ -63,7 +63,7 @@ namespace ParcelaService.Entities
                 }
                 );
 
-            builder.Entity<DozvoljeniRad>()
+            modelBuilder.Entity<DozvoljeniRad>()
                 .HasData(new
                 {
                     DozvoljeniRadId = Guid.Parse("bb7617ab-eb3e-4e67-a19e-49cdd2e4e4ef"),
@@ -71,7 +71,7 @@ namespace ParcelaService.Entities
                     ZasticenaZonaId = Guid.Parse("da357d41-7086-49dc-857c-17ee3085f46f")
                 });
 
-            builder.Entity<Parcela>()
+            modelBuilder.Entity<Parcela>()
                 .HasData(new
                 {
                     ParcelaId = Guid.Parse("7e2bc8e2-a0dc-4b45-8068-8bb3a9ec9605"),
@@ -85,7 +85,7 @@ namespace ParcelaService.Entities
                     OblikSvojine = OblikSvojine.DrustvenaSvojina
                 });
 
-            builder.Entity<Parcela>()
+            modelBuilder.Entity<Parcela>()
                 .HasData(new
                 {
                     ParcelaId = Guid.Parse("f97960ee-b9f2-4910-9faa-d5bd81998f4f"),
@@ -99,7 +99,7 @@ namespace ParcelaService.Entities
                     OblikSvojine = OblikSvojine.PrivatnaSvojina
                 }) ;
 
-            builder.Entity<DeoParcele>()
+            modelBuilder.Entity<DeoParcele>()
                 .HasData(new
                 {
                     DeoParceleId = Guid.Parse("70037ed2-cefc-498c-8a04-819d1bbd415b"),
@@ -109,7 +109,7 @@ namespace ParcelaService.Entities
                     KvalitetZemljistaId = Guid.Parse("b767f876-7462-40d7-918e-e32472e8e07f")
                 });
 
-            builder.Entity<DeoParcele>()
+            modelBuilder.Entity<DeoParcele>()
                 .HasData(new
                 {
                     DeoParceleId = Guid.Parse("45504801-01fa-4054-9601-1bb7216f22f6"),
