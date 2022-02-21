@@ -7,8 +7,14 @@ namespace ParcelaService.Models.CreateDto
 {
     public class DozvoljeniRadCreateDto
     {
-        //public Guid DozvoljeniRadId { get; set; }
+        /// <summary>
+        /// Opis dozvoljenog rada
+        /// </summary>
         public string Opis { get; set; }
+
+        /// <summary>
+        /// ID zaštićene zone
+        /// </summary>
         public Guid ZasticenaZonaId { get; set; }
     }
 }

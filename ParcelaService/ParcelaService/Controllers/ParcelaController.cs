@@ -36,10 +36,12 @@ namespace ParcelaService.Controllers
         }
 
         /// <summary>
-        /// Vraca sve parcele ili opciono sve parcele koje pripadaju nekoj katastarskoj opstini
+        /// Vraća sve parcele ili opciono sve parcele koje pripadaju nekoj katastarskoj opštini
         /// </summary>
-        /// <param name="katastarskaOpstinaId">Id katastarske opstine</param>
+        /// <param name="katastarskaOpstinaId">ID katastarske opštine</param>
         /// <returns>Lista parcela</returns>
+        /// <response code = "200">Vraća listu parcela</response>
+        /// <response code = "204">Ne postoji nijedna parcela</response>
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet]
@@ -56,10 +58,12 @@ namespace ParcelaService.Controllers
         }
 
         /// <summary>
-        /// Vraca sve delove parcele ciji je Id prosledjen
+        /// Vraća sve delove parcele čiji je ID prosleđen
         /// </summary>
-        /// <param name="parcelaId">Id parcele</param>
+        /// <param name="parcelaId">ID parcele</param>
         /// <returns>Lista delova parcele</returns>
+        /// <response code = "200">Vraća listu delova parcela</response>
+        /// <response code = "204">Ne postoji lista delova parcele</response>
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet("DeloviParcele/{parcelaId}")]
@@ -75,10 +79,12 @@ namespace ParcelaService.Controllers
         }
 
         /// <summary>
-        /// Vraca parcelu sa unetim Id
+        /// Vraća parcelu po ID-ju
         /// </summary>
-        /// <param name="parcelaId">Id parcele</param>
-        /// <returns>Odgovarajuca parcela</returns>
+        /// <param name="parcelaId">ID parcele</param>
+        /// <returns>Odgovarajuća parcela</returns>
+        /// <response code = "200">Vraća traženu parcelu</response>
+        /// <response code = "404">Nije pronađena tražena parcela</response>
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet("{parcelaId}")]
@@ -97,7 +103,11 @@ namespace ParcelaService.Controllers
         /// Kreiranje nove parcele
         /// </summary>
         /// <param name="parcela">Model parcele</param>
+        /// <param name="key"> ključ sa kojim se proverava autorizacija(key vrednost: Bearer Jovana123)</param>
         /// <returns>Potvrda o kreiranju parcele</returns>
+        /// <response code = "201">Vraća kreiranu parcele</response>
+        /// <response code="401">Lice koje želi da izvrši kreiranje parcele nije autorizovani korisnik</response>
+        /// <response code = "500">Došlo je do greške na serveru prilikom kreiranja parcele</response>
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -124,10 +134,15 @@ namespace ParcelaService.Controllers
         }
 
         /// <summary>
-        /// Azuriranje parcele
+        /// Ažuriranje parcele
         /// </summary>
         /// <param name="parcela">Model parcele</param>
+        /// <param name="key"> ključ sa kojim se proverava autorizacija(key vrednost: Bearer Jovana123)</param>
         /// <returns>Potvrda o izmenama u parceli</returns>
+        /// <response code="200">Vraća ažuriranu parcelu</response>
+        /// <response code="401">Lice koje želi da izvrši ažuriranje nije autorizovani korisnik</response>
+        /// <response code="404">Nije pronađena parcela za ažuriranje</response>
+        /// <response code="500">Došlo je do greške na serveru prilikom ažuriranja parcele</response>
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -162,7 +177,12 @@ namespace ParcelaService.Controllers
         /// Brisanje parcele
         /// </summary>
         /// <param name="parcelaId">Id parcele</param>
-        /// <returns>Obrisana parcela</returns>
+        ///  <param name="key"> ključ sa kojim se proverava autorizacija(key vrednost: Bearer Jovana123)</param>
+        /// <returns>Status 204 (NoContent)</returns>
+        /// <response code="204">Parcela uspešno obrisana</response>
+        /// <response code="401">Lice koje želi da izvrši brisanje nije autorizovani korisnik</response>
+        /// <response code="404">Nije pronađena parcela za brisanje</response>
+        /// <response code="500">Došlo je do greške na serveru prilikom brisanja parcele</response>
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -193,7 +213,7 @@ namespace ParcelaService.Controllers
         }
 
         /// <summary>
-        /// Vraca opcije za rad sa parcelama
+        /// Vraća opcije za rad sa parcelama
         /// </summary>
         /// <returns></returns>
         [HttpOptions]

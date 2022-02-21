@@ -7,6 +7,9 @@ namespace ParcelaService.Models.ConfirmationDto
 {
     public class ZasticenaZonaConfirmationDto
     {
+        /// <summary>
+        /// ID zaštićene zone
+        /// </summary>
         public Guid ZasticenaZonaId { get; set; }
     }
 }

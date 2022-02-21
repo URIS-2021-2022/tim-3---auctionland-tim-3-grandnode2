@@ -36,10 +36,12 @@ namespace ParcelaService.Controllers
         }
 
         /// <summary>
-        /// Vraca sve delove parcele ili opciono sve delove parcele sa unetim Id
+        /// Vraća sve delove parcele ili opciono sve delove parcele sa unetim ID
         /// </summary>
         /// <param name="parcelaId">Id parcele</param>
         /// <returns>Lista delova parcele</returns>
+        /// <response code = "200">Vraća listu delova parcela</response>
+        /// <response code = "204">Ne postoji nijedan deo parcele</response>
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet]
@@ -55,10 +57,12 @@ namespace ParcelaService.Controllers
         }
 
         /// <summary>
-        /// Vraca deo parcele sa unetim Id
+        /// Vraća deo parcele sa unetim ID
         /// </summary>
-        /// <param name="deoParceleId">Id dela parcele</param>
-        /// <returns>Odgovarajuci deo parcele</returns>
+        /// <param name="deoParceleId">ID dela parcele</param>
+        /// <returns>Odgovarajući deo parcele</returns>
+        /// <response code = "200">Vraća traženi deo parcele</response>
+        /// <response code = "404">Nije pronađena traženi deo parcele</response>
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet("{deoParceleId}")]
@@ -77,7 +81,11 @@ namespace ParcelaService.Controllers
         /// Kreiranje novog dela parcele
         /// </summary>
         /// <param name="deoParcele">Model dela parcele</param>
+        /// <param name="key"> ključ sa kojim se proverava autorizacija(key vrednost: Bearer Jovana123)</param>
         /// <returns>Potvrda o kreiranju dela parcele</returns>
+        ///  <response code = "201">Vraća kreirani deo parcele</response>
+        /// <response code="401">Lice koje želi da izvrši kreiranje dela parcele nije autorizovani korisnik</response>
+        /// <response code = "500">Došlo je do greške na serveru prilikom kreiranja dela parcele</response>
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -104,10 +112,15 @@ namespace ParcelaService.Controllers
         }
 
         /// <summary>
-        /// Azuriranje dela parcele
+        /// Ažuriranje dela parcele
         /// </summary>
         /// <param name="deoParcele">Model dela parcele</param>
+        /// <param name="key"> ključ sa kojim se proverava autorizacija(key vrednost: Bearer Jovana123)</param>
         /// <returns>Potvrda o izmenama u delu parcele</returns>
+        /// <response code="200">Vraća ažurirani deo parcele</response>
+        /// <response code="401">Lice koje želi da izvrši ažuriranje nije autorizovani korisnik</response>
+        /// <response code="404">Nije pronađen deo parcele za ažuriranje</response>
+        /// <response code="500">Došlo je do greške na serveru prilikom ažuriranja dela parcele</response>
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -141,8 +154,13 @@ namespace ParcelaService.Controllers
         /// <summary>
         /// Brisanje dela parcele
         /// </summary>
-        /// <param name="deoParceleId">Id dela parcele</param>
-        /// <returns>Obrisan deo parcele</returns>
+        /// <param name="deoParceleId">ID dela parcele</param>
+        ///  <param name="key"> ključ sa kojim se proverava autorizacija(key vrednost: Bearer Jovana123)</param>
+        /// <returns>Status 204 (NoContent)</returns>
+        /// <response code="204">Deo parcele uspešno obrisan</response>
+        /// <response code="401">Lice koje želi da izvrši brisanje nije autorizovani korisnik</response>
+        /// <response code="404">Nije pronađen deo parcele za brisanje</response>
+        /// <response code="500">Došlo je do greške na serveru prilikom brisanja dela parcele</response>
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -173,7 +191,7 @@ namespace ParcelaService.Controllers
         }
 
         /// <summary>
-        /// Vraca opcije za rad delovima parcele
+        /// Vraća opcije za rad delovima parcele
         /// </summary>
         /// <returns></returns>
         [HttpOptions]

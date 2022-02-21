@@ -7,7 +7,9 @@ namespace ParcelaService.Models.CreateDto
 {
     public class ZasticenaZonaCreateDto
     {
-        //public Guid ZasticenaZonaId { get; set; }
+        /// <summary>
+        /// Broj zaštićene zone
+        /// </summary>
         public int BrojZasticeneZone { get; set; }
     }
 }

@@ -7,8 +7,19 @@ namespace ParcelaService.Models
 {
     public class KvalitetZemljistaDto
     {
+        /// <summary>
+        /// ID kvaliteta zemljišta
+        /// </summary>
         public Guid KvalitetZemljistaId { get; set; }
+
+        /// <summary>
+        /// Oznaka kvaliteta zemljišta
+        /// </summary>
         public string OznakaKvaliteta { get; set; }
+
+        /// <summary>
+        /// Opis kvaliteta zemljišta
+        /// </summary>
         public string Opis { get; set; }
     }
 }
