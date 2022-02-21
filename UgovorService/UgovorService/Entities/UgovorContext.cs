@@ -16,9 +16,9 @@ namespace UgovorService.Entities
 
         public DbSet<Ugovor> Ugovori { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder builder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            builder.Entity<Ugovor>()
+            modelBuilder.Entity<Ugovor>()
                 .HasData(new
                 {
                     UgovorId = Guid.Parse("9ea5d63f-f2b0-43ec-afb4-598f70958cf1"),
@@ -33,7 +33,7 @@ namespace UgovorService.Entities
                     DatumPotpisa = DateTime.Now
 
                 });
-            builder.Entity<Ugovor>()
+            modelBuilder.Entity<Ugovor>()
               .HasData(new
               {
                   UgovorId = Guid.Parse("950713d6-f551-4b46-af25-5f8ec8f3e0aa"),
