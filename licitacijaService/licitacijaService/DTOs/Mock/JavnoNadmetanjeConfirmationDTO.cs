@@ -64,24 +64,5 @@ namespace licitacijaService.DTOs.Mock
         /// </summary>
         public int Krug { get; set; }
 
-        /// <summary>
-        /// ID oglasa
-        /// </summary>
-        public Guid OglasId { get; set; }
-
-        /// <summary>
-        /// ID licitacije
-        /// </summary>
-        public Guid LicitacijaId { get; set; }
-
-        /// <summary>
-        /// ID parcele
-        /// </summary>
-        public Guid ParcelaId { get; set; }
-
-        /// <summary>
-        /// ID kupca
-        /// </summary>
-        public Guid KupacId { get; set; }
     }
 }
