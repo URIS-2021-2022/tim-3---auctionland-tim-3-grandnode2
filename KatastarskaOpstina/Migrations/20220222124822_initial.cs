@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace KatastarskaOpstina.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -42,12 +42,12 @@ namespace KatastarskaOpstina.Migrations
             migrationBuilder.InsertData(
                 table: "StatutOpstines",
                 columns: new[] { "StatutOpstineID", "DatumKreiranjaStatuta", "SadrzajStatuta" },
-                values: new object[] { new Guid("644f3de0-a9dd-4c2e-b745-89976a1b2a36"), new DateTime(2022, 2, 20, 23, 20, 1, 28, DateTimeKind.Local).AddTicks(1132), "..." });
+                values: new object[] { new Guid("644f3de0-a9dd-4c2e-b745-89976a1b2a36"), new DateTime(2022, 2, 22, 13, 48, 21, 847, DateTimeKind.Local).AddTicks(2683), "..." });
 
             migrationBuilder.InsertData(
                 table: "StatutOpstines",
                 columns: new[] { "StatutOpstineID", "DatumKreiranjaStatuta", "SadrzajStatuta" },
-                values: new object[] { new Guid("044f3de0-a9dd-4c2e-b745-89976a1b2a36"), new DateTime(2022, 2, 20, 23, 20, 1, 42, DateTimeKind.Local).AddTicks(8400), "..." });
+                values: new object[] { new Guid("044f3de0-a9dd-4c2e-b745-89976a1b2a36"), new DateTime(2022, 2, 22, 13, 48, 21, 850, DateTimeKind.Local).AddTicks(1855), "..." });
 
             migrationBuilder.InsertData(
                 table: "KatastarskaOpstinas",

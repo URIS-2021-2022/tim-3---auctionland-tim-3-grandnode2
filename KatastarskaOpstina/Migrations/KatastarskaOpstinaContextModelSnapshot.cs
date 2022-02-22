@@ -72,13 +72,13 @@ namespace KatastarskaOpstina.Migrations
                         new
                         {
                             StatutOpstineID = new Guid("644f3de0-a9dd-4c2e-b745-89976a1b2a36"),
-                            DatumKreiranjaStatuta = new DateTime(2022, 2, 20, 23, 20, 1, 28, DateTimeKind.Local).AddTicks(1132),
+                            DatumKreiranjaStatuta = new DateTime(2022, 2, 22, 13, 48, 21, 847, DateTimeKind.Local).AddTicks(2683),
                             SadrzajStatuta = "..."
                         },
                         new
                         {
                             StatutOpstineID = new Guid("044f3de0-a9dd-4c2e-b745-89976a1b2a36"),
-                            DatumKreiranjaStatuta = new DateTime(2022, 2, 20, 23, 20, 1, 42, DateTimeKind.Local).AddTicks(8400),
+                            DatumKreiranjaStatuta = new DateTime(2022, 2, 22, 13, 48, 21, 850, DateTimeKind.Local).AddTicks(1855),
                             SadrzajStatuta = "..."
                         });
                 });

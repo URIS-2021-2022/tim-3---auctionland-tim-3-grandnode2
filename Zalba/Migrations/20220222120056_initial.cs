@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Zalba.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -60,12 +60,12 @@ namespace Zalba.Migrations
             migrationBuilder.InsertData(
                 table: "Zalbas",
                 columns: new[] { "ZalbaID", "BrojOdluke", "BrojResenja", "DatPodnosenjaZalbe", "DatResenja", "LicitacijaID", "Obrazlozenje", "PodnosilacZalbeID", "RadnjaZalbe", "StatusZalbe", "TipZalbeID" },
-                values: new object[] { new Guid("6a411c13-a195-48f7-8dbd-67596c3974c0"), 23, 345, new DateTime(2020, 12, 15, 9, 5, 26, 0, DateTimeKind.Unspecified), new DateTime(2020, 12, 17, 9, 9, 20, 0, DateTimeKind.Unspecified), new Guid("182889ec-75a7-467d-9127-df89ee77481a"), "Podneta zalba je usvojena", new Guid("e03de167-e497-46e2-bcf2-9f22903ab55c"), "JN ide u drugi krug sa novim uslovima", "usvojena", new Guid("044f3de0-a9dd-4c2e-b745-89976a1b2a36") });
+                values: new object[] { new Guid("6a411c13-a195-48f7-8dbd-67596c3974c0"), 23, 345, new DateTime(2020, 12, 15, 9, 5, 26, 0, DateTimeKind.Unspecified), new DateTime(2020, 12, 17, 9, 9, 20, 0, DateTimeKind.Unspecified), new Guid("3f8aa5b3-a67f-45b5-b518-771a7c09a944"), "Podneta zalba je usvojena", new Guid("e03de167-e497-46e2-bcf2-9f22903ab55c"), "JN ide u drugi krug sa novim uslovima", "usvojena", new Guid("044f3de0-a9dd-4c2e-b745-89976a1b2a36") });
 
             migrationBuilder.InsertData(
                 table: "Zalbas",
                 columns: new[] { "ZalbaID", "BrojOdluke", "BrojResenja", "DatPodnosenjaZalbe", "DatResenja", "LicitacijaID", "Obrazlozenje", "PodnosilacZalbeID", "RadnjaZalbe", "StatusZalbe", "TipZalbeID" },
-                values: new object[] { new Guid("1c7ea607-8ddb-493a-87fa-4bf5893e965b"), 89, 687, new DateTime(2021, 12, 15, 9, 5, 26, 0, DateTimeKind.Unspecified), new DateTime(2021, 12, 17, 9, 9, 20, 0, DateTimeKind.Unspecified), new Guid("ee7753a4-66d9-4ac3-94be-1987bff50198"), "Podneta zalba je usvojena", new Guid("54001bad-2161-42ac-9241-54ead772ed11"), "JN ide u drugi krug sa starim uslovima", "usvojena", new Guid("32cd906d-8bab-457c-ade2-fbc4ba523029") });
+                values: new object[] { new Guid("1c7ea607-8ddb-493a-87fa-4bf5893e965b"), 89, 687, new DateTime(2021, 12, 15, 9, 5, 26, 0, DateTimeKind.Unspecified), new DateTime(2021, 12, 17, 9, 9, 20, 0, DateTimeKind.Unspecified), new Guid("4e1f1f8d-a8f7-44b1-9bda-1c1ee122628d"), "Podneta zalba je usvojena", new Guid("54001bad-2161-42ac-9241-54ead772ed11"), "JN ide u drugi krug sa starim uslovima", "usvojena", new Guid("32cd906d-8bab-457c-ade2-fbc4ba523029") });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Zalbas_TipZalbeID",

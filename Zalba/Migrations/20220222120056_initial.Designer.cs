@@ -10,8 +10,8 @@ using Zalba.Entities;
 namespace Zalba.Migrations
 {
     [DbContext(typeof(ZalbaContext))]
-    [Migration("20220221175931_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20220222120056_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -102,7 +102,7 @@ namespace Zalba.Migrations
                             BrojResenja = 345,
                             DatPodnosenjaZalbe = new DateTime(2020, 12, 15, 9, 5, 26, 0, DateTimeKind.Unspecified),
                             DatResenja = new DateTime(2020, 12, 17, 9, 9, 20, 0, DateTimeKind.Unspecified),
-                            LicitacijaID = new Guid("182889ec-75a7-467d-9127-df89ee77481a"),
+                            LicitacijaID = new Guid("3f8aa5b3-a67f-45b5-b518-771a7c09a944"),
                             Obrazlozenje = "Podneta zalba je usvojena",
                             PodnosilacZalbeID = new Guid("e03de167-e497-46e2-bcf2-9f22903ab55c"),
                             RadnjaZalbe = "JN ide u drugi krug sa novim uslovima",
@@ -116,7 +116,7 @@ namespace Zalba.Migrations
                             BrojResenja = 687,
                             DatPodnosenjaZalbe = new DateTime(2021, 12, 15, 9, 5, 26, 0, DateTimeKind.Unspecified),
                             DatResenja = new DateTime(2021, 12, 17, 9, 9, 20, 0, DateTimeKind.Unspecified),
-                            LicitacijaID = new Guid("ee7753a4-66d9-4ac3-94be-1987bff50198"),
+                            LicitacijaID = new Guid("4e1f1f8d-a8f7-44b1-9bda-1c1ee122628d"),
                             Obrazlozenje = "Podneta zalba je usvojena",
                             PodnosilacZalbeID = new Guid("54001bad-2161-42ac-9241-54ead772ed11"),
                             RadnjaZalbe = "JN ide u drugi krug sa starim uslovima",

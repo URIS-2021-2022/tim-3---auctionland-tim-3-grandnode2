@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ParcelaService.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -141,8 +141,8 @@ namespace ParcelaService.Migrations
                 columns: new[] { "ParcelaId", "BrojListaNepokretnosti", "BrojParcele", "KatastarskaOpstinaId", "Klasa", "KlasaStvarnoStanje", "Kultura", "KulturaStvarnoStanje", "OblikSvojine", "Obradivost", "ObradivostStvarnoStanje", "Odvodnjavanje", "OdvodnjavanjeStvarnoStanje", "ZasticenaZonaId", "ZasticenaZonaStvarnoStanje" },
                 values: new object[,]
                 {
-                    { new Guid("7e2bc8e2-a0dc-4b45-8068-8bb3a9ec9605"), "111", "111", new Guid("7257a49d-029c-4102-98e0-5c1bf62b3c7a"), 1, null, 4, null, 3, 0, null, null, null, new Guid("80a231c2-f454-4bb9-bc55-df65440ef57e"), null },
-                    { new Guid("f97960ee-b9f2-4910-9faa-d5bd81998f4f"), "222", "222", new Guid("d5e9759a-9aa0-4eed-9d69-4d8d049b598c"), 1, null, 5, null, 0, 0, null, null, null, new Guid("da357d41-7086-49dc-857c-17ee3085f46f"), null }
+                    { new Guid("7e2bc8e2-a0dc-4b45-8068-8bb3a9ec9605"), "111", "111", new Guid("1b411c13-a295-48f7-8dbd-67886c3974c0"), 1, null, 4, null, 3, 0, null, null, null, new Guid("80a231c2-f454-4bb9-bc55-df65440ef57e"), null },
+                    { new Guid("f97960ee-b9f2-4910-9faa-d5bd81998f4f"), "222", "222", new Guid("6b411c13-a295-48f7-8dbd-67886c3974c0"), 1, null, 5, null, 0, 0, null, null, null, new Guid("da357d41-7086-49dc-857c-17ee3085f46f"), null }
                 });
 
             migrationBuilder.InsertData(

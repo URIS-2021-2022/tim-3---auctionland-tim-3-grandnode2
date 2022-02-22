@@ -3,6 +3,7 @@ using KatastarskaOpstina.Auth;
 using KatastarskaOpstina.Data;
 using KatastarskaOpstina.Entities;
 using KatastarskaOpstina.Models;
+using KatastarskaOpstina.ServiceCalls;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -20,13 +21,15 @@ namespace KatastarskaOpstina.Controllers
     public class KatastarskaOpstinaController : ControllerBase
     {
         private readonly IKatastarskaOpstinaRepository katastarskaOpstinaRepository;
+        private readonly IParcelaService parcelaService;
         private readonly LinkGenerator linkGenerator;
         private readonly IMapper mapper;
         private readonly IAuthService authService;
-        public KatastarskaOpstinaController(IKatastarskaOpstinaRepository katastarskaOpstinaRepository, LinkGenerator linkGenerator, IMapper mapper, IAuthService authService)
+        public KatastarskaOpstinaController(IKatastarskaOpstinaRepository katastarskaOpstinaRepository,IParcelaService parcelaService ,LinkGenerator linkGenerator, IMapper mapper, IAuthService authService)
         {
             this.katastarskaOpstinaRepository = katastarskaOpstinaRepository;
             this.linkGenerator = linkGenerator;
+            this.parcelaService = parcelaService;
             this.mapper = mapper;
             this.authService = authService;
         }
@@ -48,6 +51,10 @@ namespace KatastarskaOpstina.Controllers
             if (katastarskaOpstinas == null || katastarskaOpstinas.Count == 0)
             {
                 return NoContent();
+            }
+            foreach(var ko in katastarskaOpstinas)
+            {
+                ko.Parcele = parcelaService.GetParceleByKatastarskaOpstinaID(ko.KatastarskaOpstinaID).Result;
             }
             return Ok(mapper.Map<List<KatastarskaOpstinaModelDto>>(katastarskaOpstinas));
         }
@@ -71,6 +78,7 @@ namespace KatastarskaOpstina.Controllers
             {
                 return NotFound();
             }
+            katastarskaOpstinas.Parcele = parcelaService.GetParceleByKatastarskaOpstinaID(katastarskaOpstinaID).Result;
             return Ok(mapper.Map<KatastarskaOpstinaModelDto>(katastarskaOpstinas));
 
         }

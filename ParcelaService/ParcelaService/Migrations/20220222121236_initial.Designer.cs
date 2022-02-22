@@ -10,8 +10,8 @@ using ParcelaService.Entities;
 namespace ParcelaService.Migrations
 {
     [DbContext(typeof(ParcelaContext))]
-    [Migration("20220219203903_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20220222121236_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -204,7 +204,7 @@ namespace ParcelaService.Migrations
                             ParcelaId = new Guid("7e2bc8e2-a0dc-4b45-8068-8bb3a9ec9605"),
                             BrojListaNepokretnosti = "111",
                             BrojParcele = "111",
-                            KatastarskaOpstinaId = new Guid("7257a49d-029c-4102-98e0-5c1bf62b3c7a"),
+                            KatastarskaOpstinaId = new Guid("1b411c13-a295-48f7-8dbd-67886c3974c0"),
                             Klasa = 1,
                             Kultura = 4,
                             OblikSvojine = 3,
@@ -216,7 +216,7 @@ namespace ParcelaService.Migrations
                             ParcelaId = new Guid("f97960ee-b9f2-4910-9faa-d5bd81998f4f"),
                             BrojListaNepokretnosti = "222",
                             BrojParcele = "222",
-                            KatastarskaOpstinaId = new Guid("d5e9759a-9aa0-4eed-9d69-4d8d049b598c"),
+                            KatastarskaOpstinaId = new Guid("6b411c13-a295-48f7-8dbd-67886c3974c0"),
                             Klasa = 1,
                             Kultura = 5,
                             OblikSvojine = 0,
