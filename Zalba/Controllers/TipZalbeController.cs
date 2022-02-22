@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Zalba.Auth;
 using Zalba.Data;
 using Zalba.Entities;
+using Zalba.Logger;
 using Zalba.Models;
 
 namespace Zalba.Controllers
@@ -23,12 +24,14 @@ namespace Zalba.Controllers
         private readonly LinkGenerator linkGenerator;
         private readonly IMapper mapper;
         private readonly IAuthService authService;
+        private readonly LoggerService logger;
         public TipZalbeController(ITipZalbeRepository zalbaRepository, LinkGenerator linkGenerator, IMapper mapper, IAuthService authService)
         {
             this.tipZalbeRepository = zalbaRepository;
             this.linkGenerator = linkGenerator;
             this.mapper = mapper;
             this.authService = authService;
+            logger = new LoggerService();
         }
 
         /// <summary>
@@ -44,6 +47,11 @@ namespace Zalba.Controllers
         [AllowAnonymous]
         public ActionResult<List<TipZalbeModelDto>> GetTipZalbes() //ovde mi isto fale prosledjeni parametri
         {
+            #pragma warning disable CS4014
+            logger.PostLogger("Pristup svim tipovima zalbe." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
+            
+
             var tipZalbes = tipZalbeRepository.GetTipZalbes();//ovde mi isto fale prosledjeni parametri
             if (tipZalbes == null || tipZalbes.Count == 0)
             {
@@ -65,6 +73,9 @@ namespace Zalba.Controllers
         [AllowAnonymous]
         public ActionResult<TipZalbeModelDto> GetTipZalbe(Guid tipZalbeID)
         {
+            #pragma warning disable CS4014
+            logger.PostLogger("Pristup tipovima zalbi putem id-a." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
             var tipZalbe = tipZalbeRepository.GetTipZalbe(tipZalbeID);
 
             if (tipZalbe == null)
@@ -91,6 +102,9 @@ namespace Zalba.Controllers
         [HttpPost]
         public ActionResult<TipZalbeCreationDto> CreateTipZalbe([FromBody] TipZalbeCreationDto tipZalbe, [FromHeader] string key)
         {
+            #pragma warning disable CS4014
+            logger.PostLogger("Kreiranje novog tipa zalbe." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
             if (!authService.Authorize(key))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, "Korisnik nije autorizovan!");
@@ -128,6 +142,9 @@ namespace Zalba.Controllers
         [HttpDelete("{tipZalbeId}")]
         public IActionResult DeleteTipZalbe(Guid tipZalbeId, [FromHeader] string key)
         {
+            #pragma warning disable CS4014
+            logger.PostLogger("Brisanje postojeceg tipa zalbe." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
             if (!authService.Authorize(key))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, "Korisnik nije autorizovan!");
@@ -168,6 +185,9 @@ namespace Zalba.Controllers
         [HttpPut]
         public ActionResult<TipZalbeConfirmationDto> UpdateTipZalbe(TipZalbeModelDto tipZalbe, [FromHeader] string key)
         {
+            #pragma warning disable CS4014
+            logger.PostLogger("Modifikacija postojeceg tipa zalbe." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
             if (!authService.Authorize(key))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, "Korisnik nije autorizovan!");

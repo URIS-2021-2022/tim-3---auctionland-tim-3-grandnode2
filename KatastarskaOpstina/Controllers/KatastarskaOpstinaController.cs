@@ -2,6 +2,7 @@
 using KatastarskaOpstina.Auth;
 using KatastarskaOpstina.Data;
 using KatastarskaOpstina.Entities;
+using KatastarskaOpstina.Logger;
 using KatastarskaOpstina.Models;
 using KatastarskaOpstina.ServiceCalls;
 using Microsoft.AspNetCore.Authorization;
@@ -25,6 +26,8 @@ namespace KatastarskaOpstina.Controllers
         private readonly LinkGenerator linkGenerator;
         private readonly IMapper mapper;
         private readonly IAuthService authService;
+        private readonly LoggerService logger;
+
         public KatastarskaOpstinaController(IKatastarskaOpstinaRepository katastarskaOpstinaRepository,IParcelaService parcelaService ,LinkGenerator linkGenerator, IMapper mapper, IAuthService authService)
         {
             this.katastarskaOpstinaRepository = katastarskaOpstinaRepository;
@@ -32,6 +35,7 @@ namespace KatastarskaOpstina.Controllers
             this.parcelaService = parcelaService;
             this.mapper = mapper;
             this.authService = authService;
+            logger = new LoggerService();
         }
 
         /// <summary>
@@ -47,6 +51,9 @@ namespace KatastarskaOpstina.Controllers
         [AllowAnonymous]
         public ActionResult<List<KatastarskaOpstinaModelDto>> GetKatastarskaOpstinas() 
         {
+            #pragma warning disable CS4014
+            logger.PostLogger("Pristup svim katastarskim opstinama." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
             var katastarskaOpstinas = katastarskaOpstinaRepository.GetKatastarskaOpstinas();
             if (katastarskaOpstinas == null || katastarskaOpstinas.Count == 0)
             {
@@ -72,6 +79,9 @@ namespace KatastarskaOpstina.Controllers
         [AllowAnonymous]
         public ActionResult<KatastarskaOpstinaModelDto> GetKatastarskaOpstina(Guid katastarskaOpstinaID)
         {
+            #pragma warning disable CS4014
+            logger.PostLogger("Pristup katastarskoj opstini putem id-a." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
             var katastarskaOpstinas = katastarskaOpstinaRepository.GetKatastarskaOpstinaById(katastarskaOpstinaID);
 
             if (katastarskaOpstinas == null)
@@ -99,6 +109,9 @@ namespace KatastarskaOpstina.Controllers
         [HttpPost]
         public ActionResult<KatastarskaOpstinaCreationDto> CreateKatastarskaOpstina([FromBody] KatastarskaOpstinaCreationDto katastarskaOpstina, [FromHeader] string key)
         {
+            #pragma warning disable CS4014
+            logger.PostLogger("Kreiranje nove katastarske opstine." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
             if (!authService.Authorize(key))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, "Korisnik nije autorizovan!");
@@ -137,6 +150,9 @@ namespace KatastarskaOpstina.Controllers
         [HttpDelete("{katastarskaOpstinaID}")]
         public IActionResult DeleteKatastarskaOpstina(Guid katastarskaOpstinaID, [FromHeader] string key)
         {
+            #pragma warning disable CS4014
+            logger.PostLogger("Brisanje postojece katastarske opstine." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
             if (!authService.Authorize(key))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, "Korisnik nije autorizovan!");
@@ -175,6 +191,9 @@ namespace KatastarskaOpstina.Controllers
         [HttpPut]
         public ActionResult<KatastarskaOpstinaConfirmationDto> UpdateTipZalbe(KatastarskaOpstinaModelDto katastarskaOpstina, [FromHeader] string key)
         {
+            #pragma warning disable CS4014
+            logger.PostLogger("Modifikacija postojece katastarske opstine." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
             if (!authService.Authorize(key))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, "Korisnik nije autorizovan!");
