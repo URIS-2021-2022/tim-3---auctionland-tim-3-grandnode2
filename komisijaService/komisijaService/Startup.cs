@@ -73,11 +73,7 @@ namespace komisijaService
 
             services.AddScoped<IKomisijaRepository, KomisijaRepository>();
             services.AddScoped<ILicnostKomisijeRepository, LicnostiKomisijeRepository>();
-            services.AddScoped<ILoggerMockRepository, LoggerMockRepository>();
             services.AddScoped<IAuthHelper, AuthHelper>();
-
-            services.AddHttpContextAccessor();
-
             services.AddControllers().AddNewtonsoftJson(options =>
             options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 

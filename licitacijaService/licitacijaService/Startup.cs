@@ -97,14 +97,10 @@ namespace licitacijaService
 
             services.AddScoped<ILicitacijaRepository, LicitacijaRepository>();
             services.AddScoped<ILicitacijaDokumentRepository, LicitacijaDokumentRepository>();
-            services.AddScoped<ILoggerMockReposiotry, LoggerMockReposiotry>();
             services.AddScoped<IKomisijaService, KomisijaService>();
             services.AddScoped<IJavnoNadmetanjeService, JavnoNadmetanjeService>();
             services.AddScoped<IDokumentService, DokumentService>();
             services.AddScoped<IAuthHelper, AuthHelper>();
-
-            services.AddHttpContextAccessor();
-
             services.AddControllers().AddNewtonsoftJson(options =>
             options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 

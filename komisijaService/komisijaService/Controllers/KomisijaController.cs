@@ -28,21 +28,20 @@ namespace komisijaService.Controllers
         private readonly ILicnostKomisijeRepository licnostKomisijeRepository;
         private readonly IMapper mapper;
         private readonly LinkGenerator linkGenerator;
-        private readonly ILoggerMockRepository logger;
-        private readonly IHttpContextAccessor contextAccessor;
+        private readonly LoggerService logger;
+
 
         private readonly IAuthHelper auth;
 
-            public KomisijaController(IKomisijaRepository komisijaRepository, ILicnostKomisijeRepository licnostKomisijeRepository, IMapper mapper, ILoggerMockRepository logger,
-                                      LinkGenerator linkGenerator, IHttpContextAccessor contextAccessor, IAuthHelper auth)
+            public KomisijaController(IKomisijaRepository komisijaRepository, ILicnostKomisijeRepository licnostKomisijeRepository, IMapper mapper,
+                                      LinkGenerator linkGenerator, IAuthHelper auth)
             {
                 this.komisijaRepository = komisijaRepository;
                 this.licnostKomisijeRepository = licnostKomisijeRepository;
                 this.mapper = mapper;
                 this.linkGenerator = linkGenerator;
-                this.logger = logger;
-                this.contextAccessor = contextAccessor;
                 this.auth = auth;
+            logger = new LoggerService();
             }
 
         /// <summary>
@@ -66,7 +65,10 @@ namespace komisijaService.Controllers
             public ActionResult<List<Komisija>> GetKomisije(string naziv, string oznakaKomisije)
             {
 
-                var komisije = komisijaRepository.GetKomsijas(naziv,oznakaKomisije);
+            #pragma warning disable CS4014
+            logger.PostLogger("Pristup svim komisijama." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
+            var komisije = komisijaRepository.GetKomsijas(naziv,oznakaKomisije);
 
                 if (komisije == null || komisije.Count == 0)
                 {
@@ -85,7 +87,6 @@ namespace komisijaService.Controllers
                 }
                 }
                 
-                logger.Log(LogLevel.Information, contextAccessor.HttpContext.TraceIdentifier, "", "Get sve komisije", null);
                 return Ok(mapper.Map<List<KomisijaConfirmationDto>>(komisije));
 
             }
@@ -110,7 +111,10 @@ namespace komisijaService.Controllers
             public ActionResult<Komisija> GetKomisijaById(Guid komisijaId)
             {
 
-                var komisija = komisijaRepository.GetKomisijaById(komisijaId);
+            #pragma warning disable CS4014
+            logger.PostLogger("Pristup svim komisiji po id." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
+            var komisija = komisijaRepository.GetKomisijaById(komisijaId);
 
             if (komisija == null)
                 {
@@ -125,7 +129,6 @@ namespace komisijaService.Controllers
                 mapper.Map<LicnostKomisijeConfirmationDto>(komisija.predsednikKomisije);
             }
 
-            logger.Log(LogLevel.Information, contextAccessor.HttpContext.TraceIdentifier, "", "Get komisija by komisijaId", null);
                 return Ok(mapper.Map<KomisijaConfirmationDto>(komisija));
 
             }
@@ -158,7 +161,10 @@ namespace komisijaService.Controllers
             {
                 try
                 {
-                    if (key == null)
+                #pragma warning disable CS4014
+                logger.PostLogger("Dodavanje komisije." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+                #pragma warning restore CS4014
+                if (key == null)
                     {
                         return StatusCode(StatusCodes.Status401Unauthorized, "Authorization failed!");
                     }
@@ -176,7 +182,6 @@ namespace komisijaService.Controllers
                     komisijaRepository.CreateKomsija(komisija);
                     komisijaRepository.SaveChanges();
 
-                    logger.Log(LogLevel.Information, contextAccessor.HttpContext.TraceIdentifier, "", "Kreirana nova komisija", null);
 
                     string location = linkGenerator.GetPathByAction("GetKomisijaById", "Komisija", new { komisijaId = komisija.komisijaId });
 
@@ -184,8 +189,10 @@ namespace komisijaService.Controllers
                 }
                 catch (Exception ex)
                 {
-                    logger.Log(LogLevel.Error, contextAccessor.HttpContext.TraceIdentifier, "", "Greska prilikom kreiranja komisije", null);
-                    return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+                #pragma warning disable CS4014
+                logger.PostLogger("Greska prilikom dodavanje komisije." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+                #pragma warning restore CS4014
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
                 }
             }
 
@@ -223,6 +230,9 @@ namespace komisijaService.Controllers
             {
                 try
                 {
+                #pragma warning disable CS4014
+                logger.PostLogger("Udate komisije." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+                #pragma warning restore CS4014
                 if (key == null)
                     {
                         return StatusCode(StatusCodes.Status401Unauthorized, "Authorization failed!");
@@ -257,14 +267,16 @@ namespace komisijaService.Controllers
                     komisijaRepository.UpdateKomisija(oldKomisija, newKomisija);
                     
                     komisijaRepository.SaveChanges();
-                    logger.Log(LogLevel.Information, contextAccessor.HttpContext.TraceIdentifier, "", "Komisija update-ovana", null);
+         
 
                     return Ok(mapper.Map<KomisijaConfirmationDto>(oldKomisija));
                 }
                 catch (Exception ex)
                 {
-                    logger.Log(LogLevel.Error, contextAccessor.HttpContext.TraceIdentifier, "", "Update error", null);
-                    return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+                #pragma warning disable CS4014
+                logger.PostLogger("Greska prilikom azuriranja komisije." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+                #pragma warning restore CS4014
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
                 }
             }
 
@@ -294,6 +306,9 @@ namespace komisijaService.Controllers
             {
                 try
                 {
+                #pragma warning disable CS4014
+                logger.PostLogger("Brisanje komisije." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+                #pragma warning restore CS4014
                 if (key == null)
                     {
                         return StatusCode(StatusCodes.Status401Unauthorized, "Authorization failed!");
@@ -327,8 +342,10 @@ namespace komisijaService.Controllers
 
                 catch (Exception ex)
                 {
-                    logger.Log(LogLevel.Error, contextAccessor.HttpContext.TraceIdentifier, "", "Delete error", null);
-                    return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+                #pragma warning disable CS4014
+                logger.PostLogger("Greska prilikom brisanja komisije." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+                #pragma warning restore CS4014
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
                 }
             }
 
@@ -345,7 +362,7 @@ namespace komisijaService.Controllers
             [AllowAnonymous]
             public IActionResult GetKomisijaOptions()
             {
-                Response.Headers.Add("Allow", "GET, POST, PUT, DELETE");
+            Response.Headers.Add("Allow", "GET, POST, PUT, DELETE");
                 return Ok();
             } 
 

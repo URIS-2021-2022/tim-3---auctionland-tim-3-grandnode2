@@ -29,21 +29,19 @@ namespace komisijaService.Controllers
         private readonly ILicnostKomisijeRepository licnostKomisijeRepository;
         private readonly IMapper mapper;
         private readonly LinkGenerator linkGenerator;
-        private readonly ILoggerMockRepository logger;
-        private readonly IHttpContextAccessor contextAccessor;
-        
+        private readonly LoggerService logger;
+
 
         private readonly IAuthHelper auth;
 
-        public LicnostKomisijeController(IKomisijaRepository komisijaRepository, ILicnostKomisijeRepository licnostKomisijeRepository, IMapper mapper, ILoggerMockRepository logger,
-                                  LinkGenerator linkGenerator, IHttpContextAccessor contextAccessor, IAuthHelper auth)
+        public LicnostKomisijeController(IKomisijaRepository komisijaRepository, ILicnostKomisijeRepository licnostKomisijeRepository, IMapper mapper, 
+                                  LinkGenerator linkGenerator, IAuthHelper auth)
         {
             this.komisijaRepository = komisijaRepository;
             this.licnostKomisijeRepository = licnostKomisijeRepository;
             this.mapper = mapper;
             this.linkGenerator = linkGenerator;
-            this.logger = logger;
-            this.contextAccessor = contextAccessor;
+            this.logger = new LoggerService();
             this.auth = auth;
             
         }
@@ -69,7 +67,9 @@ namespace komisijaService.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult<List<LicnostKomisije>> GetLicnostiKomisije(string imeLicnostiKomisije, string prezimeLicnostiKomisije, string oznakaKomisije)
         {
-
+            #pragma warning disable CS4014
+            logger.PostLogger("Pristup svim licnostima komisije." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
             var licnostiKomisije = licnostKomisijeRepository.GetLicnostiKomisije(imeLicnostiKomisije,prezimeLicnostiKomisije, oznakaKomisije);
 
             if (licnostiKomisije == null || licnostiKomisije.Count == 0)
@@ -77,7 +77,7 @@ namespace komisijaService.Controllers
                 return NoContent();
             }
 
-            logger.Log(LogLevel.Information, contextAccessor.HttpContext.TraceIdentifier, "", "Get sve licnosti komisije", null);
+            
             return Ok(mapper.Map<List<LicnostKomisijeConfirmationDto>>(licnostiKomisije));
 
         }
@@ -101,7 +101,9 @@ namespace komisijaService.Controllers
         [AllowAnonymous]
         public ActionResult<LicnostKomisije> GetLicnostKomisijeById(Guid licnostKomisijeId)
         {
-
+            #pragma warning disable CS4014
+            logger.PostLogger("Pristup licnosti komisije preko id." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
             var licnostKomisije = licnostKomisijeRepository.GetLicnostKomisijeById(licnostKomisijeId);
 
             if (licnostKomisije == null)
@@ -109,7 +111,6 @@ namespace komisijaService.Controllers
                 return NotFound();
             }
 
-            logger.Log(LogLevel.Information, contextAccessor.HttpContext.TraceIdentifier, "", "Get licnost komisije by licnostKomisijeId", null);
             return Ok(mapper.Map<LicnostKomisijeConfirmationDto>(licnostKomisije));
 
         }
@@ -147,6 +148,9 @@ namespace komisijaService.Controllers
         {
             try
             {
+                #pragma warning disable CS4014
+                logger.PostLogger("Dodavanje nove licnosti komisije." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+                #pragma warning restore CS4014
                 if (key == null)
                 {
                     return StatusCode(StatusCodes.Status401Unauthorized, "Authorization failed!");
@@ -166,7 +170,6 @@ namespace komisijaService.Controllers
                 licnostKomisijeRepository.CreateLicnostKomisije(licnostKomisije);
                 licnostKomisijeRepository.SaveChanges();
 
-                logger.Log(LogLevel.Information, contextAccessor.HttpContext.TraceIdentifier, "", "Kreirana nova licnost komisije", null);
 
                 string location = linkGenerator.GetPathByAction("GetLicnostKomisijeById", "LicnostKomisije", new { licnostKomisijeId = licnostKomisije.licnostKomisijeId });
 
@@ -174,7 +177,9 @@ namespace komisijaService.Controllers
             }
             catch (Exception ex)
             {
-                logger.Log(LogLevel.Error, contextAccessor.HttpContext.TraceIdentifier, "", "Greska prilikom kreiranja licnosti komisije", null);
+                #pragma warning disable CS4014
+                logger.PostLogger("Greska prilikom dodavana novog claan komisije." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+                #pragma warning restore CS4014
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
@@ -217,6 +222,9 @@ namespace komisijaService.Controllers
         {
             try
             {
+                #pragma warning disable CS4014
+                logger.PostLogger("Azuriranje licnosti komisije." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+                #pragma warning restore CS4014
                 if (key == null)
                 {
                     return StatusCode(StatusCodes.Status401Unauthorized, "Authorization failed!");
@@ -244,13 +252,15 @@ namespace komisijaService.Controllers
                 licnostKomisijeRepository.UpdateLicnostKomisije(oldLicnost, newLicnost);
 
                 licnostKomisijeRepository.SaveChanges();
-                logger.Log(LogLevel.Information, contextAccessor.HttpContext.TraceIdentifier, "", "Licnost komisije je update-ovana", null);
+                
 
                 return Ok(mapper.Map<LicnostKomisijeConfirmationDto>(oldLicnost));
             }
             catch (Exception ex)
             {
-                logger.Log(LogLevel.Error, contextAccessor.HttpContext.TraceIdentifier, "", "Update error", null);
+                #pragma warning disable CS4014
+                logger.PostLogger("Greska prilikom azuriranja licnosti komisije." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+                #pragma warning restore CS4014
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
@@ -281,6 +291,9 @@ namespace komisijaService.Controllers
         {
             try
             {
+                #pragma warning disable CS4014
+                logger.PostLogger("Brisanje licnosti komisije." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+                #pragma warning restore CS4014
                 if (key == null)
                 {
                     return StatusCode(StatusCodes.Status401Unauthorized, "Authorization failed!");
@@ -305,7 +318,9 @@ namespace komisijaService.Controllers
 
             catch (Exception ex)
             {
-                logger.Log(LogLevel.Error, contextAccessor.HttpContext.TraceIdentifier, "", "Delete error", null);
+                #pragma warning disable CS4014
+                logger.PostLogger("Greska prilikom brisanja licnosti komisije." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+                #pragma warning restore CS4014
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
