@@ -571,14 +571,39 @@
             ID prijave za nadmetanje
             </summary>
         </member>
-        <member name="P:JavnoNadmetanje.Models.DokumentPrijavaZaNadmetanjeDto.DokumentId">
+        <member name="P:JavnoNadmetanje.Models.DokumentPrijavaZaNadmetanjeDto.Dokument">
             <summary>
-            ID dokumenta
+            Dokument
             </summary>
         </member>
         <member name="P:JavnoNadmetanje.Models.DokumentPrijavaZaNadmetanjeDto.DatumDonosenjaDokumenta">
             <summary>
             Datum donošenja dokumenta
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.DokumentService.DokumentDto.ZavodniBroj">
+            <summary>
+            Zavodni broj
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.DokumentService.DokumentDto.Datum">
+            <summary>
+            Datum 
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.DokumentService.DokumentDto.DatumDonosenja">
+            <summary>
+            Datum donošenja dokumenta
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.DokumentService.DokumentDto.Sablon">
+            <summary>
+            Šablon
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.DokumentService.ResponseDokumentDto.dokument">
+            <summary>
+            Dokument
             </summary>
         </member>
         <member name="P:JavnoNadmetanje.Models.JavnoNadmetanjeCreateDto.Datum">
@@ -741,14 +766,39 @@
             ID licitacije
             </summary>
         </member>
-        <member name="P:JavnoNadmetanje.Models.JavnoNadmetanjeDto.ParcelaId">
+        <member name="P:JavnoNadmetanje.Models.JavnoNadmetanjeDto.DeloviParcele">
             <summary>
-            ID parcele
+            Delovi parcele
             </summary>
         </member>
         <member name="P:JavnoNadmetanje.Models.JavnoNadmetanjeDto.KupacId">
             <summary>
             ID kupca
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.KupacService.KupacDto.KupacId">
+            <summary>
+            ID kupca
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.KupacService.KupacDto.OstvarenaPovrsina">
+            <summary>
+            Ostvarena površina
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.KupacService.KupacDto.ImaZabranu">
+            <summary>
+            Da li kupac ima zabranu
+            </summary>        
+        </member>
+        <member name="P:JavnoNadmetanje.Models.KupacService.KupacDto.DatumPocetkaZabrane">
+            <summary>
+            Datum početka zabrane
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Models.KupacService.KupacDto.DuzinaTrajanjaZabraneUGodinama">
+            <summary>
+            Dužina trajanja zabrane u godinama
             </summary>
         </member>
         <member name="P:JavnoNadmetanje.Models.OglasCreateDto.DatumObjavljivanjaOglasa">

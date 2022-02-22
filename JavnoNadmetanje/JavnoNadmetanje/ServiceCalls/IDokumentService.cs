@@ -8,6 +8,6 @@ namespace JavnoNadmetanje.ServiceCalls
 {
     public interface IDokumentService
     {
-        public Task<DokumentDto> GetDokumentById(Guid dokumentId, string accessToken);
+        public Task<ResponseDokumentDto> GetDokumentById(Guid dokumentId, string accessToken);
     }
 }

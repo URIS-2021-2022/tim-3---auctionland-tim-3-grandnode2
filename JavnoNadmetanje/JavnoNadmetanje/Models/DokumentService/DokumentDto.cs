@@ -7,10 +7,7 @@ namespace JavnoNadmetanje.Models.DokumentService
 {
     public class DokumentDto
     {
-        /// <summary>
-        /// ID dokumenta
-        /// </summary>
-        public int DokumentID { get; set; }
+    
 
         /// <summary>
         /// Zavodni broj

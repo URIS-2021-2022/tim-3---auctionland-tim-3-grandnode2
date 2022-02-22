@@ -34,7 +34,7 @@ namespace JavnoNadmetanje.Entities
         public DateTime DatumDonosenjaDokumenta { get; set; }
 
         [NotMapped]
-        public DokumentDto Dokument { get; set; }
+        public ResponseDokumentDto Dokument { get; set; }
 
     }
 }

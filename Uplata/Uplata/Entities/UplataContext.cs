@@ -31,7 +31,8 @@ namespace Uplata.Entities
                     SvrhaUplate = "Uplata za javno nadmetanje u 2022. godini",
                     Datum = DateTime.Parse("10-02-2022"),
                     BankaId = Guid.Parse("9aef1da1-d5af-4073-9d40-8794f9d33564"),
-                    PrijavaZaNadmetanjeId = Guid.Parse("1cd5c783-4bf5-4bbc-b7f0-bd66e2ba0bd7")
+                    PrijavaZaNadmetanjeId = Guid.Parse("1cd5c783-4bf5-4bbc-b7f0-bd66e2ba0bd7"),
+                    KupacId = Guid.Parse("4e1f1f8d-a8f7-44b1-9abd-1c1ee122628d")
                 });
 
             modelBuilder.Entity<UplataEntity>()
@@ -44,7 +45,8 @@ namespace Uplata.Entities
                   SvrhaUplate = "Uplata za javno nadmetanje u 2021. godini",
                   Datum = DateTime.Parse("09-02-2021"),
                   BankaId = Guid.Parse("ceed4ee2-ea12-499b-a0c9-be41d4ac0748"),
-                  PrijavaZaNadmetanjeId = Guid.Parse("07c0c62b-675e-4714-816c-b492720194d6")
+                  PrijavaZaNadmetanjeId = Guid.Parse("07c0c62b-675e-4714-816c-b492720194d6"),
+                  KupacId = Guid.Parse("4e1f1f8d-a8f7-44b1-9abd-1c1ee122628d")
               });
 
             modelBuilder.Entity<BankaEntity>()

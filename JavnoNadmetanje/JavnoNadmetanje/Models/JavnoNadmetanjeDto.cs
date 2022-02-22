@@ -1,4 +1,6 @@
 ﻿using JavnoNadmetanje.Enums;
+using JavnoNadmetanje.Models.KupacService;
+using JavnoNadmetanje.Models.ParcelaService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -87,13 +89,13 @@ namespace JavnoNadmetanje.Models
         public Guid LicitacijaId { get; set; }
 
         /// <summary>
-        /// ID parcele
+        /// Delovi parcele
         /// </summary>
-        public Guid ParcelaId { get; set; }
+        public List<DeoParceleDto> DeloviParcele { get; set; }
 
         /// <summary>
-        /// ID kupca
+        /// Kupac
         /// </summary>
-        public Guid KupacId { get; set; }
+        public KupacDto Kupac { get; set; }
     }
 }

@@ -79,6 +79,9 @@ namespace Uplata.Migrations
                     b.Property<int>("Iznos")
                         .HasColumnType("int");
 
+                    b.Property<Guid>("KupacId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<int>("PozivNaBroj")
                         .HasColumnType("int");
 
@@ -103,6 +106,7 @@ namespace Uplata.Migrations
                             BrojRacuna = 43604112,
                             Datum = new DateTime(2022, 10, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Iznos = 1500,
+                            KupacId = new Guid("4e1f1f8d-a8f7-44b1-9abd-1c1ee122628d"),
                             PozivNaBroj = 43100222,
                             PrijavaZaNadmetanjeId = new Guid("1cd5c783-4bf5-4bbc-b7f0-bd66e2ba0bd7"),
                             SvrhaUplate = "Uplata za javno nadmetanje u 2022. godini"
@@ -114,6 +118,7 @@ namespace Uplata.Migrations
                             BrojRacuna = 54715223,
                             Datum = new DateTime(2021, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Iznos = 1000,
+                            KupacId = new Guid("4e1f1f8d-a8f7-44b1-9abd-1c1ee122628d"),
                             PozivNaBroj = 54090221,
                             PrijavaZaNadmetanjeId = new Guid("07c0c62b-675e-4714-816c-b492720194d6"),
                             SvrhaUplate = "Uplata za javno nadmetanje u 2021. godini"
