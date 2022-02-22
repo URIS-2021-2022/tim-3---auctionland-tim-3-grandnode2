@@ -7,6 +7,7 @@ using ParcelaService.Auth;
 using ParcelaService.Data;
 using ParcelaService.Entities;
 using ParcelaService.Entities.Confirmations;
+using ParcelaService.Logger;
 using ParcelaService.Models;
 using ParcelaService.Models.CreateDto;
 using ParcelaService.Models.UpdateDto;
@@ -26,6 +27,7 @@ namespace ParcelaService.Controllers
         private readonly LinkGenerator _linkGenerator;
         private readonly IMapper _mapper;
         private readonly IAuthHelper _authHelper;
+        private readonly LoggerService _logger;
 
         public DeoParceleController(IDeoParceleRepository deoParceleRepository, LinkGenerator linkGenerator, IMapper mapper, IAuthHelper authHelper)
         {
@@ -33,7 +35,8 @@ namespace ParcelaService.Controllers
             _linkGenerator = linkGenerator;
             _mapper = mapper;
             _authHelper = authHelper;
-        }
+            _logger = new LoggerService();   
+    }
 
         /// <summary>
         /// Vraća sve delove parcele ili opciono sve delove parcele sa unetim ID
@@ -48,6 +51,9 @@ namespace ParcelaService.Controllers
         [AllowAnonymous]
         public ActionResult<List<DeoParceleDto>> GetAll(Guid ?parcelaId)
         {
+            #pragma warning disable CS4014
+            _logger.PostLogger("Pristup svim delovima parcele. " + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
             var deloviParcele = _deoParceleRepository.GetAll(parcelaId);
             if (deloviParcele == null || deloviParcele.Count == 0)
             {
@@ -69,6 +75,9 @@ namespace ParcelaService.Controllers
         [AllowAnonymous]
         public ActionResult<DeoParceleDto> GetById(Guid deoParceleId)
         {
+            #pragma warning disable CS4014
+            _logger.PostLogger("Pristup delu parcele." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
             var deoParcele = _deoParceleRepository.GetById(deoParceleId);
             if (deoParcele == null)
             {
@@ -93,6 +102,9 @@ namespace ParcelaService.Controllers
         [HttpPost]
         public ActionResult<DeoParceleDto> Create([FromBody] DeoParceleCreateDto deoParcele, [FromHeader] string key)
         {
+            #pragma warning disable CS4014
+            _logger.PostLogger("Kreiranje dela parcele." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
             if (!_authHelper.Authorize(key))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, "Korisnik nije autorizovan!");
@@ -128,6 +140,9 @@ namespace ParcelaService.Controllers
         [HttpPut]
         public ActionResult<DeoParceleConfirmationDto> Update(DeoParceleUpdateDto deoParcele, [FromHeader] string key)
         {
+            #pragma warning disable CS4014
+            _logger.PostLogger("Azuriranje dela parcele." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
             if (!_authHelper.Authorize(key))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, "Korisnik nije autorizovan!");
@@ -168,6 +183,9 @@ namespace ParcelaService.Controllers
         [HttpDelete("{deoParceleId}")]
         public IActionResult Delete(Guid deoParceleId, [FromHeader] string key)
         {
+            #pragma warning disable CS4014
+            _logger.PostLogger("Brisanje dela parcele" + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
             if (!_authHelper.Authorize(key))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, "Korisnik nije autorizovan!");
@@ -198,6 +216,9 @@ namespace ParcelaService.Controllers
         [AllowAnonymous]
         public IActionResult GetDeoParceleOptions()
         {
+            #pragma warning disable CS4014
+            _logger.PostLogger("Pristup opcijama." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
             Response.Headers.Add("Allow", "GET, POST, PUT, DELETE");
             return Ok();
         }

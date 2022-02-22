@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Routing;
 using ParcelaService.Auth;
 using ParcelaService.Data;
 using ParcelaService.Entities;
+using ParcelaService.Logger;
 using ParcelaService.Models;
 using ParcelaService.Models.ConfirmationDto;
 using ParcelaService.Models.CreateDto;
@@ -26,6 +27,7 @@ namespace ParcelaService.Controllers
         private readonly LinkGenerator _linkGenerator;
         private readonly IMapper _mapper;
         private readonly IAuthHelper _authHelper;
+        private readonly LoggerService _logger;
 
         public ParcelaController(IParcelaRepository parcelaRepository, LinkGenerator linkGenerator, IMapper mapper, IAuthHelper authHelper)
         {
@@ -33,6 +35,7 @@ namespace ParcelaService.Controllers
             _linkGenerator = linkGenerator;
             _mapper = mapper;
             _authHelper = authHelper;
+            _logger = new LoggerService();
         }
 
         /// <summary>
@@ -49,6 +52,9 @@ namespace ParcelaService.Controllers
         [AllowAnonymous]
         public ActionResult<List<ParcelaDto>> GetAll(Guid ?katastarskaOpstinaId)
         {
+            #pragma warning disable CS4014
+            _logger.PostLogger("Pristup svim parcelama." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
             var parcele = _parcelaRepository.GetAll(katastarskaOpstinaId);
             if (parcele == null || parcele.Count == 0)
             {
@@ -70,6 +76,9 @@ namespace ParcelaService.Controllers
         [AllowAnonymous]
         public ActionResult<List<DeoParceleDto>> GetDeloveParcele(Guid parcelaId)
         {
+            #pragma warning disable CS4014
+            _logger.PostLogger("Pristup delu parcele po Id parcele." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
             var deloviParcele = _parcelaRepository.GetDeloveParcele(parcelaId);
             if (deloviParcele == null || deloviParcele.Count == 0)
             {
@@ -91,6 +100,9 @@ namespace ParcelaService.Controllers
         [AllowAnonymous]
         public ActionResult<ParcelaDto> GetById(Guid parcelaId)
         {
+            #pragma warning disable CS4014
+            _logger.PostLogger("Pristup parceli." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
             var parcela = _parcelaRepository.GetById(parcelaId);
             if (parcela == null)
             {
@@ -115,6 +127,9 @@ namespace ParcelaService.Controllers
         [HttpPost]
         public ActionResult<ParcelaDto> Create([FromBody] ParcelaCreateDto parcela, [FromHeader] string key)
         {
+            #pragma warning disable CS4014
+            _logger.PostLogger("Kreiranje parcele." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
             if (!_authHelper.Authorize(key))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, "Korisnik nije autorizovan!");
@@ -150,6 +165,9 @@ namespace ParcelaService.Controllers
         [HttpPut]
         public ActionResult<ParcelaConfirmationDto> Update(ParcelaUpdateDto parcela, [FromHeader] string key)
         {
+            #pragma warning disable CS4014
+            _logger.PostLogger("Azuriranje parcele." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
             if (!_authHelper.Authorize(key))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, "Korisnik nije autorizovan!");
@@ -190,6 +208,9 @@ namespace ParcelaService.Controllers
         [HttpDelete("{parcelaId}")]
         public IActionResult Delete(Guid parcelaId, [FromHeader] string key)
         {
+            #pragma warning disable CS4014
+            _logger.PostLogger("Brisanje parcele." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
             if (!_authHelper.Authorize(key))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, "Korisnik nije autorizovan!");
@@ -220,6 +241,9 @@ namespace ParcelaService.Controllers
         [AllowAnonymous]
         public IActionResult GetParcelaOptions()
         {
+            #pragma warning disable CS4014
+            _logger.PostLogger("Pristup opcijama." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
             Response.Headers.Add("Allow", "GET, POST, PUT, DELETE");
             return Ok();
         }

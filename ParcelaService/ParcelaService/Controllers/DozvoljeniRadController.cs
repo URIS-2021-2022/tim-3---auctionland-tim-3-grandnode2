@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Routing;
 using ParcelaService.Auth;
 using ParcelaService.Data;
 using ParcelaService.Entities;
+using ParcelaService.Logger;
 using ParcelaService.Models;
 using ParcelaService.Models.ConfirmationDto;
 using ParcelaService.Models.CreateDto;
@@ -26,6 +27,7 @@ namespace ParcelaService.Controllers
         private readonly LinkGenerator _linkGenerator;
         private readonly IMapper _mapper;
         private readonly IAuthHelper _authHelper;
+        private readonly LoggerService _logger;
 
         public DozvoljeniRadController(IDozvoljeniRadRepository dozvoljeniRadRepository, LinkGenerator linkGenerator, IMapper mapper, IAuthHelper authHelper)
         {
@@ -33,6 +35,7 @@ namespace ParcelaService.Controllers
             _linkGenerator = linkGenerator;
             _mapper = mapper;
             _authHelper = authHelper;
+            _logger = new LoggerService();
         }
 
         /// <summary>
@@ -47,6 +50,9 @@ namespace ParcelaService.Controllers
         [AllowAnonymous]
         public ActionResult<List<DozvoljeniRadDto>> GetAll()
         {
+            #pragma warning disable CS4014
+            _logger.PostLogger("Pristup svim dozvoljenim radovima." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
             var dozvoljeniRadovi = _dozvoljeniRadRepository.GetAll();
             if (dozvoljeniRadovi == null || dozvoljeniRadovi.Count == 0)
             {
@@ -68,6 +74,9 @@ namespace ParcelaService.Controllers
         [AllowAnonymous]
         public ActionResult<DozvoljeniRadDto> GetById(Guid dozvoljeniRadId)
         {
+            #pragma warning disable CS4014
+            _logger.PostLogger("Pristup dozvoljenom radu." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
             var dozvoljeniRad = _dozvoljeniRadRepository.GetById(dozvoljeniRadId);
             if (dozvoljeniRad == null)
             {
@@ -92,6 +101,9 @@ namespace ParcelaService.Controllers
         [HttpPost]
         public ActionResult<DozvoljeniRadDto> Create([FromBody] DozvoljeniRadCreateDto dozvoljeniRad, [FromHeader] string key)
         {
+            #pragma warning disable CS4014
+            _logger.PostLogger("Kreiranje dozvoljenog rada." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
             if (!_authHelper.Authorize(key))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, "Korisnik nije autorizovan!");
@@ -127,6 +139,9 @@ namespace ParcelaService.Controllers
         [HttpPut]
         public ActionResult<DozvoljeniRadConfirmationDto> Update(DozvoljeniRadUpdateDto dozvoljeniRad, [FromHeader] string key)
         {
+            #pragma warning disable CS4014
+            _logger.PostLogger("Azuriranje dozvoljenog rada." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
             if (!_authHelper.Authorize(key))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, "Korisnik nije autorizovan!");
@@ -167,6 +182,9 @@ namespace ParcelaService.Controllers
         [HttpDelete("{dozvoljeniRadId}")]
         public IActionResult Delete(Guid dozvoljeniRadId, [FromHeader] string key)
         {
+            #pragma warning disable CS4014
+            _logger.PostLogger("Brisanje dozvoljenog rada" + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
             if (!_authHelper.Authorize(key))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, "Korisnik nije autorizovan!");
@@ -197,6 +215,9 @@ namespace ParcelaService.Controllers
         [AllowAnonymous]
         public IActionResult GetDozvoljeniRadOptions()
         {
+            #pragma warning disable CS4014
+            _logger.PostLogger("Pristup opcijama." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
             Response.Headers.Add("Allow", "GET, POST, PUT, DELETE");
             return Ok();
         }

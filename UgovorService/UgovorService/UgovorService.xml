@@ -132,6 +132,61 @@
             ID kupca
             </summary>
         </member>
+        <member name="P:UgovorService.Logger.LoggerVO.OpisAktivnosti">
+            <summary>
+            Opis aktivnosti
+            </summary>
+        </member>
+        <member name="P:UgovorService.Logger.LoggerVO.Datum">
+            <summary>
+            Datum aktivnosti
+            </summary>
+        </member>
+        <member name="P:UgovorService.Models.LiceDto.KupacId">
+            <summary>
+            Id lica- kupca
+            </summary>
+        </member>
+        <member name="P:UgovorService.Models.LiceDto.OstvarenaPovrsina">
+            <summary>
+            Ostvarena povrsina
+            </summary>
+        </member>
+        <member name="P:UgovorService.Models.LiceDto.ImaZabranu">
+            <summary>
+            Da li ima zabranu
+            </summary>
+        </member>
+        <member name="P:UgovorService.Models.LicitacijaDto.brojLicitacije">
+            <summary>
+            Broj licitacije
+            </summary>
+        </member>
+        <member name="P:UgovorService.Models.LicitacijaDto.goidna">
+            <summary>
+            Godina licitacije
+            </summary>
+        </member>
+        <member name="P:UgovorService.Models.LicitacijaDto.datumLicitacije">
+            <summary>
+            Datum licitacije
+            </summary>
+        </member>
+        <member name="P:UgovorService.Models.LicitacijaDto.ogranicenjeLicitacije">
+            <summary>
+            Ogranicenje licitacije
+            </summary>
+        </member>
+        <member name="P:UgovorService.Models.LicitacijaDto.korakCene">
+            <summary>
+            Korak cene
+            </summary>
+        </member>
+        <member name="P:UgovorService.Models.LicitacijaDto.rokZaDostavuPrijava">
+            <summary>
+            Rok za dostavu prijava
+            </summary>
+        </member>
         <member name="P:UgovorService.Models.UgovorConfirmationDto.UgovorId">
             <summary>
             ID ugovora

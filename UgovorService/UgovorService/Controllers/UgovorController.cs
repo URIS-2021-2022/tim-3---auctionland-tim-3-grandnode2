@@ -12,6 +12,7 @@ using UgovorService.Entities;
 using Microsoft.AspNetCore.Authorization;
 using UgovorService.Auth;
 using UgovorService.ServiceCalls;
+using UgovorService.Logger;
 
 namespace UgovorService.Controllers
 {
@@ -26,6 +27,7 @@ namespace UgovorService.Controllers
         private readonly IAuthHelper _authHelper;
         private readonly ILicitacijaService _licitacijaService;
         private readonly ILiceService _liceService;
+        private readonly LoggerService _logger;
 
         public UgovorController(IUgovorRepository ugovorRepository, LinkGenerator linkGenerator, IMapper mapper, IAuthHelper authHelper, ILicitacijaService licitacijaService, ILiceService liceService)
         {
@@ -35,6 +37,7 @@ namespace UgovorService.Controllers
             _authHelper = authHelper;
             _licitacijaService = licitacijaService;
             _liceService = liceService;
+            _logger = new LoggerService();
         }
 
         /// <summary>
@@ -50,6 +53,9 @@ namespace UgovorService.Controllers
         [AllowAnonymous]
         public ActionResult<List<UgovorDto>> GetAll()
         {
+            #pragma warning disable CS4014
+            _logger.PostLogger("Pristup ugovorima." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
             try
             {
                 var ugovori = _ugovorRepository.GetAll();
@@ -92,6 +98,9 @@ namespace UgovorService.Controllers
         [AllowAnonymous]
         public ActionResult<UgovorDto> GetById(Guid ugovorId)
         {
+            #pragma warning disable CS4014
+            _logger.PostLogger("Pristup ugovoru." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
             try
             {
                 var ugovor = _ugovorRepository.GetById(ugovorId);
@@ -127,6 +136,9 @@ namespace UgovorService.Controllers
         [HttpPost]
         public ActionResult<UgovorDto> Create([FromBody] UgovorCreateDto ugovor, [FromHeader] string key)
         {
+            #pragma warning disable CS4014
+            _logger.PostLogger("Kreiranje ugovora." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
             if (!_authHelper.Authorize(key))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, "Korisnik nije autorizovan!");
@@ -163,6 +175,9 @@ namespace UgovorService.Controllers
         [HttpPut]
         public ActionResult<UgovorConfirmationDto> Update(UgovorUpdateDto ugovor, [FromHeader] string key)
         {
+            #pragma warning disable CS4014
+            _logger.PostLogger("Azuriranje ugovora." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
             if (!_authHelper.Authorize(key))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, "Korisnik nije autorizovan!");
@@ -203,6 +218,9 @@ namespace UgovorService.Controllers
         [HttpDelete("{ugovorId}")]
         public IActionResult Delete(Guid ugovorId, [FromHeader] string key)
         {
+            #pragma warning disable CS4014
+            _logger.PostLogger("Brisanje ugovora." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
             if (!_authHelper.Authorize(key))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, "Korisnik nije autorizovan!");
@@ -233,6 +251,9 @@ namespace UgovorService.Controllers
         [AllowAnonymous]
         public IActionResult GetUgovorOptions()
         {
+            #pragma warning disable CS4014
+            _logger.PostLogger("Pristup opcijama." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
             Response.Headers.Add("Allow", "GET, POST, PUT, DELETE");
             return Ok();
         }
