@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Routing;
 using ParcelaService.Auth;
 using ParcelaService.Data;
 using ParcelaService.Entities;
+using ParcelaService.Logger;
 using ParcelaService.Models;
 using ParcelaService.Models.ConfirmationDto;
 using ParcelaService.Models.CreateDto;
@@ -25,6 +26,7 @@ namespace ParcelaService.Controllers
         private readonly LinkGenerator _linkGenerator;
         private readonly IMapper _mapper;
         private readonly IAuthHelper _authHelper;
+        private readonly LoggerService _logger;
 
         public ZasticenaZonaController(IZasticenaZonaRepository zasticenaZonaRepository, LinkGenerator linkGenerator, IMapper mapper, IAuthHelper authHelper)
         {
@@ -32,6 +34,7 @@ namespace ParcelaService.Controllers
             _linkGenerator = linkGenerator;
             _mapper = mapper;
             _authHelper = authHelper;
+            _logger = new LoggerService();
         }
 
         /// <summary>
@@ -46,6 +49,9 @@ namespace ParcelaService.Controllers
         [AllowAnonymous]
         public ActionResult<List<ZasticenaZonaDto>> GetAll()
         {
+            #pragma warning disable CS4014
+            _logger.PostLogger("Pristup zasticenim zonama." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
             var zasticeneZone = _zasticenaZonaRepository.GetAll();
             if (zasticeneZone == null || zasticeneZone.Count == 0)
             {
@@ -67,6 +73,9 @@ namespace ParcelaService.Controllers
         [AllowAnonymous]
         public ActionResult<ZasticenaZonaDto> GetById(Guid zasticenaZonaId)
         {
+            #pragma warning disable CS4014
+            _logger.PostLogger("Pristup zesticenoj zoni." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
             var zasticenaZona = _zasticenaZonaRepository.GetById(zasticenaZonaId);
             if (zasticenaZona == null)
             {
@@ -91,6 +100,9 @@ namespace ParcelaService.Controllers
         [HttpPost]
         public ActionResult<ZasticenaZonaDto> Create([FromBody] ZasticenaZonaCreateDto zasticenaZona, [FromHeader] string key)
         {
+            #pragma warning disable CS4014
+            _logger.PostLogger("Kreiranje zasticene zone." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
             if (!_authHelper.Authorize(key))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, "Korisnik nije autorizovan!");
@@ -126,6 +138,9 @@ namespace ParcelaService.Controllers
         [HttpPut]
         public ActionResult<ZasticenaZonaConfirmationDto> Update(ZasticenaZonaUpdateDto zasticenaZona, [FromHeader] string key)
         {
+            #pragma warning disable CS4014
+            _logger.PostLogger("Azuriranje zasticene zone." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
             if (!_authHelper.Authorize(key))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, "Korisnik nije autorizovan!");
@@ -166,6 +181,9 @@ namespace ParcelaService.Controllers
         [HttpDelete("{zasticenaZonaId}")]
         public IActionResult Delete(Guid zasticenaZonaId, [FromHeader] string key)
         {
+            #pragma warning disable CS4014
+            _logger.PostLogger("Brisanje zasticene zone." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
             if (!_authHelper.Authorize(key))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, "Korisnik nije autorizovan!");
@@ -196,6 +214,9 @@ namespace ParcelaService.Controllers
         [AllowAnonymous]
         public IActionResult GetZasticenaZonaOptions()
         {
+            #pragma warning disable CS4014
+            _logger.PostLogger("Pristup opcijama." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
             Response.Headers.Add("Allow", "GET, POST, PUT, DELETE");
             return Ok();
         }

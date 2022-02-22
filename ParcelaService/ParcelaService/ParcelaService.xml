@@ -490,6 +490,16 @@
             Lista dozvoljenih radova
             </summary>
         </member>
+        <member name="P:ParcelaService.Logger.LoggerVO.OpisAktivnosti">
+            <summary>
+            Opis aktivnosti
+            </summary>
+        </member>
+        <member name="P:ParcelaService.Logger.LoggerVO.Datum">
+            <summary>
+            Datum
+            </summary>
+        </member>
         <member name="P:ParcelaService.Models.ConfirmationDto.DozvoljeniRadConfirmationDto.DozvoljeniRadId">
             <summary>
             ID dozvoljenog rada
