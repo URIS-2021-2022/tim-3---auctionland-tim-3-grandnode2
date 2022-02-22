@@ -22,7 +22,7 @@ namespace DokumentServis.Services
             return db.Dokument.ToList();
         }
 
-        public Dokument GetById(int id)
+        public Dokument GetById(Guid id)
         {
             return db.Dokument.Find(id);
         }
@@ -39,7 +39,7 @@ namespace DokumentServis.Services
             db.SaveChanges();
         }
 
-        public bool DokumentExists(int id)
+        public bool DokumentExists(Guid id)
         {
             return db.Dokument.Any(e => e.DokumentID == id);
         }

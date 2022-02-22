@@ -16,7 +16,7 @@ namespace DokumentServis.Logger
             httpClient = new HttpClient();
         }
 
-        public async void PostLogger(string opis)
+        public async Task PostLogger(string opis)
         {
             try
             {
@@ -27,11 +27,11 @@ namespace DokumentServis.Logger
                 var logger = JsonSerializer.Serialize(loggerVO);
                 string contentType = "application/json";
                 var bodyRequest = new StringContent(logger, Encoding.UTF8, contentType);
-                var response = await httpClient.PostAsync(requestUri: loggerPath, bodyRequest);
+                await httpClient.PostAsync(requestUri: loggerPath, bodyRequest);
             }
             catch
             {
-                return;
+                // catch
             }
 
         }

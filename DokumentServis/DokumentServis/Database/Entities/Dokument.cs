@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,7 +9,7 @@ namespace DokumentServis.Database.Entities
 {
     public class Dokument
     {
-        public int DokumentID { get; set; }
+        public Guid DokumentID { get; set; }
 
         public string ZavodniBroj { get; set; }
 
@@ -18,14 +19,15 @@ namespace DokumentServis.Database.Entities
 
         public string Sablon { get; set; }
 
-        public int KorisnikID { get; set; }
+        public Guid KorisnikID { get; set; }
 
-        public int KupacID { get; set; }
+        public Guid KupacID { get; set; }
 
-        public int LiciterID { get; set; }
+        public Guid LiciterID { get; set; }
 
         [ForeignKey("VerzijaDokumentaID")]
-        public int VerzijaDokumentaID { get; set; }
+        public Guid VerzijaDokumentaID { get; set; }
+
 
 
     }

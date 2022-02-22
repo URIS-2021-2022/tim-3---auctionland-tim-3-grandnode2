@@ -11,8 +11,7 @@ namespace DokumentServis.Migrations
                 name: "VerzijaDokumenta",
                 columns: table => new
                 {
-                    VerzijaDokumentaID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    VerzijaDokumentaID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Verzija = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Revizija = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Datum = table.Column<DateTime>(type: "datetime2", nullable: false)
@@ -26,16 +25,15 @@ namespace DokumentServis.Migrations
                 name: "Dokument",
                 columns: table => new
                 {
-                    DokumentID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DokumentID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ZavodniBroj = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Datum = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DatumDonosenja = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Sablon = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    KorisnikID = table.Column<int>(type: "int", nullable: false),
-                    KupacID = table.Column<int>(type: "int", nullable: false),
-                    LiciterID = table.Column<int>(type: "int", nullable: false),
-                    VerzijaDokumentaID = table.Column<int>(type: "int", nullable: false)
+                    KorisnikID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    KupacID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    LiciterID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    VerzijaDokumentaID = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {

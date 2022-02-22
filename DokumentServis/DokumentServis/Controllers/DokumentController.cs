@@ -53,7 +53,7 @@ namespace DokumentServis.Controllers
 
         // GET api/<DokumentController>/5
         [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        public IActionResult Get(Guid id)
         {
             logger.PostLogger("Pristup dokumentu putem id-a." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
             ResponseTemplateVO vo = new ResponseTemplateVO();
@@ -94,8 +94,9 @@ namespace DokumentServis.Controllers
             {
                 if (!Provera(model))
                 {
-                    return StatusCode(StatusCodes.Status400BadRequest, new { message = "Korisnik or kupac or liciter doesnt exist" });
+                 return StatusCode(StatusCodes.Status400BadRequest, new { message = "Korisnik or kupac or liciter doesnt exist" });
                 }
+                model.DokumentID = Guid.NewGuid();
                 dokumentService.Save(model);
                 return StatusCode(StatusCodes.Status201Created, model);
             }
@@ -107,7 +108,7 @@ namespace DokumentServis.Controllers
 
         // PUT api/<DokumentController>/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] Dokument dokument)
+        public IActionResult Put(Guid id, [FromBody] Dokument dokument)
         {
             logger.PostLogger("Modifikacija postojeceg dokumenta." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
             if (id != dokument.DokumentID)
@@ -138,7 +139,7 @@ namespace DokumentServis.Controllers
 
         // DELETE api/<DokumentController>/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(Guid id)
         {
             logger.PostLogger("Brisanje postojeceg dokumenta." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
             Dokument dokument = dokumentService.GetById(id);
