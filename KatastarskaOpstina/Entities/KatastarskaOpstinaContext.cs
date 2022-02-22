@@ -19,9 +19,9 @@ namespace KatastarskaOpstina.Entities
         /// <summary>
         /// Popunjava bazu sa nekim inicijalnim podacima
         /// </summary>
-        protected override void OnModelCreating(ModelBuilder builder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            builder.Entity<StatutOpstineE>()
+            modelBuilder.Entity<StatutOpstineE>()
                 .HasData(new
                 {
                     StatutOpstineID = Guid.Parse("644f3de0-a9dd-4c2e-b745-89976a1b2a36"),
@@ -29,7 +29,7 @@ namespace KatastarskaOpstina.Entities
                     DatumKreiranjaStatuta = DateTime.Now
                 });
 
-            builder.Entity<StatutOpstineE>()
+            modelBuilder.Entity<StatutOpstineE>()
                 .HasData(new
                 {
                     StatutOpstineID = Guid.Parse("044f3de0-a9dd-4c2e-b745-89976a1b2a36"),
@@ -38,7 +38,7 @@ namespace KatastarskaOpstina.Entities
                 });
 
 
-            builder.Entity<KatastarskaOpstinaE>()
+            modelBuilder.Entity<KatastarskaOpstinaE>()
                 .HasData(new
                 {
                     KatastarskaOpstinaID = Guid.Parse("6b411c13-a295-48f7-8dbd-67886c3974c0"),
@@ -46,7 +46,7 @@ namespace KatastarskaOpstina.Entities
                     NazivOpstine = "Bikovo"
                 });
 
-            builder.Entity<KatastarskaOpstinaE>()
+            modelBuilder.Entity<KatastarskaOpstinaE>()
                 .HasData(new
                 {
                     KatastarskaOpstinaID = Guid.Parse("1b411c13-a295-48f7-8dbd-67886c3974c0"),

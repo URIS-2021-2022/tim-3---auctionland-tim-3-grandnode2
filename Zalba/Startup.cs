@@ -48,7 +48,6 @@ namespace Zalba
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             
-            
             services.AddSwaggerGen(setupAction => //ON JE OVO OBRISAO
             {
                 setupAction.SwaggerDoc("ZalbaOpenApiSpecification", new Microsoft.OpenApi.Models.OpenApiInfo()
@@ -60,15 +59,15 @@ namespace Zalba
                     {
                         Name = "Maja Cetic",
                         Email = "ceticmaja@gmail.com",
-                        Url = new Uri("http://www.ftn.uns.ac.rs/")
+                        Url = new Uri(Configuration["Links:FTN"])
                     },
                     License = new Microsoft.OpenApi.Models.OpenApiLicense
                     {
                         Name = "FTN licence",
-                        Url = new Uri("http://www.ftn.uns.ac.rs/")
+                        Url = new Uri(Configuration["Links:FTN"])
                     },
-                    TermsOfService = new Uri("http://www.ftn.uns.ac.rs/uplataTermsOfService")
-                });
+                    TermsOfService = new Uri(Configuration["Links:TermsOfService"])
+                }) ;
 
                 var xmlComments = $"{ Assembly.GetExecutingAssembly().GetName().Name }.xml";
 
