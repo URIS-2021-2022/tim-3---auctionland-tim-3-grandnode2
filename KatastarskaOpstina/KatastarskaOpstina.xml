@@ -4,9 +4,270 @@
         <name>KatastarskaOpstina</name>
     </assembly>
     <members>
+        <member name="M:KatastarskaOpstina.Controllers.KatastarskaOpstinaController.GetKatastarskaOpstinas">
+            <summary>
+            Vraca sve katastarske opstine
+            </summary>
+            <returns>Lista katastarskih opstina</returns>
+            <response code= "200">Vraca listu katastarskih opstina</response>
+            <response code= "204">Ne postoji nijedna katastarska opstina</response>
+        </member>
+        <member name="M:KatastarskaOpstina.Controllers.KatastarskaOpstinaController.GetKatastarskaOpstina(System.Guid)">
+            <summary>
+            Vraca katastarsku opstinu po ID-u
+            </summary>
+            <param name="katastarskaOpstinaID">ID katastarske opstine</param>
+            <returns>Odgovarajuca katastarska opstina</returns>
+            <response code= "200">Vraca trazenu katastarsku opstina</response>
+            <response code= "204">Nije pronadjena trazena katastarska opstina</response>
+        </member>
+        <member name="M:KatastarskaOpstina.Controllers.KatastarskaOpstinaController.CreateKatastarskaOpstina(KatastarskaOpstina.Models.KatastarskaOpstinaCreationDto,System.String)">
+            <summary>
+            Kreiranje nove katastarske opstine
+            </summary>
+            <param name="katastarskaOpstina">Model katastarske opstine </param>
+            <param name="key">Kljuc sa kojim se proverava autorizacija(key vrednost: MajaCetic)</param>
+            <returns>Potvrda o kreiranju katastarske opstine</returns>
+            <response code= "201">Vraca kreiranu katastarsku opstina</response>
+            <response code= "401">Lice koje zeli da izvrsi kreiranje katastarske opstine nije autorizovani korisnik</response>
+            <response code= "500">Doslo je do greske na serveru prilikom kreiranja katastarske opstine</response>
+        </member>
+        <member name="M:KatastarskaOpstina.Controllers.KatastarskaOpstinaController.DeleteKatastarskaOpstina(System.Guid,System.String)">
+            <summary>
+            Brisanje ugovora
+            </summary>
+            <param name="katastarskaOpstinaID">ID katastarske opstine</param>
+            <param name="key">Kljuc sa kojim se proverava autorizacija(key vrednost: MajaCetic)</param>
+            <returns>Status 204(NoContent)</returns>
+            <response code= "204">Katastarska opstina uspesno obrisana</response>
+            <response code= "401">Lice koje zeli da izvrsi brisanje katastarske opstine nije autorizovani korisnik</response>
+            <response code= "404">Nije pronadjena katastarska opstina za brisanje</response>
+            <response code= "500">Doslo je do greske na serveru prilikom brisanja katastarske opstine</response>
+        </member>
+        <member name="M:KatastarskaOpstina.Controllers.KatastarskaOpstinaController.UpdateTipZalbe(KatastarskaOpstina.Models.KatastarskaOpstinaModelDto,System.String)">
+            <summary>
+            Azuriranje ugovora
+            </summary>
+            <param name="katastarskaOpstina">Model katastarske opstine</param>
+            <param name="key">Kljuc sa kojim se proverava autorizacija(key vrednost: MajaCetic)</param>
+            <returns>Potvrda u izmenama u katastarskoj opstini</returns>
+            <response code= "200">Katastarska opstina azurirana</response>
+            <response code= "401">Lice koje zeli da izvrsi brisanje katastarske opstine nije autorizovani korisnik</response>
+            <response code= "404">Nije pronadjena katastarska opstina za brisanje</response>
+            <response code= "500">Doslo je do greske na serveru prilikom brisanja katastarske opstine</response>
+        </member>
+        <member name="M:KatastarskaOpstina.Controllers.KatastarskaOpstinaController.GetKatastarskaOpstinasOptions">
+            <summary>
+            Vraca opcije za rad sa katastarskim opstinama
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:KatastarskaOpstina.Controllers.StatutOpstineController.GetStatutOpstines">
+            <summary>
+            Vraca sve statute opstine
+            </summary>
+            <returns>Lista statuta opstina</returns>
+            <response code= "200">Vraca listu statuta opstina</response>
+            <response code= "204">Ne postoji nijedan statut opstine</response>
+        </member>
+        <member name="M:KatastarskaOpstina.Controllers.StatutOpstineController.GetStatutOpstine(System.Guid)">
+            <summary>
+            Vraca statut opstine po ID-u
+            </summary>
+            <param name="statutOpstineID">ID stauta opstine</param>
+            <returns>Odgovarajuca katastarska opstina</returns>
+            <response code= "200">Vraca trazen statut opstine</response>
+            <response code= "204">Nije pronadjen trazeni statut opstine</response>
+        </member>
+        <member name="M:KatastarskaOpstina.Controllers.StatutOpstineController.CreateStatutOpstine(KatastarskaOpstina.Models.StatutOpstineCreationDto,System.String)">
+            <summary>
+            Kreiranje novog statuta opstine
+            </summary>
+            <param name="statutOpstine">Model statuta opstine</param>
+            <param name="key">Kljuc sa kojim se proverava autorizacija(key vrednost: MajaCetic)</param>
+            <returns></returns>
+            <response code= "201">Vraca kreiran statut opstine</response>
+            <response code= "401">Lice koje zeli da izvrsi kreiranje statuta opstine nije autorizovani korisnik</response>
+            <response code= "500">Doslo je do greske na serveru prilikom kreiranja stauta opstine</response>
+        </member>
+        <member name="M:KatastarskaOpstina.Controllers.StatutOpstineController.DeleteStatutOpstine(System.Guid,System.String)">
+            <summary>
+            Brisanje statuta opstine
+            </summary>
+            <param name="statutOpstineID">ID statuta opstine</param>
+            <param name="key">Kljuc sa kojim se proverava autorizacija(key vrednost: MajaCetic)</param>
+            <returns></returns>
+            <response code= "204">Statut opstine uspesno obrisan</response>
+            <response code= "401">Lice koje zeli da izvrsi brisanje statuta opstine nije autorizovani korisnik</response>
+            <response code= "404">Nije pronadjena statut opstine za brisanje</response>
+            <response code= "500">Doslo je do greske na serveru prilikom brisanja statuta opstine</response>
+        </member>
+        <member name="M:KatastarskaOpstina.Controllers.StatutOpstineController.UpdateStatutOpstine(KatastarskaOpstina.Models.StatutOpstineModelDto,System.String)">
+            <summary>
+            Azuriranje statuta opstine
+            </summary>
+            <param name="statutOpstine">Model statuta opstine</param>
+            <param name="key">Kljuc sa kojim se proverava autorizacija(key vrednost: MajaCetic)</param>
+            <returns>Potvrda u azuriranju statuta opstine</returns>
+            <response code= "200">Statut opstine azurirana</response>
+            <response code= "401">Lice koje zeli da izvrsi brisanje statuta opstine nije autorizovani korisnik</response>
+            <response code= "404">Nije pronadjen statut opstine za brisanje</response>
+            <response code= "500">Doslo je do greske na serveru prilikom brisanja statuta opstine</response>
+        </member>
+        <member name="M:KatastarskaOpstina.Controllers.StatutOpstineController.GetStatutOpstinesOptions">
+            <summary>
+            Vraca opcije za rad sa statutom opstine
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:KatastarskaOpstina.Entities.KatastarskaOpstinaConfirmation.KatastarskaOpstinaID">
+            <summary>
+            ID katastarske opstine
+            </summary>
+        </member>
+        <member name="P:KatastarskaOpstina.Entities.KatastarskaOpstinaConfirmation.NazivOpstine">
+            <summary>
+            Naziv opstine
+            </summary>
+        </member>
         <member name="M:KatastarskaOpstina.Entities.KatastarskaOpstinaContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <summary>
             Popunjava bazu sa nekim inicijalnim podacima
+            </summary>
+        </member>
+        <member name="P:KatastarskaOpstina.Entities.KatastarskaOpstinaE.KatastarskaOpstinaID">
+            <summary>
+            ID katastarske opstine
+            </summary>
+        </member>
+        <member name="P:KatastarskaOpstina.Entities.KatastarskaOpstinaE.StatutOpstineID">
+            <summary>
+            ID statuta opstine
+            </summary>
+        </member>
+        <member name="P:KatastarskaOpstina.Entities.KatastarskaOpstinaE.NazivOpstine">
+            <summary>
+            Naziv opstine katastra
+            </summary>
+        </member>
+        <member name="P:KatastarskaOpstina.Entities.KatastarskaOpstinaE.Parcele">
+            <summary>
+            Parcele 
+            </summary>
+        </member>
+        <member name="P:KatastarskaOpstina.Entities.StatutOpstineConfirmation.StatutOpstineID">
+            <summary>
+            ID statuta opstine
+            </summary>
+        </member>
+        <member name="P:KatastarskaOpstina.Entities.StatutOpstineConfirmation.SadrzajStatuta">
+            <summary>
+            Sadrzaj statuta opstine
+            </summary>
+        </member>
+        <member name="P:KatastarskaOpstina.Entities.StatutOpstineE.StatutOpstineID">
+            <summary>
+            ID statuta opstine
+            </summary>
+        </member>
+        <member name="P:KatastarskaOpstina.Entities.StatutOpstineE.SadrzajStatuta">
+            <summary>
+            Sadrzaj statuta opstine
+            </summary>
+        </member>
+        <member name="P:KatastarskaOpstina.Entities.StatutOpstineE.DatumKreiranjaStatuta">
+            <summary>
+            Datum kreiranja statuta opstine
+            </summary>
+        </member>
+        <member name="P:KatastarskaOpstina.Models.KatastarskaOpstinaConfirmationDto.KatastarskaOpstinaID">
+            <summary>
+            ID katastarske opstine
+            </summary>
+        </member>
+        <member name="P:KatastarskaOpstina.Models.KatastarskaOpstinaConfirmationDto.NazivOpstine">
+            <summary>
+            Naziv katastarske opstine
+            </summary>
+        </member>
+        <member name="P:KatastarskaOpstina.Models.KatastarskaOpstinaCreationDto.StatutOpstineID">
+            <summary>
+            ID statuta opstine
+            </summary>
+        </member>
+        <member name="P:KatastarskaOpstina.Models.KatastarskaOpstinaCreationDto.NazivOpstine">
+            <summary>
+            Naziv opstine
+            </summary>
+        </member>
+        <member name="P:KatastarskaOpstina.Models.KatastarskaOpstinaModelDto.KatastarskaOpstinaID">
+            <summary>
+            ID katastarske opstine
+            </summary>
+        </member>
+        <member name="P:KatastarskaOpstina.Models.KatastarskaOpstinaModelDto.Parcele">
+            <summary>
+            Parcela
+            </summary>
+        </member>
+        <member name="P:KatastarskaOpstina.Models.KatastarskaOpstinaModelDto.StatutOpstineID">
+            <summary>
+            ID statuta opstine
+            </summary>
+        </member>
+        <member name="P:KatastarskaOpstina.Models.KatastarskaOpstinaModelDto.NazivOpstine">
+            <summary>
+            Naziv opstine
+            </summary>
+        </member>
+        <member name="P:KatastarskaOpstina.Models.ParcelaDto.ParcelaId">
+            <summary>
+            ID parcele
+            </summary>
+        </member>
+        <member name="P:KatastarskaOpstina.Models.ParcelaDto.BrojParcele">
+            <summary>
+            Broj parcele
+            </summary>
+        </member>
+        <member name="P:KatastarskaOpstina.Models.ParcelaDto.BrojListaNepokretnosti">
+            <summary>
+            Broj liste nepokretnosti
+            </summary>
+        </member>
+        <member name="P:KatastarskaOpstina.Models.StatutOpstineConfirmationDto.StatutOpstineID">
+            <summary>
+            ID statuta opstine
+            </summary>
+        </member>
+        <member name="P:KatastarskaOpstina.Models.StatutOpstineConfirmationDto.SadrzajStatuta">
+            <summary>
+            Sadrzaj statuta opstine
+            </summary>
+        </member>
+        <member name="P:KatastarskaOpstina.Models.StatutOpstineCreationDto.SadrzajStatuta">
+            <summary>
+            Sadrzaj statuta opstine
+            </summary>
+        </member>
+        <member name="P:KatastarskaOpstina.Models.StatutOpstineCreationDto.DatumKreiranjaStatuta">
+            <summary>
+            Datum kreiranja statuta opstine
+            </summary>
+        </member>
+        <member name="P:KatastarskaOpstina.Models.StatutOpstineModelDto.StatutOpstineID">
+            <summary>
+            ID statuta opstine
+            </summary>
+        </member>
+        <member name="P:KatastarskaOpstina.Models.StatutOpstineModelDto.SadrzajStatuta">
+            <summary>
+            Sadrzaj statuta opstine
+            </summary>
+        </member>
+        <member name="P:KatastarskaOpstina.Models.StatutOpstineModelDto.DatumKreiranjaStatuta">
+            <summary>
+            Datum kreiranja statuta opstine
             </summary>
         </member>
     </members>

@@ -23,7 +23,7 @@ namespace KatastarskaOpstina.ServiceCalls
             try
             {
                 using var httpClient = new HttpClient();
-                Uri url = new Uri($"{ configuration["Services:ParcelaService"] }api/parcele?=katastarskOpstinaId" + katastarskaOpstinaID);
+                Uri url = new Uri($"{ configuration["Services:ParcelaService"] }api/parcele?katastarskaOpstinaId=" + katastarskaOpstinaID);
                 var request = new HttpRequestMessage(HttpMethod.Get, url);
                 request.Headers.Add("Accept", "application/json");
                 var response = await httpClient.SendAsync(request);

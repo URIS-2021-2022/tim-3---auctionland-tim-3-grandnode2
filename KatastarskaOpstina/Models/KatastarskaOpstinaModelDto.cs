@@ -17,7 +17,7 @@ namespace KatastarskaOpstina.Models
         /// <summary>
         /// Parcela
         /// </summary>
-        public ParcelaDto Parcela { get; set; }
+        public List<ParcelaDto> Parcele { get; set; }
         /// <summary>
         /// ID statuta opstine
         /// </summary>
