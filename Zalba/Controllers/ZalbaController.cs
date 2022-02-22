@@ -36,7 +36,15 @@ namespace Zalba.Controllers
             this.licitacijaService = licitacijaService;
             this.podnosilacZalbeService = podnosilacZalbeService;
         }
-       
+
+        /// <summary>
+        /// Vraca sve Zalbe
+        /// </summary>
+        /// <returns> Lista zalbi </returns>
+        /// <response code="200">Vraca listu zalbi</response>
+        /// <response code="204">Ne postoji nijedna zalba</response>
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet]
         [HttpHead]
         [AllowAnonymous]
@@ -70,6 +78,15 @@ namespace Zalba.Controllers
             }
         }
 
+        /// <summary>
+        /// Vraca zalbu po ID-u
+        /// </summary>
+        /// <param name="zalbaID">ID zalbe</param>
+        /// <returns>Odgovarajuca zalba</returns>
+        /// <response code="200">Vraca trazenu zalbu</response>
+        /// <response code="404">Nije pronadjena trazena zalba</response>
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet("{zalbaID}")]
         [AllowAnonymous]
         public ActionResult<ZalbaModelDto> GetZalba(Guid zalbaID)
@@ -94,7 +111,19 @@ namespace Zalba.Controllers
 
         }
 
-
+        /// <summary>
+        /// Kreiranje nove zalbe
+        /// </summary>
+        /// <param name="zalba">Model zalbe</param>
+        /// <param name="key">Kljuc kojim se proverava autorizacija(key vrednost: MajaCetic)</param>
+        /// <returns>Potvrda o kreiranju zalbe</returns>
+        /// <response code="201">Vraca kreiranu zalbu</response>
+        /// <response code="401">Lice koje zeli da izvrsi kreiranje zalbe nije autorizovani korisnik</response>
+        /// <response code="500">Doslo je do greske na serveru prikilom kreiranja zalba</response>
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [Consumes("application/json")]
         [HttpPost]
         public ActionResult<ZalbaCreationDto> CreateZalba([FromBody] ZalbaCreationDto zalba, [FromHeader] string key)
         {
@@ -124,6 +153,20 @@ namespace Zalba.Controllers
         
         }
 
+        /// <summary>
+        /// Brisanje zalbe
+        /// </summary>
+        /// <param name="zalbaId">ID zalbe</param>
+        /// <param name="key">Kljuc kojim se proverava autorizacija(key vrednost: MajaCetic)</param>
+        /// <returns>Status 204 (NoContent)</returns>
+        /// <response code="204">Zalba uspesno obrisala</response>
+        /// <response code="401">Lice koje zeli da izvrsi brisanje nije autorizovani korisnik</response>
+        /// <response code="404">Nije pronadjena zalba za brisanje</response>
+        /// <response code="500">Doslo je do greske na serveru prikilom brisanja zalbe</response>
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [HttpDelete("{zalbaId}")]
         public IActionResult DeleteZalba(Guid zalbaId, [FromHeader] string key)
         {
@@ -150,6 +193,20 @@ namespace Zalba.Controllers
             }
         }
 
+        /// <summary>
+        /// Azuriranje zalbe
+        /// </summary>
+        /// <param name="zalba">Model zalbe</param>
+        /// <param name="key">Kljuc kojim se proverava autorizacija(key vrednost: MajaCetic)</param>
+        /// <returns>Potvrda o izmenama u zalbi</returns>
+        /// <response code="200">Vraca azuziranu zalbu</response>
+        /// <response code="401">Lice koje zeli da izvrsi azuriranje nije autorizovani korisnik</response>
+        /// <response code="404">Nije pronadjena zalba za azuriranje</response>
+        /// <response code="500">Doslo je do greske na serveru prikilom azuriranja zalbe</response>
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [HttpPut]
         public ActionResult<ZalbaConfirmationDto> UpdateZalba(ZalbaModelDto zalba, [FromHeader] string key)
         {
@@ -178,6 +235,10 @@ namespace Zalba.Controllers
             }
         }
         
+        /// <summary>
+        /// Vraca opcije za rad sa zalbama
+        /// </summary>
+        /// <returns></returns>
         [HttpOptions]
         [AllowAnonymous]
         public IActionResult GetZalbasOptions()

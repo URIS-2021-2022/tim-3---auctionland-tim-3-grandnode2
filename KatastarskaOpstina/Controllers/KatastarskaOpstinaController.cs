@@ -31,6 +31,14 @@ namespace KatastarskaOpstina.Controllers
             this.authService = authService;
         }
 
+        /// <summary>
+        /// Vraca sve katastarske opstine
+        /// </summary>
+        /// <returns>Lista katastarskih opstina</returns>
+        /// <response code= "200">Vraca listu katastarskih opstina</response>
+        /// <response code= "204">Ne postoji nijedna katastarska opstina</response>
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet]
         [HttpHead]
         [AllowAnonymous]
@@ -44,6 +52,15 @@ namespace KatastarskaOpstina.Controllers
             return Ok(mapper.Map<List<KatastarskaOpstinaModelDto>>(katastarskaOpstinas));
         }
 
+        /// <summary>
+        /// Vraca katastarsku opstinu po ID-u
+        /// </summary>
+        /// <param name="katastarskaOpstinaID">ID katastarske opstine</param>
+        /// <returns>Odgovarajuca katastarska opstina</returns>
+        /// <response code= "200">Vraca trazenu katastarsku opstina</response>
+        /// <response code= "204">Nije pronadjena trazena katastarska opstina</response>
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet("{katastarskaOpstinaID}")]
         [AllowAnonymous]
         public ActionResult<KatastarskaOpstinaModelDto> GetKatastarskaOpstina(Guid katastarskaOpstinaID)
@@ -58,7 +75,19 @@ namespace KatastarskaOpstina.Controllers
 
         }
 
-
+        /// <summary>
+        /// Kreiranje nove katastarske opstine
+        /// </summary>
+        /// <param name="katastarskaOpstina">Model katastarske opstine </param>
+        /// <param name="key">Kljuc sa kojim se proverava autorizacija(key vrednost: MajaCetic)</param>
+        /// <returns>Potvrda o kreiranju katastarske opstine</returns>
+        /// <response code= "201">Vraca kreiranu katastarsku opstina</response>
+        /// <response code= "401">Lice koje zeli da izvrsi kreiranje katastarske opstine nije autorizovani korisnik</response>
+        /// <response code= "500">Doslo je do greske na serveru prilikom kreiranja katastarske opstine</response>
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [Consumes("application/json")]
         [HttpPost]
         public ActionResult<KatastarskaOpstinaCreationDto> CreateKatastarskaOpstina([FromBody] KatastarskaOpstinaCreationDto katastarskaOpstina, [FromHeader] string key)
         {
@@ -88,6 +117,20 @@ namespace KatastarskaOpstina.Controllers
 
         }
 
+        /// <summary>
+        /// Brisanje ugovora
+        /// </summary>
+        /// <param name="katastarskaOpstinaID">ID katastarske opstine</param>
+        /// <param name="key">Kljuc sa kojim se proverava autorizacija(key vrednost: MajaCetic)</param>
+        /// <returns>Status 204(NoContent)</returns>
+        /// <response code= "204">Katastarska opstina uspesno obrisana</response>
+        /// <response code= "401">Lice koje zeli da izvrsi brisanje katastarske opstine nije autorizovani korisnik</response>
+        /// <response code= "404">Nije pronadjena katastarska opstina za brisanje</response>
+        /// <response code= "500">Doslo je do greske na serveru prilikom brisanja katastarske opstine</response>
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [HttpDelete("{katastarskaOpstinaID}")]
         public IActionResult DeleteKatastarskaOpstina(Guid katastarskaOpstinaID, [FromHeader] string key)
         {
@@ -112,7 +155,20 @@ namespace KatastarskaOpstina.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "Delete error");
             }
         }
-
+        /// <summary>
+        /// Azuriranje ugovora
+        /// </summary>
+        /// <param name="katastarskaOpstina">Model katastarske opstine</param>
+        /// <param name="key">Kljuc sa kojim se proverava autorizacija(key vrednost: MajaCetic)</param>
+        /// <returns>Potvrda u izmenama u katastarskoj opstini</returns>
+        /// <response code= "200">Katastarska opstina azurirana</response>
+        /// <response code= "401">Lice koje zeli da izvrsi brisanje katastarske opstine nije autorizovani korisnik</response>
+        /// <response code= "404">Nije pronadjena katastarska opstina za brisanje</response>
+        /// <response code= "500">Doslo je do greske na serveru prilikom brisanja katastarske opstine</response>
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [HttpPut]
         public ActionResult<KatastarskaOpstinaConfirmationDto> UpdateTipZalbe(KatastarskaOpstinaModelDto katastarskaOpstina, [FromHeader] string key)
         {
@@ -141,6 +197,10 @@ namespace KatastarskaOpstina.Controllers
             }
         }
 
+        /// <summary>
+        /// Vraca opcije za rad sa katastarskim opstinama
+        /// </summary>
+        /// <returns></returns>
         [HttpOptions]
         [AllowAnonymous]
         public IActionResult GetKatastarskaOpstinasOptions()

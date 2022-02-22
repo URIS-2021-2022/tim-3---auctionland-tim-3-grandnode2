@@ -7,8 +7,14 @@ namespace Zalba.Entities
 {
     public class TipZalbeConfirmation
     {
+        /// <summary>
+        /// ID tipa zalbe
+        /// </summary>
         public Guid TipZalbeID { get; set; }
 
+        /// <summary>
+        /// Naziv tipa
+        /// </summary>
         public string NazivTipa { get; set; }
     }
 }

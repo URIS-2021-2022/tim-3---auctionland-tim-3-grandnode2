@@ -7,11 +7,20 @@ namespace KatastarskaOpstina.Models
 {
     public class StatutOpstineModelDto
     {
+        /// <summary>
+        /// ID statuta opstine
+        /// </summary>
         public Guid StatutOpstineID { get; set; }
 
         #region
+        /// <summary>
+        /// Sadrzaj statuta opstine
+        /// </summary>
         public string SadrzajStatuta { get; set; }
 
+        /// <summary>
+        /// Datum kreiranja statuta opstine
+        /// </summary>
         public DateTime DatumKreiranjaStatuta { get; set; }
         #endregion
     }
