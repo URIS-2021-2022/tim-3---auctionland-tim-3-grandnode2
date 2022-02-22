@@ -11,18 +11,30 @@ using System.Threading.Tasks;
 
 namespace LoggerServis.Controllers
 {
+    /// <summary>
+    /// Logger controller pomocu kojeg se vrse sve potrebne funkcionalnosti vezane za controller
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
+    [Produces("application/json")]
     public class LoggerController : ControllerBase
     {
 
         private readonly LoggerService loggerService;
 
+        /// <summary>
+        /// Logger controller konstruktor
+        /// </summary>
         public LoggerController()
         {
             loggerService = new LoggerService();
         }
 
+        /// <summary>
+        /// Pristup svim loggerima
+        /// </summary>
+        /// <returns>Vraca listu svih logger-a</returns>
+        /// <response code = "200">Pristup svim logger-ima</response>
         // GET: api/<LoggerController>
         [HttpGet]
         public IEnumerable<Logger> Get()
@@ -30,6 +42,13 @@ namespace LoggerServis.Controllers
             return loggerService.GetAll();
         }
 
+        /// <summary>
+        /// Pristup loggeru na osnovu zadatog id-a
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Vraca logger ciji je id zadat u putanji</returns>
+        /// <response code = "200">Dobijanje loggera na osnovu zadatog id-a</response>
+        /// <response code = "404">Ne postoji logger sa zadatim id-em</response>
         // GET api/<LoggerController>/5
         [HttpGet("{id}")]
         public IActionResult Get(int id)
@@ -42,6 +61,13 @@ namespace LoggerServis.Controllers
             return StatusCode(StatusCodes.Status404NotFound, new { message = "Logger with this id: " + id + " doesnt exist" });
         }
 
+        /// <summary>
+        /// Kreiranje novog loggera
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>Vraca novi logger</returns>
+        /// <response code = "201">Kreiran je novi logger</response>
+        /// <response code = "500">Greska prilikom pokusaja kreiranja logger</response>
         // POST api/<LoggerController>
         [HttpPost]
         public IActionResult Post([FromBody] Logger model)
@@ -57,6 +83,14 @@ namespace LoggerServis.Controllers
             }
         }
 
+        /// <summary>
+        /// Modifikacija postojeceg loggera
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="logger"></param>
+        /// <returns>Vraca modifikovan logger</returns>
+        /// <response code = "200">Dobijanje modifikovanog loggera</response>
+        /// <response code = "404">Ne postoji logger sa zadatim id-em</response>
         // PUT api/<LoggerController>/5
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] Logger logger)
@@ -84,6 +118,13 @@ namespace LoggerServis.Controllers
             return StatusCode(StatusCodes.Status200OK, logger);
         }
 
+        /// <summary>
+        /// Brisanje postojeceg loggera
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Brise zadati logger</returns>
+        /// <response code = "200">Obrisan je logger</response>
+        /// <response code = "404">Ne postoji logger za kojeg se izvrsava brisanje</response>
         // DELETE api/<LoggerController>/5
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)

@@ -7,12 +7,12 @@ namespace DokumentServis.VO
 {
     public class Liciter
     {
-        public Guid LiciterID { get; set; }
+        public Guid KupacId { get; set; }
 
-        public string Ime { get; set; }
+        public int OstvarenaPovrsina { get; set; }
 
-        public string Prezime { get; set; }
+        public bool ImaZabranu { get; set; }
 
-        public string JMBG { get; set; }
+        public string BrojLicence { get; set; }
     }
 }

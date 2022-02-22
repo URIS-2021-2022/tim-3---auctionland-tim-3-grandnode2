@@ -1,0 +1,320 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>KorisnikServis</name>
+    </assembly>
+    <members>
+        <member name="T:KorisnikServis.Controllers.KorisnikController">
+            <summary>
+            Korisnik Controller pomocu kojeg se vrse sve potrebne funkcionalnosti vezane za controller
+            </summary>
+        </member>
+        <member name="M:KorisnikServis.Controllers.KorisnikController.#ctor(KorisnikServis.Token.IGenerateToken,Microsoft.AspNetCore.Http.IHttpContextAccessor)">
+            <summary>
+            Korisnik Controller konstruktor
+            </summary>
+        </member>
+        <member name="M:KorisnikServis.Controllers.KorisnikController.Get">
+            <summary>
+            Pristup svim korisnicima
+            </summary>
+            <returns>Vraca listu svih korisnika</returns>
+            <response code = "200">Pristup svim korisnicima</response>
+        </member>
+        <member name="M:KorisnikServis.Controllers.KorisnikController.GetKorisnikUP(System.String,System.String)">
+            <summary>
+            Pristup korisniku na osnovu korisnickog imena i lozinke 
+            </summary>
+            <param name="KorisnickoIme"></param>
+            <param name="Lozinka"></param>
+            <returns>Vraca korisnika sa zadatim korisnickim imenom i lozinkom</returns>
+            <response code = "200">Pristup korisniku putem korisnickog imena i lozinke </response>
+            <response code = "404">Ne postoji korisnik sa zadatim korisnickim imenom ili lozinkom</response>
+        </member>
+        <member name="M:KorisnikServis.Controllers.KorisnikController.LogIn(KorisnikServis.Database.Entities.Korisnik)">
+            <summary>
+            Logovanje korisnika putem korisnickog imena i lozinke
+            </summary>
+            <param name="korisnik"></param>
+            <returns>Vraca token na osnovu logovanja korisnika</returns>
+            <response code = "200">Dobijanje tokena na osnovu korisnickog imena i lozinke </response>
+            <response code = "404">Ne postoji korisnik sa zadatim korisnickim imenom ili lozinkom</response>
+        </member>
+        <member name="M:KorisnikServis.Controllers.KorisnikController.GetById(System.Guid)">
+            <summary>
+            Pristup korisniku na osnovu zadatog id-a
+            </summary>
+            <param name="id"></param>
+            <returns>Vraca korisnika ciji id je zadat u putanji</returns>
+            <response code = "200">Dobijanje korisnika na osnovu zadatog id-a</response>
+            <response code = "404">Ne postoji korisnik sa zadatim id-em</response>
+        </member>
+        <member name="M:KorisnikServis.Controllers.KorisnikController.GetByNazivTipa(System.String)">
+            <summary>
+            Pristup korisniku na osnovu naziva uloge koju ima
+            </summary>
+            <param name="nazivTipa"></param>
+            <returns>Vraca korisnika sa zadatom ulogom</returns>
+            <response code = "200">Dobijanje korisnika na osnovu zadate uloge koju ima</response>
+            <response code = "404">Ne postoji korisnik sa zadatom ulogom</response>
+        </member>
+        <member name="M:KorisnikServis.Controllers.KorisnikController.GetKorisnikToken">
+            <summary>
+            Dobijanje informacija o korisniku na osnovu tokena
+            </summary>
+            <returns>Vraca korisnika na osnovu zadatog tokena</returns>
+            <response code = "200">Dobijanje korisnika na osnovu zadatog tokena</response>
+            <response code = "404">Ne postoji korisnik sa zadatim tokenom</response>
+        </member>
+        <member name="M:KorisnikServis.Controllers.KorisnikController.Post(KorisnikServis.Database.Entities.Korisnik)">
+            <summary>
+            Kreiranje novog korisnika
+            </summary>
+            <param name="model"></param>
+            <returns>Vraca novog korisnika</returns>
+            <response code = "201">Kreiran je novi korisnik</response>
+            <response code = "500">Greska prilikom pokusaja kreiranja korisnika</response>
+        </member>
+        <member name="M:KorisnikServis.Controllers.KorisnikController.Put(System.Guid,KorisnikServis.Database.Entities.Korisnik)">
+            <summary>
+            Modifikacija postojeceg korisnika
+            </summary>
+            <param name="id"></param>
+            <param name="korisnik"></param>
+            <returns>Vraca modifikovanog korisnika</returns>
+            <response code = "200">Dobijanje modifikovanog korisnika</response>
+            <response code = "404">Ne postoji korisnik sa zadatim id-em</response>
+        </member>
+        <member name="M:KorisnikServis.Controllers.KorisnikController.Delete(System.Guid)">
+            <summary>
+            Brisanje postojeceg korisnika
+            </summary>
+            <param name="id"></param>
+            <returns>Brise zadatog korisnika</returns>
+            <response code = "200">Obrisan je korisnik</response>
+            <response code = "404">Ne postoji korisnik za kojeg se izvrsava brisanje</response>
+        </member>
+        <member name="T:KorisnikServis.Controllers.TipKorisnikaController">
+            <summary>
+            Tip korisnika controller pomocu kojeg se vrse sve potrebne funkcionalnosti za controller
+            </summary>
+        </member>
+        <member name="M:KorisnikServis.Controllers.TipKorisnikaController.#ctor">
+            <summary>
+            Tip korisnika controller konstruktor
+            </summary>
+        </member>
+        <member name="M:KorisnikServis.Controllers.TipKorisnikaController.Get">
+            <summary>
+            Pristup svim tipovima korisnika
+            </summary>
+            <returns>Vraca listu svih tipova korisnika</returns>
+            <response code = "200">Pristup svim tipovima korisnika</response>
+        </member>
+        <member name="M:KorisnikServis.Controllers.TipKorisnikaController.Get(System.Guid)">
+            <summary>
+            Pristup svim tipovima korisnika na osnovu id-a
+            </summary>
+            <param name="id"></param>
+            <returns>Vraca tip korisnika sa zadatim id-em</returns>
+            <response code = "200">Dobijanje tipa korisnika na osnovu zadatog id-a</response>
+            <response code = "404">Ne postoji tip korisnika sa zadatim id-em</response>
+        </member>
+        <member name="M:KorisnikServis.Controllers.TipKorisnikaController.Post(KorisnikServis.Database.Entities.TipKorisnika)">
+            <summary>
+            Kreiranje novog tipa korisnika
+            </summary>
+            <param name="model"></param>
+            <returns>Vraca novi tip korisnika</returns>
+            <response code = "201">Kreiran je novi tip korisnika</response>
+            <response code = "500">Greska prilikom pokusaja kreiranja novog tipa korisnika</response>
+        </member>
+        <member name="M:KorisnikServis.Controllers.TipKorisnikaController.Put(System.Guid,KorisnikServis.Database.Entities.TipKorisnika)">
+            <summary>
+            Modifikacija postojeceg tipa korisnika
+            </summary>
+            <param name="id"></param>
+            <param name="tipKorisnika"></param>
+            <returns>Vraca modifikovani tip korisnika</returns>
+            <response code = "200">Dobijanje modifikovanog tipa korisnika</response>
+            <response code = "404">Ne postoji tip korisnika sa zadatim id-em</response>
+        </member>
+        <member name="M:KorisnikServis.Controllers.TipKorisnikaController.Delete(System.Guid)">
+            <summary>
+            Brisanje postojeceg tipa korisnika
+            </summary>
+            <param name="id"></param>
+            <returns>Brise zadati tip korisnika</returns>
+            <response code = "200">Obrisan je tip korisnika</response>
+            <response code = "404">Ne postoji tip korisnika za kojeg se izvrsava brisanje</response>
+        </member>
+        <member name="T:KorisnikServis.Database.Entities.Korisnik">
+            <summary>
+            Korisnik entity
+            </summary>
+        </member>
+        <member name="P:KorisnikServis.Database.Entities.Korisnik.KorisnikID">
+            <summary>
+            KorisnikID primarni kljuc
+            </summary>
+        </member>
+        <member name="P:KorisnikServis.Database.Entities.Korisnik.ImeKorisnika">
+            <summary>
+            ImeKorisnika
+            </summary>
+        </member>
+        <member name="P:KorisnikServis.Database.Entities.Korisnik.PrezimeKorisnika">
+            <summary>
+            PrezimeKorisnika
+            </summary>
+        </member>
+        <member name="P:KorisnikServis.Database.Entities.Korisnik.KorisnickoIme">
+            <summary>
+            KorisnickoIme
+            </summary>
+        </member>
+        <member name="P:KorisnikServis.Database.Entities.Korisnik.Lozinka">
+            <summary>
+            Lozinka
+            </summary>
+        </member>
+        <member name="P:KorisnikServis.Database.Entities.Korisnik.TipKorisnikaID">
+            <summary>
+            TipKorisnikaID
+            </summary>
+        </member>
+        <member name="T:KorisnikServis.Database.Entities.TipKorisnika">
+            <summary>
+            TipKorisnika entity
+            </summary>
+        </member>
+        <member name="P:KorisnikServis.Database.Entities.TipKorisnika.TipKorisnikaID">
+            <summary>
+            TipKorisnikaID primarni kljuc
+            </summary>
+        </member>
+        <member name="P:KorisnikServis.Database.Entities.TipKorisnika.NazivTipa">
+            <summary>
+            NazivTipa
+            </summary>
+        </member>
+        <member name="T:KorisnikServis.Services.KorisnikService">
+            <summary>
+            Korisnik servis klasa
+            </summary>
+        </member>
+        <member name="M:KorisnikServis.Services.KorisnikService.#ctor">
+            <summary>
+            Korisnik servis konstruktor
+            </summary>
+        </member>
+        <member name="M:KorisnikServis.Services.KorisnikService.GetAll">
+            <summary>
+            Getovanje svih korisnika iz baze
+            </summary>
+            <returns>Vraca sve korisnike iz baze</returns>
+        </member>
+        <member name="M:KorisnikServis.Services.KorisnikService.FindImeLozinka(System.String,System.String)">
+            <summary>
+            Pronalazenje korisnika iz baze po korisnickom imenu i lozinci
+            </summary>
+            <param name="KorisnickoIme"></param>
+            <param name="Lozinka"></param>
+            <returns>Vraca korisnika sa zadatim korisnickim imenom i lozinkom</returns>
+        </member>
+        <member name="M:KorisnikServis.Services.KorisnikService.GetById(System.Guid)">
+            <summary>
+            Getovanje korisnika po zadatom id-u
+            </summary>
+            <param name="id"></param>
+            <returns>Vraca korisnika sa zadatim id-em</returns>
+        </member>
+        <member name="M:KorisnikServis.Services.KorisnikService.GetByTip(System.String)">
+            <summary>
+            Getovanje korisnika po zadatoj ulozi koju ima
+            </summary>
+            <param name="nazivTipa"></param>
+            <returns>Vraca korisnika sa datom ulogom</returns>
+        </member>
+        <member name="M:KorisnikServis.Services.KorisnikService.GetKorisnikByToken(System.Security.Claims.ClaimsIdentity)">
+            <summary>
+            Getovanje korisnika po zadatom tokenu
+            </summary>
+            <param name="identityClaims"></param>
+            <returns>Vraca korisnika sa zadatim tokenom</returns>
+        </member>
+        <member name="M:KorisnikServis.Services.KorisnikService.Save(KorisnikServis.Database.Entities.Korisnik)">
+            <summary>
+            Dodavanje novog korisnika
+            </summary>
+            <param name="korisnik"></param>
+        </member>
+        <member name="M:KorisnikServis.Services.KorisnikService.Update(KorisnikServis.Database.Entities.Korisnik)">
+            <summary>
+            Modifikovanje korisnika
+            </summary>
+            <param name="korisnik"></param>
+        </member>
+        <member name="M:KorisnikServis.Services.KorisnikService.KorisnikExists(System.Guid)">
+            <summary>
+            Provera postojanja korisnika u bazi
+            </summary>
+            <param name="id"></param>
+            <returns>Vraca true ili false u zavisnosti od postojanja</returns>
+        </member>
+        <member name="M:KorisnikServis.Services.KorisnikService.Delete(KorisnikServis.Database.Entities.Korisnik)">
+            <summary>
+            Brisanje korisnika
+            </summary>
+            <param name="korisnik"></param>
+        </member>
+        <member name="T:KorisnikServis.Services.TipKorisnikaService">
+            <summary>
+            Tip korisnika servis klasa
+            </summary>
+        </member>
+        <member name="M:KorisnikServis.Services.TipKorisnikaService.#ctor">
+            <summary>
+            Tip korisnika servis konstruktor
+            </summary>
+        </member>
+        <member name="M:KorisnikServis.Services.TipKorisnikaService.GetAll">
+            <summary>
+            Getovanje svih tipova korisnika
+            </summary>
+            <returns>Vraca sve tipove korisnika</returns>
+        </member>
+        <member name="M:KorisnikServis.Services.TipKorisnikaService.GetById(System.Guid)">
+            <summary>
+            Getovanje svih tipova korisnika po zadatom id-u
+            </summary>
+            <param name="id"></param>
+            <returns>Vraca tip korisnika sa zadatim id-em</returns>
+        </member>
+        <member name="M:KorisnikServis.Services.TipKorisnikaService.Save(KorisnikServis.Database.Entities.TipKorisnika)">
+            <summary>
+            Dodavanje novog tipa korisnika
+            </summary>
+            <param name="tipKorisnika"></param>
+        </member>
+        <member name="M:KorisnikServis.Services.TipKorisnikaService.Update(KorisnikServis.Database.Entities.TipKorisnika)">
+            <summary>
+            Modifikovanje tipa korisnika
+            </summary>
+            <param name="tipKorisnika"></param>
+        </member>
+        <member name="M:KorisnikServis.Services.TipKorisnikaService.TipKorisnikaExists(System.Guid)">
+            <summary>
+            Provera da li tip korisnika postoji u bazi
+            </summary>
+            <param name="id"></param>
+            <returns>Vraca true ili false u zavisnosti od postojanja</returns>
+        </member>
+        <member name="M:KorisnikServis.Services.TipKorisnikaService.Delete(KorisnikServis.Database.Entities.TipKorisnika)">
+            <summary>
+            Brisanje tipa korisnika
+            </summary>
+            <param name="tipKorisnika"></param>
+        </member>
+    </members>
+</doc>
