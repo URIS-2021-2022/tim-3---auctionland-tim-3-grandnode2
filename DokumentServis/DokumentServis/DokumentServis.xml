@@ -1,0 +1,288 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DokumentServis</name>
+    </assembly>
+    <members>
+        <member name="T:DokumentServis.Controllers.DokumentController">
+            <summary>
+            Dokument controller pomocu kojeg se vrse sve potrebne funkcionalnosti vezane za controller
+            </summary>
+        </member>
+        <member name="M:DokumentServis.Controllers.DokumentController.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Dokument controller korisnik
+            </summary>
+            <param name="iconfiguration"></param>
+        </member>
+        <member name="M:DokumentServis.Controllers.DokumentController.Get">
+            <summary>
+            Pristup svim dokumentima
+            </summary>
+            <returns>Vraca listu svih dokumenata</returns>
+            <response code = "200">Pristup svim dokumentima</response>
+        </member>
+        <member name="M:DokumentServis.Controllers.DokumentController.Get(System.Guid)">
+            <summary>
+            Pristup dokumentu na osnovu zadatog id-a
+            </summary>
+            <param name="id"></param>
+            <returns>Vraca dokument ciji id je zadat u putanji</returns>
+            <response code = "200">Dobijanje dokumenta na osnovu zadatog id-a</response>
+            <response code = "404">Ne postoji dokument sa zadatim id-em</response>
+        </member>
+        <member name="M:DokumentServis.Controllers.DokumentController.Post(DokumentServis.Database.Entities.Dokument)">
+            <summary>
+            Kreiranje novog dokumenta
+            </summary>
+            <param name="model"></param>
+            <returns>Vraca novi dokument</returns>
+            <response code = "201">Kreiran je novi dokument</response>
+            <response code = "500">Greska prilikom pokusaja kreiranja dokumenta</response>
+        </member>
+        <member name="M:DokumentServis.Controllers.DokumentController.Put(System.Guid,DokumentServis.Database.Entities.Dokument)">
+            <summary>
+            Modifikacija postojeceg dokumenta
+            </summary>
+            <param name="id"></param>
+            <param name="dokument"></param>
+            <returns>Vraca modifikovan dokument</returns>
+            <response code = "200">Dobijanje modifikovanog dokumenta</response>
+            <response code = "404">Ne postoji dokument sa zadatim id-em</response>
+        </member>
+        <member name="M:DokumentServis.Controllers.DokumentController.Delete(System.Guid)">
+            <summary>
+            Brisanje postojeceg dokumenta
+            </summary>
+            <param name="id"></param>
+            <returns>Brise zadati dokument</returns>
+            <response code = "200">Obrisan je dokument</response>
+            <response code = "404">Ne postoji dokument za kojeg se izvrsava brisanje</response>
+        </member>
+        <member name="T:DokumentServis.Controllers.VerzijaDokumentaController">
+            <summary>
+            Verzija dokumenta controller pomocu kojeg se vrse sve potrebne funkcionalnosti vezane za controller
+            </summary>
+        </member>
+        <member name="M:DokumentServis.Controllers.VerzijaDokumentaController.#ctor">
+            <summary>
+            Verzija dokumenta konstruktor
+            </summary>
+        </member>
+        <member name="M:DokumentServis.Controllers.VerzijaDokumentaController.Get">
+            <summary>
+            Pristup svim verzijama dokumenta
+            </summary>
+            <returns>Vraca listu svih verzija dokumenata</returns>
+            <response code = "200">Pristup svim verzijama dokumenata</response>
+        </member>
+        <member name="M:DokumentServis.Controllers.VerzijaDokumentaController.Get(System.Guid)">
+            <summary>
+            Pristup verzijama dokumenata na osnovu zadatog id-a
+            </summary>
+            <param name="id"></param>
+            <returns>Vraca verziju dokumenta ciji id je zadat u putanji</returns>
+            <response code = "200">Dobijanje verzija dokumenata na osnovu zadatog id-a</response>
+            <response code = "404">Ne postoji verzija dokumenta sa zadatim id-em</response>
+        </member>
+        <member name="M:DokumentServis.Controllers.VerzijaDokumentaController.Post(DokumentServis.Database.Entities.VerzijaDokumenta)">
+            <summary>
+            Kreiranje nove verzije dokumenta
+            </summary>
+            <param name="model"></param>
+            <returns>Vraca novu verziju dokumenta</returns>
+            <response code = "201">Kreirana je nova verzija dokumenta</response>
+            <response code = "500">Greska prilikom pokusaja kreiranja nove verzije dokumenta</response>
+        </member>
+        <member name="M:DokumentServis.Controllers.VerzijaDokumentaController.Put(System.Guid,DokumentServis.Database.Entities.VerzijaDokumenta)">
+            <summary>
+            Modifikacija postojece verzije dokumenta
+            </summary>
+            <param name="id"></param>
+            <param name="verzijaDokumenta"></param>
+            <returns>Vraca modifikovanu verziju dokumenta</returns>
+            <response code = "200">Dobijanje modifikovane verzije dokumenta</response>
+            <response code = "404">Ne postoji verzija dokumenta sa zadatim id-em</response>
+        </member>
+        <member name="M:DokumentServis.Controllers.VerzijaDokumentaController.Delete(System.Guid)">
+            <summary>
+            Brisanje postojece verzije dokumenta
+            </summary>
+            <param name="id"></param>
+            <returns>Brise zadatu verziju dokumenta</returns>
+            <response code = "200">Obrisana je verzija dokumenta</response>
+            <response code = "404">Ne postoji verzija dokumenta za kojeg se izvrsava brisanje</response>
+        </member>
+        <member name="T:DokumentServis.Database.Entities.Dokument">
+            <summary>
+            Dokument klasa
+            </summary>
+        </member>
+        <member name="P:DokumentServis.Database.Entities.Dokument.DokumentID">
+            <summary>
+            DokumentID primarni kljuc
+            </summary>
+        </member>
+        <member name="P:DokumentServis.Database.Entities.Dokument.ZavodniBroj">
+            <summary>
+            Zavodni broj
+            </summary>
+        </member>
+        <member name="P:DokumentServis.Database.Entities.Dokument.Datum">
+            <summary>
+            Datum
+            </summary>
+        </member>
+        <member name="P:DokumentServis.Database.Entities.Dokument.DatumDonosenja">
+            <summary>
+            Datum donosenja
+            </summary>
+        </member>
+        <member name="P:DokumentServis.Database.Entities.Dokument.Sablon">
+            <summary>
+            Sablon
+            </summary>
+        </member>
+        <member name="P:DokumentServis.Database.Entities.Dokument.KorisnikID">
+            <summary>
+            KorisnikID
+            </summary>
+        </member>
+        <member name="P:DokumentServis.Database.Entities.Dokument.KupacID">
+            <summary>
+            KupacID
+            </summary>
+        </member>
+        <member name="P:DokumentServis.Database.Entities.Dokument.LiciterID">
+            <summary>
+            LiciterID
+            </summary>
+        </member>
+        <member name="P:DokumentServis.Database.Entities.Dokument.VerzijaDokumentaID">
+            <summary>
+            VerzijaDokumentaID
+            </summary>
+        </member>
+        <member name="T:DokumentServis.Database.Entities.VerzijaDokumenta">
+            <summary>
+            Verzija dokumenta klasa
+            </summary>
+        </member>
+        <member name="P:DokumentServis.Database.Entities.VerzijaDokumenta.VerzijaDokumentaID">
+            <summary>
+            VerzijaDokumenta ID
+            </summary>
+        </member>
+        <member name="P:DokumentServis.Database.Entities.VerzijaDokumenta.Verzija">
+            <summary>
+            Verzija
+            </summary>
+        </member>
+        <member name="P:DokumentServis.Database.Entities.VerzijaDokumenta.Revizija">
+            <summary>
+            Revizija
+            </summary>
+        </member>
+        <member name="P:DokumentServis.Database.Entities.VerzijaDokumenta.Datum">
+            <summary>
+            Datum
+            </summary>
+        </member>
+        <member name="T:DokumentServis.Services.DokumentService">
+            <summary>
+            Dokument servis klasa
+            </summary>
+        </member>
+        <member name="M:DokumentServis.Services.DokumentService.#ctor">
+            <summary>
+            Dokument servis konstruktor
+            </summary>
+        </member>
+        <member name="M:DokumentServis.Services.DokumentService.GetAll">
+            <summary>
+            Getovanje svih dokumenata iz baze
+            </summary>
+            <returns>Vraca sve dokumente</returns>
+        </member>
+        <member name="M:DokumentServis.Services.DokumentService.GetById(System.Guid)">
+            <summary>
+            Getovanje dokumenta po id-u
+            </summary>
+            <param name="id"></param>
+            <returns>Vraca dokument sa zadatim id-em</returns>
+        </member>
+        <member name="M:DokumentServis.Services.DokumentService.Save(DokumentServis.Database.Entities.Dokument)">
+            <summary>
+            Kreiranje novog dokumenta
+            </summary>
+            <param name="dokument"></param>
+        </member>
+        <member name="M:DokumentServis.Services.DokumentService.Update(DokumentServis.Database.Entities.Dokument)">
+            <summary>
+            Modifikacija dokumenta
+            </summary>
+            <param name="dokument"></param>
+        </member>
+        <member name="M:DokumentServis.Services.DokumentService.DokumentExists(System.Guid)">
+            <summary>
+            Provera postojanja dokumenta
+            </summary>
+            <param name="id"></param>
+            <returns>Vraca true ili false u zavisnosti od toga da li dokument postoji</returns>
+        </member>
+        <member name="M:DokumentServis.Services.DokumentService.Delete(DokumentServis.Database.Entities.Dokument)">
+            <summary>
+            Brisanje postojeceg dokumenta
+            </summary>
+            <param name="dokument"></param>
+        </member>
+        <member name="T:DokumentServis.Services.VerzijaDokumentaService">
+            <summary>
+            Verzija dokumenta servis klasa
+            </summary>
+        </member>
+        <member name="M:DokumentServis.Services.VerzijaDokumentaService.#ctor">
+            <summary>
+            Verzija dokumenta servis konstruktor
+            </summary>
+        </member>
+        <member name="M:DokumentServis.Services.VerzijaDokumentaService.GetAll">
+            <summary>
+            Getovanje svih verzija dokumenata
+            </summary>
+            <returns>Vraca sve verzije dokumenata</returns>
+        </member>
+        <member name="M:DokumentServis.Services.VerzijaDokumentaService.GetById(System.Guid)">
+            <summary>
+            Getovanje sve verzije dokumenata po zadatom id-u
+            </summary>
+            <param name="id"></param>
+            <returns>Vraca sve verzije dokumenata po id-u</returns>
+        </member>
+        <member name="M:DokumentServis.Services.VerzijaDokumentaService.Save(DokumentServis.Database.Entities.VerzijaDokumenta)">
+            <summary>
+            Dodavanje nove verzije dokumenta
+            </summary>
+            <param name="verzijaDokumenta"></param>
+        </member>
+        <member name="M:DokumentServis.Services.VerzijaDokumentaService.Update(DokumentServis.Database.Entities.VerzijaDokumenta)">
+            <summary>
+            Modifikacija verzije dokumenta
+            </summary>
+            <param name="verzijaDokumenta"></param>
+        </member>
+        <member name="M:DokumentServis.Services.VerzijaDokumentaService.VerzijaDokumentaExists(System.Guid)">
+            <summary>
+            Provera da li verzija dokumenta postoji ili ne
+            </summary>
+            <param name="id"></param>
+            <returns>Vraca true ili false u zavisnosti od postojanja</returns>
+        </member>
+        <member name="M:DokumentServis.Services.VerzijaDokumentaService.Delete(DokumentServis.Database.Entities.VerzijaDokumenta)">
+            <summary>
+            Brisanje verzije dokumenta
+            </summary>
+            <param name="verzijaDokumenta"></param>
+        </member>
+    </members>
+</doc>

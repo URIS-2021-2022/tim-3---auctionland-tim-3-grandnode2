@@ -18,9 +18,13 @@ using System.Threading.Tasks;
 
 namespace DokumentServis.Controllers
 {
+    /// <summary>
+    /// Dokument controller pomocu kojeg se vrse sve potrebne funkcionalnosti vezane za controller
+    /// </summary>
     [Route("api/[controller]")]
     [Authorize(Roles = "Administrator, Prva komisija")]
     [ApiController]
+    [Produces("application/json")]
     public class DokumentController : ControllerBase
     {
         private readonly HttpClient httpClient;
@@ -31,6 +35,10 @@ namespace DokumentServis.Controllers
         private readonly string LiciterPath;
         private readonly LoggerService logger;
 
+        /// <summary>
+        /// Dokument controller korisnik
+        /// </summary>
+        /// <param name="iconfiguration"></param>
         public DokumentController(IConfiguration iconfiguration)
         {
             dokumentService = new DokumentService();
@@ -43,19 +51,35 @@ namespace DokumentServis.Controllers
         }
 
 
+        /// <summary>
+        /// Pristup svim dokumentima
+        /// </summary>
+        /// <returns>Vraca listu svih dokumenata</returns>
+        /// <response code = "200">Pristup svim dokumentima</response>
         // GET: api/<DokumentController>
         [HttpGet]
         public IEnumerable<Dokument> Get()
         {
+            #pragma warning disable CS4014
             logger.PostLogger("Pristup svim dokumentima." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
             return dokumentService.GetAll();
         }
 
+        /// <summary>
+        /// Pristup dokumentu na osnovu zadatog id-a
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Vraca dokument ciji id je zadat u putanji</returns>
+        /// <response code = "200">Dobijanje dokumenta na osnovu zadatog id-a</response>
+        /// <response code = "404">Ne postoji dokument sa zadatim id-em</response>
         // GET api/<DokumentController>/5
         [HttpGet("{id}")]
         public IActionResult Get(Guid id)
         {
+            #pragma warning disable CS4014
             logger.PostLogger("Pristup dokumentu putem id-a." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
             ResponseTemplateVO vo = new ResponseTemplateVO();
             Dokument dokument = dokumentService.GetById(id);
             if (dokument != null)
@@ -85,11 +109,20 @@ namespace DokumentServis.Controllers
             return StatusCode(StatusCodes.Status404NotFound, new { message = "Dokument with this id: " + id + "doesnt exist" });
         }
 
+        /// <summary>
+        /// Kreiranje novog dokumenta
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>Vraca novi dokument</returns>
+        /// <response code = "201">Kreiran je novi dokument</response>
+        /// <response code = "500">Greska prilikom pokusaja kreiranja dokumenta</response>
         // POST api/<DokumentController>
         [HttpPost]
         public IActionResult Post([FromBody] Dokument model)
         {
+            #pragma warning disable CS4014
             logger.PostLogger("Kreiranje novog dokumenta." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
             try
             {
                 if (!Provera(model))
@@ -106,11 +139,21 @@ namespace DokumentServis.Controllers
             }
         }
 
+        /// <summary>
+        /// Modifikacija postojeceg dokumenta
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="dokument"></param>
+        /// <returns>Vraca modifikovan dokument</returns>
+        /// <response code = "200">Dobijanje modifikovanog dokumenta</response>
+        /// <response code = "404">Ne postoji dokument sa zadatim id-em</response>
         // PUT api/<DokumentController>/5
         [HttpPut("{id}")]
         public IActionResult Put(Guid id, [FromBody] Dokument dokument)
         {
+            #pragma warning disable CS4014
             logger.PostLogger("Modifikacija postojeceg dokumenta." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
             if (id != dokument.DokumentID)
             {
                 return BadRequest();
@@ -137,11 +180,20 @@ namespace DokumentServis.Controllers
             return StatusCode(StatusCodes.Status200OK, dokument);
         }
 
+        /// <summary>
+        /// Brisanje postojeceg dokumenta
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Brise zadati dokument</returns>
+        /// <response code = "200">Obrisan je dokument</response>
+        /// <response code = "404">Ne postoji dokument za kojeg se izvrsava brisanje</response>
         // DELETE api/<DokumentController>/5
         [HttpDelete("{id}")]
         public IActionResult Delete(Guid id)
         {
+            #pragma warning disable CS4014
             logger.PostLogger("Brisanje postojeceg dokumenta." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
             Dokument dokument = dokumentService.GetById(id);
             if (dokument == null)
             {
@@ -173,7 +225,7 @@ namespace DokumentServis.Controllers
                 bool proveraKupca = false;
                 foreach (var k in kupci)
                 {
-                    if (k.KupacID == model.KupacID)
+                    if (k.KupacId == model.KupacID)
                     {
                         proveraKupca = true;
                     }
@@ -183,7 +235,7 @@ namespace DokumentServis.Controllers
                 bool proveraLicitera = false;
                 foreach (var k in liciteri)
                 {
-                    if (k.LiciterID == model.LiciterID)
+                    if (k.KupacId == model.LiciterID)
                     {
                         proveraLicitera = true;
                     }

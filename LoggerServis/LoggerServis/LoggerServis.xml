@@ -1,0 +1,130 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>LoggerServis</name>
+    </assembly>
+    <members>
+        <member name="T:LoggerServis.Controllers.LoggerController">
+            <summary>
+            Logger controller pomocu kojeg se vrse sve potrebne funkcionalnosti vezane za controller
+            </summary>
+        </member>
+        <member name="M:LoggerServis.Controllers.LoggerController.#ctor">
+            <summary>
+            Logger controller konstruktor
+            </summary>
+        </member>
+        <member name="M:LoggerServis.Controllers.LoggerController.Get">
+            <summary>
+            Pristup svim loggerima
+            </summary>
+            <returns>Vraca listu svih logger-a</returns>
+            <response code = "200">Pristup svim logger-ima</response>
+        </member>
+        <member name="M:LoggerServis.Controllers.LoggerController.Get(System.Int32)">
+            <summary>
+            Pristup loggeru na osnovu zadatog id-a
+            </summary>
+            <param name="id"></param>
+            <returns>Vraca logger ciji je id zadat u putanji</returns>
+            <response code = "200">Dobijanje loggera na osnovu zadatog id-a</response>
+            <response code = "404">Ne postoji logger sa zadatim id-em</response>
+        </member>
+        <member name="M:LoggerServis.Controllers.LoggerController.Post(LoggerServis.Database.Entities.Logger)">
+            <summary>
+            Kreiranje novog loggera
+            </summary>
+            <param name="model"></param>
+            <returns>Vraca novi logger</returns>
+            <response code = "201">Kreiran je novi logger</response>
+            <response code = "500">Greska prilikom pokusaja kreiranja logger</response>
+        </member>
+        <member name="M:LoggerServis.Controllers.LoggerController.Put(System.Int32,LoggerServis.Database.Entities.Logger)">
+            <summary>
+            Modifikacija postojeceg loggera
+            </summary>
+            <param name="id"></param>
+            <param name="logger"></param>
+            <returns>Vraca modifikovan logger</returns>
+            <response code = "200">Dobijanje modifikovanog loggera</response>
+            <response code = "404">Ne postoji logger sa zadatim id-em</response>
+        </member>
+        <member name="M:LoggerServis.Controllers.LoggerController.Delete(System.Int32)">
+            <summary>
+            Brisanje postojeceg loggera
+            </summary>
+            <param name="id"></param>
+            <returns>Brise zadati logger</returns>
+            <response code = "200">Obrisan je logger</response>
+            <response code = "404">Ne postoji logger za kojeg se izvrsava brisanje</response>
+        </member>
+        <member name="T:LoggerServis.Database.Entities.Logger">
+            <summary>
+            Logger entity
+            </summary>
+        </member>
+        <member name="P:LoggerServis.Database.Entities.Logger.LoggerID">
+            <summary>
+            LoggerID primarni kljuc
+            </summary>
+        </member>
+        <member name="P:LoggerServis.Database.Entities.Logger.OpisAktivnosti">
+            <summary>
+            Opis aktivnosti 
+            </summary>
+        </member>
+        <member name="P:LoggerServis.Database.Entities.Logger.Datum">
+            <summary>
+            Datum i vreme
+            </summary>
+        </member>
+        <member name="T:LoggerServis.Services.LoggerService">
+            <summary>
+            Logger servis klasa
+            </summary>
+        </member>
+        <member name="M:LoggerServis.Services.LoggerService.#ctor">
+            <summary>
+            Logger servis konstruktor
+            </summary>
+        </member>
+        <member name="M:LoggerServis.Services.LoggerService.GetAll">
+            <summary>
+            Getovanje svih loggera iz baze 
+            </summary>
+            <returns>Vraca sve loggere iz baze</returns>
+        </member>
+        <member name="M:LoggerServis.Services.LoggerService.GetById(System.Int32)">
+            <summary>
+            Getovanje svih loggera iz baze po zadatom idu
+            </summary>
+            <param name="id"></param>
+            <returns>Vraca logger sa zadatim id-em</returns>
+        </member>
+        <member name="M:LoggerServis.Services.LoggerService.Save(LoggerServis.Database.Entities.Logger)">
+            <summary>
+            Kreiranje loggera
+            </summary>
+            <param name="logger"></param>
+        </member>
+        <member name="M:LoggerServis.Services.LoggerService.Update(LoggerServis.Database.Entities.Logger)">
+            <summary>
+            Modifikovanje loggera
+            </summary>
+            <param name="logger"></param>
+        </member>
+        <member name="M:LoggerServis.Services.LoggerService.LoggerExists(System.Int32)">
+            <summary>
+            Provera da li logger postoji u bazi
+            </summary>
+            <param name="id"></param>
+            <returns>Vraca true ili false u zavisnosti od toga da li postoji ili ne</returns>
+        </member>
+        <member name="M:LoggerServis.Services.LoggerService.Delete(LoggerServis.Database.Entities.Logger)">
+            <summary>
+            Brisanje loggera
+            </summary>
+            <param name="logger"></param>
+        </member>
+    </members>
+</doc>
