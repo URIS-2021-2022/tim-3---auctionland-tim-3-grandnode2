@@ -22,23 +22,23 @@ namespace Zalba.Entities
         /// <summary>
         /// Popunjava bazu sa nekim inicijalnim podacima
         /// </summary>
-        protected override void OnModelCreating(ModelBuilder builder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            builder.Entity<TipZalbeE>()
+            modelBuilder.Entity<TipZalbeE>()
                 .HasData(new
                 {
                     TipZalbeID = Guid.Parse("044f3de0-a9dd-4c2e-b745-89976a1b2a36"),
                     NazivTipa = "nnnnnn",
                     OpisTipa = "..."
                 });
-            builder.Entity<TipZalbeE>()
+            modelBuilder.Entity<TipZalbeE>()
                 .HasData(new
                 {
                     TipZalbeID = Guid.Parse("32cd906d-8bab-457c-ade2-fbc4ba523029"),
                     NazivTipa = "nnnnnn",
                     OpisTipa = "..."
                 });
-            builder.Entity<ZalbaE>()
+            modelBuilder.Entity<ZalbaE>()
                 .HasData(new
                 {
                     ZalbaID = Guid.Parse("6a411c13-a195-48f7-8dbd-67596c3974c0"),
@@ -54,7 +54,7 @@ namespace Zalba.Entities
                     RadnjaZalbe = "JN ide u drugi krug sa novim uslovima"
                 });
 
-            builder.Entity<ZalbaE>()
+            modelBuilder.Entity<ZalbaE>()
                 .HasData(new
                 {
                     ZalbaID = Guid.Parse("1c7ea607-8ddb-493a-87fa-4bf5893e965b"),

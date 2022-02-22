@@ -97,12 +97,7 @@ namespace Zalba.Controllers
             }
             try
             {
-                /*bool modelValid = ValidateZalba(zalba);
-
-               if (!modelValid)
-                {
-                    return BadRequest("Zalba ne odgovara");
-                }*/
+                
 
                 var tipZalbeE = mapper.Map<TipZalbeE>(tipZalbe);
                 var confirmation = tipZalbeRepository.CreateTipZalbe(tipZalbeE);
@@ -179,7 +174,7 @@ namespace Zalba.Controllers
             }
             try
             {
-                //bool modelValid = ValidateZalba(zalba);
+              
 
                 if (tipZalbeRepository.GetTipZalbe(tipZalbe.TipZalbeID) == null)
                 {
@@ -210,18 +205,6 @@ namespace Zalba.Controllers
             return Ok();
         }
 
-       /* private bool ValidateZalba(KreiranjeZalbeDto zalba)
-        {
-            if (zalba.DatResenja < zalba.DatPodnosenjaZalbe)
-            {
-                return false;
-            }
-            if (zalba.DatResenja > DateTime.Now || zalba.DatPodnosenjaZalbe > DateTime.Now)
-            {
-                return false;
-            }
-
-            return true;
-        }*/
+       
     }
 }

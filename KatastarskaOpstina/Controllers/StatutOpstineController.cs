@@ -97,12 +97,7 @@ namespace KatastarskaOpstina.Controllers
             }
             try
             {
-                /*bool modelValid = ValidatestatusOpstine(statusOpstine);
-
-               if (!modelValid)
-                {
-                    return BadRequest("statusOpstine ne odgovara");
-                }*/
+                
 
                 var statutOpstineE = mapper.Map<StatutOpstineE>(statutOpstine);
                 var confirmation = statutOpstineRepository.CreateStatutOpstine(statutOpstineE);
@@ -179,7 +174,7 @@ namespace KatastarskaOpstina.Controllers
             }
             try
             {
-                //bool modelValid = ValidatestatusOpstine(statusOpstine);
+
 
                 if (statutOpstineRepository.GetStatutOpstine(statutOpstine.StatutOpstineID) == null)
                 {

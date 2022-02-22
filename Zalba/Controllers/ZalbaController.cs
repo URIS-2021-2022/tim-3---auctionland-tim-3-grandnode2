@@ -133,12 +133,7 @@ namespace Zalba.Controllers
             }
             try
             {
-                /*bool modelValid = ValidateZalba(zalba);
-
-               if (!modelValid)
-                {
-                    return BadRequest("Zalba ne odgovara");
-                }*/
+                
 
                 var zalbaE = mapper.Map<ZalbaE>(zalba);
                 var confirmation = zalbaRepository.CreateZalba(zalbaE);
@@ -216,7 +211,7 @@ namespace Zalba.Controllers
             }
             try
             {
-                //bool modelValid = ValidateZalba(zalba);
+               
                
                 if (zalbaRepository.GetZalba(zalba.ZalbaID) == null)
                 {
@@ -247,19 +242,7 @@ namespace Zalba.Controllers
             return Ok();
         }
 
-        private bool ValidateZalba(ZalbaCreationDto zalba)
-        {
-            if(zalba.DatResenja < zalba.DatPodnosenjaZalbe)
-            {
-                return false;
-            }
-            if(zalba.DatResenja > DateTime.Now || zalba.DatPodnosenjaZalbe > DateTime.Now)
-            {
-                return false;
-            }
-
-            return true;
-        }
+       
 
     }
 }

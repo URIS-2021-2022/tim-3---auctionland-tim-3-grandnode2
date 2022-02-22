@@ -105,12 +105,7 @@ namespace KatastarskaOpstina.Controllers
             }
             try
             {
-                /*bool modelValid = ValidatekatastarskaOpstina(katastarskaOpstina);
-
-               if (!modelValid)
-                {
-                    return BadRequest("katastarskaOpstina ne odgovara");
-                }*/
+                
 
                 var katastarskaOpstinaE = mapper.Map<KatastarskaOpstinaE>(katastarskaOpstina);
                 var confirmation = katastarskaOpstinaRepository.CreateKatastarskaOpstina(katastarskaOpstinaE);
@@ -186,7 +181,7 @@ namespace KatastarskaOpstina.Controllers
             }
             try
             {
-                //bool modelValid = ValidatekatastarskaOpstina(katastarskaOpstina);
+                
 
                 if (katastarskaOpstinaRepository.GetKatastarskaOpstinaById(katastarskaOpstina.KatastarskaOpstinaID) == null)
                 {
