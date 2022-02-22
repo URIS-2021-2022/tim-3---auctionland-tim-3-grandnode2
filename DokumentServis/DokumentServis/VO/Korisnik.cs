@@ -7,7 +7,7 @@ namespace DokumentServis.VO
 {
     public class Korisnik
     {
-        public int KorisnikID { get; set; }
+        public Guid KorisnikID { get; set; }
 
         public string ImeKorisnika { get; set; }
 
@@ -17,6 +17,6 @@ namespace DokumentServis.VO
 
         public string Lozinka { get; set; }
 
-        public int TipKorisnikaID { get; set; }
+        public Guid TipKorisnikaID { get; set; }
     }
 }

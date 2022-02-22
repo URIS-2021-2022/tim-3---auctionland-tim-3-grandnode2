@@ -8,14 +8,14 @@ namespace KorisnikServis.Database.Entities
 {
     public class Korisnik
     {
-        public int KorisnikID { get; set; }
+        public Guid KorisnikID { get; set; }
         public string ImeKorisnika { get; set; }
         public string PrezimeKorisnika { get; set; }
         public string KorisnickoIme { get; set; }
         public string Lozinka { get; set; }
 
         [ForeignKey("TipKorisnikaID")]
-        public int TipKorisnikaID { get; set; }
+        public Guid TipKorisnikaID { get; set; }
 
     }
 }

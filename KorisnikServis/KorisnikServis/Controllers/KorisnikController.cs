@@ -74,7 +74,7 @@ namespace KorisnikServis.Controllers
         // GET api/<KorisnikController>/5
         [Authorize(Roles = "Administrator")]
         [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        public IActionResult GetById(Guid id)
         {
             logger.PostLogger("Pristup korisniku putem id-a." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
             Korisnik korisnik = korisnikService.GetById(id);
@@ -134,7 +134,7 @@ namespace KorisnikServis.Controllers
         // PUT api/<KorisnikController>/5
         [Authorize(Roles = "Administrator, Superuser, Tehnicki sekretar, Prva komisija, Menadzer, Operater Nadmetanja")]
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] Korisnik korisnik)
+        public IActionResult Put(Guid id, [FromBody] Korisnik korisnik)
         {
             logger.PostLogger("Modifikacija postojeceg korisnika." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
             if (id != korisnik.KorisnikID)
@@ -162,7 +162,7 @@ namespace KorisnikServis.Controllers
         // DELETE api/<KorisnikController>/5
         [Authorize(Roles = "Administrator")]
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(Guid id)
         {
             logger.PostLogger("Brisanje postojeceg korisnika." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
             Korisnik korisnik = korisnikService.GetById(id);

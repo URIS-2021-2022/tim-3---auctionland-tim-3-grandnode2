@@ -7,7 +7,7 @@ namespace DokumentServis.VO
 {
     public class Liciter
     {
-        public int LiciterID { get; set; }
+        public Guid LiciterID { get; set; }
 
         public string Ime { get; set; }
 

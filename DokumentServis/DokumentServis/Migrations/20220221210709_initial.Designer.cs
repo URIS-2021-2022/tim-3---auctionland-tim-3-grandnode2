@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DokumentServis.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20220219153025_initial")]
+    [Migration("20220221210709_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,10 +23,9 @@ namespace DokumentServis.Migrations
 
             modelBuilder.Entity("DokumentServis.Database.Entities.Dokument", b =>
                 {
-                    b.Property<int>("DokumentID")
+                    b.Property<Guid>("DokumentID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("Datum")
                         .HasColumnType("datetime2");
@@ -34,20 +33,20 @@ namespace DokumentServis.Migrations
                     b.Property<DateTime>("DatumDonosenja")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("KorisnikID")
-                        .HasColumnType("int");
+                    b.Property<Guid>("KorisnikID")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("KupacID")
-                        .HasColumnType("int");
+                    b.Property<Guid>("KupacID")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("LiciterID")
-                        .HasColumnType("int");
+                    b.Property<Guid>("LiciterID")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Sablon")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("VerzijaDokumentaID")
-                        .HasColumnType("int");
+                    b.Property<Guid>("VerzijaDokumentaID")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ZavodniBroj")
                         .HasColumnType("nvarchar(max)");
@@ -61,10 +60,9 @@ namespace DokumentServis.Migrations
 
             modelBuilder.Entity("DokumentServis.Database.Entities.VerzijaDokumenta", b =>
                 {
-                    b.Property<int>("VerzijaDokumentaID")
+                    b.Property<Guid>("VerzijaDokumentaID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("Datum")
                         .HasColumnType("datetime2");

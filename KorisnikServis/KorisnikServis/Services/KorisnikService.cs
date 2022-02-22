@@ -37,7 +37,7 @@ namespace KorisnikServis.Services
             return korisnik;
         }
 
-        public Korisnik GetById(int id)
+        public Korisnik GetById(Guid id)
         {
             return db.Korisnik.Find(id);
         }
@@ -45,7 +45,7 @@ namespace KorisnikServis.Services
         public List<Korisnik> GetByTip(string nazivTipa)
         {
             List<Korisnik> korisniks = new List<Korisnik>();
-            int tipKorisnikaID = 0;
+            Guid tipKorisnikaID = Guid.Empty;
             foreach (var k in db.TipKorisnika)
             {
                 if (k.NazivTipa == nazivTipa)
@@ -69,12 +69,12 @@ namespace KorisnikServis.Services
         {
             Korisnik korisnik = new Korisnik()
             {
-                KorisnikID = Int32.Parse(identityClaims.FindFirst("KorisnikID").Value),
+                KorisnikID = Guid.Parse(identityClaims.FindFirst("KorisnikID").Value),
                 ImeKorisnika = identityClaims.FindFirst("ImeKorisnika").Value,
                 PrezimeKorisnika = identityClaims.FindFirst("PrezimeKorisnika").Value,
                 KorisnickoIme = identityClaims.FindFirst("KorisnickoIme").Value,
                 Lozinka = identityClaims.FindFirst("Lozinka").Value,
-                TipKorisnikaID = Int32.Parse(identityClaims.FindFirst("TipKorisnikaID").Value)
+                TipKorisnikaID = Guid.Parse(identityClaims.FindFirst("TipKorisnikaID").Value)
             };
             return korisnik;
         }
@@ -90,7 +90,7 @@ namespace KorisnikServis.Services
             db.SaveChanges();
         }
 
-        public bool KorisnikExists(int id)
+        public bool KorisnikExists(Guid id)
         {
             return db.Korisnik.Any(e => e.KorisnikID == id);
         }

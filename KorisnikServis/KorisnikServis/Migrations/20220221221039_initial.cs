@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace KorisnikServis.Migrations
 {
@@ -10,8 +11,7 @@ namespace KorisnikServis.Migrations
                 name: "TipKorisnika",
                 columns: table => new
                 {
-                    TipKorisnikaID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TipKorisnikaID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     NazivTipa = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -23,13 +23,12 @@ namespace KorisnikServis.Migrations
                 name: "Korisnik",
                 columns: table => new
                 {
-                    KorisnikID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    KorisnikID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ImeKorisnika = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PrezimeKorisnika = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     KorisnickoIme = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Lozinka = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TipKorisnikaID = table.Column<int>(type: "int", nullable: false)
+                    TipKorisnikaID = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {

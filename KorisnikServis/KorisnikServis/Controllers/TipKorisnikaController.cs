@@ -38,7 +38,7 @@ namespace KorisnikServis.Controllers
 
         // GET api/<TipKorisnikaController>/5
         [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        public IActionResult Get(Guid id)
         {
             logger.PostLogger("Pristup svim tipovima korisnika po id-u." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
             TipKorisnika tipKorisnika = tipKorisnikaService.GetById(id);
@@ -67,7 +67,7 @@ namespace KorisnikServis.Controllers
 
         // PUT api/<TipKorisnikaController>/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] TipKorisnika tipKorisnika)
+        public IActionResult Put(Guid id, [FromBody] TipKorisnika tipKorisnika)
         {
             logger.PostLogger("Modifikacija postojeceg tipa korisnika." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
             if (id != tipKorisnika.TipKorisnikaID)
@@ -96,7 +96,7 @@ namespace KorisnikServis.Controllers
 
         // DELETE api/<TipKorisnikaController>/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(Guid id)
         {
             logger.PostLogger("Brisanje postojeceg tipa korisnika." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
             TipKorisnika tipKorisnika = tipKorisnikaService.GetById(id);

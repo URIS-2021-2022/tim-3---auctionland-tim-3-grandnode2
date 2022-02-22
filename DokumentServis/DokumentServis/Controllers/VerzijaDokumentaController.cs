@@ -37,7 +37,7 @@ namespace DokumentServis.Controllers
 
         // GET api/<VerzijaDokumentaController>/5
         [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        public IActionResult Get(Guid id)
         {
             logger.PostLogger("Pristup verziji dokumenta putem id-a." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
             VerzijaDokumenta verzijaDokumenta = verzijaDokumentaService.GetById(id);
@@ -66,7 +66,7 @@ namespace DokumentServis.Controllers
 
         // PUT api/<VerzijaDokumentaController>/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] VerzijaDokumenta verzijaDokumenta)
+        public IActionResult Put(Guid id, [FromBody] VerzijaDokumenta verzijaDokumenta)
         {
             logger.PostLogger("Modifikacija postojece verzije dokumenta." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
             if (id != verzijaDokumenta.VerzijaDokumentaID)
@@ -95,7 +95,7 @@ namespace DokumentServis.Controllers
 
         // DELETE api/<VerzijaDokumentaController>/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(Guid id)
         {
             logger.PostLogger("Brisanje postojece verzije dokumenta." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
             VerzijaDokumenta verzijaDokumenta = verzijaDokumentaService.GetById(id);

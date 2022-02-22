@@ -7,7 +7,7 @@ namespace DokumentServis.VO
 {
     public class Kupac
     {
-        public int KupacID { get; set; }
+        public Guid KupacID { get; set; }
 
         public long OstvarenaPovrsina { get; set; }
 

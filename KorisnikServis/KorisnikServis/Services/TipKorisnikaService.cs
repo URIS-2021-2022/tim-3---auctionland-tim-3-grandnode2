@@ -22,7 +22,7 @@ namespace KorisnikServis.Services
             return db.TipKorisnika.ToList();
         }
 
-        public TipKorisnika GetById(int id)
+        public TipKorisnika GetById(Guid id)
         {
             return db.TipKorisnika.Find(id);
         }
@@ -39,7 +39,7 @@ namespace KorisnikServis.Services
             db.SaveChanges();
         }
 
-        public bool TipKorisnikaExists(int id)
+        public bool TipKorisnikaExists(Guid id)
         {
             return db.TipKorisnika.Any(e => e.TipKorisnikaID == id);
         }
