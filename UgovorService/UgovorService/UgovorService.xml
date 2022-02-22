@@ -132,21 +132,6 @@
             ID kupca
             </summary>
         </member>
-        <member name="P:UgovorService.Models.LiceDto.LiceId">
-            <summary>
-            ID kupca
-            </summary>
-        </member>
-        <member name="P:UgovorService.Models.LiceDto.Ime">
-            <summary>
-            Ime kupca
-            </summary>
-        </member>
-        <member name="P:UgovorService.Models.LiceDto.Prezime">
-            <summary>
-            Prezime kupca
-            </summary>
-        </member>
         <member name="P:UgovorService.Models.UgovorConfirmationDto.UgovorId">
             <summary>
             ID ugovora

@@ -18,6 +18,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using KupacService.Logger;
 
 namespace KupacService
 {
@@ -42,6 +43,8 @@ namespace KupacService
             services.AddScoped<IKupacRepository, KupacRepository>();
             services.AddScoped<IFizickoLiceRepository, FizickoLiceRepository>();
             services.AddScoped<IPravnoLiceRepository, PravnoLiceRepository>();
+            services.AddScoped<ILoggerMockRepository, LoggerMockRepository>();
+            services.AddScoped<IPravnoLiceRepository, PravnoLiceRepository>();
             services.AddScoped<ILiciterRepository, LiciterRepository>();
             services.AddScoped<IKontaktOsobaRepository, KontaktOsobaRepository>();
 
@@ -56,6 +59,8 @@ namespace KupacService
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "KupacService", Version = "v1" });
             });
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

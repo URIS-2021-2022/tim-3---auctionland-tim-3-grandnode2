@@ -220,21 +220,6 @@
             Radnja zalbe
             </summary>
         </member>
-        <member name="P:Zalba.Models.PodnosilacZalbeDto.PodnosilacZalbeID">
-            <summary>
-            ID podnosioca zalbe
-            </summary>
-        </member>
-        <member name="P:Zalba.Models.PodnosilacZalbeDto.Ime">
-            <summary>
-            Ime podnosioca zalbe
-            </summary>
-        </member>
-        <member name="P:Zalba.Models.PodnosilacZalbeDto.Prezime">
-            <summary>
-            Prezime podnosioca zalbe
-            </summary>
-        </member>
         <member name="P:Zalba.Models.TipZalbeConfirmationDto.TipZalbeID">
             <summary>
             ID tipa zalbe
