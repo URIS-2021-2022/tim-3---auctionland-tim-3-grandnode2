@@ -89,7 +89,7 @@ namespace KupacService.Controllers
             return Ok(mapper.Map<List<KupacConfirmationDto>>(kupci));
         }
 
-        [HttpGet]
+        [HttpGet("{kupacId}")]
         [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]

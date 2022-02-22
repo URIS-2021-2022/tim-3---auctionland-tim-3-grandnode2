@@ -1,5 +1,7 @@
 ﻿using KupacService.Auth;
+using KupacService.Data;
 using KupacService.DBContexts;
+using KupacService.ServiceCalls;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -15,6 +17,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 
 namespace KupacService
 {
@@ -34,6 +37,19 @@ namespace KupacService
             services.AddDbContext<KupacContext>(options => options.UseSqlServer(Configuration.GetConnectionString("KupacDatabase")));
 
             services.AddScoped<IAuthHelper, AuthHelper>();
+
+
+            services.AddScoped<IKupacRepository, KupacRepository>();
+            services.AddScoped<IFizickoLiceRepository, FizickoLiceRepository>();
+            services.AddScoped<IPravnoLiceRepository, PravnoLiceRepository>();
+            services.AddScoped<ILiciterRepository, LiciterRepository>();
+            services.AddScoped<IKontaktOsobaRepository, KontaktOsobaRepository>();
+
+            
+            services.AddHttpContextAccessor();
+
+            services.AddScoped<IUplataService, UplataService>();
+            services.AddScoped<IJavnoNadmetanjeService, JavnoNadmetanjeService>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
