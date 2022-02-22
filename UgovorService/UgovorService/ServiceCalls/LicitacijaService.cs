@@ -24,7 +24,7 @@ namespace UgovorService.ServiceCalls
             try
             {
                 using var httpClient = new HttpClient();
-                Uri url = new Uri($"{ _configuration["Services:LicitacijaService"] }api/licitacije?=licitacijaId" + licitacijaId);
+                Uri url = new Uri($"{ _configuration["Services:LicitacijaService"] }/api/licitacije/" + licitacijaId);
                 var request = new HttpRequestMessage(HttpMethod.Get, url);
                 request.Headers.Add("Accept", "application/json");
                 var response = await httpClient.SendAsync(request);

@@ -147,21 +147,6 @@
             Prezime kupca
             </summary>
         </member>
-        <member name="P:UgovorService.Models.LicitacijaDto.LicitacijaId">
-            <summary>
-            ID licitacije
-            </summary>
-        </member>
-        <member name="P:UgovorService.Models.LicitacijaDto.BrojLicitacije">
-            <summary>
-            Broj licitacije
-            </summary>
-        </member>
-        <member name="P:UgovorService.Models.LicitacijaDto.DatumLicitacije">
-            <summary>
-            Datum licitacije
-            </summary>
-        </member>
         <member name="P:UgovorService.Models.UgovorConfirmationDto.UgovorId">
             <summary>
             ID ugovora

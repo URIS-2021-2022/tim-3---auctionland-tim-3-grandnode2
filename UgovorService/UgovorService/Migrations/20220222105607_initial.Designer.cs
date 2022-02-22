@@ -10,8 +10,8 @@ using UgovorService.Entities;
 namespace UgovorService.Migrations
 {
     [DbContext(typeof(UgovorContext))]
-    [Migration("20220220200846_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20220222105607_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -63,10 +63,10 @@ namespace UgovorService.Migrations
                         new
                         {
                             UgovorId = new Guid("9ea5d63f-f2b0-43ec-afb4-598f70958cf1"),
-                            DatumPotpisa = new DateTime(2022, 2, 20, 21, 8, 46, 196, DateTimeKind.Local).AddTicks(7031),
-                            DatumZavodjenja = new DateTime(2022, 2, 20, 21, 8, 46, 187, DateTimeKind.Local).AddTicks(6322),
+                            DatumPotpisa = new DateTime(2022, 2, 22, 11, 56, 6, 722, DateTimeKind.Local).AddTicks(4486),
+                            DatumZavodjenja = new DateTime(2022, 2, 22, 11, 56, 6, 710, DateTimeKind.Local).AddTicks(5769),
                             LiceId = new Guid("919b3994-6c05-44b9-8f6b-47e0378491d1"),
-                            LicitacijaId = new Guid("0e644068-2ec7-4f5c-be94-9539ed6e9a13"),
+                            LicitacijaId = new Guid("4e1f1f8d-a8f7-44b1-9bda-1c1ee122628d"),
                             MestoPotpisivanja = "Subotica",
                             RokDospeca = 30,
                             RokZaVracanjeZemljista = new DateTime(2021, 12, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -76,10 +76,10 @@ namespace UgovorService.Migrations
                         new
                         {
                             UgovorId = new Guid("950713d6-f551-4b46-af25-5f8ec8f3e0aa"),
-                            DatumPotpisa = new DateTime(2022, 2, 20, 21, 8, 46, 197, DateTimeKind.Local).AddTicks(8440),
-                            DatumZavodjenja = new DateTime(2022, 2, 20, 21, 8, 46, 197, DateTimeKind.Local).AddTicks(8378),
+                            DatumPotpisa = new DateTime(2022, 2, 22, 11, 56, 6, 724, DateTimeKind.Local).AddTicks(652),
+                            DatumZavodjenja = new DateTime(2022, 2, 22, 11, 56, 6, 724, DateTimeKind.Local).AddTicks(560),
                             LiceId = new Guid("e6aefc80-8d6b-42df-b5da-f5ec9f24600f"),
-                            LicitacijaId = new Guid("b46100fa-b51c-46ac-b122-0a80bb14d5e0"),
+                            LicitacijaId = new Guid("3f8aa5b3-a67f-45b5-b518-771a7c09a944"),
                             MestoPotpisivanja = "Subotica",
                             RokDospeca = 30,
                             RokZaVracanjeZemljista = new DateTime(2021, 12, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),

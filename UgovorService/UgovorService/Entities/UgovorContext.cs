@@ -22,7 +22,7 @@ namespace UgovorService.Entities
                 .HasData(new
                 {
                     UgovorId = Guid.Parse("9ea5d63f-f2b0-43ec-afb4-598f70958cf1"),
-                    LicitacijaId = Guid.Parse("0e644068-2ec7-4f5c-be94-9539ed6e9a13"),
+                    LicitacijaId = Guid.Parse("4E1F1F8D-A8F7-44B1-9BDA-1C1EE122628D"),
                     TipGarancije = TipGarancije.Jemstvo,
                     LiceId = Guid.Parse("919b3994-6c05-44b9-8f6b-47e0378491d1"),
                     RokDospeca = 30,
@@ -37,7 +37,7 @@ namespace UgovorService.Entities
               .HasData(new
               {
                   UgovorId = Guid.Parse("950713d6-f551-4b46-af25-5f8ec8f3e0aa"),
-                  LicitacijaId = Guid.Parse("b46100fa-b51c-46ac-b122-0a80bb14d5e0"),
+                  LicitacijaId = Guid.Parse("3F8AA5B3-A67F-45B5-B518-771A7C09A944"),
                   TipGarancije = TipGarancije.GarancijaNekretninom,
                   LiceId = Guid.Parse("e6aefc80-8d6b-42df-b5da-f5ec9f24600f"),
                   RokDospeca = 30,
