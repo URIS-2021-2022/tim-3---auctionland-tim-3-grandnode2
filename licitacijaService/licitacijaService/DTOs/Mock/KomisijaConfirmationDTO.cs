@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace licitacijaService.DTOs.Mock
 {
-    public class KomisijaConfirmationDTO
+    public class KomisijaConfirmationDto
     {
 
         /// <summary>

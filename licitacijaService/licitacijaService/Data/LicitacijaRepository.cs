@@ -39,14 +39,9 @@ namespace licitacijaService.Data
 
         public List<Licitacija> GetLicitacije(string brojLicitacije = null)
         {
-            try
-            {
+            
                 return context.licitacije.Where(l => (brojLicitacije == null || l.brojLicitacije == Int32.Parse(brojLicitacije))).ToList();
-            }
-            catch
-            {
-                return null;
-            }
+            
         }
 
         public bool SaveChanges()

@@ -19,7 +19,7 @@ namespace licitacijaService.ServiceCalls
             this.configuration = configuration;
         }
 
-        public async Task<List<JavnoNadmetanjeConfirmationDTO>> GetJavnaNadmetanjaByLicitacijaId(Guid licitacijaId)
+        public async Task<List<JavnoNadmetanjeConfirmationDto>> GetJavnaNadmetanjaByLicitacijaId(Guid licitacijaId)
         {
             try
             {
@@ -35,7 +35,7 @@ namespace licitacijaService.ServiceCalls
                     {
                         return default;
                     }
-                    return JsonConvert.DeserializeObject<List<JavnoNadmetanjeConfirmationDTO>>(content);
+                    return JsonConvert.DeserializeObject<List<JavnoNadmetanjeConfirmationDto>>(content);
                 }
                 return default;
             }

@@ -83,14 +83,14 @@ namespace licitacijaService
                          License = new Microsoft.OpenApi.Models.OpenApiLicense
                          {
                              Name = "FTN licence",
-                             Url = new Uri("http://www.ftn.uns.ac.rs/")
+                             Url = new Uri(Configuration["LicenceUri"])
                          }
                      });
 
                 var xmlComments = $"{Assembly.GetExecutingAssembly().GetName().Name }.xml";
                 var xmlCommentsPath = Path.Combine(AppContext.BaseDirectory, xmlComments);
 
-                //setupAction.IncludeXmlComments(xmlCommentsPath);
+                setupAction.IncludeXmlComments(xmlCommentsPath);
 
             });
 

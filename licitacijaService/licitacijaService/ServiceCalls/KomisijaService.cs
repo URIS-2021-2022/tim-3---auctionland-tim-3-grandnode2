@@ -18,7 +18,7 @@ namespace licitacijaService.ServiceCalls
             this.configuration = configuration;
         }
 
-        public async Task<List<KomisijaConfirmationDTO>> GetKomisijaByOznaka(string oznakaKomisije)
+        public async Task<List<KomisijaConfirmationDto>> GetKomisijaByOznaka(string oznakaKomisije)
         {
             try
             {
@@ -34,7 +34,7 @@ namespace licitacijaService.ServiceCalls
                     {
                         return default;
                     }
-                    return JsonConvert.DeserializeObject<List<KomisijaConfirmationDTO>>(content);
+                    return JsonConvert.DeserializeObject<List<KomisijaConfirmationDto>>(content);
                 }
                 return default;
             }

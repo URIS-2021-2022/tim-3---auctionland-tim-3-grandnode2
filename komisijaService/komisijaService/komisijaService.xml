@@ -1,0 +1,414 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>komisijaService</name>
+    </assembly>
+    <members>
+        <member name="T:komisijaService.Controllers.KomisijaController">
+            <summary>
+            Komisija controller sa CRUD endpointima
+            </summary>
+        </member>
+        <member name="M:komisijaService.Controllers.KomisijaController.GetKomisije(System.String,System.String)">
+            <summary>
+            Vraca listu svih komisija
+            </summary>
+            <param name="naziv">Naziv komisije</param>
+            <param name="oznakaKomisije">Oznaka komisije</param>
+            <returns>Lista svih komisija</returns>
+            <remarks> 
+            Primer request-a \
+            GET 'https://localhost:44306/api/komisije' \
+            </remarks>
+            <response code="200">Success answer - return all komisije</response>
+            <response code="204">No content</response>
+            <response code="500">Server error</response>
+        </member>
+        <member name="M:komisijaService.Controllers.KomisijaController.GetKomisijaById(System.Guid)">
+            <summary>
+            Vraca komisiju sa specificiranim komisijaId
+            </summary>
+            <param name="komisijaId">Jedinstevni identifikator komisije</param>
+            <remarks>    
+            Primer request-a \
+            GET 'https://localhost:44306/api/komisije/' \
+                --param  'komisijaId = 4E1F1F8D-A8F7-44B1-9ABD-1C1EE122628D'
+            </remarks>
+            <response code="200">Success - vraca komisiju sa vrednosti identifikatora komisijaId</response>
+            <response code="404">Not found</response>
+            <response code="500">Server error</response>
+        </member>
+        <member name="M:komisijaService.Controllers.KomisijaController.CreateKomisija(komisijaService.DTOs.KomisijaCreationDto,System.String)">
+             <summary>
+             Dodaj novu komisiju
+             </summary>
+             <param name="KomisijaDto">Model komisije</param>
+             <param name="key">Authorization Key Value</param>
+             <remarks>
+             Primer request-a \
+             POST 'https://localhost:44306/api/komisije'\
+                 --header 'key: Bearer DunjaZamaklar' \
+             Example: \
+             { \
+                     oznakaKomisije = "kom556ef" \
+                     nazivKomisije = "Treca komisija", \
+            }
+             </remarks>
+             <response code="201">Success - vraca kreirane komisije</response>
+             <response code="401">Unauthorized user</response>
+             <response code="500">Server error</response>
+        </member>
+        <member name="M:komisijaService.Controllers.KomisijaController.UpdateKomisija(komisijaService.DTOs.KomisijaUpdateDto,System.Guid,System.String)">
+            <summary>
+            Update komisiju
+            </summary>
+            <param name="komisijaUpdateDto">Model komisije</param>
+            <param name="komisijaId">jedinstevni identifikator komisije</param>
+            <param name="key">Authorization Key Value</param>
+            <remarks>
+            Primer request-a \
+            PUT 'https://localhost:44306/api/komisije/'\
+             --header 'key: Bearer DunjaZamaklar' \
+             --param  'komisijaId = 4E1F1F8D-A8F7-44B1-9ABD-1C1EE122628D'\
+            Example: \
+            { \
+                   "nazivKomisije": "Update Test service", \
+                   "oznakaKomisije": "Update Test description", \
+            } \
+            </remarks>
+            <response code="200">Success answer - update-ovana komisija</response>
+            <response code="401">Unauthorized user</response>
+            <response code="403">Not allowed</response>
+            <response code="404">Not found</response>
+            <response code="500">Server error</response>
+        </member>
+        <member name="M:komisijaService.Controllers.KomisijaController.DeleteKomisija(System.Guid,System.String)">
+            <summary>
+            Obrisi komisiju
+            </summary>
+            <param name="komisijaId">Jedinstevni identifikator komisije</param>
+            <param name="key">Authorization Key Value</param>
+            <remarks>
+            Example of request \
+            DELETE 'https://localhost:44306/api/komisije/'\
+             --header 'key: Bearer DunjaZamaklar' \
+             --param  'komisijaId = 4E1F1F8D-A8F7-44B1-9ABD-1C1EE122628D'\
+            </remarks>
+            <response code="200">Success answer</response>
+            <response code="401">Unauthorized user</response>
+            <response code="403">Not allowed</response>
+            <response code="404">Not found</response>
+            <response code="500">Server error</response>
+        </member>
+        <member name="M:komisijaService.Controllers.KomisijaController.GetKomisijaOptions">
+            <summary>
+            Vraca implementirane opcije rada sa servisom
+            </summary>
+            <returns></returns>
+            <remarks>
+            Example of request
+            OPTIONS 'https://localhost:44395/api/komisije'
+            </remarks>
+        </member>
+        <member name="T:komisijaService.Controllers.LicnostKomisijeController">
+            <summary>
+            LicnostKomisije controller sa CRUD endpointima
+            </summary>
+        </member>
+        <member name="M:komisijaService.Controllers.LicnostKomisijeController.GetLicnostiKomisije(System.String,System.String,System.String)">
+            <summary>
+            Vraca listu svih licnosti komisije
+            </summary>
+            <param name="imeLicnostiKomisije">Ime licnosti komisije</param>
+            <param name="prezimeLicnostiKomisije">Prezime licnosti komisije</param>
+            <param name="oznakaKomisije">Oznaka komisije</param>
+            <returns>Lista svih licnosti komisije</returns>
+            <remarks> 
+            Primer request-a \
+            GET 'https://localhost:44306/api/licnostiKomisije' \
+            </remarks>
+            <response code="200">Success answer - return all licnosti komisije</response>
+            <response code="204">No content</response>
+            <response code="500">Server error</response>
+        </member>
+        <member name="M:komisijaService.Controllers.LicnostKomisijeController.GetLicnostKomisijeById(System.Guid)">
+            <summary>
+            Vraca licnost komisije sa specificiranim licnostKomisijeId
+            </summary>
+            <param name="licnostKomisijeId">Jedinstevni identifikator licnosti komisije</param>
+            <remarks>    
+            Primer request-a \
+            GET 'https://localhost:44306/api/licnostKomisije/' \
+                --param  'licnostKomisijeId = 4E1F1F8D-A8F7-44B1-9BDA-1C1EE122628D'
+            </remarks>
+            <response code="200">Success - vraca licnost komisije sa vrednosti identifikatora licnostKomisijeId</response>
+            <response code="404">Not found</response>
+            <response code="500">Server error</response>
+        </member>
+        <member name="M:komisijaService.Controllers.LicnostKomisijeController.CreateLicnostKomisije(komisijaService.DTOs.LicnostKomisijeCreationDto,System.String)">
+             <summary>
+             Dodaj novu licnost komisije
+             </summary>
+             <param name="LicnostKomisijeDto">Model licnosti komisije</param>
+             <param name="key">Authorization Key Value</param>
+             <remarks>
+             Primer request-a \
+             POST 'https://localhost:44306/api/licnostiKomisije'\
+                 --header 'key: Bearer DunjaZamaklar' \
+             Example: \
+             { \
+                     imeLicnostiKomisije: "Mina",
+                     prezimeLicnostiKomisije: "Spasic",
+                     funkcijaLicnostiKomisije: "Obican clan",
+                     kontaktLicnostiKomisije: "0672514739",
+                     datumRodjenjaLicnostiKomisije: "1976-01-19T00:00:00",
+                     oznakaKomisije: "kom345ef"        
+            }
+             </remarks>
+             <response code="201">Success - vraca kreiranu licnost komisije</response>
+             <response code="401">Unauthorized user</response>
+             <response code="500">Server error</response>
+        </member>
+        <member name="M:komisijaService.Controllers.LicnostKomisijeController.UpdateLicnostKomisije(komisijaService.DTOs.LicnostKomisijeUpdateDto,System.Guid,System.String)">
+            <summary>
+            Update licnost komisije
+            </summary>
+            <param name="licnostKomisijeUpdateDto">Model licnosti komisije</param>
+            <param name="licnostKomisijeId">jedinstevni identifikator licnosti komisije</param>
+            <param name="key">Authorization Key Value</param>
+            <remarks>
+            Primer request-a \
+            PUT 'https://localhost:44306/api/licnostiKomisije/'\
+             --header 'key: Bearer DunjaZamaklar' \
+             --param  'licnostKomisijeId = 4E1F1F8D-A8F7-44B1-9BDA-1C1EE122628D'\
+            Example: \
+            { \
+                    imeLicnostiKomisije: "Mina",
+                    prezimeLicnostiKomisije: "Spasic",
+                    funkcijaLicnostiKomisije: "Obican clan",
+                    kontaktLicnostiKomisije: "0672514739",
+                    datumRodjenjaLicnostiKomisije: "1976-01-19T00:00:00",
+                    oznakaKomisije: "kom345ef"   
+            } \
+            </remarks>
+            <response code="200">Success answer - update-ovana licnost komisije</response>
+            <response code="401">Unauthorized user</response>
+            <response code="403">Not allowed</response>
+            <response code="404">Not found</response>
+            <response code="500">Server error</response>
+        </member>
+        <member name="M:komisijaService.Controllers.LicnostKomisijeController.DleteLicnostKomisije(System.Guid,System.String)">
+            <summary>
+            Obrisi licnost komisije
+            </summary>
+            <param name="licnostKomisijeId">Jedinstevni identifikator licnosti komisije</param>
+            <param name="key">Authorization Key Value</param>
+            <remarks>
+            Example of request \
+            DELETE 'https://localhost:44306/api/licnostiKomisije/'\
+             --header 'key: Bearer DunjaZamaklar' \
+             --param  'licnostKomisijeId = 4E1F1F8D-A8F7-44B1-9BDA-1C1EE122628D'\
+            </remarks>
+            <response code="200">Success answer</response>
+            <response code="401">Unauthorized user</response>
+            <response code="403">Not allowed</response>
+            <response code="404">Not found</response>
+            <response code="500">Server error</response>
+        </member>
+        <member name="M:komisijaService.Controllers.LicnostKomisijeController.GetLicnostKomisijeOptions">
+            <summary>
+            Vraca implementirane opcije rada sa servisom
+            </summary>
+            <returns></returns>
+            <remarks>
+            Example of request
+            OPTIONS 'https://localhost:44395/api/licnostiKomisije'
+            </remarks>
+        </member>
+        <member name="M:komisijaService.DBContexts.KomisijaContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+            Filling the database with data
+            </summary>
+        </member>
+        <member name="P:komisijaService.DTOs.KomisijaConfirmationDto.nazivKomisije">
+            <summary>
+            Naziv komisije
+            </summary>
+        </member>
+        <member name="P:komisijaService.DTOs.KomisijaConfirmationDto.oznakaKomisije">
+            <summary>
+            Oznaka komisije
+            </summary>
+        </member>
+        <member name="P:komisijaService.DTOs.KomisijaConfirmationDto.predsednikKomisije">
+            <summary>
+            Predsednik komisije
+            </summary>
+        </member>
+        <member name="P:komisijaService.DTOs.KomisijaConfirmationDto.clanoviKomisije">
+            <summary>
+            Clanovi komisije
+            </summary>
+        </member>
+        <member name="P:komisijaService.DTOs.KomisijaCreationDto.nazivKomisije">
+            <summary>
+            Naziv komisije
+            </summary>
+        </member>
+        <member name="P:komisijaService.DTOs.KomisijaCreationDto.oznakaKomisije">
+            <summary>
+            Oznaka komisije
+            </summary>
+        </member>
+        <member name="P:komisijaService.DTOs.KomisijaUpdateDto.nazivKomisije">
+            <summary>
+            Naziv komisije
+            </summary>
+        </member>
+        <member name="P:komisijaService.DTOs.KomisijaUpdateDto.oznakaKomisije">
+            <summary>
+            Oznaka komisije
+            </summary>
+        </member>
+        <member name="P:komisijaService.DTOs.LicnostKomisijeConfirmationDto.licnostKomisije">
+            <summary>
+            Prezime i ime licnosti komisije
+            </summary>
+        </member>
+        <member name="P:komisijaService.DTOs.LicnostKomisijeConfirmationDto.funkcijaLicnostiKomisije">
+            <summary>
+            Funkcija licnosti komisije
+            </summary>
+        </member>
+        <member name="P:komisijaService.DTOs.LicnostKomisijeConfirmationDto.kontaktLicnostiKomisije">
+            <summary>
+            Broj telefona licnosti komisije
+            </summary>
+        </member>
+        <member name="P:komisijaService.DTOs.LicnostKomisijeConfirmationDto.datumRodjenjaLicnostiKomisije">
+            <summary>
+            Datum rodjenja licnosti komisije
+            </summary>
+        </member>
+        <member name="P:komisijaService.DTOs.LicnostKomisijeConfirmationDto.oznakaKomisije">
+            <summary>
+            Oznaka komisije
+            </summary>
+        </member>
+        <member name="P:komisijaService.DTOs.LicnostKomisijeCreationDto.imeLicnostiKomisije">
+            <summary>
+            Ime licnosti komisije
+            </summary>
+        </member>
+        <member name="P:komisijaService.DTOs.LicnostKomisijeCreationDto.prezimeLicnostiKomisije">
+            <summary>
+            Prezime licnosti komisije
+            </summary>
+        </member>
+        <member name="P:komisijaService.DTOs.LicnostKomisijeCreationDto.funkcijaLicnostiKomisije">
+            <summary>
+            Funkcija licnosti komisije
+            </summary>
+        </member>
+        <member name="P:komisijaService.DTOs.LicnostKomisijeCreationDto.kontaktLicnostiKomisije">
+            <summary>
+            Broj telefona licnosti komisije
+            </summary>
+        </member>
+        <member name="P:komisijaService.DTOs.LicnostKomisijeCreationDto.datumRodjenjaLicnostiKomisije">
+            <summary>
+            Datum rodjenja licnosti komisije
+            </summary>
+        </member>
+        <member name="P:komisijaService.DTOs.LicnostKomisijeCreationDto.oznakaKomisije">
+            <summary>
+            Oznaka komisije
+            </summary>
+        </member>
+        <member name="P:komisijaService.DTOs.LicnostKomisijeUpdateDto.imeLicnostiKomisije">
+            <summary>
+            Ime licnosti komisije
+            </summary>
+        </member>
+        <member name="P:komisijaService.DTOs.LicnostKomisijeUpdateDto.prezimeLicnostiKomisije">
+            <summary>
+            Prezime licnosti komisije
+            </summary>
+        </member>
+        <member name="P:komisijaService.DTOs.LicnostKomisijeUpdateDto.funkcijaLicnostiKomisije">
+            <summary>
+            Funkcija licnosti komisije
+            </summary>
+        </member>
+        <member name="P:komisijaService.DTOs.LicnostKomisijeUpdateDto.kontaktLicnostiKomisije">
+            <summary>
+            Broj telefona licnosti komisije
+            </summary>
+        </member>
+        <member name="P:komisijaService.DTOs.LicnostKomisijeUpdateDto.datumRodjenjaLicnostiKomisije">
+            <summary>
+            Datum rodjenja licnosti komisije
+            </summary>
+        </member>
+        <member name="P:komisijaService.DTOs.LicnostKomisijeUpdateDto.oznakaKomisije">
+            <summary>
+            Oznaka komisije
+            </summary>
+        </member>
+        <member name="P:komisijaService.Entites.Komisija.komisijaId">
+            <summary>
+            Identifikator komisije
+            </summary>
+        </member>
+        <member name="P:komisijaService.Entites.Komisija.nazivKomisije">
+            <summary>
+            Naziv komisije
+            </summary>
+        </member>
+        <member name="P:komisijaService.Entites.Komisija.oznakaKomisije">
+            <summary>
+            Oznaka komisije
+            </summary>
+        </member>
+        <member name="P:komisijaService.Entites.Komisija.clanoviKomisije">
+            <summary>
+            Clanovi komisije
+            </summary>
+        </member>
+        <member name="P:komisijaService.Entites.LicnostKomisije.licnostKomisijeId">
+            <summary>
+            Identifikator licnosti komisije
+            </summary>
+        </member>
+        <member name="P:komisijaService.Entites.LicnostKomisije.imeLicnostiKomisije">
+            <summary>
+            Ime licnosti komisije
+            </summary>
+        </member>
+        <member name="P:komisijaService.Entites.LicnostKomisije.prezimeLicnostiKomisije">
+            <summary>
+            Prezime licnosti komisije
+            </summary>
+        </member>
+        <member name="P:komisijaService.Entites.LicnostKomisije.funkcijaLicnostiKomisije">
+            <summary>
+            Funkcija licnosti komisije
+            </summary>
+        </member>
+        <member name="P:komisijaService.Entites.LicnostKomisije.kontaktLicnostiKomisije">
+            <summary>
+            Broj telefona licnosti komisije
+            </summary>
+        </member>
+        <member name="P:komisijaService.Entites.LicnostKomisije.datumRodjenjaLicnostiKomisije">
+            <summary>
+            Datum rodjenja licnosti komisije
+            </summary>
+        </member>
+        <member name="P:komisijaService.Entites.LicnostKomisije.komisijaId">
+            <summary>
+            Identifikator komisije
+            </summary>
+        </member>
+    </members>
+</doc>

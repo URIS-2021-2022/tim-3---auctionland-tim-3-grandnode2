@@ -8,6 +8,6 @@ namespace licitacijaService.ServiceCalls
 {
     public interface IKomisijaService
     {
-        public Task<List<KomisijaConfirmationDTO>> GetKomisijaByOznaka(string oznakaKomisije);
+        public Task<List<KomisijaConfirmationDto>> GetKomisijaByOznaka(string oznakaKomisije);
     }
 }

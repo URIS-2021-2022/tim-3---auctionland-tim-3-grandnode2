@@ -21,7 +21,6 @@ namespace komisijaService.Data
         {
             licnostKomisije.licnostKomisijeId = Guid.NewGuid();
             context.LicnostiKomisije.Add(licnostKomisije);
-           // komisijaRepository.GetKomisijaById(licnostKomisije.komisijaId).clanoviKomisije.Add();
         }
 
         public void DeleteLicnostKomisije(Guid id)

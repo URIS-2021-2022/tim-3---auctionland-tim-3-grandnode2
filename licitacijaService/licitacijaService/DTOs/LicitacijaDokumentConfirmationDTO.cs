@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace licitacijaService.DTOs
 {
-    public class LicitacijaDokumentConfirmationDTO
+    public class LicitacijaDokumentConfirmationDto
     {
 
         /// <summary>

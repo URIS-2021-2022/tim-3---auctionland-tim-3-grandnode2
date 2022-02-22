@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace licitacijaService.DTOs
 {
-    public class LicitacijaDokumentCreationandUpdateDTO
+    public class LicitacijaDokumentCreationandUpdateDto
     {
         /// <summary>
         /// Identifikator licitacije

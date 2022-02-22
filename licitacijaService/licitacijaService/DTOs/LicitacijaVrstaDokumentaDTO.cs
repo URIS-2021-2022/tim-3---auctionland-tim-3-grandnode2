@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace licitacijaService.DTOs
 {
-    public class LicitacijaVrstaDokumentaDTO
+    public class LicitacijaVrstaDokumentaDto
     {
         /// <summary>
         /// Datum podnosenja dokumenta

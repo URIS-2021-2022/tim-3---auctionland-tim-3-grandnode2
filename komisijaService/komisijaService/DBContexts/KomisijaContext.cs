@@ -53,7 +53,7 @@ namespace komisijaService.DBContexts
                {
                    licnostKomisijeId = Guid.Parse("1f8aa5b3-a67f-45c5-b519-771a7c09a944"),
                    imeLicnostiKomisije = "Marko",
-                   prezimeLicnostiKomisije = "﻿﻿﻿Markovic",
+                   prezimeLicnostiKomisije = "Stojanovic",
                    funkcijaLicnostiKomisije = "Pomocnik",
                    komisijaId = Guid.Parse("4e1f1f8d-a8f7-44b1-9abd-1c1ee122628d"),
                    kontaktLicnostiKomisije = "0645371333",

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace licitacijaService.DTOs.Mock
 {
-    public class DokumentDTO
+    public class DokumentDto
     {
         public string ZavodniBroj { get; set; }
 
