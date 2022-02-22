@@ -23,7 +23,7 @@ namespace KupacService.ServiceCalls
             try
             {
                 using var httpClient = new HttpClient();
-                Uri url = new Uri($"{ configuration["Services:UplataService"] }api/Uplate/" + kupacId);
+                Uri url = new Uri($"{ configuration["Services:UplataService"] }UplateZaKupca/" + kupacId);
                 var request = new HttpRequestMessage(HttpMethod.Get, url);
                 request.Headers.Add("Accept", "application/json");
                 var response = await httpClient.SendAsync(request);

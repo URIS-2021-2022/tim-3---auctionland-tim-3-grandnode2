@@ -23,7 +23,7 @@ namespace UgovorService.ServiceCalls
              try
             {
                 using var httpClient = new HttpClient();
-                Uri url = new Uri($"{ _configuration["Services:LiceService"] }api/kupci?=kupacId" + liceId); //Treba srediti
+                Uri url = new Uri($"{ _configuration["Services:KupacService"] }/api/Kupci/" + liceId); //Treba srediti
                 var request = new HttpRequestMessage(HttpMethod.Get, url);
                 request.Headers.Add("Accept", "application/json");
                 var response = await httpClient.SendAsync(request);

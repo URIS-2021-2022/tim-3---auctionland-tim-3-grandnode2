@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KupacService.Migrations
 {
     [DbContext(typeof(KupacContext))]
-    [Migration("20220221180735_initial")]
+    [Migration("20220222183210_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

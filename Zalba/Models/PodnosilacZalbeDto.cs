@@ -7,17 +7,9 @@ namespace Zalba.Models
 {
     public class PodnosilacZalbeDto
     {
-        /// <summary>
-        /// ID podnosioca zalbe
-        /// </summary>
-        public Guid PodnosilacZalbeID { get; set; }
-        /// <summary>
-        /// Ime podnosioca zalbe
-        /// </summary>
-        public string Ime { get; set; }
-        /// <summary>
-        /// Prezime podnosioca zalbe
-        /// </summary>
-        public string Prezime { get; set; }
+        public Guid KupacId { get; set; }
+        public int OstvarenaPovrsina { get; set; }
+        public bool ImaZabranu { get; set; }
+
     }
 }
