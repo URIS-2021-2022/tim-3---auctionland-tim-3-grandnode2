@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using JavnoNadmetanje.Entities;
+﻿using JavnoNadmetanje.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,12 +9,10 @@ namespace JavnoNadmetanje.Data
     public class SluzbeniListRepository : ISluzbeniListRepository
     {
         private readonly JavnoNadmetanjeContext context;
-        private readonly IMapper mapper;
 
-        public SluzbeniListRepository(JavnoNadmetanjeContext context, IMapper mapper)
+        public SluzbeniListRepository(JavnoNadmetanjeContext context)
         {
             this.context = context;
-            this.mapper = mapper;
         }
 
         public bool SaveChanges()

@@ -145,7 +145,7 @@ namespace JavnoNadmetanje.Controllers
 
             try
             {
-                SluzbeniListEntity sluzbeniList = sluzbeniListRepository.GetSluzbeniListById(sluzbeniListId); ;
+                SluzbeniListEntity sluzbeniList = sluzbeniListRepository.GetSluzbeniListById(sluzbeniListId); 
                 if (sluzbeniList == null)
                 {
                     return NotFound();

@@ -14,6 +14,8 @@ namespace Uplata.Data
 
         List<UplataEntity> GetUplateByPrijavaZaNadmetanjeId(Guid prijavaZaNadmetanjeId);
 
+        List<UplataEntity> GetUplateByKupacId(Guid kupacId);
+
         UplataEntity CreateUplata(UplataEntity uplata);
 
         void UpdateUplata(UplataEntity uplata);

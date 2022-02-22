@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using JavnoNadmetanje.Entities;
+﻿using JavnoNadmetanje.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,12 +9,10 @@ namespace JavnoNadmetanje.Data
     public class DokumentPrijavaZaNadmetanjeRepository : IDokumentPrijavaZaNadmetanjeRepository
     {
         private readonly JavnoNadmetanjeContext context;
-        private readonly IMapper mapper;
 
-        public DokumentPrijavaZaNadmetanjeRepository(JavnoNadmetanjeContext context, IMapper mapper)
+        public DokumentPrijavaZaNadmetanjeRepository(JavnoNadmetanjeContext context)
         {
             this.context = context;
-            this.mapper = mapper;
         }
 
         public bool SaveChanges()

@@ -17,7 +17,7 @@ namespace JavnoNadmetanje.Data
             FillData();
         }
 
-        private void FillData()
+        private static void FillData()
         {
             JavnaNadmetanja.AddRange(new List<JavnoNadmetanjeEntity>
             {
@@ -76,7 +76,7 @@ namespace JavnoNadmetanje.Data
 
         public List<JavnoNadmetanjeEntity> GetJavnaNadmetanjaByLicitacijaId(Guid licitacijaId)
         {
-            return JavnaNadmetanja.Where(j => (licitacijaId == null || j.LicitacijaId == licitacijaId)).ToList();
+            return JavnaNadmetanja.Where(j => (j.LicitacijaId == licitacijaId)).ToList();
         }
 
         public JavnoNadmetanjeEntity CreateJavnoNadmetanje(JavnoNadmetanjeEntity javnoNadmetanje)

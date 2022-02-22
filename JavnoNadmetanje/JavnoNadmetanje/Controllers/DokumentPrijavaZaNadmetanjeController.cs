@@ -3,6 +3,9 @@ using JavnoNadmetanje.Auth;
 using JavnoNadmetanje.Data;
 using JavnoNadmetanje.Entities;
 using JavnoNadmetanje.Models;
+using JavnoNadmetanje.Models.DokumentService;
+using JavnoNadmetanje.ServiceCalls;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -21,13 +24,15 @@ namespace JavnoNadmetanje.Controllers
     public class DokumentPrijavaZaNadmetanjeController : ControllerBase
     {
         private readonly IDokumentPrijavaZaNadmetanjeRepository dokumentPrijavaZaNadmetanjeRepository;
+        private readonly IDokumentService dokumentService;
         private readonly LinkGenerator linkGenerator;
         private readonly IMapper mapper;
         private readonly IAuthService authService;
 
-        public DokumentPrijavaZaNadmetanjeController(IDokumentPrijavaZaNadmetanjeRepository dokumentPrijavaZaNadmetanjeRepository, LinkGenerator linkGenerator, IMapper mapper, IAuthService authService)
+        public DokumentPrijavaZaNadmetanjeController(IDokumentPrijavaZaNadmetanjeRepository dokumentPrijavaZaNadmetanjeRepository, IDokumentService dokumentService, LinkGenerator linkGenerator, IMapper mapper, IAuthService authService)
         {
             this.dokumentPrijavaZaNadmetanjeRepository= dokumentPrijavaZaNadmetanjeRepository;
+            this.dokumentService = dokumentService;
             this.linkGenerator = linkGenerator;
             this.mapper = mapper;
             this.authService = authService;
@@ -47,11 +52,19 @@ namespace JavnoNadmetanje.Controllers
         public ActionResult<List<DokumentPrijavaZaNadmetanjeDto>> GetDokumentiPrijavaByPrijavaZaNadmetanjeId(Guid prijavaZaNadmetanjeId)
         {
             List<DokumentPrijavaZaNadmetanjeEntity> dokumentiPrijave = dokumentPrijavaZaNadmetanjeRepository.GetDokumentiPrijavaByPrijavaZaNadmetanjeId(prijavaZaNadmetanjeId);
+            string accessToken = HttpContext.GetTokenAsync("access_token").Result;
 
             if (dokumentiPrijave == null || dokumentiPrijave.Count == 0)
             {
                 return NoContent();
             }
+
+            foreach(DokumentPrijavaZaNadmetanjeEntity dok in dokumentiPrijave)
+            {
+                DokumentDto dokument = dokumentService.GetDokumentById(dok.DokumentId, accessToken).Result;
+                dok.Dokument = dokument;
+            }
+
             return Ok(mapper.Map<List<DokumentPrijavaZaNadmetanjeDto>>(dokumentiPrijave));
         }
 
@@ -70,10 +83,17 @@ namespace JavnoNadmetanje.Controllers
         public ActionResult<DokumentPrijavaZaNadmetanjeDto> GetDokumentPrijavaById(Guid prijavaZaNadmetanjeId, Guid dokumentId)
         {
             DokumentPrijavaZaNadmetanjeEntity dokumentPrijava = dokumentPrijavaZaNadmetanjeRepository.GetDokumentPrijavaById(prijavaZaNadmetanjeId, dokumentId);
+            string accessToken = HttpContext.GetTokenAsync("access_token").Result;
+
             if (dokumentPrijava == null)
             {
                 return NotFound();
             }
+
+             DokumentDto dokument = dokumentService.GetDokumentById(dokumentPrijava.DokumentId, accessToken).Result;
+             dokumentPrijava.Dokument = dokument;
+
+
             return Ok(mapper.Map<DokumentPrijavaZaNadmetanjeDto>(dokumentPrijava));
         }
 

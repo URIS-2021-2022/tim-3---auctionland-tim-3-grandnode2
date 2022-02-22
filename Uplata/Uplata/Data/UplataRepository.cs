@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,12 +9,10 @@ namespace Uplata.Data
     public class UplataRepository : IUplataRepository
     {
         private readonly UplataContext context;
-        private readonly IMapper mapper;
 
-        public UplataRepository(UplataContext context, IMapper mapper)
+        public UplataRepository(UplataContext context)
         {
             this.context = context;
-            this.mapper = mapper;
         }
 
         public bool SaveChanges()
@@ -35,7 +32,12 @@ namespace Uplata.Data
 
         public List<UplataEntity> GetUplateByPrijavaZaNadmetanjeId(Guid prijavaZaNadmetanjeId)
         {
-            return context.Uplate.Where(u => (prijavaZaNadmetanjeId == null || u.PrijavaZaNadmetanjeId == prijavaZaNadmetanjeId)).ToList();
+            return context.Uplate.Where(u => (u.PrijavaZaNadmetanjeId == prijavaZaNadmetanjeId)).ToList();
+        }
+
+        public List<UplataEntity> GetUplateByKupacId(Guid kupacId)
+        {
+            return context.Uplate.Where(u => (u.KupacId == kupacId)).ToList();
         }
 
         public UplataEntity CreateUplata(UplataEntity uplata)

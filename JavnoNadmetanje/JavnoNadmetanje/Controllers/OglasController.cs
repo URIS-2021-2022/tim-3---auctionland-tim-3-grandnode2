@@ -144,7 +144,7 @@ namespace JavnoNadmetanje.Controllers
 
             try
             {
-                OglasEntity oglas = oglasRepository.GetOglasById(oglasId); ;
+                OglasEntity oglas = oglasRepository.GetOglasById(oglasId); 
                 if (oglas == null)
                 {
                     return NotFound();
