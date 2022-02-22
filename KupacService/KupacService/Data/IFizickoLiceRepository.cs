@@ -10,6 +10,7 @@ namespace KupacService.Data
     {
         List<FizickoLice> GetFizickaLica();
         FizickoLice GetFizickoLiceById(Guid id);
+        List<Guid> GetOvlascenaLicaByKupacId(Guid kupacId);
         void CreateFizickoLice(FizickoLice fizickoLice);
         void UpdateFizickoLice(FizickoLice oldFizickoLice, FizickoLice newFizickoLice);
         void DeleteFizickoLice(Guid id);

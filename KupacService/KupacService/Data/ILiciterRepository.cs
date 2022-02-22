@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace KupacService.Data
 {
-    interface ILiciterRepository
+    public interface ILiciterRepository
     {
         List<Liciter> GetLiciteri();
         Liciter GetLiciterById(Guid id);

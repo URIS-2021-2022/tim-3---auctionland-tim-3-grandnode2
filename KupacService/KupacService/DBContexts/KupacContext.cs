@@ -16,12 +16,6 @@ namespace KupacService.DBContexts
             this.configuration = configuration;
         }
 
-        /*
-         public DbSet<LicnostKomisije> LicnostiKomisije { get; set; }
-        public DbSet<Komisija> Komisija { get; set; }
-
-         */
-
         public DbSet<Kupac> Kupac { get; set; }
         public DbSet<PravnoLice> PravnoLice { get; set; }
         public DbSet<FizickoLice> FizickoLice { get; set; }

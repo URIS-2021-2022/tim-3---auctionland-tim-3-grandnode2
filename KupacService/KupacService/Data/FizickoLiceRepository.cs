@@ -58,5 +58,15 @@ namespace KupacService.Data
             oldFizickoLice.Email = newFizickoLice.Email;
             oldFizickoLice.BrojRacuna = newFizickoLice.BrojRacuna;
         }
+
+        public List<Guid> GetOvlascenaLicaByKupacId(Guid kupacId)
+        {
+            return new List<Guid>
+            {
+                Guid.Parse("4e1f1f8d-a8f7-44b1-9abd-1c1ee122628d"),
+                Guid.Parse("3f8aa5b3-a67f-45b5-b518-771a7c09a944"),
+                Guid.Parse("4e1f1f8d-af35-44b1-9abd-1c1ee122628d")
+            };
+        }
     }
 }
