@@ -31,6 +31,14 @@ namespace KatastarskaOpstina.Controllers
             this.authService = authService;
         }
 
+        /// <summary>
+        /// Vraca sve statute opstine
+        /// </summary>
+        /// <returns>Lista statuta opstina</returns>
+        /// <response code= "200">Vraca listu statuta opstina</response>
+        /// <response code= "204">Ne postoji nijedan statut opstine</response>
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet]
         [HttpHead]
         [AllowAnonymous]
@@ -44,6 +52,15 @@ namespace KatastarskaOpstina.Controllers
             return Ok(mapper.Map<List<StatutOpstineModelDto>>(statutOpstines));
         }
 
+        /// <summary>
+        /// Vraca statut opstine po ID-u
+        /// </summary>
+        /// <param name="statutOpstineID">ID stauta opstine</param>
+        /// <returns>Odgovarajuca katastarska opstina</returns>
+        /// <response code= "200">Vraca trazen statut opstine</response>
+        /// <response code= "204">Nije pronadjen trazeni statut opstine</response>
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet("{StatutOpstineID}")]
         [AllowAnonymous]
         public ActionResult<StatutOpstineModelDto> GetStatutOpstine(Guid statutOpstineID)
@@ -58,7 +75,19 @@ namespace KatastarskaOpstina.Controllers
 
         }
 
-
+        /// <summary>
+        /// Kreiranje novog statuta opstine
+        /// </summary>
+        /// <param name="statutOpstine">Model statuta opstine</param>
+        /// <param name="key">Kljuc sa kojim se proverava autorizacija(key vrednost: MajaCetic)</param>
+        /// <returns></returns>
+        /// <response code= "201">Vraca kreiran statut opstine</response>
+        /// <response code= "401">Lice koje zeli da izvrsi kreiranje statuta opstine nije autorizovani korisnik</response>
+        /// <response code= "500">Doslo je do greske na serveru prilikom kreiranja stauta opstine</response>
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [Consumes("application/json")]
         [HttpPost]
         public ActionResult<StatutOpstineCreationDto> CreateStatutOpstine([FromBody] StatutOpstineCreationDto statutOpstine, [FromHeader] string key)
         {
@@ -88,6 +117,20 @@ namespace KatastarskaOpstina.Controllers
 
         }
 
+        /// <summary>
+        /// Brisanje statuta opstine
+        /// </summary>
+        /// <param name="statutOpstineID">ID statuta opstine</param>
+        /// <param name="key">Kljuc sa kojim se proverava autorizacija(key vrednost: MajaCetic)</param>
+        /// <returns></returns>
+        /// <response code= "204">Statut opstine uspesno obrisan</response>
+        /// <response code= "401">Lice koje zeli da izvrsi brisanje statuta opstine nije autorizovani korisnik</response>
+        /// <response code= "404">Nije pronadjena statut opstine za brisanje</response>
+        /// <response code= "500">Doslo je do greske na serveru prilikom brisanja statuta opstine</response>
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [HttpDelete("{StatutOpstineID}")]
         public IActionResult DeleteStatutOpstine(Guid statutOpstineID, [FromHeader] string key)
         {
@@ -113,6 +156,20 @@ namespace KatastarskaOpstina.Controllers
             }
         }
 
+        /// <summary>
+        /// Azuriranje statuta opstine
+        /// </summary>
+        /// <param name="statutOpstine">Model statuta opstine</param>
+        /// <param name="key">Kljuc sa kojim se proverava autorizacija(key vrednost: MajaCetic)</param>
+        /// <returns>Potvrda u azuriranju statuta opstine</returns>
+        /// <response code= "200">Statut opstine azurirana</response>
+        /// <response code= "401">Lice koje zeli da izvrsi brisanje statuta opstine nije autorizovani korisnik</response>
+        /// <response code= "404">Nije pronadjen statut opstine za brisanje</response>
+        /// <response code= "500">Doslo je do greske na serveru prilikom brisanja statuta opstine</response>
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [HttpPut]
         public ActionResult<StatutOpstineConfirmationDto> UpdateStatutOpstine(StatutOpstineModelDto statutOpstine, [FromHeader] string key)
         {
@@ -141,6 +198,10 @@ namespace KatastarskaOpstina.Controllers
             }
         }
 
+        /// <summary>
+        /// Vraca opcije za rad sa statutom opstine
+        /// </summary>
+        /// <returns></returns>
         [HttpOptions]
         [AllowAnonymous]
         public IActionResult GetStatutOpstinesOptions()

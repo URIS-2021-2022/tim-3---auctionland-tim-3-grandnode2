@@ -9,9 +9,14 @@ namespace Zalba.Models
     public class TipZalbeCreationDto
     {
         #region
-
+        /// <summary>
+        /// Naziv tipa zalbe
+        /// </summary>
         public string NazivTipa { get; set; }
 
+        /// <summary>
+        /// Opis tipa zalbe
+        /// </summary>
         public string OpisTipa { get; set; }
 
         #endregion
