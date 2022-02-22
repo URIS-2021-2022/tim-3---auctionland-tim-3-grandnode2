@@ -31,22 +31,20 @@ namespace licitacijaService.Controllers
         private readonly IDokumentService dokumentService;
         private readonly IMapper mapper;
         private readonly LinkGenerator linkGenerator;
-        private readonly ILoggerMockReposiotry logger;
-        private readonly IHttpContextAccessor contextAccessor;
+        private readonly LoggerService logger;
 
         private readonly IAuthHelper auth;
 
-        public LicitacijaDokumentController(ILicitacijaRepository licitacijaRepository, ILicitacijaDokumentRepository licitacijaDokumentRepository, IDokumentService dokumentService ,IMapper mapper, ILoggerMockReposiotry logger,
-                                  LinkGenerator linkGenerator, IHttpContextAccessor contextAccessor, IAuthHelper auth)
+        public LicitacijaDokumentController(ILicitacijaRepository licitacijaRepository, ILicitacijaDokumentRepository licitacijaDokumentRepository, IDokumentService dokumentService ,IMapper mapper, 
+                                  LinkGenerator linkGenerator, IAuthHelper auth)
         {
             this.licitacijaRepository = licitacijaRepository;
             this.licitacijaDokumentRepository = licitacijaDokumentRepository;
             this.dokumentService = dokumentService;
             this.mapper = mapper;
             this.linkGenerator = linkGenerator;
-            this.logger = logger;
-            this.contextAccessor = contextAccessor;
             this.auth = auth;
+            this.logger = new LoggerService();
         }
 
         /// <summary>
@@ -68,6 +66,9 @@ namespace licitacijaService.Controllers
         [AllowAnonymous]
         public ActionResult<LicitacijaDokumentConfirmationDto> GetDokumentiByLicitacijaId(Guid licitacijaId, string podnosilac)
         {
+            #pragma warning disable CS4014
+            logger.PostLogger("Pristup dokumentima licitacije." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
             var dokumentaLicitacije = licitacijaDokumentRepository.GetDokumnetByLicitacijaId(licitacijaId);
             string accessToken = HttpContext.GetTokenAsync("access_token").Result;
             if (podnosilac!=null)
@@ -91,7 +92,6 @@ namespace licitacijaService.Controllers
             {
                 dok.dokument = dokumentService.GetDokumentByDokumentId(dok.dokumentId,accessToken).Result;
             }
-            logger.Log(LogLevel.Information, contextAccessor.HttpContext.TraceIdentifier, "", "Get licitacija by licitacijaId", null);
             return Ok(mapper.Map<List<LicitacijaDokumentConfirmationDto>>(dokumentaLicitacije));
 
         }
@@ -125,6 +125,9 @@ namespace licitacijaService.Controllers
         {
             try
             {
+                #pragma warning disable CS4014
+                logger.PostLogger("Pridruzivanje dokumenta licitaciji." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+                #pragma warning restore CS4014
                 if (key == null)
                 {
                     return StatusCode(StatusCodes.Status401Unauthorized, "Authorization failed!");
@@ -147,15 +150,15 @@ namespace licitacijaService.Controllers
                 licitacijaDokumentRepository.CreateLicitacijaDokument(dokuemntiLicitacija);
                 licitacijaDokumentRepository.SaveChanges();
 
-                logger.Log(LogLevel.Information, contextAccessor.HttpContext.TraceIdentifier, "", "Dokument pridruzen licitaciji", null);
-
                 string location = linkGenerator.GetPathByAction("GetDokumentiByLicitacijaId", "LicitacijaDokument", new { licitacijaId = licitacija.licitacijaId });
 
                 return Created(location, dokuemntiLicitacija);
             }
             catch (Exception ex)
             {
-                logger.Log(LogLevel.Error, contextAccessor.HttpContext.TraceIdentifier, "", "Greska prilikom podnosenja dokumenta", null);
+                #pragma warning disable CS4014
+                logger.PostLogger("Greska prilikom pridruzivanja dokumenta licitaciji." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+                #pragma warning restore CS4014
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
@@ -195,7 +198,10 @@ namespace licitacijaService.Controllers
         {
             try
             {
-                if(dokumentId == Guid.Empty|| licitacijaId == Guid.Empty)
+                #pragma warning disable CS4014
+                logger.PostLogger("Azuriranje dokumenta licitacije." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+                #pragma warning restore CS4014
+                if (dokumentId == Guid.Empty|| licitacijaId == Guid.Empty)
                 {
                     return StatusCode(StatusCodes.Status400BadRequest, "Bad Request! Provide dokuemntId and licitacijaId values!!");
                 }
@@ -228,13 +234,13 @@ namespace licitacijaService.Controllers
                 licitacijaDokumentRepository.UpdateLicitacijaDokument(oldLD, newLD);
 
                 licitacijaDokumentRepository.SaveChanges();
-                logger.Log(LogLevel.Information, contextAccessor.HttpContext.TraceIdentifier, "", "Dokument-liictacija je update-ovana", null);
-
                 return Ok(oldLD);
             }
             catch (Exception ex)
             {
-                logger.Log(LogLevel.Error, contextAccessor.HttpContext.TraceIdentifier, "", "Update error", null);
+                #pragma warning disable CS4014
+                logger.PostLogger("Greska prilikom azuriranja dokumenta licitacije." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+                #pragma warning restore CS4014
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
@@ -261,10 +267,13 @@ namespace licitacijaService.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpDelete("{licitacijaId}")]
-        public IActionResult DeleteKomisija(Guid licitacijaId, [FromHeader] string key)
+        public IActionResult DeleteDokumentLicitacije(Guid licitacijaId, [FromHeader] string key)
         {
             try
             {
+                #pragma warning disable CS4014
+                logger.PostLogger("Brisanje dokumenta licitacije." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+                #pragma warning restore CS4014
                 if (key == null)
                 {
                     return StatusCode(StatusCodes.Status401Unauthorized, "Authorization failed!");
@@ -289,7 +298,9 @@ namespace licitacijaService.Controllers
 
             catch (Exception ex)
             {
-                logger.Log(LogLevel.Error, contextAccessor.HttpContext.TraceIdentifier, "", "Delete error", null);
+                #pragma warning disable CS4014
+                logger.PostLogger("Greska prilikom brisanja dokumenta licitacije." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+                #pragma warning restore CS4014
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }

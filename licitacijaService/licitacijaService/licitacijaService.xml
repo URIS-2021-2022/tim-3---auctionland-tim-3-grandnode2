@@ -184,7 +184,7 @@
             <response code="404">Not found</response>
             <response code="500">Server error</response>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:licitacijaService.Controllers.LicitacijaDokumentController.DeleteKomisija(System.Guid,System.String)" -->
+        <!-- Badly formed XML comment ignored for member "M:licitacijaService.Controllers.LicitacijaDokumentController.DeleteDokumentLicitacije(System.Guid,System.String)" -->
         <member name="M:licitacijaService.Controllers.LicitacijaDokumentController.GetLicitacijaDokumentOptions">
             <summary>
             Vraca implementirane opcije rada sa lictacijom i dokumentom

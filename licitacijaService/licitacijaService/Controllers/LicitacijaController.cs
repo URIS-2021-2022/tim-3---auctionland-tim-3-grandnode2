@@ -37,13 +37,12 @@ namespace licitacijaService.Controllers
         private readonly IDokumentService dokumentService;
         private readonly IMapper mapper;
         private readonly LinkGenerator linkGenerator;
-        private readonly ILoggerMockReposiotry logger;
-        private readonly IHttpContextAccessor contextAccessor;
+        private readonly LoggerService logger;
 
         private readonly IAuthHelper auth;
 
-        public LicitacijaController(ILicitacijaRepository licitacijaRepository, ILicitacijaDokumentRepository licitacijaDokumentRepository,IJavnoNadmetanjeService javnoNadmetanjeService,IKomisijaService komisijaService,IMapper mapper, ILoggerMockReposiotry logger,
-                                  IDokumentService dokumentService,LinkGenerator linkGenerator, IHttpContextAccessor contextAccessor, IAuthHelper auth)
+        public LicitacijaController(ILicitacijaRepository licitacijaRepository, ILicitacijaDokumentRepository licitacijaDokumentRepository,IJavnoNadmetanjeService javnoNadmetanjeService,IKomisijaService komisijaService,IMapper mapper, 
+                                  IDokumentService dokumentService,LinkGenerator linkGenerator, IAuthHelper auth)
         {
             this.licitacijaRepository = licitacijaRepository;
             this.licitacijaDokumentRepository = licitacijaDokumentRepository;
@@ -52,9 +51,8 @@ namespace licitacijaService.Controllers
             this.dokumentService = dokumentService;
             this.mapper = mapper;
             this.linkGenerator = linkGenerator;
-            this.logger = logger;
-            this.contextAccessor = contextAccessor;
             this.auth = auth;
+            this.logger = new LoggerService();
         }
 
         /// <summary>
@@ -76,7 +74,9 @@ namespace licitacijaService.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult<List<Licitacija>> GetLicitacije(string brojLicitacije)
         {
-
+            #pragma warning disable CS4014
+            logger.PostLogger("Pristup svim licitacijama." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
             var licitacije = licitacijaRepository.GetLicitacije(brojLicitacije);
 
             if (licitacije.Count == 0)
@@ -118,9 +118,6 @@ namespace licitacijaService.Controllers
                 mapper.Map<List<LicitacijaVrstaDokumentaDto>>(pravniDokuemnti);
                 mapper.Map<List<LicitacijaVrstaDokumentaDto>>(fizickiDokumneti);
             }
-          
-
-            logger.Log(LogLevel.Information, contextAccessor.HttpContext.TraceIdentifier, "", "Get sve licitacije", null);
             return Ok(mapper.Map<List<LicitacijaConfirmationDto>>(licitacije));
 
         }
@@ -144,7 +141,9 @@ namespace licitacijaService.Controllers
         [AllowAnonymous]
         public ActionResult<Licitacija> GetLicitacijaById(Guid licitacijaId)
         {
-
+            #pragma warning disable CS4014
+            logger.PostLogger("Pristup licitaciji po id." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
             var licitacija = licitacijaRepository.GetLicitacijaById(licitacijaId);
 
             if (licitacija == null)
@@ -185,8 +184,6 @@ namespace licitacijaService.Controllers
             mapper.Map<List<JavnoNadmetanjeConfirmationDto>>(javnaNadmetanja);
             mapper.Map<List<LicitacijaVrstaDokumentaDto>>(pravniDokuemnti);
             mapper.Map<List<LicitacijaVrstaDokumentaDto>>(fizickiDokumneti);
-
-            logger.Log(LogLevel.Information, contextAccessor.HttpContext.TraceIdentifier, "", "Get licitacija by licitacijaId", null);
             return Ok(mapper.Map<LicitacijaConfirmationDto>(licitacija));
 
         }
@@ -223,7 +220,10 @@ namespace licitacijaService.Controllers
         {
             try
             {
-                if(key == null)
+                #pragma warning disable CS4014
+                logger.PostLogger("Dodavanje nove licitacije." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+                #pragma warning restore CS4014
+                if (key == null)
                 {
                     return StatusCode(StatusCodes.Status401Unauthorized, "Authorization failed!");
                 }
@@ -240,16 +240,15 @@ namespace licitacijaService.Controllers
                 licitacijaRepository.CreateLicitacija(licitacija);
                 licitacijaRepository.SaveChanges();
                 licitacija.komisija = komisije.FirstOrDefault();
-
-                logger.Log(LogLevel.Information, contextAccessor.HttpContext.TraceIdentifier, "", "Kreirana nova licitacija", null);
-
                 string location = linkGenerator.GetPathByAction("GetLicitacijaById", "Licitacija", new { licitacijaId = licitacija.licitacijaId });
 
                 return Created(location, mapper.Map<LicitacijaConfirmationDto>(licitacija));
             }
             catch (Exception ex)
             {
-                logger.Log(LogLevel.Error, contextAccessor.HttpContext.TraceIdentifier, "", "Greska prilikom kreiranja licitacije", null);
+                #pragma warning disable CS4014
+                logger.PostLogger("Greska prilikom dodvanja nove licitacije." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+                #pragma warning restore CS4014
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
@@ -293,6 +292,9 @@ namespace licitacijaService.Controllers
         {
             try
             {
+                #pragma warning disable CS4014
+                logger.PostLogger("Azuriranje licitacije." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+                #pragma warning restore CS4014
                 if (key == null)
                 {
                     return StatusCode(StatusCodes.Status401Unauthorized, "Authorization failed!");
@@ -318,13 +320,14 @@ namespace licitacijaService.Controllers
                 licitacijaRepository.UpdateLicitacija(oldLicitacija, newLicitacija);
 
                 licitacijaRepository.SaveChanges();
-                logger.Log(LogLevel.Information, contextAccessor.HttpContext.TraceIdentifier, "", "Licitacija je update-ovana", null);
                 oldLicitacija.komisija = komisije.FirstOrDefault();
                 return Ok(mapper.Map<LicitacijaConfirmationDto>(oldLicitacija));
             }
             catch (Exception ex)
             {
-                logger.Log(LogLevel.Error, contextAccessor.HttpContext.TraceIdentifier, "", "Update error", null);
+                #pragma warning disable CS4014
+                logger.PostLogger("Greska prilikom azuriranja licitacije." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+                #pragma warning restore CS4014
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
@@ -355,7 +358,10 @@ namespace licitacijaService.Controllers
      {
          try
          {
-            if(key == null)
+                #pragma warning disable CS4014
+                logger.PostLogger("Brisanje licitacije." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+                #pragma warning restore CS4014
+                if (key == null)
                 {
                     return StatusCode(StatusCodes.Status401Unauthorized, "Authorization failed!");
                 }
@@ -381,8 +387,10 @@ namespace licitacijaService.Controllers
 
          catch (Exception ex)
          {
-             logger.Log(LogLevel.Error, contextAccessor.HttpContext.TraceIdentifier, "", "Delete error", null);
-             return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+                #pragma warning disable CS4014
+                logger.PostLogger("Greska prilikom brisanja licitacije." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+                #pragma warning restore CS4014
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
          }
      }
 
