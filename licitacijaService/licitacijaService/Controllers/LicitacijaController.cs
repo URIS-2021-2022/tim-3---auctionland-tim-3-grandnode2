@@ -79,7 +79,7 @@ namespace licitacijaService.Controllers
 
             var licitacije = licitacijaRepository.GetLicitacije(brojLicitacije);
 
-            if (licitacije == null || licitacije.Count == 0)
+            if (licitacije.Count == 0)
             {
                 return NoContent();
             }
@@ -106,22 +106,22 @@ namespace licitacijaService.Controllers
                         dokp.dokument = dokumentService.GetDokumentByDokumentId(dokp.dokumentId, accessToken).Result;
                     }
                 }
-                List<JavnoNadmetanjeConfirmationDTO> javnaNadmetanja = javnoNadmetanjeService.GetJavnaNadmetanjaByLicitacijaId(l.licitacijaId).Result;
+                List<JavnoNadmetanjeConfirmationDto> javnaNadmetanja = javnoNadmetanjeService.GetJavnaNadmetanjaByLicitacijaId(l.licitacijaId).Result;
                 l.javnaNadmetanja = javnaNadmetanja;
-                List<KomisijaConfirmationDTO> komisije = komisijaService.GetKomisijaByOznaka(l.oznakaKomisije).Result;
+                List<KomisijaConfirmationDto> komisije = komisijaService.GetKomisijaByOznaka(l.oznakaKomisije).Result;
                 if (komisije != null && komisije.Count > 0)
                 {
-                    KomisijaConfirmationDTO komisija = komisijaService.GetKomisijaByOznaka(l.oznakaKomisije).Result.FirstOrDefault();
+                    KomisijaConfirmationDto komisija = komisijaService.GetKomisijaByOznaka(l.oznakaKomisije).Result.FirstOrDefault();
                     l.komisija = komisija;
                 }
-                mapper.Map<List<JavnoNadmetanjeConfirmationDTO>>(javnaNadmetanja);
-                mapper.Map<List<LicitacijaVrstaDokumentaDTO>>(pravniDokuemnti);
-                mapper.Map<List<LicitacijaVrstaDokumentaDTO>>(fizickiDokumneti);
+                mapper.Map<List<JavnoNadmetanjeConfirmationDto>>(javnaNadmetanja);
+                mapper.Map<List<LicitacijaVrstaDokumentaDto>>(pravniDokuemnti);
+                mapper.Map<List<LicitacijaVrstaDokumentaDto>>(fizickiDokumneti);
             }
           
 
             logger.Log(LogLevel.Information, contextAccessor.HttpContext.TraceIdentifier, "", "Get sve licitacije", null);
-            return Ok(mapper.Map<List<LicitacijaConfirmationDTO>>(licitacije));
+            return Ok(mapper.Map<List<LicitacijaConfirmationDto>>(licitacije));
 
         }
 
@@ -174,20 +174,20 @@ namespace licitacijaService.Controllers
             licitacija.dokumentacijaFizickaLica = fizickiDokumneti;
             licitacija.dokumnetacijaPravnaLica = pravniDokuemnti;
             
-            List<JavnoNadmetanjeConfirmationDTO> javnaNadmetanja = javnoNadmetanjeService.GetJavnaNadmetanjaByLicitacijaId(licitacija.licitacijaId).Result;
+            List<JavnoNadmetanjeConfirmationDto> javnaNadmetanja = javnoNadmetanjeService.GetJavnaNadmetanjaByLicitacijaId(licitacija.licitacijaId).Result;
             licitacija.javnaNadmetanja = javnaNadmetanja;
-            List<KomisijaConfirmationDTO> komisije = komisijaService.GetKomisijaByOznaka(licitacija.oznakaKomisije).Result;
+            List<KomisijaConfirmationDto> komisije = komisijaService.GetKomisijaByOznaka(licitacija.oznakaKomisije).Result;
             if (komisije != null && komisije.Count > 0)
             {
-                KomisijaConfirmationDTO komisija = komisijaService.GetKomisijaByOznaka(licitacija.oznakaKomisije).Result.FirstOrDefault();
+                KomisijaConfirmationDto komisija = komisijaService.GetKomisijaByOznaka(licitacija.oznakaKomisije).Result.FirstOrDefault();
                 licitacija.komisija = komisija;
             }
-            mapper.Map<List<JavnoNadmetanjeConfirmationDTO>>(javnaNadmetanja);
-            mapper.Map<List<LicitacijaVrstaDokumentaDTO>>(pravniDokuemnti);
-            mapper.Map<List<LicitacijaVrstaDokumentaDTO>>(fizickiDokumneti);
+            mapper.Map<List<JavnoNadmetanjeConfirmationDto>>(javnaNadmetanja);
+            mapper.Map<List<LicitacijaVrstaDokumentaDto>>(pravniDokuemnti);
+            mapper.Map<List<LicitacijaVrstaDokumentaDto>>(fizickiDokumneti);
 
             logger.Log(LogLevel.Information, contextAccessor.HttpContext.TraceIdentifier, "", "Get licitacija by licitacijaId", null);
-            return Ok(mapper.Map<LicitacijaConfirmationDTO>(licitacija));
+            return Ok(mapper.Map<LicitacijaConfirmationDto>(licitacija));
 
         }
 
@@ -219,7 +219,7 @@ namespace licitacijaService.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpPost]
-        public ActionResult<LicitacijaConfirmationDTO> CreateLicitacija([FromBody] LicitacijaCreationDTO licitacijaCreationDTO, [FromHeader] string key)
+        public ActionResult<LicitacijaConfirmationDto> CreateLicitacija([FromBody] LicitacijaCreationDto licitacijaCreationDTO, [FromHeader] string key)
         {
             try
             {
@@ -231,7 +231,7 @@ namespace licitacijaService.Controllers
                 {
                     return StatusCode(StatusCodes.Status401Unauthorized, "Authorization failed!");
                 }
-                List<KomisijaConfirmationDTO> komisije = komisijaService.GetKomisijaByOznaka(licitacijaCreationDTO.oznakaKomisije).Result;
+                List<KomisijaConfirmationDto> komisije = komisijaService.GetKomisijaByOznaka(licitacijaCreationDTO.oznakaKomisije).Result;
                 if (komisije == null || komisije.Count<=0)
                 {
                     return StatusCode(StatusCodes.Status400BadRequest, "Neispravna oznaka komisije!");
@@ -245,7 +245,7 @@ namespace licitacijaService.Controllers
 
                 string location = linkGenerator.GetPathByAction("GetLicitacijaById", "Licitacija", new { licitacijaId = licitacija.licitacijaId });
 
-                return Created(location, mapper.Map<LicitacijaConfirmationDTO>(licitacija));
+                return Created(location, mapper.Map<LicitacijaConfirmationDto>(licitacija));
             }
             catch (Exception ex)
             {
@@ -289,7 +289,7 @@ namespace licitacijaService.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpPut("{licitacijaId}")]
-        public ActionResult<LicitacijaConfirmationDTO> UpdateLicitacija([FromBody] LicitacijaUpdateDTO licitacijaUpdateDTO, Guid licitacijaId, [FromHeader] string key)
+        public ActionResult<LicitacijaConfirmationDto> UpdateLicitacija([FromBody] LicitacijaUpdateDto licitacijaUpdateDTO, Guid licitacijaId, [FromHeader] string key)
         {
             try
             {
@@ -310,7 +310,7 @@ namespace licitacijaService.Controllers
                 }
                 Licitacija newLicitacija = mapper.Map<Licitacija>(licitacijaUpdateDTO);
                 newLicitacija.licitacijaId = licitacijaId;
-                List<KomisijaConfirmationDTO> komisije = komisijaService.GetKomisijaByOznaka(licitacijaUpdateDTO.oznakaKomisije).Result;
+                List<KomisijaConfirmationDto> komisije = komisijaService.GetKomisijaByOznaka(licitacijaUpdateDTO.oznakaKomisije).Result;
                 if (komisije == null || komisije.Count <= 0)
                 {
                     return StatusCode(StatusCodes.Status400BadRequest, "Neispravna oznaka komisije!");
@@ -320,7 +320,7 @@ namespace licitacijaService.Controllers
                 licitacijaRepository.SaveChanges();
                 logger.Log(LogLevel.Information, contextAccessor.HttpContext.TraceIdentifier, "", "Licitacija je update-ovana", null);
                 oldLicitacija.komisija = komisije.FirstOrDefault();
-                return Ok(mapper.Map<LicitacijaConfirmationDTO>(oldLicitacija));
+                return Ok(mapper.Map<LicitacijaConfirmationDto>(oldLicitacija));
             }
             catch (Exception ex)
             {

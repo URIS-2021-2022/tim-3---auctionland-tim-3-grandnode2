@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace licitacijaService.DTOs
 {
-    public class LicitacijaConfirmationDTO
+    public class LicitacijaConfirmationDto
     {
         /// <summary>
         /// Broj licitacije
@@ -46,28 +46,28 @@ namespace licitacijaService.DTOs
         [Required(ErrorMessage = "Obavezan rok za prijavu")]
         public DateTime rokZaDostavuPrijava { get; set; }
 
-        public ICollection<LicitacijaVrstaDokumentaDTO> dokumnetacijaPravnaLica { get; set; }
+        public ICollection<LicitacijaVrstaDokumentaDto> dokumnetacijaPravnaLica { get; set; }
 
         /// <summary>
         /// Lista dokumentacije za fizickih lica
         /// </summary>
 
         [Required]
-        public ICollection<LicitacijaVrstaDokumentaDTO> dokumentacijaFizickaLica { get; set; }
+        public ICollection<LicitacijaVrstaDokumentaDto> dokumentacijaFizickaLica { get; set; }
 
         /// <summary>
         /// Lista javnih nadmetanja licitacije
         /// </summary>
 
         [Required]
-        public ICollection<JavnoNadmetanjeConfirmationDTO> javnaNadmetanja { get; set; }
+        public ICollection<JavnoNadmetanjeConfirmationDto> javnaNadmetanja { get; set; }
 
         /// <summary>
         /// Komisija licitacije
         /// </summary>
 
         [Required]
-        public KomisijaConfirmationDTO komisija { get; set; }
+        public KomisijaConfirmationDto komisija { get; set; }
 
         
     }

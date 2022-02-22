@@ -7,6 +7,6 @@ namespace licitacijaService.DTOs.Mock
 {
     public class ResponseDokument
     {
-        public DokumentDTO dokument { get; set; }
+        public DokumentDto dokument { get; set; }
     }
 }

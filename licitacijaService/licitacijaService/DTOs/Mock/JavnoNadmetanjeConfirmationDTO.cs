@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace licitacijaService.DTOs.Mock
 {
-    public class JavnoNadmetanjeConfirmationDTO
+    public class JavnoNadmetanjeConfirmationDto
 
     {
         /// <summary>

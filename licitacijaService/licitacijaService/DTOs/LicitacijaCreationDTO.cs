@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace licitacijaService.DTOs
 {
-    public class LicitacijaCreationDTO
+    public class LicitacijaCreationDto
     {
         /// <summary>
         /// Broj licitacije

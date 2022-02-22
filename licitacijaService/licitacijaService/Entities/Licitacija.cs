@@ -62,7 +62,7 @@ namespace licitacijaService.Entities
         public string oznakaKomisije { get; set; }
 
         [NotMapped]
-        public KomisijaConfirmationDTO komisija { get; set; }
+        public KomisijaConfirmationDto komisija { get; set; }
 
         /// <summary>
         /// Lista dokumentacije za pravna lica
@@ -82,7 +82,7 @@ namespace licitacijaService.Entities
         /// </summary>
 
         [NotMapped]
-        public ICollection<JavnoNadmetanjeConfirmationDTO> javnaNadmetanja { get; set; }
+        public ICollection<JavnoNadmetanjeConfirmationDto> javnaNadmetanja { get; set; }
 
 
     }

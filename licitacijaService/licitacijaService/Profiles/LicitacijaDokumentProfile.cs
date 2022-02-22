@@ -12,9 +12,9 @@ namespace licitacijaService.Profiles
     {
         public LicitacijaDokumentProfile()
         {
-            CreateMap<LicitacijaDokumentCreationandUpdateDTO, LicitacijaDokument>();
-            CreateMap<LicitacijaDokument, LicitacijaDokumentConfirmationDTO>();
-            CreateMap<LicitacijaDokument, LicitacijaVrstaDokumentaDTO>();
+            CreateMap<LicitacijaDokumentCreationandUpdateDto, LicitacijaDokument>();
+            CreateMap<LicitacijaDokument, LicitacijaDokumentConfirmationDto>();
+            CreateMap<LicitacijaDokument, LicitacijaVrstaDokumentaDto>();
         }
     }
 }

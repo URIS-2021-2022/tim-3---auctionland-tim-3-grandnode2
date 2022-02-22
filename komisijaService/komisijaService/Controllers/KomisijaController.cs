@@ -244,7 +244,7 @@ namespace komisijaService.Controllers
                     if (newKomisija.oznakaKomisije != oldKomisija.oznakaKomisije)
                         {
                       
-                            if (licnostiKomisije.Count > 0 && licnostiKomisije != null)
+                            if (licnostiKomisije.Count > 0)
                             {
                                 foreach (LicnostKomisije lk in licnostiKomisije)
                                 {

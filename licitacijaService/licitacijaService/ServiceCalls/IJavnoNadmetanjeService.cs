@@ -8,6 +8,6 @@ namespace licitacijaService.ServiceCalls
 {
     public interface IJavnoNadmetanjeService
     {
-        public Task<List<JavnoNadmetanjeConfirmationDTO>> GetJavnaNadmetanjaByLicitacijaId(Guid licitacijaId);
+        public Task<List<JavnoNadmetanjeConfirmationDto>> GetJavnaNadmetanjaByLicitacijaId(Guid licitacijaId);
     }
 }

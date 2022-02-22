@@ -66,7 +66,7 @@ namespace licitacijaService.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpGet("{licitacijaId}")]
         [AllowAnonymous]
-        public ActionResult<LicitacijaDokumentConfirmationDTO> GetDokumentiByLicitacijaId(Guid licitacijaId, string podnosilac)
+        public ActionResult<LicitacijaDokumentConfirmationDto> GetDokumentiByLicitacijaId(Guid licitacijaId, string podnosilac)
         {
             var dokumentaLicitacije = licitacijaDokumentRepository.GetDokumnetByLicitacijaId(licitacijaId);
             string accessToken = HttpContext.GetTokenAsync("access_token").Result;
@@ -82,7 +82,7 @@ namespace licitacijaService.Controllers
             }
 
 
-            if (dokumentaLicitacije == null && dokumentaLicitacije.Count<1)
+            if (dokumentaLicitacije == null || dokumentaLicitacije.Count<1)
             {
                 return NotFound();
             }
@@ -92,7 +92,7 @@ namespace licitacijaService.Controllers
                 dok.dokument = dokumentService.GetDokumentByDokumentId(dok.dokumentId,accessToken).Result;
             }
             logger.Log(LogLevel.Information, contextAccessor.HttpContext.TraceIdentifier, "", "Get licitacija by licitacijaId", null);
-            return Ok(mapper.Map<List<LicitacijaDokumentConfirmationDTO>>(dokumentaLicitacije));
+            return Ok(mapper.Map<List<LicitacijaDokumentConfirmationDto>>(dokumentaLicitacije));
 
         }
 
@@ -121,7 +121,7 @@ namespace licitacijaService.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpPost]
-        public ActionResult<LicitacijaDokument> CreateLicitacijaDokument([FromBody] LicitacijaDokumentCreationandUpdateDTO licitacijaDokumentiCreationDTO, [FromHeader] string key)
+        public ActionResult<LicitacijaDokument> CreateLicitacijaDokument([FromBody] LicitacijaDokumentCreationandUpdateDto licitacijaDokumentiCreationDTO, [FromHeader] string key)
         {
             try
             {
@@ -191,7 +191,7 @@ namespace licitacijaService.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpPut()]
-        public ActionResult<LicitacijaDokument> UpdateDokumentLicitacija([FromBody] LicitacijaDokumentCreationandUpdateDTO licitacijaDokumentCreationDTO, Guid licitacijaId, Guid dokumentId, [FromHeader] string key)
+        public ActionResult<LicitacijaDokument> UpdateDokumentLicitacija([FromBody] LicitacijaDokumentCreationandUpdateDto licitacijaDokumentCreationDTO, Guid licitacijaId, Guid dokumentId, [FromHeader] string key)
         {
             try
             {
