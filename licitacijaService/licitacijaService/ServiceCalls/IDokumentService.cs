@@ -9,6 +9,6 @@ namespace licitacijaService.ServiceCalls
     public interface IDokumentService
     {
 
-        public Task<DokumentDTO> GetDokumentByDokumentId(Guid dokumentId, string accessToken);
+        public Task<ResponseDokument> GetDokumentByDokumentId(Guid dokumentId, string accessToken);
     }
 }

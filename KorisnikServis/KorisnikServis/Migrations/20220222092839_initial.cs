@@ -8,18 +8,6 @@ namespace KorisnikServis.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "TipKorisnika",
-                columns: table => new
-                {
-                    TipKorisnikaID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    NazivTipa = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TipKorisnika", x => x.TipKorisnikaID);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Korisnik",
                 columns: table => new
                 {
@@ -33,18 +21,19 @@ namespace KorisnikServis.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Korisnik", x => x.KorisnikID);
-                    table.ForeignKey(
-                        name: "FK_Korisnik_TipKorisnika_TipKorisnikaID",
-                        column: x => x.TipKorisnikaID,
-                        principalTable: "TipKorisnika",
-                        principalColumn: "TipKorisnikaID",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Korisnik_TipKorisnikaID",
-                table: "Korisnik",
-                column: "TipKorisnikaID");
+            migrationBuilder.CreateTable(
+                name: "TipKorisnika",
+                columns: table => new
+                {
+                    TipKorisnikaID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    NazivTipa = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TipKorisnika", x => x.TipKorisnikaID);
+                });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

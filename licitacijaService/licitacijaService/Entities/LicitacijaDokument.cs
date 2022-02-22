@@ -27,7 +27,7 @@ namespace licitacijaService.Entities
         /// Dokument
         /// </summary>
         [NotMapped]
-        public DokumentDTO dokument { get; set; }
+        public ResponseDokument dokument { get; set; }
 
         /// <summary>
         /// Indikator vrste podnosioca dokumenta

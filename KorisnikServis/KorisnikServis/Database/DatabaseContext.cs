@@ -14,7 +14,7 @@ namespace KorisnikServis.Database
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-AMVOLPE\SQLEXPRESS;Initial Catalog=KorisnikServis; Integrated Security=True;");
+            optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-A7T4B1V\SQLEXPRESS;Initial Catalog=KorisnikServis; Integrated Security=True;");
         }
     }
 }

@@ -21,6 +21,6 @@ namespace licitacijaService.DTOs
         /// Dokument
         /// </summary>
         [Required]
-        public DokumentDTO dokument { get; set; }
+        public ResponseDokument dokument { get; set; }
     }
 }

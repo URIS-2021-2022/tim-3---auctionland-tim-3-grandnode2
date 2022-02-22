@@ -51,8 +51,6 @@ namespace DokumentServis.Migrations
 
                     b.HasKey("DokumentID");
 
-                    b.HasIndex("VerzijaDokumentaID");
-
                     b.ToTable("Dokument");
                 });
 
@@ -74,17 +72,6 @@ namespace DokumentServis.Migrations
                     b.HasKey("VerzijaDokumentaID");
 
                     b.ToTable("VerzijaDokumenta");
-                });
-
-            modelBuilder.Entity("DokumentServis.Database.Entities.Dokument", b =>
-                {
-                    b.HasOne("DokumentServis.Database.Entities.VerzijaDokumenta", "VerzijaDokumenta")
-                        .WithMany()
-                        .HasForeignKey("VerzijaDokumentaID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("VerzijaDokumenta");
                 });
 #pragma warning restore 612, 618
         }

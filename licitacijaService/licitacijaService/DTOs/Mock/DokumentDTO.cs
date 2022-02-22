@@ -7,8 +7,6 @@ namespace licitacijaService.DTOs.Mock
 {
     public class DokumentDTO
     {
-        public int DokumentID { get; set; }
-
         public string ZavodniBroj { get; set; }
 
         public DateTime Datum { get; set; }
@@ -16,12 +14,6 @@ namespace licitacijaService.DTOs.Mock
         public DateTime DatumDonosenja { get; set; }
 
         public string Sablon { get; set; }
-
-        public int KorisnikID { get; set; }
-
-        public int KupacID { get; set; }
-
-        public int LiciterID { get; set; }
 
     }
 }

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KorisnikServis.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20220221221039_initial")]
+    [Migration("20220222092839_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -44,8 +44,6 @@ namespace KorisnikServis.Migrations
 
                     b.HasKey("KorisnikID");
 
-                    b.HasIndex("TipKorisnikaID");
-
                     b.ToTable("Korisnik");
                 });
 
@@ -61,17 +59,6 @@ namespace KorisnikServis.Migrations
                     b.HasKey("TipKorisnikaID");
 
                     b.ToTable("TipKorisnika");
-                });
-
-            modelBuilder.Entity("KorisnikServis.Database.Entities.Korisnik", b =>
-                {
-                    b.HasOne("KorisnikServis.Database.Entities.TipKorisnika", "TipKorisnika")
-                        .WithMany()
-                        .HasForeignKey("TipKorisnikaID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("TipKorisnika");
                 });
 #pragma warning restore 612, 618
         }

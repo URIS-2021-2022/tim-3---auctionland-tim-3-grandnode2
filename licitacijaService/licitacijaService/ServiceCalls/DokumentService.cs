@@ -15,7 +15,7 @@ namespace licitacijaService.ServiceCalls
         {
             this.configuration = configuration;
         }
-        public async Task<DokumentDTO> GetDokumentByDokumentId(Guid dokumentId, string accessToken)
+        public async Task<ResponseDokument> GetDokumentByDokumentId(Guid dokumentId, string accessToken)
         {
             try
             {
@@ -32,7 +32,7 @@ namespace licitacijaService.ServiceCalls
                     {
                         return default;
                     }
-                    return JsonConvert.DeserializeObject<DokumentDTO>(content);
+                    return JsonConvert.DeserializeObject<ResponseDokument>(content);
                 }
                 return default;
             }
