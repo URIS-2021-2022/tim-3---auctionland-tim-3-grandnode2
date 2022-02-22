@@ -566,6 +566,16 @@
             Datum izdavanja službenog lista
             </summary>
         </member>
+        <member name="P:JavnoNadmetanje.Logger.LoggerVO.OpisAktivnosti">
+            <summary>
+            Opis aktivnosti
+            </summary>
+        </member>
+        <member name="P:JavnoNadmetanje.Logger.LoggerVO.Datum">
+            <summary>
+            Datum
+            </summary>
+        </member>
         <member name="P:JavnoNadmetanje.Models.DokumentPrijavaZaNadmetanjeDto.PrijavaZaNadmetanjeId">
             <summary>
             ID prijave za nadmetanje
@@ -771,9 +781,9 @@
             Delovi parcele
             </summary>
         </member>
-        <member name="P:JavnoNadmetanje.Models.JavnoNadmetanjeDto.KupacId">
+        <member name="P:JavnoNadmetanje.Models.JavnoNadmetanjeDto.Kupac">
             <summary>
-            ID kupca
+            Kupac
             </summary>
         </member>
         <member name="P:JavnoNadmetanje.Models.KupacService.KupacDto.KupacId">
@@ -790,16 +800,6 @@
             <summary>
             Da li kupac ima zabranu
             </summary>        
-        </member>
-        <member name="P:JavnoNadmetanje.Models.KupacService.KupacDto.DatumPocetkaZabrane">
-            <summary>
-            Datum početka zabrane
-            </summary>
-        </member>
-        <member name="P:JavnoNadmetanje.Models.KupacService.KupacDto.DuzinaTrajanjaZabraneUGodinama">
-            <summary>
-            Dužina trajanja zabrane u godinama
-            </summary>
         </member>
         <member name="P:JavnoNadmetanje.Models.OglasCreateDto.DatumObjavljivanjaOglasa">
             <summary>

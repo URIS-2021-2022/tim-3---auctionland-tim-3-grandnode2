@@ -93,14 +93,14 @@ namespace JavnoNadmetanje
                     {
                         Name = "Lenka Subotin",
                         Email = "subotinlenka@gmail.com",
-                        Url = new Uri("http://www.ftn.uns.ac.rs/")
+                        Url = new Uri(Configuration["Links:FTN"])
                     },
                     License = new Microsoft.OpenApi.Models.OpenApiLicense
                     {
                         Name = "FTN licence",
-                        Url = new Uri("http://www.ftn.uns.ac.rs/")
+                        Url = new Uri(Configuration["Links:FTN"])
                     },
-                    TermsOfService = new Uri("http://www.ftn.uns.ac.rs/javnoNadmetanjeTermsOfService")
+                    TermsOfService = new Uri(Configuration["Links:TermsOfService"])
                 });
 
                 var xmlComments = $"{ Assembly.GetExecutingAssembly().GetName().Name }.xml";

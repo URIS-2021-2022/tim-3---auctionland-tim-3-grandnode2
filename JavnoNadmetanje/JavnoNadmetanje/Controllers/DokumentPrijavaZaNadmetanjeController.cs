@@ -2,6 +2,7 @@
 using JavnoNadmetanje.Auth;
 using JavnoNadmetanje.Data;
 using JavnoNadmetanje.Entities;
+using JavnoNadmetanje.Logger;
 using JavnoNadmetanje.Models;
 using JavnoNadmetanje.Models.DokumentService;
 using JavnoNadmetanje.ServiceCalls;
@@ -28,7 +29,7 @@ namespace JavnoNadmetanje.Controllers
         private readonly LinkGenerator linkGenerator;
         private readonly IMapper mapper;
         private readonly IAuthService authService;
-       
+        private readonly LoggerService logger;
 
         public DokumentPrijavaZaNadmetanjeController(IDokumentPrijavaZaNadmetanjeRepository dokumentPrijavaZaNadmetanjeRepository, IDokumentService dokumentService, LinkGenerator linkGenerator, IMapper mapper, IAuthService authService)
         {
@@ -37,6 +38,7 @@ namespace JavnoNadmetanje.Controllers
             this.linkGenerator = linkGenerator;
             this.mapper = mapper;
             this.authService = authService;
+            logger = new LoggerService();
         }
 
         /// <summary>
@@ -52,6 +54,10 @@ namespace JavnoNadmetanje.Controllers
         [AllowAnonymous]
         public ActionResult<List<DokumentPrijavaZaNadmetanjeDto>> GetDokumentiPrijavaByPrijavaZaNadmetanjeId(Guid prijavaZaNadmetanjeId)
         {
+            #pragma warning disable CS4014
+            logger.PostLogger("Pristup svim vezama između dokumenta i prijave za javno nadmetanje putem ID-ja prijave za nadmetanje." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
+
             List<DokumentPrijavaZaNadmetanjeEntity> dokumentiPrijave = dokumentPrijavaZaNadmetanjeRepository.GetDokumentiPrijavaByPrijavaZaNadmetanjeId(prijavaZaNadmetanjeId);
             string accessToken = HttpContext.GetTokenAsync("access_token").Result;
 
@@ -83,7 +89,10 @@ namespace JavnoNadmetanje.Controllers
         [AllowAnonymous]
         public ActionResult<DokumentPrijavaZaNadmetanjeDto> GetDokumentPrijavaById(Guid prijavaZaNadmetanjeId, Guid dokumentId)
         {
-         //   DokumentPrijavaZaNadmetanjeEntity dokumentPrijava = dokumentPrijavaZaNadmetanjeRepository.GetDokumentPrijavaById(prijavaZaNadmetanjeId, dokumentId);
+            #pragma warning disable CS4014
+            logger.PostLogger("Pristup svim vezama između dokumenta i prijave za javno nadmetanje putem ID-ja prijave za nadmetanje i dokumenta." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
+
             string accessToken = HttpContext.GetTokenAsync("access_token").Result;
             DokumentPrijavaZaNadmetanjeDto dokPrij = new DokumentPrijavaZaNadmetanjeDto();
             dokPrij.PrijavaZaNadmetanjeId = prijavaZaNadmetanjeId;
@@ -115,6 +124,11 @@ namespace JavnoNadmetanje.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public ActionResult<DokumentPrijavaZaNadmetanjeDto> CreateDokumentPrijava([FromBody] DokumentPrijavaZaNadmetanjeDto dokumentPrijava, [FromHeader] string key)
         {
+            #pragma warning disable CS4014
+            logger.PostLogger("Kreiranje novu vezu između dokumenta i prijave za nadmetanje." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
+
+
             if (!authService.Authorize(key))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, "Korisnik nije autorizovan!");
@@ -151,6 +165,10 @@ namespace JavnoNadmetanje.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public IActionResult DeleteDokumentPrijavaByPrijavaZaNadmetanjeId(Guid prijavaZaNadmetanjeId, [FromHeader] string key)
         {
+            #pragma warning disable CS4014
+            logger.PostLogger("Brisanje postojeće veze između dokumenta i prijave za javno nadmetanje." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
+
             if (!authService.Authorize(key))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, "Korisnik nije autorizovan!");
@@ -191,6 +209,10 @@ namespace JavnoNadmetanje.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public ActionResult<DokumentPrijavaZaNadmetanjeDto> UpdateDokumentPrijava(DokumentPrijavaZaNadmetanjeEntity dokumentPrijava, [FromHeader] string key)
         {
+            #pragma warning disable CS4014
+            logger.PostLogger("Modifikacija postojeće veze između dokumenta i prijave za javno nadmetanje." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
+
             if (!authService.Authorize(key))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, "Korisnik nije autorizovan!");
@@ -226,6 +248,10 @@ namespace JavnoNadmetanje.Controllers
         [AllowAnonymous]
         public IActionResult GetDokumentPrijavaOptions()
         {
+            #pragma warning disable CS4014
+            logger.PostLogger("Pristup opcijama za vezu između dokumenta i prijave za nadmetanje." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
+
             Response.Headers.Add("Allow", "GET, HEAD, POST, PUT, DELETE");
             return Ok();
         }

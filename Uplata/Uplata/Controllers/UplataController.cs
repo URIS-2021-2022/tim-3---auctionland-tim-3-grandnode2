@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Uplata.Auth;
 using Uplata.Data;
 using Uplata.Entities;
+using Uplata.Logger;
 using Uplata.Models;
 
 namespace Uplata.Controllers
@@ -24,6 +25,7 @@ namespace Uplata.Controllers
         private readonly LinkGenerator linkGenerator;
         private readonly IMapper mapper;
         private readonly IAuthService authService;
+        private readonly LoggerService logger;
 
         public UplataController(IUplataRepository uplataRepository, LinkGenerator linkGenerator, IMapper mapper, IAuthService authService)
         {
@@ -31,6 +33,7 @@ namespace Uplata.Controllers
             this.linkGenerator = linkGenerator;
             this.mapper = mapper;
             this.authService = authService;
+            logger = new LoggerService();
         }
 
         /// <summary>
@@ -46,6 +49,10 @@ namespace Uplata.Controllers
         [AllowAnonymous]
         public ActionResult<List<UplataDto>> GetUplate()
         {
+            #pragma warning disable CS4014
+            logger.PostLogger("Pristup svim uplatama." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
+
             List<UplataEntity> uplate = uplataRepository.GetUplate();
 
             if (uplate == null || uplate.Count == 0)
@@ -68,6 +75,10 @@ namespace Uplata.Controllers
         [AllowAnonymous]
         public ActionResult<UplataDto> GetUplataById(Guid uplataId)
         {
+            #pragma warning disable CS4014
+            logger.PostLogger("Pristup uplati putem ID-ja." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
+
             UplataEntity uplata = uplataRepository.GetUplataById(uplataId);
 
             if (uplata == null)
@@ -90,6 +101,10 @@ namespace Uplata.Controllers
         [AllowAnonymous]
         public ActionResult<List<UplataDto>> GetUplateByPrijavaZaNadmetanjeId(Guid prijavaZaNadmetanjeId)
         {
+            #pragma warning disable CS4014
+            logger.PostLogger("Pristup uplatama putem ID-ja prijave za nadmetanje." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
+
             List<UplataEntity> uplate = uplataRepository.GetUplateByPrijavaZaNadmetanjeId(prijavaZaNadmetanjeId);
 
             if (uplate == null || uplate.Count == 0)
@@ -98,7 +113,6 @@ namespace Uplata.Controllers
             }
             return Ok(mapper.Map<List<UplataDto>>(uplate));
         }
-
 
         /// <summary>
         /// Vraća listu uplata po ID-ju kupca
@@ -113,6 +127,10 @@ namespace Uplata.Controllers
         [AllowAnonymous]
         public ActionResult<List<UplataDto>> GetUplateByKupacId(Guid kupacId)
         {
+            #pragma warning disable CS4014
+            logger.PostLogger("Pristup uplatama putem ID-ja kupca." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
+
             List<UplataEntity> uplate = uplataRepository.GetUplateByKupacId(kupacId);
 
             if (uplate == null || uplate.Count == 0)
@@ -150,6 +168,10 @@ namespace Uplata.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public ActionResult<UplataDto> CreateUplata([FromBody] UplataCreateDto uplata, [FromHeader] string key)
         {
+            #pragma warning disable CS4014
+            logger.PostLogger("Kreiranje nove uplate." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
+
             if (!authService.Authorize(key))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, "Korisnik nije autorizovan!");
@@ -186,6 +208,10 @@ namespace Uplata.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public IActionResult DeleteUplata(Guid uplataId, [FromHeader] string key)
         {
+            #pragma warning disable CS4014
+            logger.PostLogger("Brisanje postojeće uplate." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
+
             if (!authService.Authorize(key))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, "Korisnik nije autorizovan!");
@@ -223,8 +249,12 @@ namespace Uplata.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public ActionResult<UplataDto> UpdateOglas(UplataEntity uplata, [FromHeader] string key)
+        public ActionResult<UplataDto> UpdateUplata(UplataEntity uplata, [FromHeader] string key)
         {
+            #pragma warning disable CS4014
+            logger.PostLogger("Modifikacija postojeće uplate." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
+
             if (!authService.Authorize(key))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, "Korisnik nije autorizovan!");
@@ -261,6 +291,10 @@ namespace Uplata.Controllers
         [AllowAnonymous]
         public IActionResult GetUplataOptions()
         {
+            #pragma warning disable CS4014
+            logger.PostLogger("Pristup opcijama za uplatu." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
+
             Response.Headers.Add("Allow", "GET, HEAD, POST, PUT, DELETE");
             return Ok();
         }

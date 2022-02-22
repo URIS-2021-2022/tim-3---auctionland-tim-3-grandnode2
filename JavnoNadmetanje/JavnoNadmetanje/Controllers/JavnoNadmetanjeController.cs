@@ -2,6 +2,7 @@
 using JavnoNadmetanje.Auth;
 using JavnoNadmetanje.Data;
 using JavnoNadmetanje.Entities;
+using JavnoNadmetanje.Logger;
 using JavnoNadmetanje.Models;
 using JavnoNadmetanje.Models.KupacService;
 using JavnoNadmetanje.Models.ParcelaService;
@@ -29,6 +30,7 @@ namespace JavnoNadmetanje.Controllers
         private readonly LinkGenerator linkGenerator;
         private readonly IMapper mapper;
         private readonly IAuthService authService;
+        private readonly LoggerService logger;
 
         public JavnoNadmetanjeController(IJavnoNadmetanjeRepository javnoNadmetanjeRepository, IParcelaService parcelaService, IKupacService kupacService, LinkGenerator linkGenerator, IMapper mapper, IAuthService authService)
         {
@@ -38,6 +40,7 @@ namespace JavnoNadmetanje.Controllers
             this.mapper = mapper;
             this.authService = authService;
             this.kupacService = kupacService;
+            logger = new LoggerService();
         }
 
         /// <summary>
@@ -53,6 +56,10 @@ namespace JavnoNadmetanje.Controllers
         [AllowAnonymous]
         public ActionResult<List<JavnoNadmetanjeDto>> GetJavnaNadmetanja()
         {
+            #pragma warning disable CS4014
+            logger.PostLogger("Pristup svim javnim nadmetanjima." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
+
             List<JavnoNadmetanjeEntity> javnaNadmetanja = javnoNadmetanjeRepository.GetJavnaNadmetanja();
 
             if (javnaNadmetanja == null || javnaNadmetanja.Count == 0)
@@ -85,6 +92,10 @@ namespace JavnoNadmetanje.Controllers
         [AllowAnonymous]
         public ActionResult<JavnoNadmetanjeDto> GetJavnoNadmetanjeById(Guid javnoNadmetanjeId)
         {
+            #pragma warning disable CS4014
+            logger.PostLogger("Pristup javnom nadmetanju putem ID-ja." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
+
             JavnoNadmetanjeEntity javnoNadmetanje = javnoNadmetanjeRepository.GetJavnoNadmetanjeById(javnoNadmetanjeId);
             
             if(javnoNadmetanje == null)
@@ -113,6 +124,10 @@ namespace JavnoNadmetanje.Controllers
         [AllowAnonymous]
         public ActionResult<List<JavnoNadmetanjeDto>> GetJavnaNadmetanjaByLicitacijaId(Guid licitacijaId)
         {
+            #pragma warning disable CS4014
+            logger.PostLogger("Pristup javnim nadmetanjima putem ID-ja licitacije." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
+
             List<JavnoNadmetanjeEntity> javnaNadmetanja = javnoNadmetanjeRepository.GetJavnaNadmetanjaByLicitacijaId(licitacijaId);
 
             if (javnaNadmetanja == null || javnaNadmetanja.Count == 0)
@@ -159,6 +174,10 @@ namespace JavnoNadmetanje.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public ActionResult<JavnoNadmetanjeDto> CreateJavnoNadmetanje([FromBody] JavnoNadmetanjeCreateDto javnoNadmetanje, [FromHeader] string key)
         {
+            #pragma warning disable CS4014
+            logger.PostLogger("Kreiranje novog javnog nadmetanja." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
+
             if (!authService.Authorize(key))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, "Korisnik nije autorizovan!");
@@ -202,6 +221,10 @@ namespace JavnoNadmetanje.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public IActionResult DeleteJavnoNadmetanje(Guid javnoNadmetanjeId, [FromHeader] string key)
         {
+            #pragma warning disable CS4014
+            logger.PostLogger("Brisanje postojećeg javnog nadmetanja." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
+
             if (!authService.Authorize(key))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, "Korisnik nije autorizovan!");
@@ -242,6 +265,10 @@ namespace JavnoNadmetanje.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public ActionResult<JavnoNadmetanjeDto> UpdateJavnoNadmetanje(JavnoNadmetanjeEntity javnoNadmetanje, [FromHeader] string key)
         {
+            #pragma warning disable CS4014
+            logger.PostLogger("Modifikacija postojećeg javnog nadmetanja." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
+
             if (!authService.Authorize(key))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, "Korisnik nije autorizovan!");
@@ -287,6 +314,10 @@ namespace JavnoNadmetanje.Controllers
         [AllowAnonymous]
         public IActionResult GetJavnoNadmetanjeOptions()
         {
+            #pragma warning disable CS4014
+            logger.PostLogger("Pristup opcijama za javno nadmetanje." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
+
             Response.Headers.Add("Allow", "GET, HEAD, POST, PUT, DELETE");
             return Ok();
         }

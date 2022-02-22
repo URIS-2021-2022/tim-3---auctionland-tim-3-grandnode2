@@ -2,6 +2,7 @@
 using JavnoNadmetanje.Auth;
 using JavnoNadmetanje.Data;
 using JavnoNadmetanje.Entities;
+using JavnoNadmetanje.Logger;
 using JavnoNadmetanje.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -25,6 +26,7 @@ namespace JavnoNadmetanje.Controllers
         private readonly LinkGenerator linkGenerator;
         private readonly IMapper mapper;
         private readonly IAuthService authService;
+        private readonly LoggerService logger;
 
         public SluzbeniListController(ISluzbeniListRepository sluzbeniListRepository, LinkGenerator linkGenerator, IMapper mapper, IAuthService authService)
         {
@@ -32,6 +34,7 @@ namespace JavnoNadmetanje.Controllers
             this.linkGenerator = linkGenerator;
             this.mapper = mapper;
             this.authService = authService;
+            logger = new LoggerService();
         }
 
         /// <summary>
@@ -47,6 +50,10 @@ namespace JavnoNadmetanje.Controllers
         [AllowAnonymous]
         public ActionResult<List<SluzbeniListDto>> GetSluzbeniListovi()
         {
+            #pragma warning disable CS4014
+            logger.PostLogger("Pristup svim službenim dokumentima." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
+
             List<SluzbeniListEntity> sluzbeniListovi = sluzbeniListRepository.GetSluzbeniListovi();
 
             if (sluzbeniListovi == null || sluzbeniListovi.Count == 0)
@@ -69,6 +76,10 @@ namespace JavnoNadmetanje.Controllers
         [AllowAnonymous]
         public ActionResult<SluzbeniListDto> GetSluzbeniListById(Guid sluzbeniListId)
         {
+            #pragma warning disable CS4014
+            logger.PostLogger("Pristup službenom listu putem ID-ja." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
+
             SluzbeniListEntity sluzbeniList = sluzbeniListRepository.GetSluzbeniListById(sluzbeniListId);
 
             if (sluzbeniList == null)
@@ -102,6 +113,10 @@ namespace JavnoNadmetanje.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public ActionResult<SluzbeniListDto> CreateSluzbeniList([FromBody] SluzbeniListCreateDto sluzbeniList, [FromHeader] string key)
         {
+            #pragma warning disable CS4014
+            logger.PostLogger("Kreiranje novog službenog lista." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
+
             if (!authService.Authorize(key))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, "Korisnik nije autorizovan!");
@@ -138,6 +153,10 @@ namespace JavnoNadmetanje.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public IActionResult DeleteSluzbeniList(Guid sluzbeniListId, [FromHeader] string key)
         {
+            #pragma warning disable CS4014
+            logger.PostLogger("Brisanje postojećeg službenog lista." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
+
             if (!authService.Authorize(key))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, "Korisnik nije autorizovan!");
@@ -178,6 +197,10 @@ namespace JavnoNadmetanje.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public ActionResult<SluzbeniListDto> UpdateSluzbeniList(SluzbeniListEntity sluzbeniList, [FromHeader] string key)
         {
+            #pragma warning disable CS4014
+            logger.PostLogger("Modifikacija postojećeg službenog lista." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
+
             if (!authService.Authorize(key))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, "Korisnik nije autorizovan!");
@@ -213,6 +236,10 @@ namespace JavnoNadmetanje.Controllers
         [AllowAnonymous]
         public IActionResult GetSluzbeniListOptions()
         {
+            #pragma warning disable CS4014
+            logger.PostLogger("Pristup opcijama za službeni list." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
+
             Response.Headers.Add("Allow", "GET, HEAD, POST, PUT, DELETE");
             return Ok();
         }
