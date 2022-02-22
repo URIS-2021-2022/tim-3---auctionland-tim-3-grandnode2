@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DokumentServis.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20220221210709_initial")]
+    [Migration("20220222082245_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -53,8 +53,6 @@ namespace DokumentServis.Migrations
 
                     b.HasKey("DokumentID");
 
-                    b.HasIndex("VerzijaDokumentaID");
-
                     b.ToTable("Dokument");
                 });
 
@@ -76,17 +74,6 @@ namespace DokumentServis.Migrations
                     b.HasKey("VerzijaDokumentaID");
 
                     b.ToTable("VerzijaDokumenta");
-                });
-
-            modelBuilder.Entity("DokumentServis.Database.Entities.Dokument", b =>
-                {
-                    b.HasOne("DokumentServis.Database.Entities.VerzijaDokumenta", "VerzijaDokumenta")
-                        .WithMany()
-                        .HasForeignKey("VerzijaDokumentaID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("VerzijaDokumenta");
                 });
 #pragma warning restore 612, 618
         }

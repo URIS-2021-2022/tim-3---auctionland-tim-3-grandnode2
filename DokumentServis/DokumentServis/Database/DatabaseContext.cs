@@ -15,7 +15,7 @@ namespace DokumentServis.Database
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-AMVOLPE\SQLEXPRESS;Initial Catalog=DokumentServis; Integrated Security=True;");
+            optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-A7T4B1V\SQLEXPRESS;Initial Catalog=DokumentServis; Integrated Security=True;");
         }
     }
 }

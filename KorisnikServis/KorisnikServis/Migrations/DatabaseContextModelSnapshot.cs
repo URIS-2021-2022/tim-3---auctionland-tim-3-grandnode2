@@ -42,8 +42,6 @@ namespace KorisnikServis.Migrations
 
                     b.HasKey("KorisnikID");
 
-                    b.HasIndex("TipKorisnikaID");
-
                     b.ToTable("Korisnik");
                 });
 
@@ -59,17 +57,6 @@ namespace KorisnikServis.Migrations
                     b.HasKey("TipKorisnikaID");
 
                     b.ToTable("TipKorisnika");
-                });
-
-            modelBuilder.Entity("KorisnikServis.Database.Entities.Korisnik", b =>
-                {
-                    b.HasOne("KorisnikServis.Database.Entities.TipKorisnika", "TipKorisnika")
-                        .WithMany()
-                        .HasForeignKey("TipKorisnikaID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("TipKorisnika");
                 });
 #pragma warning restore 612, 618
         }
