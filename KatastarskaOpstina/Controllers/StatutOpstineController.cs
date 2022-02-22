@@ -2,6 +2,7 @@
 using KatastarskaOpstina.Auth;
 using KatastarskaOpstina.Data;
 using KatastarskaOpstina.Entities;
+using KatastarskaOpstina.Logger;
 using KatastarskaOpstina.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -23,12 +24,15 @@ namespace KatastarskaOpstina.Controllers
         private readonly LinkGenerator linkGenerator;
         private readonly IMapper mapper;
         private readonly IAuthService authService;
+        private readonly LoggerService logger;
+
         public StatutOpstineController(IStatutOpstineRepository statutOpstineRepository, LinkGenerator linkGenerator, IMapper mapper, IAuthService authService)
         {
             this.statutOpstineRepository = statutOpstineRepository;
             this.linkGenerator = linkGenerator;
             this.mapper = mapper;
             this.authService = authService;
+            logger = new LoggerService();
         }
 
         /// <summary>
@@ -44,6 +48,9 @@ namespace KatastarskaOpstina.Controllers
         [AllowAnonymous]
         public ActionResult<List<StatutOpstineModelDto>> GetStatutOpstines() //ovde mi isto fale prosledjeni parametri
         {
+            #pragma warning disable CS4014
+            logger.PostLogger("Pristup svim statutima opstine." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
             var statutOpstines = statutOpstineRepository.GetStatutOpstines();//ovde mi isto fale prosledjeni parametri
             if (statutOpstines == null || statutOpstines.Count == 0)
             {
@@ -65,6 +72,9 @@ namespace KatastarskaOpstina.Controllers
         [AllowAnonymous]
         public ActionResult<StatutOpstineModelDto> GetStatutOpstine(Guid statutOpstineID)
         {
+            #pragma warning disable CS4014
+            logger.PostLogger("Pristup statutu opstine putem id-a." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
             var statutOpstine = statutOpstineRepository.GetStatutOpstine(statutOpstineID);
 
             if (statutOpstine == null)
@@ -91,6 +101,9 @@ namespace KatastarskaOpstina.Controllers
         [HttpPost]
         public ActionResult<StatutOpstineCreationDto> CreateStatutOpstine([FromBody] StatutOpstineCreationDto statutOpstine, [FromHeader] string key)
         {
+            #pragma warning disable CS4014
+            logger.PostLogger("Kreiranje novog statuta opstine." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
             if (!authService.Authorize(key))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, "Korisnik nije autorizovan!");
@@ -129,6 +142,9 @@ namespace KatastarskaOpstina.Controllers
         [HttpDelete("{StatutOpstineID}")]
         public IActionResult DeleteStatutOpstine(Guid statutOpstineID, [FromHeader] string key)
         {
+            #pragma warning disable CS4014
+            logger.PostLogger("Brisanje postojeceg statuta opstine." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
             if (!authService.Authorize(key))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, "Korisnik nije autorizovan!");
@@ -168,6 +184,9 @@ namespace KatastarskaOpstina.Controllers
         [HttpPut]
         public ActionResult<StatutOpstineConfirmationDto> UpdateStatutOpstine(StatutOpstineModelDto statutOpstine, [FromHeader] string key)
         {
+            #pragma warning disable CS4014
+            logger.PostLogger("Modifikacija postojeceg statuta opstine." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
             if (!authService.Authorize(key))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, "Korisnik nije autorizovan!");

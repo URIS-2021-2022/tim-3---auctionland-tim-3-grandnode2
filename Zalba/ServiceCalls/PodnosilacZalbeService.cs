@@ -23,7 +23,7 @@ namespace Zalba.ServiceCalls
             try
             {
                 using var httpClient = new HttpClient();
-                Uri url = new Uri($"{ _configuration["Services:PodnosilacZalbeService"] }api/Kupci" + podnosilacZalbeId); //videti api
+                Uri url = new Uri($"{ _configuration["Services:PodnosilacZalbeService"] }api/Kupci/" + podnosilacZalbeId); //videti api
                 var request = new HttpRequestMessage(HttpMethod.Get, url);
                 request.Headers.Add("Accept", "application/json");
                 var response = await httpClient.SendAsync(request);

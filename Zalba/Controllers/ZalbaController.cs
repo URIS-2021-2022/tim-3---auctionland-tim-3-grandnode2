@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Zalba.Auth;
 using Zalba.Data;
 using Zalba.Entities;
+using Zalba.Logger;
 using Zalba.Models;
 using Zalba.ServiceCalls;
 
@@ -27,6 +28,7 @@ namespace Zalba.Controllers
         private readonly IAuthService authService;
         private readonly ILicitacijaService licitacijaService;
         private readonly IPodnosilacZalbeService podnosilacZalbeService;
+        private readonly LoggerService logger;
         public ZalbaController(IZalbaRepository zalbaRepository, LinkGenerator linkGenerator, IMapper mapper, IAuthService authService, ILicitacijaService licitacijaService, IPodnosilacZalbeService podnosilacZalbeService)
         {
             this.zalbaRepository = zalbaRepository;
@@ -35,6 +37,7 @@ namespace Zalba.Controllers
             this.authService = authService;
             this.licitacijaService = licitacijaService;
             this.podnosilacZalbeService = podnosilacZalbeService;
+            logger = new LoggerService();
         }
 
         /// <summary>
@@ -50,6 +53,9 @@ namespace Zalba.Controllers
         [AllowAnonymous]
         public ActionResult<List<ZalbaModelDto>> GetZalbas() 
         {
+            #pragma warning disable CS4014
+            logger.PostLogger("Pristup svim zalbama." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
             try
             {
                 var zalbas = zalbaRepository.GetZalbas();
@@ -91,6 +97,9 @@ namespace Zalba.Controllers
         [AllowAnonymous]
         public ActionResult<ZalbaModelDto> GetZalba(Guid zalbaID)
         {
+            #pragma warning disable CS4014
+            logger.PostLogger("Pristup zalbama putem id-a." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
             try
             {
                 var zalba = zalbaRepository.GetZalba(zalbaID);
@@ -127,6 +136,9 @@ namespace Zalba.Controllers
         [HttpPost]
         public ActionResult<ZalbaCreationDto> CreateZalba([FromBody] ZalbaCreationDto zalba, [FromHeader] string key)
         {
+            #pragma warning disable CS4014
+            logger.PostLogger("Kreiranje nove zalbe." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
             if (!authService.Authorize(key))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, "Korisnik nije autorizovan!");
@@ -165,6 +177,9 @@ namespace Zalba.Controllers
         [HttpDelete("{zalbaId}")]
         public IActionResult DeleteZalba(Guid zalbaId, [FromHeader] string key)
         {
+            #pragma warning disable CS4014
+            logger.PostLogger("Brisanje postojece zalbe." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
             if (!authService.Authorize(key))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, "Korisnik nije autorizovan!");
@@ -205,6 +220,9 @@ namespace Zalba.Controllers
         [HttpPut]
         public ActionResult<ZalbaConfirmationDto> UpdateZalba(ZalbaModelDto zalba, [FromHeader] string key)
         {
+            #pragma warning disable CS4014
+            logger.PostLogger("Modifikacija postojece zalbe." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
             if (!authService.Authorize(key))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, "Korisnik nije autorizovan!");
