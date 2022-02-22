@@ -97,6 +97,15 @@
             <response code = "200">Vraća listu uplata za prosleđenu prijavu za nadmetanje</response>
             <response code = "204">Ne postoji lista uplata za prosleđenu prijavu za nadmetanje</response>
         </member>
+        <member name="M:Uplata.Controllers.UplataController.GetUplateByKupacId(System.Guid)">
+            <summary>
+            Vraća listu uplata po ID-ju kupca
+            </summary>
+            <param name="kupacId">ID kupca</param>
+            <returns>Lista uplata za prosleđenog kupca</returns>
+            <response code = "200">Vraća listu uplata za prosleđenog kupca</response>
+            <response code = "204">Ne postoji lista uplata za prosleđenog kupca</response>
+        </member>
         <member name="M:Uplata.Controllers.UplataController.CreateUplata(Uplata.Models.UplataCreateDto,System.String)">
             <summary>
             Kreira novu uplatu
@@ -216,6 +225,11 @@
             ID prijave za nadmetanje
             </summary>
         </member>
+        <member name="P:Uplata.Entities.UplataEntity.KupacId">
+            <summary>
+            ID kupca
+            </summary>
+        </member>
         <member name="P:Uplata.Models.BankaCreateDto.NazivBanke">
             <summary>
             Naziv banke
@@ -286,6 +300,11 @@
             Prijava za nadmetanje ID
             </summary>
         </member>
+        <member name="P:Uplata.Models.UplataCreateDto.KupacId">
+            <summary>
+            ID kupca
+            </summary>
+        </member>
         <member name="P:Uplata.Models.UplataDto.UplataId">
             <summary>
             ID uplate
@@ -324,6 +343,11 @@
         <member name="P:Uplata.Models.UplataDto.PrijavaZaNadmetanjeId">
             <summary>
             Prijava za nadmetanje ID
+            </summary>
+        </member>
+        <member name="P:Uplata.Models.UplataDto.KupacId">
+            <summary>
+            ID kupca
             </summary>
         </member>
     </members>

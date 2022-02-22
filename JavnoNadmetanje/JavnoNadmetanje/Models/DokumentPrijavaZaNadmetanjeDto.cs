@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JavnoNadmetanje.Models.DokumentService;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,9 +15,9 @@ namespace JavnoNadmetanje.Models
         public Guid PrijavaZaNadmetanjeId { get; set; }
 
         /// <summary>
-        /// ID dokumenta
+        /// Dokument
         /// </summary>
-        public Guid DokumentId { get; set; }
+        public ResponseDokumentDto Dokument { get; set; }
 
         /// <summary>
         /// Datum donošenja dokumenta

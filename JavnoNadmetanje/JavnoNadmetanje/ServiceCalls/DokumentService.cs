@@ -17,7 +17,7 @@ namespace JavnoNadmetanje.ServiceCalls
         {
             this.configuration = configuration;
         }
-        public async Task<DokumentDto> GetDokumentById(Guid dokumentId, string accessToken)
+        public async Task<ResponseDokumentDto> GetDokumentById(Guid dokumentId, string accessToken)
         {
             try
             {
@@ -34,7 +34,7 @@ namespace JavnoNadmetanje.ServiceCalls
                     {
                         return default;
                     }
-                    return JsonConvert.DeserializeObject<DokumentDto>(content);
+                    return JsonConvert.DeserializeObject<ResponseDokumentDto>(content);
                 }
                 return default;
             }

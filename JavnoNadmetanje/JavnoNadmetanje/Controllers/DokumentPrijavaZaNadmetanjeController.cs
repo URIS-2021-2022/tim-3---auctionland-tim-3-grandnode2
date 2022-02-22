@@ -28,6 +28,7 @@ namespace JavnoNadmetanje.Controllers
         private readonly LinkGenerator linkGenerator;
         private readonly IMapper mapper;
         private readonly IAuthService authService;
+       
 
         public DokumentPrijavaZaNadmetanjeController(IDokumentPrijavaZaNadmetanjeRepository dokumentPrijavaZaNadmetanjeRepository, IDokumentService dokumentService, LinkGenerator linkGenerator, IMapper mapper, IAuthService authService)
         {
@@ -61,7 +62,7 @@ namespace JavnoNadmetanje.Controllers
 
             foreach(DokumentPrijavaZaNadmetanjeEntity dok in dokumentiPrijave)
             {
-                DokumentDto dokument = dokumentService.GetDokumentById(dok.DokumentId, accessToken).Result;
+                ResponseDokumentDto dokument = dokumentService.GetDokumentById(dok.DokumentId, accessToken).Result;
                 dok.Dokument = dokument;
             }
 
@@ -82,19 +83,14 @@ namespace JavnoNadmetanje.Controllers
         [AllowAnonymous]
         public ActionResult<DokumentPrijavaZaNadmetanjeDto> GetDokumentPrijavaById(Guid prijavaZaNadmetanjeId, Guid dokumentId)
         {
-            DokumentPrijavaZaNadmetanjeEntity dokumentPrijava = dokumentPrijavaZaNadmetanjeRepository.GetDokumentPrijavaById(prijavaZaNadmetanjeId, dokumentId);
+         //   DokumentPrijavaZaNadmetanjeEntity dokumentPrijava = dokumentPrijavaZaNadmetanjeRepository.GetDokumentPrijavaById(prijavaZaNadmetanjeId, dokumentId);
             string accessToken = HttpContext.GetTokenAsync("access_token").Result;
+            DokumentPrijavaZaNadmetanjeDto dokPrij = new DokumentPrijavaZaNadmetanjeDto();
+            dokPrij.PrijavaZaNadmetanjeId = prijavaZaNadmetanjeId;
+            ResponseDokumentDto dokument = dokumentService.GetDokumentById(dokumentId, accessToken).Result;
+            dokPrij.Dokument = dokument;
 
-            if (dokumentPrijava == null)
-            {
-                return NotFound();
-            }
-
-             DokumentDto dokument = dokumentService.GetDokumentById(dokumentPrijava.DokumentId, accessToken).Result;
-             dokumentPrijava.Dokument = dokument;
-
-
-            return Ok(mapper.Map<DokumentPrijavaZaNadmetanjeDto>(dokumentPrijava));
+            return Ok(dokPrij);
         }
 
         /// <summary>
