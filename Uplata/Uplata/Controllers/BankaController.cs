@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Uplata.Auth;
 using Uplata.Data;
 using Uplata.Entities;
+using Uplata.Logger;
 using Uplata.Models;
 
 namespace Uplata.Controllers
@@ -24,6 +25,7 @@ namespace Uplata.Controllers
         private readonly LinkGenerator linkGenerator;
         private readonly IMapper mapper;
         private readonly IAuthService authService;
+        private readonly LoggerService logger;
 
         public BankaController(IBankaRepository bankaRepository, LinkGenerator linkGenerator, IMapper mapper, IAuthService authService)
         {
@@ -31,6 +33,7 @@ namespace Uplata.Controllers
             this.linkGenerator = linkGenerator;
             this.mapper = mapper;
             this.authService = authService;
+            logger = new LoggerService();
         }
 
         /// <summary>
@@ -46,6 +49,10 @@ namespace Uplata.Controllers
         [AllowAnonymous]
         public ActionResult<List<BankaDto>> GetBanke()
         {
+            #pragma warning disable CS4014
+            logger.PostLogger("Pristup svim bankama." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
+
             List<BankaEntity> banke = bankaRepository.GetBanke();
 
             if (banke == null || banke.Count == 0)
@@ -68,6 +75,10 @@ namespace Uplata.Controllers
         [AllowAnonymous]
         public ActionResult<BankaDto> GetBankaById(Guid bankaId)
         {
+            #pragma warning disable CS4014
+            logger.PostLogger("Pristup banci putem ID-ja." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
+
             BankaEntity banka = bankaRepository.GetBankaById(bankaId);
 
             if (banka == null)
@@ -101,6 +112,10 @@ namespace Uplata.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public ActionResult<BankaDto> CreateBanka([FromBody] BankaCreateDto banka, [FromHeader] string key)
         {
+            #pragma warning disable CS4014
+            logger.PostLogger("Kreiranje nove banke." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
+
             if (!authService.Authorize(key))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, "Korisnik nije autorizovan!");
@@ -137,6 +152,10 @@ namespace Uplata.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public IActionResult DeleteBanka(Guid bankaId, [FromHeader] string key)
         {
+            #pragma warning disable CS4014
+            logger.PostLogger("Brisanje postojeće banke." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
+
             if (!authService.Authorize(key))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, "Korisnik nije autorizovan!");
@@ -176,6 +195,10 @@ namespace Uplata.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public ActionResult<BankaDto> UpdateBanka(BankaEntity banka, [FromHeader] string key)
         {
+            #pragma warning disable CS4014
+            logger.PostLogger("Modifikacija postojeće banke." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
+
             if (!authService.Authorize(key))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, "Korisnik nije autorizovan!");
@@ -212,6 +235,10 @@ namespace Uplata.Controllers
         [AllowAnonymous]
         public IActionResult GetBankaOptions()
         {
+            #pragma warning disable CS4014
+            logger.PostLogger("Pristup opcijama za banku." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
+
             Response.Headers.Add("Allow", "GET, HEAD, POST, PUT, DELETE");
             return Ok();
         }

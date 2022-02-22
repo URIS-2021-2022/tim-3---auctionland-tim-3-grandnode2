@@ -142,7 +142,7 @@
             <response code="404">Nije pronađena uplata za brisanje</response>
             <response code="500">Došlo je do greške na serveru prilikom brisanja uplate</response>
         </member>
-        <member name="M:Uplata.Controllers.UplataController.UpdateOglas(Uplata.Entities.UplataEntity,System.String)">
+        <member name="M:Uplata.Controllers.UplataController.UpdateUplata(Uplata.Entities.UplataEntity,System.String)">
             <summary>
             Ažurira jednu uplatu
             </summary>
@@ -228,6 +228,16 @@
         <member name="P:Uplata.Entities.UplataEntity.KupacId">
             <summary>
             ID kupca
+            </summary>
+        </member>
+        <member name="P:Uplata.Logger.LoggerVO.OpisAktivnosti">
+            <summary>
+            Opis aktivnosti
+            </summary>
+        </member>
+        <member name="P:Uplata.Logger.LoggerVO.Datum">
+            <summary>
+            Datum
             </summary>
         </member>
         <member name="P:Uplata.Models.BankaCreateDto.NazivBanke">

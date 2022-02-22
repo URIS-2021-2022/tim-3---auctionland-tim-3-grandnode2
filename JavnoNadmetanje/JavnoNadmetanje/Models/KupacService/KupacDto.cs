@@ -22,14 +22,5 @@ namespace JavnoNadmetanje.Models.KupacService
         /// </summary>        
         public bool ImaZabranu { get; set; }
 
-        /// <summary>
-        /// Datum početka zabrane
-        /// </summary>
-        public DateTime? DatumPocetkaZabrane { get; set; }
-
-        /// <summary>
-        /// Dužina trajanja zabrane u godinama
-        /// </summary>
-        public int? DuzinaTrajanjaZabraneUGodinama { get; set; }
     }
 }

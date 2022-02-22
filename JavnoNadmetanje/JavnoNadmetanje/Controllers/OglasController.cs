@@ -2,6 +2,7 @@
 using JavnoNadmetanje.Auth;
 using JavnoNadmetanje.Data;
 using JavnoNadmetanje.Entities;
+using JavnoNadmetanje.Logger;
 using JavnoNadmetanje.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -24,6 +25,7 @@ namespace JavnoNadmetanje.Controllers
         private readonly LinkGenerator linkGenerator;
         private readonly IMapper mapper;
         private readonly IAuthService authService;
+        private readonly LoggerService logger;
 
         public OglasController(IOglasRepository oglasRepository, LinkGenerator linkGenerator, IMapper mapper, IAuthService authService)
         {
@@ -31,6 +33,7 @@ namespace JavnoNadmetanje.Controllers
             this.linkGenerator = linkGenerator;
             this.mapper = mapper;
             this.authService = authService;
+            logger = new LoggerService();
         }
 
         /// <summary>
@@ -46,6 +49,10 @@ namespace JavnoNadmetanje.Controllers
         [AllowAnonymous]
         public ActionResult<List<OglasDto>> GetOglasi()
         {
+            #pragma warning disable CS4014
+            logger.PostLogger("Pristup svim oglasima." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
+
             List<OglasEntity> oglasi = oglasRepository.GetOglasi();
 
             if (oglasi == null || oglasi.Count == 0)
@@ -68,6 +75,10 @@ namespace JavnoNadmetanje.Controllers
         [AllowAnonymous]
         public ActionResult<OglasDto> GetOglasById(Guid oglasId)
         {
+            #pragma warning disable CS4014
+            logger.PostLogger("Pristup oglasu putem ID-ja." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
+
             OglasEntity oglas = oglasRepository.GetOglasById(oglasId);
 
             if (oglas == null)
@@ -101,6 +112,10 @@ namespace JavnoNadmetanje.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public ActionResult<OglasDto> CreateOglas([FromBody] OglasCreateDto oglas, [FromHeader] string key)
         {
+            #pragma warning disable CS4014
+            logger.PostLogger("Kreiranje novog oglasa." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
+
             if (!authService.Authorize(key))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, "Korisnik nije autorizovan!");
@@ -137,6 +152,10 @@ namespace JavnoNadmetanje.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public IActionResult DeleteOglas(Guid oglasId, [FromHeader] string key)
         {
+            #pragma warning disable CS4014
+            logger.PostLogger("Brisanje postojećeg oglasa." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
+
             if (!authService.Authorize(key))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, "Korisnik nije autorizovan!");
@@ -177,6 +196,10 @@ namespace JavnoNadmetanje.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public ActionResult<OglasDto> UpdateOglas(OglasEntity oglas, [FromHeader] string key)
         {
+            #pragma warning disable CS4014
+            logger.PostLogger("Modifikacija postojećeg oglasa." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
+
             if (!authService.Authorize(key))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, "Korisnik nije autorizovan!");
@@ -213,6 +236,10 @@ namespace JavnoNadmetanje.Controllers
         [AllowAnonymous]
         public IActionResult GetOglasOptions()
         {
+            #pragma warning disable CS4014
+            logger.PostLogger("Pristup opcijama za oglas." + "*********Korisnicko ime: " + HttpContext.User.Identity.Name);
+            #pragma warning restore CS4014
+
             Response.Headers.Add("Allow", "GET, HEAD, POST, PUT, DELETE");
             return Ok();
         }
