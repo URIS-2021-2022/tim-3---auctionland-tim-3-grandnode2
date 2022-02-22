@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,12 +9,10 @@ namespace Uplata.Data
     public class BankaRepository : IBankaRepository
     {
         private readonly UplataContext context;
-        private readonly IMapper mapper;
 
-        public BankaRepository(UplataContext context, IMapper mapper)
+        public BankaRepository(UplataContext context)
         {
             this.context = context;
-            this.mapper = mapper;
         }
 
         public bool SaveChanges()

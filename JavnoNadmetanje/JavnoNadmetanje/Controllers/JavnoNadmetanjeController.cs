@@ -3,6 +3,9 @@ using JavnoNadmetanje.Auth;
 using JavnoNadmetanje.Data;
 using JavnoNadmetanje.Entities;
 using JavnoNadmetanje.Models;
+using JavnoNadmetanje.Models.KupacService;
+using JavnoNadmetanje.Models.ParcelaService;
+using JavnoNadmetanje.ServiceCalls;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -21,16 +24,20 @@ namespace JavnoNadmetanje.Controllers
     public class JavnoNadmetanjeController : ControllerBase
     {
         private readonly IJavnoNadmetanjeRepository javnoNadmetanjeRepository;
+        private readonly IParcelaService parcelaService;
+        private readonly IKupacService kupacService;
         private readonly LinkGenerator linkGenerator;
         private readonly IMapper mapper;
         private readonly IAuthService authService;
 
-        public JavnoNadmetanjeController(IJavnoNadmetanjeRepository javnoNadmetanjeRepository, LinkGenerator linkGenerator, IMapper mapper, IAuthService authService)
+        public JavnoNadmetanjeController(IJavnoNadmetanjeRepository javnoNadmetanjeRepository, IParcelaService parcelaService, IKupacService kupacService, LinkGenerator linkGenerator, IMapper mapper, IAuthService authService)
         {
             this.javnoNadmetanjeRepository = javnoNadmetanjeRepository;
+            this.parcelaService = parcelaService;
             this.linkGenerator = linkGenerator;
             this.mapper = mapper;
             this.authService = authService;
+            this.kupacService = kupacService;
         }
 
         /// <summary>
@@ -52,6 +59,16 @@ namespace JavnoNadmetanje.Controllers
             {
                 return NoContent();
             }
+
+            foreach (JavnoNadmetanjeEntity j in javnaNadmetanja)
+            {
+                List<DeoParceleDto> deloviParcele = parcelaService.GetDeloveParcele(j.ParcelaId).Result;
+                KupacDto kupac = kupacService.GetKupacById(j.KupacId).Result;
+                j.DeloviParcele = deloviParcele;
+                j.Kupac = kupac;
+    
+            }
+
             return Ok(mapper.Map<List<JavnoNadmetanjeDto>>(javnaNadmetanja));
         }
 
@@ -74,6 +91,12 @@ namespace JavnoNadmetanje.Controllers
             {
                 return NotFound();
             }
+
+            List<DeoParceleDto> deloviParcele = parcelaService.GetDeloveParcele(javnoNadmetanje.ParcelaId).Result;
+            KupacDto kupac = kupacService.GetKupacById(javnoNadmetanje.KupacId).Result;
+            javnoNadmetanje.DeloviParcele = deloviParcele;
+            javnoNadmetanje.Kupac = kupac;
+
             return Ok(mapper.Map<JavnoNadmetanjeDto>(javnoNadmetanje));
         }
 

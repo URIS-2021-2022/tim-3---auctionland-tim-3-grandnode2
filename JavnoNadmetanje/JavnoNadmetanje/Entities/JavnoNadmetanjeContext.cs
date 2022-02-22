@@ -27,11 +27,11 @@ namespace JavnoNadmetanje.Entities
         /// <summary>
         /// Metoda koja popunjava bazu sa inicijalnim podacima
         /// </summary>
-        protected override void OnModelCreating(ModelBuilder builder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            builder.Entity<DokumentPrijavaZaNadmetanjeEntity>().HasKey(dp => new { dp.PrijavaZaNadmetanjeId, dp.DokumentId });
+            modelBuilder.Entity<DokumentPrijavaZaNadmetanjeEntity>().HasKey(dp => new { dp.PrijavaZaNadmetanjeId, dp.DokumentId });
 
-            builder.Entity<JavnoNadmetanjeEntity>()
+            modelBuilder.Entity<JavnoNadmetanjeEntity>()
                 .HasData(new
                 {
                     JavnoNadmetanjeId = Guid.Parse("6a411c13-a195-48f7-8dbd-67596c3974c0"),
@@ -53,7 +53,7 @@ namespace JavnoNadmetanje.Entities
                     KupacId = Guid.Parse("bc03a6fb-b322-4797-b6c4-0a899615f653")
                 });
 
-            builder.Entity<JavnoNadmetanjeEntity>()
+            modelBuilder.Entity<JavnoNadmetanjeEntity>()
                 .HasData(new
                 {
                     JavnoNadmetanjeId = Guid.Parse("1c7ea607-8ddb-493a-87fa-4bf5893e965b"),
@@ -76,7 +76,7 @@ namespace JavnoNadmetanje.Entities
 
                 });
 
-            builder.Entity<PrijavaZaNadmetanjeEntity>()
+            modelBuilder.Entity<PrijavaZaNadmetanjeEntity>()
                 .HasData(new
                 {
                     PrijavaZaNadmetanjeId = Guid.Parse("07c0c62b-675e-4714-816c-b492720194d6"),
@@ -85,7 +85,7 @@ namespace JavnoNadmetanje.Entities
                     JavnoNadmetanjeId = Guid.Parse("6a411c13-a195-48f7-8dbd-67596c3974c0")
                 });
 
-            builder.Entity<PrijavaZaNadmetanjeEntity>()
+            modelBuilder.Entity<PrijavaZaNadmetanjeEntity>()
                 .HasData(new
                 {
                     PrijavaZaNadmetanjeId = Guid.Parse("1cd5c783-4bf5-4bbc-b7f0-bd66e2ba0bd7"),
@@ -94,7 +94,7 @@ namespace JavnoNadmetanje.Entities
                     JavnoNadmetanjeId = Guid.Parse("1c7ea607-8ddb-493a-87fa-4bf5893e965b")
                 });
 
-            builder.Entity<OglasEntity>()
+            modelBuilder.Entity<OglasEntity>()
                 .HasData(new
                 {
                     OglasId = Guid.Parse("382e1636-2705-477e-95c4-8727e819c5e9"),
@@ -104,7 +104,7 @@ namespace JavnoNadmetanje.Entities
 
                 });
 
-            builder.Entity<OglasEntity>()
+            modelBuilder.Entity<OglasEntity>()
                 .HasData(new
                 {
                     OglasId = Guid.Parse("abd912e3-5962-463e-a04e-5fdd2b43e30f"),
@@ -113,7 +113,7 @@ namespace JavnoNadmetanje.Entities
                     SluzbeniListId = Guid.Parse("1a0d7558-2ebc-45df-83d3-13066c36d42b")
                 });
 
-            builder.Entity<SluzbeniListEntity>()
+            modelBuilder.Entity<SluzbeniListEntity>()
                 .HasData(new
                 {
                     SluzbeniListId = Guid.Parse("1a0d7558-2ebc-45df-83d3-13066c36d42b"),
@@ -122,7 +122,7 @@ namespace JavnoNadmetanje.Entities
                     DatumIzdavanja = DateTime.Parse("11-10-2021")
                 });
 
-            builder.Entity<SluzbeniListEntity>()
+            modelBuilder.Entity<SluzbeniListEntity>()
                 .HasData(new
                 {
                     SluzbeniListId = Guid.Parse("76e60dd7-0e18-4c7c-abe0-b59524eca5ff"),
@@ -131,7 +131,7 @@ namespace JavnoNadmetanje.Entities
                     DatumIzdavanja = DateTime.Parse("11-01-2022")
                 });
 
-            builder.Entity<DokumentPrijavaZaNadmetanjeEntity>()
+            modelBuilder.Entity<DokumentPrijavaZaNadmetanjeEntity>()
                 .HasData(new
                 {
                     PrijavaZaNadmetanjeId = Guid.Parse("07c0c62b-675e-4714-816c-b492720194d6"),
@@ -139,7 +139,7 @@ namespace JavnoNadmetanje.Entities
                     DatumDonosenjaDokumenta = DateTime.Parse("09-02-2022")
                 });
 
-            builder.Entity<DokumentPrijavaZaNadmetanjeEntity>()
+            modelBuilder.Entity<DokumentPrijavaZaNadmetanjeEntity>()
                 .HasData(new
                 {
                     PrijavaZaNadmetanjeId = Guid.Parse("1cd5c783-4bf5-4bbc-b7f0-bd66e2ba0bd7"),

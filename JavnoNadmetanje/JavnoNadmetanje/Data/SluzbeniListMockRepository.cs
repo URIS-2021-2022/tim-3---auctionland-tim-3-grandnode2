@@ -15,7 +15,7 @@ namespace JavnoNadmetanje.Data
             FillData();
         }
 
-        private void FillData()
+        private static void FillData()
         {
             SluzbeniListovi.AddRange(new List<SluzbeniListEntity>
             {

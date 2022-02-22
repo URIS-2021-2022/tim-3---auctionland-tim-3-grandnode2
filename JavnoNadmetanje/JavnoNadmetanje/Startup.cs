@@ -54,6 +54,9 @@ namespace JavnoNadmetanje
             services.AddScoped<IOglasRepository, OglasRepository>();
             services.AddScoped<IDokumentPrijavaZaNadmetanjeRepository, DokumentPrijavaZaNadmetanjeRepository>();
             services.AddScoped<IUplataService, UplataService>();
+            services.AddScoped<IParcelaService, ParcelaService>();
+            services.AddScoped<IKupacService, KupacService>();
+            services.AddScoped<IDokumentService, DokumentService>();
             services.AddScoped<IAuthService, AuthService>();
 
             services.AddSwaggerGen(setupAction =>

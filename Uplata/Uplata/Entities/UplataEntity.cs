@@ -61,5 +61,11 @@ namespace Uplata.Entities
         /// </summary>
         [Required]
         public Guid PrijavaZaNadmetanjeId { get; set; }
+
+        /// <summary>
+        /// ID kupca
+        /// </summary>
+        [Required]
+        public Guid KupacId { get; set; }
     }
 }

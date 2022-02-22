@@ -15,7 +15,7 @@ namespace Uplata.Data
             FillData();
         }
 
-        private void FillData()
+        private static void FillData()
         {
             Banke.AddRange(new List<BankaEntity>
             {

@@ -99,6 +99,29 @@ namespace Uplata.Controllers
             return Ok(mapper.Map<List<UplataDto>>(uplate));
         }
 
+
+        /// <summary>
+        /// Vraća listu uplata po ID-ju kupca
+        /// </summary>
+        /// <param name="kupacId">ID kupca</param>
+        /// <returns>Lista uplata za prosleđenog kupca</returns>
+        /// <response code = "200">Vraća listu uplata za prosleđenog kupca</response>
+        /// <response code = "204">Ne postoji lista uplata za prosleđenog kupca</response>
+        [HttpGet("/UplateZaKupca/{kupacId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [AllowAnonymous]
+        public ActionResult<List<UplataDto>> GetUplateByKupacId(Guid kupacId)
+        {
+            List<UplataEntity> uplate = uplataRepository.GetUplateByKupacId(kupacId);
+
+            if (uplate == null || uplate.Count == 0)
+            {
+                return NoContent();
+            }
+            return Ok(mapper.Map<List<UplataDto>>(uplate));
+        }
+
         /// <summary>
         /// Kreira novu uplatu
         /// </summary>

@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using JavnoNadmetanje.Entities;
+﻿using JavnoNadmetanje.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,12 +9,10 @@ namespace JavnoNadmetanje.Data
     public class JavnoNadmetanjeRepository : IJavnoNadmetanjeRepository
     {
         private readonly JavnoNadmetanjeContext context;
-        private readonly IMapper mapper;
 
-        public JavnoNadmetanjeRepository(JavnoNadmetanjeContext context, IMapper mapper)
+        public JavnoNadmetanjeRepository(JavnoNadmetanjeContext context)
         {
             this.context = context;
-            this.mapper = mapper;
         }
 
         public bool SaveChanges()
@@ -35,7 +32,7 @@ namespace JavnoNadmetanje.Data
 
         public List<JavnoNadmetanjeEntity> GetJavnaNadmetanjaByLicitacijaId(Guid licitacijaId)
         {
-            return context.JavnaNadmetanja.Where(j => (licitacijaId == null || j.LicitacijaId == licitacijaId)).ToList();
+            return context.JavnaNadmetanja.Where(j => (j.LicitacijaId == licitacijaId)).ToList();
         }
 
         public JavnoNadmetanjeEntity CreateJavnoNadmetanje(JavnoNadmetanjeEntity javnoNadmetanje)

@@ -19,9 +19,9 @@ namespace Uplata.Entities
 
         public DbSet<BankaEntity> Banke { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder builder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            builder.Entity<UplataEntity>()
+            modelBuilder.Entity<UplataEntity>()
                 .HasData(new
                 {
                     UplataId = Guid.Parse("de24dc84-1744-41cd-b4d7-56b830dde7f9"),
@@ -34,7 +34,7 @@ namespace Uplata.Entities
                     PrijavaZaNadmetanjeId = Guid.Parse("1cd5c783-4bf5-4bbc-b7f0-bd66e2ba0bd7")
                 });
 
-            builder.Entity<UplataEntity>()
+            modelBuilder.Entity<UplataEntity>()
               .HasData(new
               {
                   UplataId = Guid.Parse("4f3e6672-2456-4fa6-8bf1-a7974a097136"),
@@ -47,7 +47,7 @@ namespace Uplata.Entities
                   PrijavaZaNadmetanjeId = Guid.Parse("07c0c62b-675e-4714-816c-b492720194d6")
               });
 
-            builder.Entity<BankaEntity>()
+            modelBuilder.Entity<BankaEntity>()
                 .HasData(new
                 {
                     BankaId = Guid.Parse("9aef1da1-d5af-4073-9d40-8794f9d33564"),
@@ -56,7 +56,7 @@ namespace Uplata.Entities
                     Grad = "Novi Sad"
                 });
 
-            builder.Entity<BankaEntity>()
+            modelBuilder.Entity<BankaEntity>()
                .HasData(new
                {
                    BankaId = Guid.Parse("ceed4ee2-ea12-499b-a0c9-be41d4ac0748"),

@@ -46,5 +46,10 @@ namespace Uplata.Models
         /// Prijava za nadmetanje ID
         /// </summary>
         public Guid PrijavaZaNadmetanjeId { get; set; }
+
+        /// <summary>
+        /// ID kupca
+        /// </summary>
+        public Guid KupacId { get; set; }
     }
 }

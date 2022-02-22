@@ -10,12 +10,10 @@ namespace JavnoNadmetanje.Data
     public class PrijavaZaNadmetanjeRepository : IPrijavaZaNadmetanjeRepository
     {
         private readonly JavnoNadmetanjeContext context;
-        private readonly IMapper mapper;
 
-        public PrijavaZaNadmetanjeRepository(JavnoNadmetanjeContext context, IMapper mapper)
+        public PrijavaZaNadmetanjeRepository(JavnoNadmetanjeContext context)
         {
             this.context = context;
-            this.mapper = mapper;
         }
 
         public bool SaveChanges()

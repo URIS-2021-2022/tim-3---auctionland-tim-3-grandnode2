@@ -15,7 +15,7 @@ namespace Uplata.Data
             FillData();
         }
 
-        private void FillData()
+        private static void FillData()
         {
             Uplate.AddRange(new List<UplataEntity>
             {
@@ -57,7 +57,12 @@ namespace Uplata.Data
 
         public List<UplataEntity> GetUplateByPrijavaZaNadmetanjeId(Guid prijavaZaNadmetanjeId)
         {
-            return Uplate.Where(u => (prijavaZaNadmetanjeId == null || u.PrijavaZaNadmetanjeId == prijavaZaNadmetanjeId)).ToList();
+            return Uplate.Where(u => (u.PrijavaZaNadmetanjeId == prijavaZaNadmetanjeId)).ToList();
+        }
+
+        public List<UplataEntity> GetUplateByKupacId(Guid kupacId)
+        {
+            return Uplate.Where(u => (u.KupacId == kupacId)).ToList();
         }
 
         public UplataEntity CreateUplata(UplataEntity uplata)
