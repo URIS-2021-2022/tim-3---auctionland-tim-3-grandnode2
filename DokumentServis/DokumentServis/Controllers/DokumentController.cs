@@ -94,12 +94,12 @@ namespace DokumentServis.Controllers
                     Korisnik korisnik = JsonConvert.DeserializeObject<Korisnik>(responseKorisnik.Content.ReadAsStringAsync().Result);
                     var responseKupac = httpClient.GetAsync(requestUri: KupacPath + dokument.KupacID).Result;
                     Kupac kupac = JsonConvert.DeserializeObject<Kupac>(responseKupac.Content.ReadAsStringAsync().Result);
-                    //var responseLiciter = httpClient.GetAsync(requestUri: LiciterPath + dokument.LiciterID).Result;
-                    //Liciter liciter = JsonConvert.DeserializeObject<Liciter>(responseLiciter.Content.ReadAsStringAsync().Result);
+                    var responseLiciter = httpClient.GetAsync(requestUri: LiciterPath + dokument.LiciterID).Result;
+                    Liciter liciter = JsonConvert.DeserializeObject<Liciter>(responseLiciter.Content.ReadAsStringAsync().Result);
                     vo.dokument = dokument;
                     vo.korisnik = korisnik;
                     vo.kupac = kupac;
-                  //  vo.liciter = liciter;
+                    vo.liciter = liciter;
                     return StatusCode(StatusCodes.Status200OK, vo);
                 }
                 catch (Exception exp)
