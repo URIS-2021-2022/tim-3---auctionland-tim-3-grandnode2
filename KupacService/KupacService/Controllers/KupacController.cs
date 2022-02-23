@@ -78,7 +78,6 @@ namespace KupacService.Controllers
                 List<UplataDto> uplate = uplataService.GetUplateByKupacId(k.KupacId).Result;
                 List<Guid> uplateGuids = uplate.Select(u => u.KupacId).ToList();
                 k.UplateId = uplateGuids;
-                //mapper.Map<List<UplataDto>>(k.UplateId);
                 List<Guid> ovlascenaLicaGuids = fizickoLiceRepository.GetOvlascenaLicaByKupacId(k.KupacId);
                 k.OvlascenoLice = ovlascenaLicaGuids;
                 List<Guid> javnaNadmetanjaGuids = kupacRepository.GetJavnaNadmetanjaByKupacId(k.KupacId);
@@ -106,7 +105,6 @@ namespace KupacService.Controllers
             List<UplataDto> uplate = uplataService.GetUplateByKupacId(kupac.KupacId).Result;
             List<Guid> uplateGuids = uplate.Select(u => u.KupacId).ToList();
             kupac.UplateId = uplateGuids;
-            //mapper.Map<List<UplataDto>>(kupac.UplateId);
             List<Guid> ovlascenaLicaGuids = fizickoLiceRepository.GetOvlascenaLicaByKupacId(kupac.KupacId);
             kupac.OvlascenoLice = ovlascenaLicaGuids;
             List<Guid> javnaNadmetanjaGuids = kupacRepository.GetJavnaNadmetanjaByKupacId(kupac.KupacId);
