@@ -36,6 +36,7 @@ namespace LoggerServis.Controllers
         /// <returns>Vraca listu svih logger-a</returns>
         /// <response code = "200">Pristup svim logger-ima</response>
         // GET: api/<LoggerController>
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet]
         public IEnumerable<Logger> Get()
         {
@@ -50,6 +51,8 @@ namespace LoggerServis.Controllers
         /// <response code = "200">Dobijanje loggera na osnovu zadatog id-a</response>
         /// <response code = "404">Ne postoji logger sa zadatim id-em</response>
         // GET api/<LoggerController>/5
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
@@ -67,8 +70,11 @@ namespace LoggerServis.Controllers
         /// <param name="model">Model loggera</param>
         /// <returns>Vraca novi logger</returns>
         /// <remarks>
+        /// <strong>
         /// Primer request-a za kreiranje novog loggera \
+        /// !!!!!! Ovaj json je potrebno kopirati u request body kako bi uspesno testirali!!!!! \
         /// POST api/Logger/ \
+        /// </strong>
         ///{
         ///     "opisAktivnosti": "Pristup svim tipovima korisnika po id-u.*********Korisnicko ime: markoo", \
         ///     "datum": "2022-02-22T00:59:54.371502" \
@@ -77,6 +83,8 @@ namespace LoggerServis.Controllers
         /// <response code = "201">Kreiran je novi logger</response>
         /// <response code = "500">Greska prilikom pokusaja kreiranja logger</response>
         // POST api/<LoggerController>
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpPost]
         public IActionResult Post([FromBody] Logger model)
         {
@@ -98,8 +106,11 @@ namespace LoggerServis.Controllers
         /// <param name="logger">Model loggera</param>
         /// <returns>Vraca modifikovan logger</returns>
         /// <remarks>
+        /// <strong>
         /// Primer request-a za modifikovanje loggera \
+        /// !!!!!! Ovaj json je potrebno kopirati u request body kako bi uspesno testirali!!!!! \
         /// PUT api/Logger/156 \
+        /// </strong>
         ///{
         ///     "loggerID": 156, \
         ///     "opisAktivnosti": "Pristup svim tipovima korisnika po id-u.*********Korisnicko ime: markoo", \
@@ -107,8 +118,12 @@ namespace LoggerServis.Controllers
         ///}
         /// </remarks>
         /// <response code = "200">Dobijanje modifikovanog loggera</response>
+        /// <response code = "400">Nisu uneti dobri podaci</response>
         /// <response code = "404">Ne postoji logger sa zadatim id-em</response>
         // PUT api/<LoggerController>/5
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] Logger logger)
         {
@@ -143,6 +158,8 @@ namespace LoggerServis.Controllers
         /// <response code = "200">Obrisan je logger</response>
         /// <response code = "404">Ne postoji logger za kojeg se izvrsava brisanje</response>
         // DELETE api/<LoggerController>/5
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {

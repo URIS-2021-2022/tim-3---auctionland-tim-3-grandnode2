@@ -45,8 +45,16 @@ namespace KorisnikServis.Controllers
         /// uz logovanje navedene aktivnosti, kao i korisnickog imena korisnika koji je izvrsio tu aktivnost u okviru loggera
         /// </summary>
         /// <returns>Vraca listu svih korisnika</returns>
+        /// <remarks>
+        /// <strong>
+        /// Potrebno je prethodno ulogovati postojeceg korisnika \
+        /// </strong>
+        /// </remarks>
         /// <response code = "200">Pristup svim korisnicima</response>
+        /// <response code = "401">Korisnik nije ulogovan</response>
         // GET: api/<KorisnikController>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [Authorize(Roles = "Administrator")]
         [HttpGet]
         public IEnumerable<Korisnik> Get()
@@ -62,11 +70,15 @@ namespace KorisnikServis.Controllers
         /// Tehnicki sekretar, Prva komisija i Menadzer, 
         /// uz logovanje navedene aktivnosti, kao i korisnickog imena korisnika koji je izvrsio tu aktivnost u okviru loggera
         /// </summary>
-        /// <param name="KorisnickoIme"></param>
-        /// <param name="Lozinka"></param>
+        /// <param name="KorisnickoIme">Primer korisnickog imena: markoo</param>
+        /// <param name="Lozinka">Primer lozinke: marko123</param>
         /// <returns>Vraca korisnika sa zadatim korisnickim imenom i lozinkom</returns>
         /// <response code = "200">Pristup korisniku putem korisnickog imena i lozinke</response>
+        /// <response code = "401">Korisnik nije ulogovan</response>
         /// <response code = "404">Ne postoji korisnik sa zadatim korisnickim imenom ili lozinkom</response>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [Authorize(Roles = "Administrator, Superuser, Tehnicki sekretar, Prva komisija, Menadzer")]
         [HttpGet("{KorisnickoIme}/{Lozinka}")]
         public IActionResult GetKorisnikUP(string KorisnickoIme, string Lozinka)
@@ -91,8 +103,21 @@ namespace KorisnikServis.Controllers
         /// </summary>
         /// <param name="korisnik"></param>
         /// <returns>Vraca token na osnovu logovanja korisnika</returns>
+        /// <remarks>
+        /// <strong>
+        /// Primer request-a za logovanje postojeceg korisnika \
+        /// !!!!!! Ovaj json je potrebno kopirati u request body kako bi uspesno testirali!!!!! \
+        /// POST api/Korisnik/ \
+        /// </strong>
+        ///{ \
+        ///     "korisnickoIme": "markoo", \
+        ///     "lozinka": "marko123" \
+        ///}
+        /// </remarks>
         /// <response code = "200">Dobijanje tokena na osnovu korisnickog imena i lozinke </response>
         /// <response code = "404">Ne postoji korisnik sa zadatim korisnickim imenom ili lozinkom</response>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [AllowAnonymous]
         [HttpPost("login")]
         public IActionResult LogIn([FromBody] Korisnik korisnik)
@@ -113,11 +138,15 @@ namespace KorisnikServis.Controllers
         /// Pristup korisniku na osnovu zadatog id-a
         /// uz logovanje navedene aktivnosti, kao i korisnickog imena korisnika koji je izvrsio tu aktivnost u okviru loggera
         /// </summary>
-        /// <param name="id">Id korisnika</param>
+        /// <param name="id">Id korisnika primer: bbc752be-d0b8-41f0-94e8-d54df388a9f0</param>
         /// <returns>Vraca korisnika ciji id je zadat u putanji</returns>
         /// <response code = "200">Dobijanje korisnika na osnovu zadatog id-a</response>
+        /// <response code = "401">Korisnik nije ulogovan</response>
         /// <response code = "404">Ne postoji korisnik sa zadatim id-em</response>
         // GET api/<KorisnikController>/5
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [Authorize(Roles = "Administrator")]
         [HttpGet("{id}")]
         public IActionResult GetById(Guid id)
@@ -137,10 +166,14 @@ namespace KorisnikServis.Controllers
         /// Pristup korisnicima na osnovu naziva uloge koju imaju, definisanu kroz tip korisnika, 
         /// uz logovanje navedene aktivnosti, kao i korisnickog imena korisnika koji je izvrsio tu aktivnost u okviru loggera
         /// </summary>
-        /// <param name="nazivTipa"></param>
+        /// <param name="nazivTipa">Primer uloge: Administrator</param>
         /// <returns>Vraca korisnika sa zadatom ulogom</returns>
         /// <response code = "200">Dobijanje korisnika na osnovu zadate uloge koju ima</response>
+        /// <response code = "401">Korisnik nije ulogovan</response>
         /// <response code = "404">Ne postoji korisnik sa zadatom ulogom</response>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [Authorize(Roles = "Administrator")]
         [HttpGet("getTip/{nazivTipa}")]
         public IActionResult GetByNazivTipa(string nazivTipa)
@@ -164,6 +197,8 @@ namespace KorisnikServis.Controllers
         /// <returns>Vraca korisnika na osnovu zadatog tokena</returns>
         /// <response code = "200">Dobijanje korisnika na osnovu zadatog tokena</response>
         /// <response code = "404">Ne postoji korisnik sa zadatim tokenom</response>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpGet("getKorisnikToken")]
         public IActionResult GetKorisnikToken()
         {
@@ -187,10 +222,13 @@ namespace KorisnikServis.Controllers
         /// <param name="model">Model korisnika</param>
         /// <returns>Vraca novog korisnika</returns>
         /// <remarks>
+        /// <strong>
         /// Primer request-a za kreiranje novog korisnika \
+        /// !!!!!! Ovaj json je potrebno kopirati u request body kako bi uspesno testirali!!!!! \
         /// POST api/Korisnik/ \
+        /// </strong>
         ///{ \
-        ///     "imeKorisnika": "Laza", \
+        ///     "imeKorisnika": "Mika", \
         ///     "prezimeKorisnika": "Lazic", \
         ///     "korisnickoIme": "lazaa", \
         ///     "lozinka": "laza123", \
@@ -198,8 +236,12 @@ namespace KorisnikServis.Controllers
         ///}
         /// </remarks>
         /// <response code = "201">Kreiran je novi korisnik</response>
+        /// <response code = "401">Korisnik nije ulogovan</response>
         /// <response code = "500">Greska prilikom pokusaja kreiranja korisnika</response>
         // POST api/<KorisnikController>
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [Authorize]
         [HttpPost]
         public IActionResult Post([FromBody] Korisnik model)
@@ -224,15 +266,18 @@ namespace KorisnikServis.Controllers
         /// Tehnicki sekretar, Prva komisija, Menadzer i Operater nadmetanja, 
         /// uz logovanje navedene aktivnosti, kao i korisnickog imena korisnika koji je izvrsio tu aktivnost u okviru loggera
         /// </summary>
-        /// <param name="id">Parametar na osnovu kojeg se identifikuje korisnik za azuriranje</param>
+        /// <param name="id">Parametar na osnovu kojeg se identifikuje korisnik za azuriranje af133d94-bc4f-4073-8097-3cbbd46b04dd</param>
         /// <param name="korisnik">Model novog korisnika</param>
         /// <returns>Vraca modifikovanog korisnika</returns>
         /// <remarks>
+        /// <strong>
         /// Primer request-a za modifikovanje korisnika \
+        /// !!!!!! Ovaj json je potrebno kopirati u request body kako bi uspesno testirali!!!!! \
         /// PUT api/Korisnik/af133d94-bc4f-4073-8097-3cbbd46b04dd \
+        /// </strong>
         ///{ \
         ///     "korisnikID": "af133d94-bc4f-4073-8097-3cbbd46b04dd", \
-        ///     "imeKorisnika": "Laza", \
+        ///     "imeKorisnika": "LazaModifikovan", \
         ///     "prezimeKorisnika": "Lazic", \
         ///     "korisnickoIme": "lazaa", \
         ///     "lozinka": "laza123", \
@@ -240,8 +285,14 @@ namespace KorisnikServis.Controllers
         ///}
         /// </remarks>
         /// <response code = "200">Dobijanje modifikovanog korisnika</response>
+        /// <response code = "400">Nisu dobro prosledjeni podaci</response>
+        /// <response code = "401">Korisnik nije ulogovan</response>
         /// <response code = "404">Ne postoji korisnik sa zadatim id-em</response>
         // PUT api/<KorisnikController>/5
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [Authorize(Roles = "Administrator, Superuser, Tehnicki sekretar, Prva komisija, Menadzer, Operater Nadmetanja")]
         [HttpPut("{id}")]
         public IActionResult Put(Guid id, [FromBody] Korisnik korisnik)
@@ -278,8 +329,12 @@ namespace KorisnikServis.Controllers
         /// <param name="id">Parametar id-a korisnika za kojeg se izvrsava brisanje</param>
         /// <returns>Brise zadatog korisnika</returns>
         /// <response code = "200">Obrisan je korisnik</response>
+        /// <response code = "401">Korisnik nije ulogovan</response>
         /// <response code = "404">Ne postoji korisnik za kojeg se izvrsava brisanje</response>
         // DELETE api/<KorisnikController>/5
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [Authorize(Roles = "Administrator")]
         [HttpDelete("{id}")]
         public IActionResult Delete(Guid id)

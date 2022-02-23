@@ -20,7 +20,13 @@
             uz logovanje navedene aktivnosti, kao i korisnickog imena korisnika koji je izvrsio tu aktivnost u okviru loggera
             </summary>
             <returns>Vraca listu svih korisnika</returns>
+            <remarks>
+            <strong>
+            Potrebno je prethodno ulogovati postojeceg korisnika \
+            </strong>
+            </remarks>
             <response code = "200">Pristup svim korisnicima</response>
+            <response code = "401">Korisnik nije ulogovan</response>
         </member>
         <member name="M:KorisnikServis.Controllers.KorisnikController.GetKorisnikUP(System.String,System.String)">
             <summary>
@@ -28,31 +34,44 @@
             Tehnicki sekretar, Prva komisija i Menadzer, 
             uz logovanje navedene aktivnosti, kao i korisnickog imena korisnika koji je izvrsio tu aktivnost u okviru loggera
             </summary>
-            <param name="KorisnickoIme"></param>
-            <param name="Lozinka"></param>
+            <param name="KorisnickoIme">Primer korisnickog imena: markoo</param>
+            <param name="Lozinka">Primer lozinke: marko123</param>
             <returns>Vraca korisnika sa zadatim korisnickim imenom i lozinkom</returns>
             <response code = "200">Pristup korisniku putem korisnickog imena i lozinke</response>
+            <response code = "401">Korisnik nije ulogovan</response>
             <response code = "404">Ne postoji korisnik sa zadatim korisnickim imenom ili lozinkom</response>
         </member>
         <member name="M:KorisnikServis.Controllers.KorisnikController.LogIn(KorisnikServis.Database.Entities.Korisnik)">
-            <summary>
-            Logovanje korisnika putem korisnickog imena i lozinke, kako bi se omogucila autentifikacija korisnika kroz utvrdjivanje identiteta
-            korisnika kako bi mu se omogucio pristup sistemu, 
-            uz logovanje navedene aktivnosti, kao i korisnickog imena korisnika koji je izvrsio tu aktivnost u okviru loggera
-            </summary>
-            <param name="korisnik"></param>
-            <returns>Vraca token na osnovu logovanja korisnika</returns>
-            <response code = "200">Dobijanje tokena na osnovu korisnickog imena i lozinke </response>
-            <response code = "404">Ne postoji korisnik sa zadatim korisnickim imenom ili lozinkom</response>
+             <summary>
+             Logovanje korisnika putem korisnickog imena i lozinke, kako bi se omogucila autentifikacija korisnika kroz utvrdjivanje identiteta
+             korisnika kako bi mu se omogucio pristup sistemu, 
+             uz logovanje navedene aktivnosti, kao i korisnickog imena korisnika koji je izvrsio tu aktivnost u okviru loggera
+             </summary>
+             <param name="korisnik"></param>
+             <returns>Vraca token na osnovu logovanja korisnika</returns>
+             <remarks>
+             <strong>
+             Primer request-a za logovanje postojeceg korisnika \
+             !!!!!! Ovaj json je potrebno kopirati u request body kako bi uspesno testirali!!!!! \
+             POST api/Korisnik/ \
+             </strong>
+            { \
+                 "korisnickoIme": "markoo", \
+                 "lozinka": "marko123" \
+            }
+             </remarks>
+             <response code = "200">Dobijanje tokena na osnovu korisnickog imena i lozinke </response>
+             <response code = "404">Ne postoji korisnik sa zadatim korisnickim imenom ili lozinkom</response>
         </member>
         <member name="M:KorisnikServis.Controllers.KorisnikController.GetById(System.Guid)">
             <summary>
             Pristup korisniku na osnovu zadatog id-a
             uz logovanje navedene aktivnosti, kao i korisnickog imena korisnika koji je izvrsio tu aktivnost u okviru loggera
             </summary>
-            <param name="id">Id korisnika</param>
+            <param name="id">Id korisnika primer: bbc752be-d0b8-41f0-94e8-d54df388a9f0</param>
             <returns>Vraca korisnika ciji id je zadat u putanji</returns>
             <response code = "200">Dobijanje korisnika na osnovu zadatog id-a</response>
+            <response code = "401">Korisnik nije ulogovan</response>
             <response code = "404">Ne postoji korisnik sa zadatim id-em</response>
         </member>
         <member name="M:KorisnikServis.Controllers.KorisnikController.GetByNazivTipa(System.String)">
@@ -60,9 +79,10 @@
             Pristup korisnicima na osnovu naziva uloge koju imaju, definisanu kroz tip korisnika, 
             uz logovanje navedene aktivnosti, kao i korisnickog imena korisnika koji je izvrsio tu aktivnost u okviru loggera
             </summary>
-            <param name="nazivTipa"></param>
+            <param name="nazivTipa">Primer uloge: Administrator</param>
             <returns>Vraca korisnika sa zadatom ulogom</returns>
             <response code = "200">Dobijanje korisnika na osnovu zadate uloge koju ima</response>
+            <response code = "401">Korisnik nije ulogovan</response>
             <response code = "404">Ne postoji korisnik sa zadatom ulogom</response>
         </member>
         <member name="M:KorisnikServis.Controllers.KorisnikController.GetKorisnikToken">
@@ -82,10 +102,13 @@
              <param name="model">Model korisnika</param>
              <returns>Vraca novog korisnika</returns>
              <remarks>
+             <strong>
              Primer request-a za kreiranje novog korisnika \
+             !!!!!! Ovaj json je potrebno kopirati u request body kako bi uspesno testirali!!!!! \
              POST api/Korisnik/ \
+             </strong>
             { \
-                 "imeKorisnika": "Laza", \
+                 "imeKorisnika": "Mika", \
                  "prezimeKorisnika": "Lazic", \
                  "korisnickoIme": "lazaa", \
                  "lozinka": "laza123", \
@@ -93,6 +116,7 @@
             }
              </remarks>
              <response code = "201">Kreiran je novi korisnik</response>
+             <response code = "401">Korisnik nije ulogovan</response>
              <response code = "500">Greska prilikom pokusaja kreiranja korisnika</response>
         </member>
         <member name="M:KorisnikServis.Controllers.KorisnikController.Put(System.Guid,KorisnikServis.Database.Entities.Korisnik)">
@@ -101,15 +125,18 @@
              Tehnicki sekretar, Prva komisija, Menadzer i Operater nadmetanja, 
              uz logovanje navedene aktivnosti, kao i korisnickog imena korisnika koji je izvrsio tu aktivnost u okviru loggera
              </summary>
-             <param name="id">Parametar na osnovu kojeg se identifikuje korisnik za azuriranje</param>
+             <param name="id">Parametar na osnovu kojeg se identifikuje korisnik za azuriranje af133d94-bc4f-4073-8097-3cbbd46b04dd</param>
              <param name="korisnik">Model novog korisnika</param>
              <returns>Vraca modifikovanog korisnika</returns>
              <remarks>
+             <strong>
              Primer request-a za modifikovanje korisnika \
+             !!!!!! Ovaj json je potrebno kopirati u request body kako bi uspesno testirali!!!!! \
              PUT api/Korisnik/af133d94-bc4f-4073-8097-3cbbd46b04dd \
+             </strong>
             { \
                  "korisnikID": "af133d94-bc4f-4073-8097-3cbbd46b04dd", \
-                 "imeKorisnika": "Laza", \
+                 "imeKorisnika": "LazaModifikovan", \
                  "prezimeKorisnika": "Lazic", \
                  "korisnickoIme": "lazaa", \
                  "lozinka": "laza123", \
@@ -117,6 +144,8 @@
             }
              </remarks>
              <response code = "200">Dobijanje modifikovanog korisnika</response>
+             <response code = "400">Nisu dobro prosledjeni podaci</response>
+             <response code = "401">Korisnik nije ulogovan</response>
              <response code = "404">Ne postoji korisnik sa zadatim id-em</response>
         </member>
         <member name="M:KorisnikServis.Controllers.KorisnikController.Delete(System.Guid)">
@@ -127,6 +156,7 @@
             <param name="id">Parametar id-a korisnika za kojeg se izvrsava brisanje</param>
             <returns>Brise zadatog korisnika</returns>
             <response code = "200">Obrisan je korisnik</response>
+            <response code = "401">Korisnik nije ulogovan</response>
             <response code = "404">Ne postoji korisnik za kojeg se izvrsava brisanje</response>
         </member>
         <member name="T:KorisnikServis.Controllers.TipKorisnikaController">
@@ -146,15 +176,17 @@
             </summary>
             <returns>Vraca listu svih tipova korisnika</returns>
             <response code = "200">Pristup svim tipovima korisnika</response>
+            <response code = "401">Korisnik nije ulogovan</response>
         </member>
         <member name="M:KorisnikServis.Controllers.TipKorisnikaController.Get(System.Guid)">
             <summary>
             Pristup svim tipovima korisnika na osnovu id-a, 
             uz logovanje navedene aktivnosti, kao i korisnickog imena korisnika koji je izvrsio tu aktivnost u okviru loggera
             </summary>
-            <param name="id">Id tipa korisnika</param>
+            <param name="id">Id tipa korisnika primer: 76b67f3a-f669-4b8f-9f6a-20a66107d312</param>
             <returns>Vraca tip korisnika sa zadatim id-em</returns>
             <response code = "200">Dobijanje tipa korisnika na osnovu zadatog id-a</response>
+            <response code = "401">Korisnik nije ulogovan</response>
             <response code = "404">Ne postoji tip korisnika sa zadatim id-em</response>
         </member>
         <member name="M:KorisnikServis.Controllers.TipKorisnikaController.Post(KorisnikServis.Database.Entities.TipKorisnika)">
@@ -165,13 +197,17 @@
              <param name="model">Model tipa korisnika</param>
              <returns>Vraca novi tip korisnika</returns>
              <remarks>
+             <strong>
              Primer request-a za kreiranje novog tipa korisnika \
-             POST api/Korisnik/ \
+             !!!!!! Ovaj json je potrebno kopirati u request body kako bi uspesno testirali!!!!! \
+             POST api/TipKorisnika/ \
+             </strong>
             { \
-                 "tipKorisnikaID": "76b67f3a-f669-4b8f-9f6a-20a66107d312", \
+                 "nazivTipa": "Beleznik" \
             }
              </remarks>
              <response code = "201">Kreiran je novi tip korisnika</response>
+             <response code = "401">Korisnik nije ulogovan</response>
              <response code = "500">Greska prilikom pokusaja kreiranja novog tipa korisnika</response>
         </member>
         <member name="M:KorisnikServis.Controllers.TipKorisnikaController.Put(System.Guid,KorisnikServis.Database.Entities.TipKorisnika)">
@@ -179,18 +215,23 @@
              Modifikacija postojeceg tipa korisnika, 
              uz logovanje navedene aktivnosti, kao i korisnickog imena korisnika koji je izvrsio tu aktivnost u okviru loggera
              </summary>
-             <param name="id">Parametar na osnovu kojeg se identifikuje tip korisnika za azuriranje</param>
+             <param name="id">Parametar na osnovu kojeg se identifikuje tip korisnika za azuriranje 76b67f3a-f669-4b8f-9f6a-20a66107d312</param>
              <param name="tipKorisnika">Model novog tipa korisnika</param>
              <returns>Vraca modifikovani tip korisnika</returns>
-             /// <remarks>
+             <remarks>
+             <strong>
              Primer request-a za modifikaciju korisnika \
-             PUT api/Korisnik/76b67f3a-f669-4b8f-9f6a-20a66107d312 \
+             !!!!!! Ovaj json je potrebno kopirati u request body kako bi uspesno testirali!!!!! \
+             PUT api/TipKorisnika/76b67f3a-f669-4b8f-9f6a-20a66107d312 \
+             </strong>
             { \
                  "tipKorisnikaID": "76b67f3a-f669-4b8f-9f6a-20a66107d312", \
-                 "nazivTipa": "Operater Nadmetanja" \
+                 "nazivTipa": "Operater Nadmetanja Modifikovan" \
             }
              </remarks>
              <response code = "200">Dobijanje modifikovanog tipa korisnika</response>
+             <response code = "400">Nisu prosledjeni dobri podaci</response>
+             <response code = "401">Korisnik nije ulogovan</response>
              <response code = "404">Ne postoji tip korisnika sa zadatim id-em</response>
         </member>
         <member name="M:KorisnikServis.Controllers.TipKorisnikaController.Delete(System.Guid)">
@@ -201,6 +242,7 @@
             <param name="id">Parametar id-a tipa korisnika za kojeg se vrsi brisanje</param>
             <returns>Brise zadati tip korisnika</returns>
             <response code = "200">Obrisan je tip korisnika</response>
+            <response code = "401">Korisnik nije ulogovan</response>
             <response code = "404">Ne postoji tip korisnika za kojeg se izvrsava brisanje</response>
         </member>
         <member name="T:KorisnikServis.Database.Entities.Korisnik">
