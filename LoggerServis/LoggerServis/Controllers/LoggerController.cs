@@ -1,5 +1,6 @@
 ﻿using LoggerServis.Database.Entities;
 using LoggerServis.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -35,8 +36,11 @@ namespace LoggerServis.Controllers
         /// </summary>
         /// <returns>Vraca listu svih logger-a</returns>
         /// <response code = "200">Pristup svim logger-ima</response>
+        /// <response code = "401">Korisnik nije ulogovan</response>
         // GET: api/<LoggerController>
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [Authorize(Roles = "Administrator")]
         [HttpGet]
         public IEnumerable<Logger> Get()
         {

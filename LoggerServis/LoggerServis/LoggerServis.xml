@@ -20,6 +20,7 @@
             </summary>
             <returns>Vraca listu svih logger-a</returns>
             <response code = "200">Pristup svim logger-ima</response>
+            <response code = "401">Korisnik nije ulogovan</response>
         </member>
         <member name="M:LoggerServis.Controllers.LoggerController.Get(System.Int32)">
             <summary>
