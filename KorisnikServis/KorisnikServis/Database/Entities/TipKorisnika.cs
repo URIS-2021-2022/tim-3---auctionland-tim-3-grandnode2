@@ -11,12 +11,12 @@ namespace KorisnikServis.Database.Entities
     public class TipKorisnika
     {
         /// <summary>
-        /// TipKorisnikaID primarni kljuc
+        /// Id tipa korisnika,  primarni kljuc
         /// </summary>
         public Guid TipKorisnikaID { get; set; }
 
         /// <summary>
-        /// NazivTipa
+        /// Naziv tipa korisnika
         /// </summary>
         public string NazivTipa { get; set; }
     }

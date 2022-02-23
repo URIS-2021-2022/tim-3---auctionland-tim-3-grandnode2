@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 namespace KorisnikServis.Controllers
 {
     /// <summary>
-    /// Tip korisnika controller pomocu kojeg se vrse sve potrebne funkcionalnosti za controller
+    /// Tip korisnika controller pomocu kojeg se vrse sve potrebne funkcionalnosti iz specifikacije vezane za tip korisnika
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
@@ -36,7 +36,8 @@ namespace KorisnikServis.Controllers
         }
 
         /// <summary>
-        /// Pristup svim tipovima korisnika
+        /// Pristup svim tipovima korisnika, koji je omogucen od strane prethodno ulogovanog korisnika, 
+        /// uz logovanje navedene aktivnosti, kao i korisnickog imena korisnika koji je izvrsio tu aktivnost u okviru loggera
         /// </summary>
         /// <returns>Vraca listu svih tipova korisnika</returns>
         /// <response code = "200">Pristup svim tipovima korisnika</response>
@@ -51,9 +52,10 @@ namespace KorisnikServis.Controllers
         }
 
         /// <summary>
-        /// Pristup svim tipovima korisnika na osnovu id-a
+        /// Pristup svim tipovima korisnika na osnovu id-a, 
+        /// uz logovanje navedene aktivnosti, kao i korisnickog imena korisnika koji je izvrsio tu aktivnost u okviru loggera
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">Id tipa korisnika</param>
         /// <returns>Vraca tip korisnika sa zadatim id-em</returns>
         /// <response code = "200">Dobijanje tipa korisnika na osnovu zadatog id-a</response>
         /// <response code = "404">Ne postoji tip korisnika sa zadatim id-em</response>
@@ -73,10 +75,18 @@ namespace KorisnikServis.Controllers
         }
 
         /// <summary>
-        /// Kreiranje novog tipa korisnika
+        /// Kreiranje novog tipa korisnika, 
+        /// uz logovanje navedene aktivnosti, kao i korisnickog imena korisnika koji je izvrsio tu aktivnost u okviru loggera
         /// </summary>
-        /// <param name="model"></param>
+        /// <param name="model">Model tipa korisnika</param>
         /// <returns>Vraca novi tip korisnika</returns>
+        /// <remarks>
+        /// Primer request-a za kreiranje novog tipa korisnika \
+        /// POST api/TipKorisnika/ \
+        ///{ \
+        ///     "tipKorisnikaID": "76b67f3a-f669-4b8f-9f6a-20a66107d312", \
+        ///}
+        /// </remarks>
         /// <response code = "201">Kreiran je novi tip korisnika</response>
         /// <response code = "500">Greska prilikom pokusaja kreiranja novog tipa korisnika</response>
         // POST api/<TipKorisnikaController>
@@ -88,6 +98,7 @@ namespace KorisnikServis.Controllers
             #pragma warning restore CS4014
             try
             {
+                model.TipKorisnikaID = Guid.NewGuid();
                 tipKorisnikaService.Save(model);
                 return StatusCode(StatusCodes.Status201Created, model);
             }
@@ -98,11 +109,20 @@ namespace KorisnikServis.Controllers
         }
 
         /// <summary>
-        /// Modifikacija postojeceg tipa korisnika
+        /// Modifikacija postojeceg tipa korisnika, 
+        /// uz logovanje navedene aktivnosti, kao i korisnickog imena korisnika koji je izvrsio tu aktivnost u okviru loggera
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="tipKorisnika"></param>
+        /// <param name="id">Parametar na osnovu kojeg se identifikuje tip korisnika za azuriranje</param>
+        /// <param name="tipKorisnika">Model novog tipa korisnika</param>
         /// <returns>Vraca modifikovani tip korisnika</returns>
+        /// /// <remarks>
+        /// Primer request-a za modifikaciju korisnika \
+        /// PUT api/TipKorisnika/76b67f3a-f669-4b8f-9f6a-20a66107d312 \
+        ///{ \
+        ///     "tipKorisnikaID": "76b67f3a-f669-4b8f-9f6a-20a66107d312", \
+        ///     "nazivTipa": "Operater Nadmetanja" \
+        ///}
+        /// </remarks>
         /// <response code = "200">Dobijanje modifikovanog tipa korisnika</response>
         /// <response code = "404">Ne postoji tip korisnika sa zadatim id-em</response>
         // PUT api/<TipKorisnikaController>/5
@@ -137,9 +157,10 @@ namespace KorisnikServis.Controllers
         }
 
         /// <summary>
-        /// Brisanje postojeceg tipa korisnika
+        /// Brisanje postojeceg tipa korisnika, 
+        /// uz logovanje navedene aktivnosti, kao i korisnickog imena korisnika koji je izvrsio tu aktivnost u okviru loggera
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">Parametar id-a tipa korisnika za kojeg se vrsi brisanje</param>
         /// <returns>Brise zadati tip korisnika</returns>
         /// <response code = "200">Obrisan je tip korisnika</response>
         /// <response code = "404">Ne postoji tip korisnika za kojeg se izvrsava brisanje</response>

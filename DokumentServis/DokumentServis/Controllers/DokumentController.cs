@@ -19,7 +19,7 @@ using System.Threading.Tasks;
 namespace DokumentServis.Controllers
 {
     /// <summary>
-    /// Dokument controller pomocu kojeg se vrse sve potrebne funkcionalnosti vezane za controller
+    /// Dokument controller pomocu kojeg se vrse sve potrebne funkcionalnosti iz specifikacije vezane za dokument
     /// </summary>
     [Route("api/[controller]")]
     [Authorize(Roles = "Administrator, Prva komisija")]
@@ -52,7 +52,8 @@ namespace DokumentServis.Controllers
 
 
         /// <summary>
-        /// Pristup svim dokumentima
+        /// Pristup svim dokumentima, koji omogucen od strane prethodno ulogovanog korisnika koji ima ulogu Administratora ili Prve komisije,
+        /// uz logovanje navedene aktivnosti, kao i korisnickog imena korisnika koji je izvrsio tu aktivnost u okviru loggera
         /// </summary>
         /// <returns>Vraca listu svih dokumenata</returns>
         /// <response code = "200">Pristup svim dokumentima</response>
@@ -67,9 +68,10 @@ namespace DokumentServis.Controllers
         }
 
         /// <summary>
-        /// Pristup dokumentu na osnovu zadatog id-a
+        /// Pristup dokumentu na osnovu zadatog id-a, od strane prethodno ulogovanog korisnika koji ima ulogu Administratora ili Prve komisije, 
+        /// uz logovanje navedene aktivnosti, kao i korisnickog imena korisnika koji je izvrsio tu aktivnost u okviru loggera
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">Id dokumenta</param>
         /// <returns>Vraca dokument ciji id je zadat u putanji</returns>
         /// <response code = "200">Dobijanje dokumenta na osnovu zadatog id-a</response>
         /// <response code = "404">Ne postoji dokument sa zadatim id-em</response>
@@ -110,14 +112,29 @@ namespace DokumentServis.Controllers
         }
 
         /// <summary>
-        /// Kreiranje novog dokumenta
+        /// Kreiranje novog dokumenta, od strane prethodno ulogovanog korisnika koji ima ulogu Administratora ili Prve komisije
+        /// uz logovanje navedene aktivnosti, kao i korisnickog imena korisnika koji je izvrsio tu aktivnost u okviru loggera
         /// </summary>
-        /// <param name="model"></param>
+        /// <param name="model">Model dokumenta</param>
         /// <returns>Vraca novi dokument</returns>
+        /// <remarks>
+        /// Primer request-a za kreiranje novog dokumenta \
+        /// POST api/Dokument/ \
+        ///{
+        ///     "zavodniBroj": "1313", \
+        ///     "datum": "2019-06-24T00:00:00", \
+        ///     "datumDonosenja": "2021-12-09T00:00:00", \
+        ///     "sablon": "FontFamily: TimesNewRoman, FontSize: 12pt", \
+        ///     "korisnikID": "bbc752be-d0b8-41f0-94e8-d54df388a9f0", \
+        ///     "kupacID": "734e2747-d30f-4ddc-9d15-33fd6a036898", \
+        ///     "liciterID": "fe650e15-966e-470e-a6f7-2932d0a2f2a2", \
+        ///     "verzijaDokumentaID": "e51ecff3-0f88-4803-97fe-c853cae5fd99" \
+        ///}
+        /// </remarks>
         /// <response code = "201">Kreiran je novi dokument</response>
         /// <response code = "500">Greska prilikom pokusaja kreiranja dokumenta</response>
-        // POST api/<DokumentController>
-        [HttpPost]
+    // POST api/<DokumentController>
+    [HttpPost]
         public IActionResult Post([FromBody] Dokument model)
         {
             #pragma warning disable CS4014
@@ -140,11 +157,27 @@ namespace DokumentServis.Controllers
         }
 
         /// <summary>
-        /// Modifikacija postojeceg dokumenta
+        /// Modifikacija postojeceg dokumenta, od strane prethodno ulogovanog korisnika koji ima ulogu Administratora ili Prve komisije
+        /// uz logovanje navedene aktivnosti, kao i korisnickog imena korisnika koji je izvrsio tu aktivnost u okviru loggera
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="dokument"></param>
+        /// <param name="id">Parametar na osnovu kojeg se identifikuje dokument za azuriranje</param>
+        /// <param name="dokument">Model novog dokumenta</param>
         /// <returns>Vraca modifikovan dokument</returns>
+        /// <remarks>
+        /// Primer request-a za modifikaciju dokumenta \
+        /// PUT api/Dokument/dc37631c-78ae-4663-ba97-09ec6b1e5111 \
+        ///{
+        ///     "dokumentID": "dc37631c-78ae-4663-ba97-09ec6b1e5111", \
+        ///     "zavodniBroj": "1313", \
+        ///     "datum": "2019-06-24T00:00:00", \
+        ///     "datumDonosenja": "2021-12-09T00:00:00", \
+        ///     "sablon": "FontFamily: TimesNewRoman, FontSize: 12pt", \
+        ///     "korisnikID": "bbc752be-d0b8-41f0-94e8-d54df388a9f0", \
+        ///     "kupacID": "734e2747-d30f-4ddc-9d15-33fd6a036898", \
+        ///     "liciterID": "fe650e15-966e-470e-a6f7-2932d0a2f2a2", \
+        ///     "verzijaDokumentaID": "e51ecff3-0f88-4803-97fe-c853cae5fd99" \
+        ///}
+        /// </remarks>
         /// <response code = "200">Dobijanje modifikovanog dokumenta</response>
         /// <response code = "404">Ne postoji dokument sa zadatim id-em</response>
         // PUT api/<DokumentController>/5
@@ -181,9 +214,10 @@ namespace DokumentServis.Controllers
         }
 
         /// <summary>
-        /// Brisanje postojeceg dokumenta
+        /// Brisanje postojeceg dokumenta, od strane prethodno ulogovanog korisnika koji ima ulogu Administratora ili Prve komisije, 
+        /// uz logovanje navedene aktivnosti, kao i korisnickog imena korisnika koji je izvrsio tu aktivnost u okviru loggera
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">Parametar id-a dokumenta za koji se vrsi brisanje</param>
         /// <returns>Brise zadati dokument</returns>
         /// <response code = "200">Obrisan je dokument</response>
         /// <response code = "404">Ne postoji dokument za kojeg se izvrsava brisanje</response>

@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 namespace KorisnikServis.Controllers
 {
     /// <summary>
-    /// Korisnik Controller pomocu kojeg se vrse sve potrebne funkcionalnosti vezane za controller
+    /// Korisnik Controller pomocu kojeg se vrse sve potrebne funkcionalnosti iz specifikacije vezane za korisnika
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
@@ -41,7 +41,8 @@ namespace KorisnikServis.Controllers
         }
 
         /// <summary>
-        /// Pristup svim korisnicima
+        /// Pristup svim korisnicima, koji je omogucen od strane prethodno ulogovanog korisnika koji ima ulogu Administratora u sistemu, 
+        /// uz logovanje navedene aktivnosti, kao i korisnickog imena korisnika koji je izvrsio tu aktivnost u okviru loggera
         /// </summary>
         /// <returns>Vraca listu svih korisnika</returns>
         /// <response code = "200">Pristup svim korisnicima</response>
@@ -57,12 +58,14 @@ namespace KorisnikServis.Controllers
         }
 
         /// <summary>
-        /// Pristup korisniku na osnovu korisnickog imena i lozinke 
+        /// Pristup korisniku na osnovu korisnickog imena i lozinke od strane korisnika koji imaju uloge: Administrator, Superuser, 
+        /// Tehnicki sekretar, Prva komisija i Menadzer, 
+        /// uz logovanje navedene aktivnosti, kao i korisnickog imena korisnika koji je izvrsio tu aktivnost u okviru loggera
         /// </summary>
         /// <param name="KorisnickoIme"></param>
         /// <param name="Lozinka"></param>
         /// <returns>Vraca korisnika sa zadatim korisnickim imenom i lozinkom</returns>
-        /// <response code = "200">Pristup korisniku putem korisnickog imena i lozinke </response>
+        /// <response code = "200">Pristup korisniku putem korisnickog imena i lozinke</response>
         /// <response code = "404">Ne postoji korisnik sa zadatim korisnickim imenom ili lozinkom</response>
         [Authorize(Roles = "Administrator, Superuser, Tehnicki sekretar, Prva komisija, Menadzer")]
         [HttpGet("{KorisnickoIme}/{Lozinka}")]
@@ -82,7 +85,9 @@ namespace KorisnikServis.Controllers
         }
 
         /// <summary>
-        /// Logovanje korisnika putem korisnickog imena i lozinke
+        /// Logovanje korisnika putem korisnickog imena i lozinke, kako bi se omogucila autentifikacija korisnika kroz utvrdjivanje identiteta
+        /// korisnika kako bi mu se omogucio pristup sistemu, 
+        /// uz logovanje navedene aktivnosti, kao i korisnickog imena korisnika koji je izvrsio tu aktivnost u okviru loggera
         /// </summary>
         /// <param name="korisnik"></param>
         /// <returns>Vraca token na osnovu logovanja korisnika</returns>
@@ -106,8 +111,9 @@ namespace KorisnikServis.Controllers
 
         /// <summary>
         /// Pristup korisniku na osnovu zadatog id-a
+        /// uz logovanje navedene aktivnosti, kao i korisnickog imena korisnika koji je izvrsio tu aktivnost u okviru loggera
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">Id korisnika</param>
         /// <returns>Vraca korisnika ciji id je zadat u putanji</returns>
         /// <response code = "200">Dobijanje korisnika na osnovu zadatog id-a</response>
         /// <response code = "404">Ne postoji korisnik sa zadatim id-em</response>
@@ -128,7 +134,8 @@ namespace KorisnikServis.Controllers
         }
 
         /// <summary>
-        /// Pristup korisniku na osnovu naziva uloge koju ima
+        /// Pristup korisnicima na osnovu naziva uloge koju imaju, definisanu kroz tip korisnika, 
+        /// uz logovanje navedene aktivnosti, kao i korisnickog imena korisnika koji je izvrsio tu aktivnost u okviru loggera
         /// </summary>
         /// <param name="nazivTipa"></param>
         /// <returns>Vraca korisnika sa zadatom ulogom</returns>
@@ -151,7 +158,8 @@ namespace KorisnikServis.Controllers
         }
 
         /// <summary>
-        /// Dobijanje informacija o korisniku na osnovu tokena
+        /// Dobijanje svih bitnih informacija o korisniku na osnovu tokena, 
+        /// uz logovanje navedene aktivnosti, kao i korisnickog imena korisnika koji je izvrsio tu aktivnost u okviru loggera
         /// </summary>
         /// <returns>Vraca korisnika na osnovu zadatog tokena</returns>
         /// <response code = "200">Dobijanje korisnika na osnovu zadatog tokena</response>
@@ -173,10 +181,22 @@ namespace KorisnikServis.Controllers
         }
 
         /// <summary>
-        /// Kreiranje novog korisnika
+        /// Kreiranje novog korisnika, 
+        /// uz logovanje navedene aktivnosti, kao i korisnickog imena korisnika koji je izvrsio tu aktivnost u okviru loggera
         /// </summary>
-        /// <param name="model"></param>
+        /// <param name="model">Model korisnika</param>
         /// <returns>Vraca novog korisnika</returns>
+        /// <remarks>
+        /// Primer request-a za kreiranje novog korisnika \
+        /// POST api/Korisnik/ \
+        ///{ \
+        ///     "imeKorisnika": "Laza", \
+        ///     "prezimeKorisnika": "Lazic", \
+        ///     "korisnickoIme": "lazaa", \
+        ///     "lozinka": "laza123", \
+        ///     "tipKorisnikaID": "e012104b-5e48-4d2f-b1a9-9a89a28230d2" \
+        ///}
+        /// </remarks>
         /// <response code = "201">Kreiran je novi korisnik</response>
         /// <response code = "500">Greska prilikom pokusaja kreiranja korisnika</response>
         // POST api/<KorisnikController>
@@ -189,6 +209,7 @@ namespace KorisnikServis.Controllers
             #pragma warning restore CS4014
             try
             {
+                model.KorisnikID = Guid.NewGuid();
                 korisnikService.Save(model);
                 return StatusCode(StatusCodes.Status201Created, model);
             }
@@ -199,11 +220,25 @@ namespace KorisnikServis.Controllers
         }
 
         /// <summary>
-        /// Modifikacija postojeceg korisnika
+        /// Modifikacija postojeceg korisnika,  od strane korisnika koji imaju uloge: Administrator, Superuser, 
+        /// Tehnicki sekretar, Prva komisija, Menadzer i Operater nadmetanja, 
+        /// uz logovanje navedene aktivnosti, kao i korisnickog imena korisnika koji je izvrsio tu aktivnost u okviru loggera
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="korisnik"></param>
+        /// <param name="id">Parametar na osnovu kojeg se identifikuje korisnik za azuriranje</param>
+        /// <param name="korisnik">Model novog korisnika</param>
         /// <returns>Vraca modifikovanog korisnika</returns>
+        /// <remarks>
+        /// Primer request-a za modifikovanje korisnika \
+        /// PUT api/Korisnik/af133d94-bc4f-4073-8097-3cbbd46b04dd \
+        ///{ \
+        ///     "korisnikID": "af133d94-bc4f-4073-8097-3cbbd46b04dd", \
+        ///     "imeKorisnika": "Laza", \
+        ///     "prezimeKorisnika": "Lazic", \
+        ///     "korisnickoIme": "lazaa", \
+        ///     "lozinka": "laza123", \
+        ///     "tipKorisnikaID": "e012104b-5e48-4d2f-b1a9-9a89a28230d2" \
+        ///}
+        /// </remarks>
         /// <response code = "200">Dobijanje modifikovanog korisnika</response>
         /// <response code = "404">Ne postoji korisnik sa zadatim id-em</response>
         // PUT api/<KorisnikController>/5
@@ -237,9 +272,10 @@ namespace KorisnikServis.Controllers
         }
 
         /// <summary>
-        /// Brisanje postojeceg korisnika
+        /// Brisanje postojeceg korisnika od strane korisnika koji ima ulogu Administratora, 
+        /// uz logovanje navedene aktivnosti, kao i korisnickog imena korisnika koji je izvrsio tu aktivnost u okviru loggera
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">Parametar id-a korisnika za kojeg se izvrsava brisanje</param>
         /// <returns>Brise zadatog korisnika</returns>
         /// <response code = "200">Obrisan je korisnik</response>
         /// <response code = "404">Ne postoji korisnik za kojeg se izvrsava brisanje</response>
