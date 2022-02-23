@@ -150,7 +150,6 @@ namespace licitacijaService.Controllers
             {
                 return NotFound();
             }
-            var dokumentaLicitacije = licitacijaDokumentRepository.GetDokumnetByLicitacijaId(licitacijaId);
             string accessToken = HttpContext.GetTokenAsync("access_token").Result;
             List<LicitacijaDokument> pravniDokuemnti = licitacijaDokumentRepository.GetDokumnetByLicitacijaIdAndVrstaPodnosioca(licitacijaId, "p");
             List<LicitacijaDokument> fizickiDokumneti = licitacijaDokumentRepository.GetDokumnetByLicitacijaIdAndVrstaPodnosioca(licitacijaId, "f");
