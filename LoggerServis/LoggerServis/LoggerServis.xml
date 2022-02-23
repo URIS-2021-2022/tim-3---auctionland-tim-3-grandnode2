@@ -31,29 +31,53 @@
             <response code = "404">Ne postoji logger sa zadatim id-em</response>
         </member>
         <member name="M:LoggerServis.Controllers.LoggerController.Post(LoggerServis.Database.Entities.Logger)">
-            <summary>
-            Kreiranje novog loggera
-            </summary>
-            <param name="model">Model loggera</param>
-            <returns>Vraca novi logger</returns>
-            <response code = "201">Kreiran je novi logger</response>
-            <response code = "500">Greska prilikom pokusaja kreiranja logger</response>
+             <summary>
+             Kreiranje novog loggera
+             </summary>
+             <param name="model">Model loggera</param>
+             <returns>Vraca novi logger</returns>
+             <remarks>
+             <strong>
+             Primer request-a za kreiranje novog loggera \
+             !!!!!! Ovaj json je potrebno kopirati u request body kako bi uspesno testirali!!!!! \
+             POST api/Logger/ \
+             </strong>
+            {
+                 "opisAktivnosti": "Pristup svim tipovima korisnika po id-u.*********Korisnicko ime: markoo", \
+                 "datum": "2022-02-22T00:59:54.371502" \
+            }
+             </remarks>
+             <response code = "201">Kreiran je novi logger</response>
+             <response code = "500">Greska prilikom pokusaja kreiranja logger</response>
         </member>
         <member name="M:LoggerServis.Controllers.LoggerController.Put(System.Int32,LoggerServis.Database.Entities.Logger)">
-            <summary>
-            Modifikacija postojeceg loggera
-            </summary>
-            <param name="id">Parametar na osnovu kojeg se identifikuje logger za azuriranje</param>
-            <param name="logger">Model loggera</param>
-            <returns>Vraca modifikovan logger</returns>
-            <response code = "200">Dobijanje modifikovanog loggera</response>
-            <response code = "404">Ne postoji logger sa zadatim id-em</response>
+             <summary>
+             Modifikacija postojeceg loggera
+             </summary>
+             <param name="id">Parametar na osnovu kojeg se identifikuje logger za azuriranje</param>
+             <param name="logger">Model loggera</param>
+             <returns>Vraca modifikovan logger</returns>
+             <remarks>
+             <strong>
+             Primer request-a za modifikovanje loggera \
+             !!!!!! Ovaj json je potrebno kopirati u request body kako bi uspesno testirali!!!!! \
+             PUT api/Logger/156 \
+             </strong>
+            {
+                 "loggerID": 156, \
+                 "opisAktivnosti": "Pristup svim tipovima korisnika po id-u.*********Korisnicko ime: markoo", \
+                 "datum": "2022-02-22T00:59:54.371502" \
+            }
+             </remarks>
+             <response code = "200">Dobijanje modifikovanog loggera</response>
+             <response code = "400">Nisu uneti dobri podaci</response>
+             <response code = "404">Ne postoji logger sa zadatim id-em</response>
         </member>
         <member name="M:LoggerServis.Controllers.LoggerController.Delete(System.Int32)">
             <summary>
             Brisanje postojeceg loggera
             </summary>
-            <param name="id"></param>
+            <param name="id">Parametar na osnovu kojeg se identifikuje logger za brisanje</param>
             <returns>Brise zadati logger</returns>
             <response code = "200">Obrisan je logger</response>
             <response code = "404">Ne postoji logger za kojeg se izvrsava brisanje</response>

@@ -22,15 +22,17 @@
             </summary>
             <returns>Vraca listu svih dokumenata</returns>
             <response code = "200">Pristup svim dokumentima</response>
+            <response code = "401">Korisnik nije ulogovan</response>
         </member>
         <member name="M:DokumentServis.Controllers.DokumentController.Get(System.Guid)">
             <summary>
             Pristup dokumentu na osnovu zadatog id-a, od strane prethodno ulogovanog korisnika koji ima ulogu Administratora ili Prve komisije, 
             uz logovanje navedene aktivnosti, kao i korisnickog imena korisnika koji je izvrsio tu aktivnost u okviru loggera
             </summary>
-            <param name="id">Id dokumenta</param>
+            <param name="id">Id dokumenta primer: dc37631c-78ae-4663-ba97-09ec6b1e5111</param>
             <returns>Vraca dokument ciji id je zadat u putanji</returns>
             <response code = "200">Dobijanje dokumenta na osnovu zadatog id-a</response>
+            <response code = "401">Korisnik nije ulogovan</response>
             <response code = "404">Ne postoji dokument sa zadatim id-em</response>
         </member>
         <member name="M:DokumentServis.Controllers.DokumentController.Post(DokumentServis.Database.Entities.Dokument)">
@@ -41,8 +43,11 @@
              <param name="model">Model dokumenta</param>
              <returns>Vraca novi dokument</returns>
              <remarks>
+             <strong>
              Primer request-a za kreiranje novog dokumenta \
-             POST api/Korisnik/ \
+             !!!!!! Ovaj json je potrebno kopirati u request body kako bi uspesno testirali!!!!! \
+             POST api/Dokument/ \
+             </strong>
             {
                  "zavodniBroj": "1313", \
                  "datum": "2019-06-24T00:00:00", \
@@ -55,6 +60,7 @@
             }
              </remarks>
              <response code = "201">Kreiran je novi dokument</response>
+             <response code = "401">Korisnik nije ulogovan</response>
              <response code = "500">Greska prilikom pokusaja kreiranja dokumenta</response>
         </member>
         <member name="M:DokumentServis.Controllers.DokumentController.Put(System.Guid,DokumentServis.Database.Entities.Dokument)">
@@ -62,12 +68,15 @@
              Modifikacija postojeceg dokumenta, od strane prethodno ulogovanog korisnika koji ima ulogu Administratora ili Prve komisije
              uz logovanje navedene aktivnosti, kao i korisnickog imena korisnika koji je izvrsio tu aktivnost u okviru loggera
              </summary>
-             <param name="id">Parametar na osnovu kojeg se identifikuje dokument za azuriranje</param>
+             <param name="id">Parametar na osnovu kojeg se identifikuje dokument za azuriranje dc37631c-78ae-4663-ba97-09ec6b1e5111</param>
              <param name="dokument">Model novog dokumenta</param>
              <returns>Vraca modifikovan dokument</returns>
              <remarks>
+             <strong>
              Primer request-a za modifikaciju dokumenta \
-             PUT api/Korisnik/dc37631c-78ae-4663-ba97-09ec6b1e5111 \
+             !!!!!! Ovaj json je potrebno kopirati u request body kako bi uspesno testirali!!!!! \
+             PUT api/Dokument/dc37631c-78ae-4663-ba97-09ec6b1e5111 \
+             </strong>
             {
                  "dokumentID": "dc37631c-78ae-4663-ba97-09ec6b1e5111", \
                  "zavodniBroj": "1313", \
@@ -81,6 +90,8 @@
             }
              </remarks>
              <response code = "200">Dobijanje modifikovanog dokumenta</response>
+             <response code = "400">Nisu dobro uneti podaci</response>
+             <response code = "401">Korisnik nije ulogovan</response>
              <response code = "404">Ne postoji dokument sa zadatim id-em</response>
         </member>
         <member name="M:DokumentServis.Controllers.DokumentController.Delete(System.Guid)">
@@ -88,9 +99,10 @@
             Brisanje postojeceg dokumenta, od strane prethodno ulogovanog korisnika koji ima ulogu Administratora ili Prve komisije, 
             uz logovanje navedene aktivnosti, kao i korisnickog imena korisnika koji je izvrsio tu aktivnost u okviru loggera
             </summary>
-            <param name="id">Parametar id-a dokumenta za koji se vrsi brisanje</param>
+            <param name="id">Parametar id-a dokumenta za koji se vrsi brisanje primer: dc37631c-78ae-4663-ba97-09ec6b1e5111</param>
             <returns>Brise zadati dokument</returns>
             <response code = "200">Obrisan je dokument</response>
+            <response code = "401">Korisnik nije ulogovan</response>
             <response code = "404">Ne postoji dokument za kojeg se izvrsava brisanje</response>
         </member>
         <member name="T:DokumentServis.Controllers.VerzijaDokumentaController">
@@ -110,15 +122,17 @@
             </summary>
             <returns>Vraca listu svih verzija dokumenata</returns>
             <response code = "200">Pristup svim verzijama dokumenata</response>
+            <response code = "401">Korisnik nije ulogovan</response>
         </member>
         <member name="M:DokumentServis.Controllers.VerzijaDokumentaController.Get(System.Guid)">
             <summary>
             Pristup verzijama dokumenata na osnovu zadatog id-a, od strane prethodno ulogovanog korisnika koji ima ulogu Administratora ili Prve komisije,
             uz logovanje navedene aktivnosti, kao i korisnickog imena korisnika koji je izvrsio tu aktivnost u okviru loggera
             </summary>
-            <param name="id">Id verzije dokumenta</param>
+            <param name="id">Id verzije dokumenta primer: b35b4aa3-9ff8-49a1-a7a3-132be69397e3</param>
             <returns>Vraca verziju dokumenta ciji id je zadat u putanji</returns>
             <response code = "200">Dobijanje verzija dokumenata na osnovu zadatog id-a</response>
+            <response code = "401">Korisnik nije ulogovan</response>
             <response code = "404">Ne postoji verzija dokumenta sa zadatim id-em</response>
         </member>
         <member name="M:DokumentServis.Controllers.VerzijaDokumentaController.Post(DokumentServis.Database.Entities.VerzijaDokumenta)">
@@ -129,39 +143,54 @@
              <param name="model">Model verzije dokumenta</param>
              <returns>Vraca novu verziju dokumenta</returns>
              <remarks>
-             Primer request-a za kreiranje novog dokumenta \
-             POST api/Korisnik/ \
-            {
-                 "zavodniBroj": "1313", \
-                 "datum": "2019-06-24T00:00:00", \
-                 "datumDonosenja": "2021-12-09T00:00:00", \
-                 "sablon": "FontFamily: TimesNewRoman, FontSize: 12pt", \
-                 "korisnikID": "bbc752be-d0b8-41f0-94e8-d54df388a9f0", \
-                 "kupacID": "734e2747-d30f-4ddc-9d15-33fd6a036898", \
-                 "liciterID": "fe650e15-966e-470e-a6f7-2932d0a2f2a2", \
-                 "verzijaDokumentaID": "e51ecff3-0f88-4803-97fe-c853cae5fd99" \
+             <strong>
+             Primer request-a za kreiranje nove verzije dokumenta \
+             !!!!!! Ovaj json je potrebno kopirati u request body kako bi uspesno testirali!!!!! \
+             POST api/VerzijaDokumenta/ \
+             </strong>
+            { \
+                 "verzija": "v1.1", \
+                 "revizija": "Uvid u dokument", \
+                 "datum": "2021-12-09T00:00:00" \
             }
              </remarks>
              <response code = "201">Kreirana je nova verzija dokumenta</response>
+             <response code = "401">Korisnik nije ulogovan</response>
              <response code = "500">Greska prilikom pokusaja kreiranja nove verzije dokumenta</response>
         </member>
         <member name="M:DokumentServis.Controllers.VerzijaDokumentaController.Put(System.Guid,DokumentServis.Database.Entities.VerzijaDokumenta)">
-            <summary>
-            Modifikacija postojece verzije dokumenta
-            </summary>
-            <param name="id"></param>
-            <param name="verzijaDokumenta"></param>
-            <returns>Vraca modifikovanu verziju dokumenta</returns>
-            <response code = "200">Dobijanje modifikovane verzije dokumenta</response>
-            <response code = "404">Ne postoji verzija dokumenta sa zadatim id-em</response>
+             <summary>
+             Modifikacija postojece verzije dokumenta, od strane prethodno ulogovanog korisnika koji ima ulogu Administratora ili Prve komisije, 
+             uz logovanje navedene aktivnosti, kao i korisnickog imena korisnika koji je izvrsio tu aktivnost u okviru loggera
+             </summary>
+             <param name="id">Parametar na osnovu kojeg se identifikuje verzija dokumenta za azuriranje primer: b35b4aa3-9ff8-49a1-a7a3-132be69397e3</param>
+             <param name="verzijaDokumenta">Model verzije dokumenta</param>
+             <returns>Vraca modifikovanu verziju dokumenta</returns>
+             <remarks>
+             Primer request-a za modifikaciju v \
+             !!!!!! Ovaj json je potrebno kopirati u request body kako bi uspesno testirali!!!!! \
+             PUT api/VerzijaDokumenta/b35b4aa3-9ff8-49a1-a7a3-132be69397e3 \
+            { \
+                 "verzijaDokumentaID": "b35b4aa3-9ff8-49a1-a7a3-132be69397e3", \
+                 "verzija": "v1.1", \
+                 "revizija": "Uvid u dokument", \
+                 "datum": "2021-12-09T00:00:00" \
+            }
+             </remarks>
+             <response code = "200">Dobijanje modifikovane verzije dokumenta</response>
+             <response code = "400">Nisu uneti dobri podaci</response>
+             <response code = "401">Korisnik nije ulogovan</response>
+             <response code = "404">Ne postoji verzija dokumenta sa zadatim id-em</response>
         </member>
         <member name="M:DokumentServis.Controllers.VerzijaDokumentaController.Delete(System.Guid)">
             <summary>
-            Brisanje postojece verzije dokumenta
+            Brisanje postojece verzije dokumenta, , od strane prethodno ulogovanog korisnika koji ima ulogu Administratora ili Prve komisije, 
+            uz logovanje navedene aktivnosti, kao i korisnickog imena korisnika koji je izvrsio tu aktivnost u okviru loggera
             </summary>
-            <param name="id"></param>
+            <param name="id">Parametar na osnovu kojeg se identifikuje verzija dokumenta za brisanje primer: b35b4aa3-9ff8-49a1-a7a3-132be69397e3</param>
             <returns>Brise zadatu verziju dokumenta</returns>
             <response code = "200">Obrisana je verzija dokumenta</response>
+            <response code = "401">Korisnik nije ulogovan</response>
             <response code = "404">Ne postoji verzija dokumenta za kojeg se izvrsava brisanje</response>
         </member>
         <member name="T:DokumentServis.Database.Entities.Dokument">
@@ -171,47 +200,47 @@
         </member>
         <member name="P:DokumentServis.Database.Entities.Dokument.DokumentID">
             <summary>
-            DokumentID primarni kljuc
+            Id dokumenta, primarni kljuc
             </summary>
         </member>
         <member name="P:DokumentServis.Database.Entities.Dokument.ZavodniBroj">
             <summary>
-            Zavodni broj
+            Zavodni broj dokumenta
             </summary>
         </member>
         <member name="P:DokumentServis.Database.Entities.Dokument.Datum">
             <summary>
-            Datum
+            Datum generisanja dokumenta
             </summary>
         </member>
         <member name="P:DokumentServis.Database.Entities.Dokument.DatumDonosenja">
             <summary>
-            Datum donosenja
+            Datum donosenja donosenja dokumenta
             </summary>
         </member>
         <member name="P:DokumentServis.Database.Entities.Dokument.Sablon">
             <summary>
-            Sablon
+            Sablon koji definise parametre kao sto su FontFamily, FontSize i slicno
             </summary>
         </member>
         <member name="P:DokumentServis.Database.Entities.Dokument.KorisnikID">
             <summary>
-            KorisnikID
+            Id korisnika
             </summary>
         </member>
         <member name="P:DokumentServis.Database.Entities.Dokument.KupacID">
             <summary>
-            KupacID
+            Id kupca
             </summary>
         </member>
         <member name="P:DokumentServis.Database.Entities.Dokument.LiciterID">
             <summary>
-            LiciterID
+            Id licitera
             </summary>
         </member>
         <member name="P:DokumentServis.Database.Entities.Dokument.VerzijaDokumentaID">
             <summary>
-            VerzijaDokumentaID
+            Id verzije dokumenta
             </summary>
         </member>
         <member name="T:DokumentServis.Database.Entities.VerzijaDokumenta">
@@ -221,22 +250,22 @@
         </member>
         <member name="P:DokumentServis.Database.Entities.VerzijaDokumenta.VerzijaDokumentaID">
             <summary>
-            VerzijaDokumenta ID
+            Id verzije dokumenta, primarni kljuc
             </summary>
         </member>
         <member name="P:DokumentServis.Database.Entities.VerzijaDokumenta.Verzija">
             <summary>
-            Verzija
+            Verzija dokumenta
             </summary>
         </member>
         <member name="P:DokumentServis.Database.Entities.VerzijaDokumenta.Revizija">
             <summary>
-            Revizija
+            Revizija dokumenta
             </summary>
         </member>
         <member name="P:DokumentServis.Database.Entities.VerzijaDokumenta.Datum">
             <summary>
-            Datum
+            Datum verzije dokumenta
             </summary>
         </member>
         <member name="T:DokumentServis.Services.DokumentService">

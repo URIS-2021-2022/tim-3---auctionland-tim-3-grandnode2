@@ -57,7 +57,10 @@ namespace DokumentServis.Controllers
         /// </summary>
         /// <returns>Vraca listu svih dokumenata</returns>
         /// <response code = "200">Pristup svim dokumentima</response>
+        /// <response code = "401">Korisnik nije ulogovan</response>
         // GET: api/<DokumentController>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [HttpGet]
         public IEnumerable<Dokument> Get()
         {
@@ -71,11 +74,15 @@ namespace DokumentServis.Controllers
         /// Pristup dokumentu na osnovu zadatog id-a, od strane prethodno ulogovanog korisnika koji ima ulogu Administratora ili Prve komisije, 
         /// uz logovanje navedene aktivnosti, kao i korisnickog imena korisnika koji je izvrsio tu aktivnost u okviru loggera
         /// </summary>
-        /// <param name="id">Id dokumenta</param>
+        /// <param name="id">Id dokumenta primer: dc37631c-78ae-4663-ba97-09ec6b1e5111</param>
         /// <returns>Vraca dokument ciji id je zadat u putanji</returns>
         /// <response code = "200">Dobijanje dokumenta na osnovu zadatog id-a</response>
+        /// <response code = "401">Korisnik nije ulogovan</response>
         /// <response code = "404">Ne postoji dokument sa zadatim id-em</response>
         // GET api/<DokumentController>/5
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpGet("{id}")]
         public IActionResult Get(Guid id)
         {
@@ -118,8 +125,11 @@ namespace DokumentServis.Controllers
         /// <param name="model">Model dokumenta</param>
         /// <returns>Vraca novi dokument</returns>
         /// <remarks>
+        /// <strong>
         /// Primer request-a za kreiranje novog dokumenta \
+        /// !!!!!! Ovaj json je potrebno kopirati u request body kako bi uspesno testirali!!!!! \
         /// POST api/Dokument/ \
+        /// </strong>
         ///{
         ///     "zavodniBroj": "1313", \
         ///     "datum": "2019-06-24T00:00:00", \
@@ -132,9 +142,13 @@ namespace DokumentServis.Controllers
         ///}
         /// </remarks>
         /// <response code = "201">Kreiran je novi dokument</response>
+        /// <response code = "401">Korisnik nije ulogovan</response>
         /// <response code = "500">Greska prilikom pokusaja kreiranja dokumenta</response>
-    // POST api/<DokumentController>
-    [HttpPost]
+        // POST api/<DokumentController>
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [HttpPost]
         public IActionResult Post([FromBody] Dokument model)
         {
             #pragma warning disable CS4014
@@ -160,12 +174,15 @@ namespace DokumentServis.Controllers
         /// Modifikacija postojeceg dokumenta, od strane prethodno ulogovanog korisnika koji ima ulogu Administratora ili Prve komisije
         /// uz logovanje navedene aktivnosti, kao i korisnickog imena korisnika koji je izvrsio tu aktivnost u okviru loggera
         /// </summary>
-        /// <param name="id">Parametar na osnovu kojeg se identifikuje dokument za azuriranje</param>
+        /// <param name="id">Parametar na osnovu kojeg se identifikuje dokument za azuriranje dc37631c-78ae-4663-ba97-09ec6b1e5111</param>
         /// <param name="dokument">Model novog dokumenta</param>
         /// <returns>Vraca modifikovan dokument</returns>
         /// <remarks>
+        /// <strong>
         /// Primer request-a za modifikaciju dokumenta \
+        /// !!!!!! Ovaj json je potrebno kopirati u request body kako bi uspesno testirali!!!!! \
         /// PUT api/Dokument/dc37631c-78ae-4663-ba97-09ec6b1e5111 \
+        /// </strong>
         ///{
         ///     "dokumentID": "dc37631c-78ae-4663-ba97-09ec6b1e5111", \
         ///     "zavodniBroj": "1313", \
@@ -179,8 +196,14 @@ namespace DokumentServis.Controllers
         ///}
         /// </remarks>
         /// <response code = "200">Dobijanje modifikovanog dokumenta</response>
+        /// <response code = "400">Nisu dobro uneti podaci</response>
+        /// <response code = "401">Korisnik nije ulogovan</response>
         /// <response code = "404">Ne postoji dokument sa zadatim id-em</response>
         // PUT api/<DokumentController>/5
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpPut("{id}")]
         public IActionResult Put(Guid id, [FromBody] Dokument dokument)
         {
@@ -217,11 +240,15 @@ namespace DokumentServis.Controllers
         /// Brisanje postojeceg dokumenta, od strane prethodno ulogovanog korisnika koji ima ulogu Administratora ili Prve komisije, 
         /// uz logovanje navedene aktivnosti, kao i korisnickog imena korisnika koji je izvrsio tu aktivnost u okviru loggera
         /// </summary>
-        /// <param name="id">Parametar id-a dokumenta za koji se vrsi brisanje</param>
+        /// <param name="id">Parametar id-a dokumenta za koji se vrsi brisanje primer: dc37631c-78ae-4663-ba97-09ec6b1e5111</param>
         /// <returns>Brise zadati dokument</returns>
         /// <response code = "200">Obrisan je dokument</response>
+        /// <response code = "401">Korisnik nije ulogovan</response>
         /// <response code = "404">Ne postoji dokument za kojeg se izvrsava brisanje</response>
         // DELETE api/<DokumentController>/5
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpDelete("{id}")]
         public IActionResult Delete(Guid id)
         {
