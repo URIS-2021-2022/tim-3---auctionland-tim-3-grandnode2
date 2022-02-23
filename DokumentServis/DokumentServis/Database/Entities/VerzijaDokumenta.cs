@@ -13,22 +13,22 @@ namespace DokumentServis.Database.Entities
     public class VerzijaDokumenta
     {
         /// <summary>
-        /// VerzijaDokumenta ID
+        /// Id verzije dokumenta, primarni kljuc
         /// </summary>
         public Guid VerzijaDokumentaID { get; set; }
 
         /// <summary>
-        /// Verzija
+        /// Verzija dokumenta
         /// </summary>
         public string Verzija { get; set; }
 
         /// <summary>
-        /// Revizija
+        /// Revizija dokumenta
         /// </summary>
         public string Revizija { get; set; }
 
         /// <summary>
-        /// Datum
+        /// Datum verzije dokumenta
         /// </summary>
         public DateTime Datum { get; set; }
     }

@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 namespace DokumentServis.Controllers
 {
     /// <summary>
-    /// Verzija dokumenta controller pomocu kojeg se vrse sve potrebne funkcionalnosti vezane za controller
+    /// Verzija dokumenta controller pomocu kojeg se vrse sve potrebne funkcionalnosti iz specifikacije vezane za verziju dokumenta
     /// </summary>
     [Route("api/[controller]")]
     [Authorize(Roles = "Administrator, Prva komisija")]
@@ -35,7 +35,8 @@ namespace DokumentServis.Controllers
         }
 
         /// <summary>
-        /// Pristup svim verzijama dokumenta
+        /// Pristup svim verzijama dokumenta, koji omogucen od strane prethodno ulogovanog korisnika koji ima ulogu Administratora ili Prve komisije,
+        /// uz logovanje navedene aktivnosti, kao i korisnickog imena korisnika koji je izvrsio tu aktivnost u okviru loggera
         /// </summary>
         /// <returns>Vraca listu svih verzija dokumenata</returns>
         /// <response code = "200">Pristup svim verzijama dokumenata</response>
@@ -50,9 +51,10 @@ namespace DokumentServis.Controllers
         }
 
         /// <summary>
-        /// Pristup verzijama dokumenata na osnovu zadatog id-a
+        /// Pristup verzijama dokumenata na osnovu zadatog id-a, od strane prethodno ulogovanog korisnika koji ima ulogu Administratora ili Prve komisije,
+        /// uz logovanje navedene aktivnosti, kao i korisnickog imena korisnika koji je izvrsio tu aktivnost u okviru loggera
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">Id verzije dokumenta</param>
         /// <returns>Vraca verziju dokumenta ciji id je zadat u putanji</returns>
         /// <response code = "200">Dobijanje verzija dokumenata na osnovu zadatog id-a</response>
         /// <response code = "404">Ne postoji verzija dokumenta sa zadatim id-em</response>
@@ -72,10 +74,20 @@ namespace DokumentServis.Controllers
         }
 
         /// <summary>
-        /// Kreiranje nove verzije dokumenta
+        /// Kreiranje nove verzije dokumenta, od strane prethodno ulogovanog korisnika koji ima ulogu Administratora ili Prve komisije, 
+        /// uz logovanje navedene aktivnosti, kao i korisnickog imena korisnika koji je izvrsio tu aktivnost u okviru loggera
         /// </summary>
-        /// <param name="model"></param>
+        /// <param name="model">Model verzije dokumenta</param>
         /// <returns>Vraca novu verziju dokumenta</returns>
+        /// <remarks>
+        /// Primer request-a za kreiranje nove verzije dokumenta \
+        /// POST api/VerzijaDokumenta/ \
+        ///{ \
+        ///     "verzija": "v1.1", \
+        ///     "revizija": "Uvid u dokument", \
+        ///     "datum": "2021-12-09T00:00:00" \
+        ///}
+        /// </remarks>
         /// <response code = "201">Kreirana je nova verzija dokumenta</response>
         /// <response code = "500">Greska prilikom pokusaja kreiranja nove verzije dokumenta</response>
         // POST api/<VerzijaDokumentaController>
@@ -87,6 +99,7 @@ namespace DokumentServis.Controllers
             #pragma warning restore CS4014
             try
             {
+                model.VerzijaDokumentaID = Guid.NewGuid();
                 verzijaDokumentaService.Save(model);
                 return StatusCode(StatusCodes.Status201Created, model);
             }
@@ -97,11 +110,22 @@ namespace DokumentServis.Controllers
         }
 
         /// <summary>
-        /// Modifikacija postojece verzije dokumenta
+        /// Modifikacija postojece verzije dokumenta, od strane prethodno ulogovanog korisnika koji ima ulogu Administratora ili Prve komisije, 
+        /// uz logovanje navedene aktivnosti, kao i korisnickog imena korisnika koji je izvrsio tu aktivnost u okviru loggera
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="verzijaDokumenta"></param>
+        /// <param name="id">Parametar na osnovu kojeg se identifikuje verzija dokumenta za azuriranje</param>
+        /// <param name="verzijaDokumenta">Model verzije dokumenta</param>
         /// <returns>Vraca modifikovanu verziju dokumenta</returns>
+        /// <remarks>
+        /// Primer request-a za modifikaciju v \
+        /// PUT api/VerzijaDokumenta/b35b4aa3-9ff8-49a1-a7a3-132be69397e3 \
+        ///{ \
+        ///     "verzijaDokumentaID": "b35b4aa3-9ff8-49a1-a7a3-132be69397e3", \
+        ///     "verzija": "v1.1", \
+        ///     "revizija": "Uvid u dokument", \
+        ///     "datum": "2021-12-09T00:00:00" \
+        ///}
+        /// </remarks>
         /// <response code = "200">Dobijanje modifikovane verzije dokumenta</response>
         /// <response code = "404">Ne postoji verzija dokumenta sa zadatim id-em</response>
         // PUT api/<VerzijaDokumentaController>/5
@@ -136,9 +160,10 @@ namespace DokumentServis.Controllers
         }
 
         /// <summary>
-        /// Brisanje postojece verzije dokumenta
+        /// Brisanje postojece verzije dokumenta, , od strane prethodno ulogovanog korisnika koji ima ulogu Administratora ili Prve komisije, 
+        /// uz logovanje navedene aktivnosti, kao i korisnickog imena korisnika koji je izvrsio tu aktivnost u okviru loggera
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">Parametar na osnovu kojeg se identifikuje verzija dokumenta za brisanje</param>
         /// <returns>Brise zadatu verziju dokumenta</returns>
         /// <response code = "200">Obrisana je verzija dokumenta</response>
         /// <response code = "404">Ne postoji verzija dokumenta za kojeg se izvrsava brisanje</response>

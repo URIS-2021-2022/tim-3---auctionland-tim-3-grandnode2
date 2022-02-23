@@ -12,32 +12,32 @@ namespace KorisnikServis.Database.Entities
     public class Korisnik
     {
         /// <summary>
-        /// KorisnikID primarni kljuc
+        /// Id korisnika, primarni kljuc
         /// </summary>
         public Guid KorisnikID { get; set; }
 
         /// <summary>
-        /// ImeKorisnika
+        /// Ime korisnika 
         /// </summary>
         public string ImeKorisnika { get; set; }
 
         /// <summary>
-        /// PrezimeKorisnika
+        /// Prezime korisnika
         /// </summary>
         public string PrezimeKorisnika { get; set; }
 
         /// <summary>
-        /// KorisnickoIme
+        /// Korisnicko ime korisnika
         /// </summary>
         public string KorisnickoIme { get; set; }
 
         /// <summary>
-        /// Lozinka
+        /// Lozinka korisnika
         /// </summary>
         public string Lozinka { get; set; }
 
         /// <summary>
-        /// TipKorisnikaID
+        /// Tip korisnika
         /// </summary>
         [ForeignKey("TipKorisnikaID")]
         public Guid TipKorisnikaID { get; set; }

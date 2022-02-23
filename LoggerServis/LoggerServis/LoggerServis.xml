@@ -6,7 +6,7 @@
     <members>
         <member name="T:LoggerServis.Controllers.LoggerController">
             <summary>
-            Logger controller pomocu kojeg se vrse sve potrebne funkcionalnosti vezane za controller
+            Logger controller pomocu kojeg se vrse sve potrebne funkcionalnosti vezane za logger
             </summary>
         </member>
         <member name="M:LoggerServis.Controllers.LoggerController.#ctor">
@@ -34,7 +34,7 @@
             <summary>
             Kreiranje novog loggera
             </summary>
-            <param name="model"></param>
+            <param name="model">Model loggera</param>
             <returns>Vraca novi logger</returns>
             <response code = "201">Kreiran je novi logger</response>
             <response code = "500">Greska prilikom pokusaja kreiranja logger</response>
@@ -43,8 +43,8 @@
             <summary>
             Modifikacija postojeceg loggera
             </summary>
-            <param name="id"></param>
-            <param name="logger"></param>
+            <param name="id">Parametar na osnovu kojeg se identifikuje logger za azuriranje</param>
+            <param name="logger">Model loggera</param>
             <returns>Vraca modifikovan logger</returns>
             <response code = "200">Dobijanje modifikovanog loggera</response>
             <response code = "404">Ne postoji logger sa zadatim id-em</response>

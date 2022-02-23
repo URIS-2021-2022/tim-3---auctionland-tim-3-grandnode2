@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace LoggerServis.Controllers
 {
     /// <summary>
-    /// Logger controller pomocu kojeg se vrse sve potrebne funkcionalnosti vezane za controller
+    /// Logger controller pomocu kojeg se vrse sve potrebne funkcionalnosti vezane za logger
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
@@ -64,8 +64,16 @@ namespace LoggerServis.Controllers
         /// <summary>
         /// Kreiranje novog loggera
         /// </summary>
-        /// <param name="model"></param>
+        /// <param name="model">Model loggera</param>
         /// <returns>Vraca novi logger</returns>
+        /// <remarks>
+        /// Primer request-a za kreiranje novog loggera \
+        /// POST api/Logger/ \
+        ///{
+        ///     "opisAktivnosti": "Pristup svim tipovima korisnika po id-u.*********Korisnicko ime: markoo", \
+        ///     "datum": "2022-02-22T00:59:54.371502" \
+        ///}
+        /// </remarks>
         /// <response code = "201">Kreiran je novi logger</response>
         /// <response code = "500">Greska prilikom pokusaja kreiranja logger</response>
         // POST api/<LoggerController>
@@ -86,9 +94,18 @@ namespace LoggerServis.Controllers
         /// <summary>
         /// Modifikacija postojeceg loggera
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="logger"></param>
+        /// <param name="id">Parametar na osnovu kojeg se identifikuje logger za azuriranje</param>
+        /// <param name="logger">Model loggera</param>
         /// <returns>Vraca modifikovan logger</returns>
+        /// <remarks>
+        /// Primer request-a za modifikovanje loggera \
+        /// PUT api/Logger/156 \
+        ///{
+        ///     "loggerID": 156, \
+        ///     "opisAktivnosti": "Pristup svim tipovima korisnika po id-u.*********Korisnicko ime: markoo", \
+        ///     "datum": "2022-02-22T00:59:54.371502" \
+        ///}
+        /// </remarks>
         /// <response code = "200">Dobijanje modifikovanog loggera</response>
         /// <response code = "404">Ne postoji logger sa zadatim id-em</response>
         // PUT api/<LoggerController>/5
@@ -121,7 +138,7 @@ namespace LoggerServis.Controllers
         /// <summary>
         /// Brisanje postojeceg loggera
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">Parametar na osnovu kojeg se identifikuje logger za brisanje</param>
         /// <returns>Brise zadati logger</returns>
         /// <response code = "200">Obrisan je logger</response>
         /// <response code = "404">Ne postoji logger za kojeg se izvrsava brisanje</response>

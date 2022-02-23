@@ -13,47 +13,47 @@ namespace DokumentServis.Database.Entities
     public class Dokument
     {
         /// <summary>
-        /// DokumentID primarni kljuc
+        /// Id dokumenta, primarni kljuc
         /// </summary>
         public Guid DokumentID { get; set; }
 
         /// <summary>
-        /// Zavodni broj
+        /// Zavodni broj dokumenta
         /// </summary>
         public string ZavodniBroj { get; set; }
 
         /// <summary>
-        /// Datum
+        /// Datum generisanja dokumenta
         /// </summary>
         public DateTime Datum { get; set; }
 
         /// <summary>
-        /// Datum donosenja
+        /// Datum donosenja donosenja dokumenta
         /// </summary>
         public DateTime DatumDonosenja { get; set; }
 
         /// <summary>
-        /// Sablon
+        /// Sablon koji definise parametre kao sto su FontFamily, FontSize i slicno
         /// </summary>
         public string Sablon { get; set; }
 
         /// <summary>
-        /// KorisnikID
+        /// Id korisnika
         /// </summary>
         public Guid KorisnikID { get; set; }
 
         /// <summary>
-        /// KupacID
+        /// Id kupca
         /// </summary>
         public Guid KupacID { get; set; }
 
         /// <summary>
-        /// LiciterID
+        /// Id licitera
         /// </summary>
         public Guid LiciterID { get; set; }
 
         /// <summary>
-        /// VerzijaDokumentaID
+        /// Id verzije dokumenta
         /// </summary>
         [ForeignKey("VerzijaDokumentaID")]
         public Guid VerzijaDokumentaID { get; set; }
